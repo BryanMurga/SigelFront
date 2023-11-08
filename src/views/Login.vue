@@ -70,6 +70,7 @@
 <script>
 
 import axios from 'axios';
+import { setRole } from '../sessions';
 
 export default {
     data() {
@@ -127,7 +128,7 @@ export default {
             axios.post('http://localhost:4000/auth/login', this.formData)
                 .then(response => {
                     // Maneja la respuesta exitosa aquí
-                    console.log('Respuesta:', response.data);
+
 
                     Swal.fire({
                         title: "Datos correctos",
@@ -136,6 +137,8 @@ export default {
                         button: "Aceptar",
                     });
 
+                    const userRole = response.data.role;
+                    setRole(userRole)
                     this.$router.push({ name: 'prueba' });
                 })
                 .catch(error => {
@@ -155,4 +158,6 @@ export default {
         console.log(this.userName, this.password)
     },
 }
+
+
 </script>
