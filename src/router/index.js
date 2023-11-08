@@ -17,7 +17,16 @@ const router = createRouter({
         {
             path: '/register',
             name: 'register',
-            component: localStorage.token != undefined ? HomeView : RegisterView,
+            component: RegisterView,
+            beforeEnter: (to, from, next) => {
+                if (getRole() === 'coordinador') {
+                  // Acceso permitido para administradores
+                  next();
+                } else {
+                  // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+                  next({ name: 'login' });
+                }
+              }
         },
         {
             path: '/login',

@@ -137,8 +137,16 @@ export default {
                     });
 
                     const userRole = response.data.role;
+
+                    if(userRole == 'admin'){
+                        this.$router.push({ name: 'prueba' });
+                    }else if(userRole == 'coordinador'){
+                        this.$router.push({ name: 'register' });
+                    }
+
                     setRole(userRole)
-                    this.$router.push({ name: 'prueba' });
+                    
+                    
                 })
                 .catch(error => {
                     // Maneja el error aquí
