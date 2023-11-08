@@ -1,7 +1,6 @@
 <template>
-    <div class="p-10 bg-gray-200 absolute h-[100vh] w-full flex items-center justify-center">
-        []
-        <div class="bg-white shadow-lg overflow-hidden rounded-xl w-[50%] h-[38em]">
+    <div class="p-10 bg-gray-200 absolute h-[100%] w-full flex items-center justify-center">
+        <div class="bg-white shadow-lg overflow-hidden rounded-xl  lg:w-[50%] xs:w-full sm:w-full h-[38em]">
             <div class="flex space-between items-center">
                 <div class="image-container lg:w-[50%] xs:hidden">
                     <!-- Agregar la imagen -->
