@@ -1,12 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { getRole } from '../sessions'
+
 import HomeView from '../views/Home.vue'
 import LoginView from '../views/Login.vue'
-<<<<<<< HEAD
 import RegisterView from '../views/Register.vue'
-=======
 import PruebaView from '../views/Prueba.vue'
-
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -16,7 +15,6 @@ const router = createRouter({
             component: LoginView,
         },
         {
-<<<<<<< HEAD
             path: '/register',
             name: 'register',
             component: localStorage.token != undefined ? HomeView : RegisterView,
@@ -27,14 +25,21 @@ const router = createRouter({
             component: LoginView,
         },
         {
-            path: '/register',
-            name: 'register',
-            component: RegisterView,
-=======
             path: '/prueba',
             name: 'prueba',
-            component: localStorage != undefined ? PruebaView : LoginView,
+            component: PruebaView,
+            beforeEnter: (to, from, next) => {
+                if (getRole() === 'admin') {
+                  // Acceso permitido para administradores
+                  next();
+                } else {
+                  // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+                  next({ name: 'login' });
+                }
+              }
         }
+
+
     ],
 })
 
