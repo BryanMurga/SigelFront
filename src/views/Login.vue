@@ -9,11 +9,8 @@
                 <div class="lg:w-[50%] xs:w-full sm:w-full p-10 ">
                     <div>
                         <b class="text-2xl text-gray-800">Sistema de Gestión y control de Leads.</b>
-                        <p class="text-gray-600">
-                            Introduce los datos requeridos para iniciar sesión.
-                        </p>
                     </div>
-                    <br>
+                    <br><br>
                     <form @submit="entrar">
                         <div>
                             <div class="flex flex-col">
@@ -59,7 +56,7 @@
 
 <style scoped>
 .image-container {
-    background-image: url(/uninter2.jpg    );
+    background-image: url(/uninterlogo.png    );
     background-position: center;
     background-size: cover;
     height: 38em;
