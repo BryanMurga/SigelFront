@@ -1,13 +1,3 @@
-<script>
-import { onMounted } from "vue";
-import { initFlowbite } from "flowbite";
-
-// initialize components based on data attribute selectors
-onMounted(() => {
-   initFlowbite();
-});
-</script>
-
 <template>
    <div class="flex">
       <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
@@ -72,7 +62,7 @@ onMounted(() => {
       
       <div class="flex-1 p-4  lg:ml-64">
          <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
-         <span class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
+         <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
 
          <form>
             <label for="default-search"
@@ -98,9 +88,19 @@ onMounted(() => {
    </div>
 </template>
 
+<script>
+import { onMounted } from "vue";
+import { initFlowbite } from "flowbite";
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+   initFlowbite();
+});
+</script>
+
 <style>
 .image-container {
-   background-image: url(/logo.png);
+   background-image: url(/uninterlogo.png);
    background-position: center;
    background-size: cover;
    height: 16em;
