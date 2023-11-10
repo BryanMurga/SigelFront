@@ -16,7 +16,7 @@
                             <div class="flex flex-col">
                                 <span class="font-bold mb-1">
                                     <i class="fa fa-user-circle"></i> Correo Electronico</span>
-                                <input type="email" v-model="formData.userName" name="userName"
+                                <input type="email" v-model="formData.email" name="email"
                                     placeholder="Introduzca un usuario"
                                     class="p-4 rounded-lg border border-gray-300 w-full">
                             </div>
@@ -72,25 +72,25 @@ export default {
     data() {
         return {
             formData: {
-                userName: null,
+                email: null,
                 password: null
             },
         }
     },
     methods: {
-        validateEmail: function (userName) {
+        validateEmail: function (email) {
             let regExp = /^\S+@\S+\.\S+$/;
 
-            return regExp.test(userName);
+            return regExp.test(email);
 
         },
-        validarArroba: function (userName) {
+        validarArroba: function (email) {
             let regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-            return regExp.test(userName);
+            return regExp.test(email);
         },
         validateFields: function () {
-            if (!this.validateEmail(this.userName)) {
+            if (!this.validateEmail(this.email)) {
                 Swal.fire({
                     title: "Error",
                     text: "Correo electronico invalido",
@@ -99,7 +99,7 @@ export default {
                 });
                 return false;
             }
-            else if (!this.validarArroba(this.userName)) {
+            else if (!this.validarArroba(this.email)) {
                 Swal.fire({
                     title: "Error",
                     text: "Doble arroba no permitido",
@@ -159,7 +159,6 @@ export default {
         }
     },
     mounted: function () {
-        console.log(this.userName, this.password)
     },
 }
 
