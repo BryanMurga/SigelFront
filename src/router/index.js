@@ -6,6 +6,8 @@ import HomeView from '../views/Home.vue'
 import LoginView from '../views/Login.vue'
 import RegisterView from '../views/Register.vue'
 import PruebaView from '../views/Prueba.vue'
+import LeadsView from '../views/admin/Leads.vue'
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -34,9 +36,9 @@ const router = createRouter({
             component: LoginView,
         },
         {
-            path: '/prueba',
-            name: 'prueba',
-            component: PruebaView,
+            path: '/leads',
+            name: 'leads',
+            component: LeadsView,
             beforeEnter: (to, from, next) => {
                 if (getRole() === 'admin') {
                   // Acceso permitido para administradores
@@ -47,7 +49,9 @@ const router = createRouter({
                 }
               }
         }
+
+
     ],
 })
 
-    export default router
+export default router
