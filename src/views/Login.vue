@@ -4,7 +4,6 @@
             <div class="flex space-between items-center">
                 <div class="image-container lg:w-[50%] xs:hidden">
                     <!-- Agregar la imagen -->
-
                 </div>
                 <div class="lg:w-[50%] xs:w-full sm:w-full p-10 ">
                     <div>
@@ -138,7 +137,7 @@ export default {
                     const userName = response.data.userName;
 
                     if(userRole == 'admin'){
-                        this.$router.push({ name: 'prueba' });
+                        this.$router.push({ name: 'leads' });
                     }else if(userRole == 'coordinador'){
                         this.$router.push({ name: 'register' });
                     }
