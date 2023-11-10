@@ -21,6 +21,8 @@
             </div>
 
             <ul class="space-y-2 font-medium">
+               <br>
+               <h1>Hola {{ userName }}</h1>  
                <br />
                <li>
                   <a href="#" class="flex items-center p-2 rounded-lg text-white  dark:hover:bg-gray-700 group">
@@ -91,11 +93,29 @@
 <script>
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
+import { getUserName } from "../sessions";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
    initFlowbite();
 });
+
+export default {
+   data() {
+        return {
+            formData: {
+                email: null,
+                password: null
+            },
+
+            userName: getUserName()
+        }
+    },
+    methods: {
+
+    }
+};
+
 </script>
 
 <style>

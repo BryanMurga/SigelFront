@@ -10,4 +10,16 @@ export function setRole(role) {
   export function clearRole() {
     localStorage.removeItem('role');
   }
+
+  export function setUserName(userName) {
+    localStorage.setItem('userName', userName);
+  }
+  
+  export function getUserName() {
+    return localStorage.getItem('userName');
+  }
+  
+  export function clearUserName() {
+    localStorage.removeItem('userName');
+  }
   

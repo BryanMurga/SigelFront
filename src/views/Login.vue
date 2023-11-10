@@ -67,6 +67,7 @@
 
 import axios from 'axios';
 import { setRole } from '../sessions';
+import { setUserName } from '../sessions';
 
 export default {
     data() {
@@ -124,7 +125,7 @@ export default {
             axios.post('http://localhost:4000/auth/login', this.formData)
                 .then(response => {
                     // Maneja la respuesta exitosa aquí
-
+                    console.log(response.data);
 
                     Swal.fire({
                         title: "Datos correctos",
@@ -134,6 +135,7 @@ export default {
                     });
 
                     const userRole = response.data.role;
+                    const userName = response.data.userName;
 
                     if(userRole == 'admin'){
                         this.$router.push({ name: 'prueba' });
@@ -142,6 +144,7 @@ export default {
                     }
 
                     setRole(userRole)
+                    setUserName(userName)
                     
                     
                 })
