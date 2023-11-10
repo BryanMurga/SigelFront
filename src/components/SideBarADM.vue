@@ -13,7 +13,7 @@
       </button>
 
       <aside id="default-sidebar"
-         class="lg:w-1/5 fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+         class="lg:w-1/5 fixed top-0 left-0 z-28 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
          aria-label="Sidebar">
          <div class="h-full px-3 py-4 overflow-y-auto bg-gray-800 text-white w-64 flex flex-col items-center">
             <div class="image-container w-[100%]">
@@ -21,6 +21,8 @@
             </div>
 
             <ul class="space-y-2 font-medium">
+               <br>
+               <h1>Hola {{ userName }}</h1>  
                <br />
                <li>
                   <a href="#" class="flex items-center p-2 rounded-lg text-white  dark:hover:bg-gray-700 group">
@@ -91,14 +93,32 @@
 <script>
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
+import { getUserName } from "../sessions";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
    initFlowbite();
 });
+
+export default {
+   data() {
+        return {
+            formData: {
+                email: null,
+                password: null
+            },
+
+            userName: getUserName()
+        }
+    },
+    methods: {
+
+    }
+};
+
 </script>
 
-<style>
+<style scoped>
 .image-container {
    background-image: url(/uninterlogo.png);
    background-position: center;
