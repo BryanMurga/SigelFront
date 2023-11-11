@@ -48,13 +48,9 @@ const router = createRouter({
                   next({ name: 'login' });
                 }
           }
+
+
         },
-        {
-          path: '/home',
-          name: 'home',
-          component: HomeView,
-        }
-      ]
   })
 
 export default router
