@@ -2,7 +2,7 @@
 
   import { getRole } from '../sessions'
 
-import HomeView from '../views/Home.vue'
+import HomeView from '../views/admin/Home.vue'
 import LoginView from '../views/Login.vue'
 import RegisterView from '../views/Register.vue'
 import PruebaView from '../views/Prueba.vue'
@@ -48,9 +48,13 @@ const router = createRouter({
                   next({ name: 'login' });
                 }
           }
-
-
         },
+        {
+          path: '/home',
+          name: 'home',
+          component: HomeView,
+        }
+      ]
   })
 
 export default router
