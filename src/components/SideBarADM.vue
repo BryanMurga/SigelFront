@@ -1,5 +1,5 @@
 <template>
-   <div class="flex">
+   <div class="flex-1">
       <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
          type="button"
          class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -13,7 +13,7 @@
       </button>
 
       <aside id="default-sidebar"
-         class="lg:w-1/5 fixed top-0 left-0 z-28 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+         class="fixed top-0 left-0 z-30  w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
          aria-label="Sidebar">
          <div class="h-full px-3 py-4 overflow-y-auto bg-gray-800 text-white w-64 flex flex-col items-center">
             <div class="image-container w-[100%]">
@@ -25,7 +25,7 @@
                <h1>Hola {{ userName }}</h1>  
                <br />
                <li>
-                  <a href="#" class="flex items-center p-2 rounded-lg text-white  dark:hover:bg-gray-700 group">
+                  <a href="" class="flex items-center p-2 rounded-lg text-white  dark:hover:bg-gray-700 group">
                      <i class="fas fa-home" style="color: #48c9b0"></i>
                      <span class="ml-3">Home</span>
                   </a>
