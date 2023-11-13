@@ -1,18 +1,20 @@
 <template>
    <div>
-    <h1>Otra Vista</h1>
-    <sideBarADM /> <!-- Importa y utiliza el componente SidebarADM -->
+    <sideBarADM/> <!-- Importa y utiliza el componente SidebarADM -->
     <!-- Otro contenido de tu vista -->
+    <search/> <!-- Importa y utiliza el componente serch -->
   </div>
 </template>
 
 <script>
 
 import sideBarADM from '../components/SideBarADM.vue'; // Ruta relativa al componente
+import search from '../components/search.vue'; // Ruta relativa al componente
 
 export default {
    components: {
-      sideBarADM
+      sideBarADM,
+      search
    },
    data() {
       return {
@@ -29,22 +31,6 @@ import { getUserName } from "../sessions";
 onMounted(() => {
    initFlowbite();
 });
-
-// export default {
-//    data() {
-//         return {
-//             formData: {
-//                 email: null,
-//                 password: null
-//             },
-
-//             userName: getUserName()
-//         }
-//     },
-//     methods: {
-
-//     }
-// };
 
 </script>
 

@@ -2,7 +2,7 @@
 
   import { getRole } from '../sessions'
 
-import HomeView from '../views/Home.vue'
+import HomeView from '../views/admin/Home.vue'
 import LoginView from '../views/Login.vue'
 import RegisterView from '../views/Register.vue'
 import PruebaView from '../views/Prueba.vue'
@@ -51,7 +51,6 @@ const router = createRouter({
 
 
         },
-    ]
   })
 
 export default router
