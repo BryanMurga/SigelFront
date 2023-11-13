@@ -1,6 +1,10 @@
 <template>
 
     <header>
+        <div class="lg:ml-64 p-4">
+            <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
+            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
+        </div>
         <SideBarADM class="lg:w-64 md:w-48 sm:w-32"/> <!-- Importa y utiliza el componente SidebarADM -->
         <Search/>
         

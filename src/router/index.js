@@ -7,6 +7,7 @@ import LoginView from '../views/Login.vue'
 import RegisterView from '../views/Register.vue'
 import PruebaView from '../views/Prueba.vue'
 import LeadsView from '../views/admin/Leads.vue'
+import TemplateView from '../views/Template.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,13 @@ const router = createRouter({
         }
       }
     },
+    {
+      path: '/template',
+      name: 'template',
+      component: TemplateView,
+    }
+    
+
   ]
 })
 export default router;

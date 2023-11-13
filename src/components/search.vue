@@ -1,8 +1,5 @@
 <template>
   <div class="flex-1 p-4  lg:ml-64">
-         <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
-         <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
-
          <form>
             <label for="default-search"
                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
