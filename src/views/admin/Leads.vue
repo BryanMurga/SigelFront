@@ -1,13 +1,12 @@
 <template>
-
     <header>
         <div class="lg:ml-64 p-4">
             <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
         </div>
-        <SideBarADM class="lg:w-64 md:w-48 sm:w-32"/> <!-- Importa y utiliza el componente SidebarADM -->
-        <Search/>
-        
+        <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
+        <Search />
+
     </header>
 
     <section>
@@ -24,7 +23,7 @@
                                 </div>
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                    Nombre Completo
+                                Nombre Completo
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Telefono
@@ -50,7 +49,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
+                        <tr v-for="lead in leads" :key="lead.LeadID"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
@@ -60,30 +59,28 @@
                                 </div>
                             </td>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Apple MacBook Pro 17"
+                                {{ lead.NombreCompleto }}
                             </th>
                             <td class="px-6 py-4">
-                                Silver
+                                {{ lead.Telefono }}
                             </td>
                             <td class="px-6 py-4">
-                                Laptop
+                                {{ lead.CorreoElectronico }}
                             </td>
                             <td class="px-6 py-4">
-                                Yes
+                                {{ lead.FechaPrimerContacto }}
                             </td>
                             <td class="px-6 py-4">
-                                Yes
+                                {{ lead.FechaNac }}
                             </td>
                             <td class="px-6 py-4">
-                                $2999
+                                {{ lead.NombreCiudad }} 
                             </td>
                             <td class="px-6 py-4">
-                                3.0 lb.
+                                {{ lead.CarreraInteresID }}
                             </td>
                             <td class="flex items-center px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                <a href="#"
-                                    class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                {{ lead.EstatusInsc }}
                             </td>
                         </tr>
 
@@ -92,9 +89,6 @@
             </div>
         </div>
     </section>
-
-
-
 </template>
  
 <script>
@@ -103,6 +97,7 @@ import { initFlowbite } from "flowbite";
 import { getUserName } from "../../sessions";
 import SideBarADM from "../../components/SideBarADM.vue";
 import Search from "../../components/Search.vue";
+import axios from "axios";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -110,36 +105,30 @@ onMounted(() => {
 });
 
 export default {
-    components: {
-
-    },
     data() {
         return {
-            userName: getUserName()
+            userName: getUserName(),
+            leads: []
         };
-        leads:[]
+
+    },
+    mounted() {
+        this.loadLeads();
     },
     methods: {
-        loadLeads(){
-            axios.get('http://localhost:4000/leads')
-                .then(response => {
-                    this.users = response.data;  // Asigna los usuarios a la propiedad 'users'
-                })
-                .catch(error => {
-                    console.error('Error al cargar usuarios', error);
-                });
-
-        }
+        async loadLeads() {
+            try {
+                // Reemplaza 'tu-endpoint' con la URL real de tu endpoint
+                const response = await axios.get('http://localhost:4000/leads');
+                this.leads = response.data.leads; // Almacena los leads en el array
+            } catch (error) {
+                console.error('Error al obtener leads:', error);
+            }
+        },
     },
     components: { SideBarADM, Search }
 };
 
 </script>
  
-<style>.image-container {
-    background-image: url(/uninterlogo.png);
-    background-position: center;
-    background-size: cover;
-    height: 16em;
-    width: 16em;
-}</style>
+<style></style>
