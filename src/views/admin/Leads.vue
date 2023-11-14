@@ -74,7 +74,7 @@
                                 {{ lead.FechaNac }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ lead.NombreCiudad }} 
+                                {{ lead.NombreCiudad }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ lead.CarreraInteresID }}
@@ -114,6 +114,15 @@ export default {
     },
     mounted() {
         this.loadLeads();
+        // Agrega un nuevo estado al historial cuando el componente se monta
+        window.history.pushState({ noBackExitsApp: true }, null, null);
+
+        window.addEventListener('popstate', this.preventBack);
+
+    },
+    beforeDestroy() {
+        // Elimina el event listener cuando el componente se destruye
+        window.removeEventListener('popstate', this.preventBack);
     },
     methods: {
         async loadLeads() {
@@ -125,6 +134,17 @@ export default {
                 console.error('Error al obtener leads:', error);
             }
         },
+        preventBack(event) {
+            // Verifica si hay un estado personalizado en el historial
+            if (event.state && event.state.noBackExitsApp) {
+                // Vuelve a agregar el estado y evita retroceder
+                window.history.pushState({ noBackExitsApp: true }, null, null);
+            } else {
+                // Aquí puedes realizar otras acciones si es necesario
+                // Por ejemplo, redirigir a una página específica
+                // window.location.href = "/inicio";
+            }
+        }
     },
     components: { SideBarADM, Search }
 };

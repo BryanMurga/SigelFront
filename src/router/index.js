@@ -49,7 +49,12 @@ const router = createRouter({
       path: '/template',
       name: 'template',
       component: TemplateView,
-    }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+    },
     
 
   ]

@@ -13,7 +13,7 @@
       class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar">
       <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-         <a href="https://flowbite.com/" class="flex items-center ps-2.5 mb-5">
+         <a href="" class="flex items-center ps-2.5 mb-5">
             <img src="/logo.png" class="h-12 me-3 sm:h-12" alt="Uninter Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Hola {{ userName }}</span>
          </a>
@@ -85,7 +85,7 @@
 <script>
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
-import { getUserName } from "../sessions";
+import { getUserName, clearRole, clearUserName } from "../sessions";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -104,6 +104,11 @@ export default {
       }
    },
    methods: {
+      cerrarSesion() {
+         clearRole();
+         clearUserName();
+         this.$router.push("/login");
+      }
 
    }
 };
