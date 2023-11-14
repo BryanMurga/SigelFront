@@ -8,6 +8,7 @@ import RegisterView from '../views/Register.vue'
 import PruebaView from '../views/Prueba.vue'
 import LeadsView from '../views/admin/Leads.vue'
 import TemplateView from '../views/Template.vue'
+import PromotorListView from '../views/admin/PromotorList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,7 +50,22 @@ const router = createRouter({
       path: '/template',
       name: 'template',
       component: TemplateView,
+    },
+    {
+      path: '/promotor-list',
+      name: 'promotor-list',
+      component: PromotorListView,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
     }
+
     
 
   ]
