@@ -17,67 +17,65 @@
             <img src="/logo.png" class="h-12 me-3 sm:h-12" alt="Uninter Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Hola {{ userName }}</span>
          </a>
-         <ul class="space-y-2 font-medium">
-            <li class="mr-20">
-               <a href="#"
-                  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <svg
-                     class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mt-5"
-                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                  </svg>
-                  <i class="fa-solid fa-home fa-xl"></i>
-                  <span class="ms-3">Home</span>
-               </a>
-            </li>
-            <li>
-               <a href="#"
-                  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5">
-                  <svg
-                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                  </svg>
-                  <i class="fa-solid fa-users fa-xl"></i>
-                  <span class="flex-1 ms-3 whitespace-nowrap">Leads</span>
-                  <span
-                     class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300"></span>
-               </a>
-            </li>
-            <li>
-               <a href="#"
-                  class=" mt-5 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <svg
-                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  </svg>
-                  <i class="fa-solid fa-circle-plus fa-xl"></i>
-                  <span class="flex-1 ms-3 whitespace-nowrap">Asignar</span>
-               </a>
-            </li>
-            <li>
-               <a href="#"
-                  class="mt-5 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <svg
-                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                     <i class="fa-solid fa-user-pen fa-xl"></i>
-                     <span class="flex-1 ms-3 whitespace-nowrap">Reasignar</span>
-                  </svg>
-               </a>
-            </li>
-            <li style="margin-top: 290px;">
-               <a href="#"
-                  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <svg
-                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  </svg>
-                  <i class="fa-solid fa-right-to-bracket fa-2xl"></i>
-                  <span class="flex-1 ms-3 whitespace-nowrap">Cerrar sesión</span>
-               </a>
-            </li>
-
-         </ul>
-
+            <ul class="space-y-2 font-medium">
+               <li class="mr-20">
+                  <a href="#"
+                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                     <svg
+                        class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mt-5"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                     </svg>
+                     <i class="fa-solid fa-home fa-xl"></i>
+                     <span class="ms-3">Home</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="#"
+                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5">
+                     <svg
+                        class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                     </svg>
+                     <i class="fa-solid fa-users fa-xl"></i>
+                     <span class="flex-1 ms-3 whitespace-nowrap">Leads</span>
+                     <span
+                        class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300"></span>
+                  </a>
+               </li>
+               <li>
+                  <a  href="#"
+                     class=" mt-5 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                     <svg
+                        class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                     </svg>
+                     <i class="fa-solid fa-circle-plus fa-xl"></i>
+                     <span class="flex-1 ms-3 whitespace-nowrap">Asignar</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="#"
+                     class="mt-5 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                     <svg
+                        class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                        <i class="fa-solid fa-user-pen fa-xl"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Reasignar</span>
+                     </svg>
+                  </a>
+               </li>
+                  <li style="margin-top: 290px;">
+                     <a @click="cerrarSesion"  href=""
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <svg
+                           class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                           aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        </svg>
+                        <i class="fa-solid fa-right-to-bracket fa-2xl"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Cerrar sesión</span>
+                     </a>
+                  </li>
+            </ul>
       </div>
    </aside>
 </template>

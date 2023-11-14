@@ -140,9 +140,7 @@ export default {
                 // Vuelve a agregar el estado y evita retroceder
                 window.history.pushState({ noBackExitsApp: true }, null, null);
             } else {
-                // Aquí puedes realizar otras acciones si es necesario
-                // Por ejemplo, redirigir a una página específica
-                // window.location.href = "/inicio";
+                window.history.pushState({ noBackExitsApp: true }, null, null);
             }
         }
     },
