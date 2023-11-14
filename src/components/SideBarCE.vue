@@ -85,7 +85,7 @@
 <script>
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
-import { getUserName } from "../sessions";
+import { getUserName, clearRole, clearUserName } from "../sessions";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -104,6 +104,11 @@ export default {
       }
    },
    methods: {
+      cerrarSesion() {
+         clearRole();
+         clearUserName();
+         this.$router.push("/login");
+      }
 
    }
 };
