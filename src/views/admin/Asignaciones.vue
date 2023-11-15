@@ -45,14 +45,16 @@
                             <td class="px-6 py-4">
                                 {{ lead.CorreoElectronico }}
                             </td>
-                            <th scope="col" class="px-2 py-1">
-                                <select v-model="selectedPromotor"
-                                    class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option v-for="promotor in listaDePromotores" :key="promotor.id" :value="promotor.id">
-                                        {{ promotor.nombre }}
-                                    </option>
-                                </select>
-                            </th>
+                            <td class="px-2 py-1">
+        <select v-model="selectedPromotor"
+          class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          style="color: black;">
+          <option v-for="promotor in promotoresActivos" :key="promotor.id" :value="promotor.id"
+            style="color: black;">
+            {{ promotor.Nombre }}
+          </option>
+        </select>
+      </td>
                         </tr>
                     </tbody>
                 </table>
@@ -79,12 +81,15 @@ export default {
     data() {
         return {
             userName: getUserName(),
-            leads: []
+            leads: [],
+            promotoresActivos: [], // Agrega una variable para almacenar los promotores activos
+            selectedPromotor: null // Variable para almacenar el promotor seleccionado
         };
 
     },
     mounted() {
         this.loadLeads();
+        this.loadActivePromotores(); // Llama a la función para cargar promotores activos
         // Agrega un nuevo estado al historial cuando el componente se monta
         window.history.pushState({ noBackExitsApp: true }, null, null);
 
@@ -105,6 +110,14 @@ export default {
                 console.error('Error al obtener leads:', error);
             }
         },
+        async loadActivePromotores() {
+            try {
+                const response = await axios.get('http://localhost:4000/promotores/activos');
+                this.promotoresActivos = response.data.promotores;
+            } catch (error) {
+                console.error('Error al obtener promotores activos:', error);
+            }
+        },
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
             if (event.state && event.state.noBackExitsApp) {
@@ -113,9 +126,8 @@ export default {
             } else {
                 window.history.pushState({ noBackExitsApp: true }, null, null);
             }
-        }
+        },
     },
-    
     components: { SideBarADM, Search }
 };
 
