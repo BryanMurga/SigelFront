@@ -9,6 +9,7 @@ import PruebaView from '../views/Prueba.vue'
 import LeadsView from '../views/admin/Leads.vue'
 import TemplateView from '../views/Template.vue'
 import PromotorListView from '../views/admin/PromotorList.vue'
+import AsignacionesView from '../views/admin/Asignaciones.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,8 +72,34 @@ const router = createRouter({
       name: 'login',
       component: LoginView,
     },
-    
-
+    {
+      path: '/home-adm',
+      name: 'home-adm',
+      component: HomeView,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/asignaciones',
+      name: 'asignaciones',
+      component: AsignacionesView,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    }
   ]
 })
 export default router;
