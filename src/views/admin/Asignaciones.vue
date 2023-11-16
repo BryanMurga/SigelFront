@@ -46,15 +46,15 @@
                                 {{ lead.CorreoElectronico }}
                             </td>
                             <td class="px-2 py-1">
-        <select v-model="selectedPromotor"
-          class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-          style="color: black;">
-          <option v-for="promotor in promotoresActivos" :key="promotor.id" :value="promotor.id"
-            style="color: black;">
-            {{ promotor.Nombre }}
-          </option>
-        </select>
-      </td>
+                                <select v-model="selectedPromotor"
+                                    class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    style="color: black;">
+                                    <option v-for="promotor in promotoresActivos" :key="promotor.id" :value="promotor.id"
+                                        style="color: black;">
+                                        {{ promotor.Nombre }}
+                                    </option>
+                                </select>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

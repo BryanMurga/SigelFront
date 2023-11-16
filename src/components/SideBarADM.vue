@@ -13,24 +13,24 @@
       class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar">
       <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-         <a href="" class="flex items-center ps-2.5 mb-5">
+         <a href="#" class="flex items-center ps-2.5 mb-5">
             <img src="/logo.png" class="h-12 me-3 sm:h-12" alt="Uninter Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Hola {{ userName }}</span>
          </a>
             <ul class="space-y-2 font-medium">
                <li class="mr-20">
-                  <a href="#"
+                  <a href="home-adm"
                      class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                      <svg
                         class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mt-5"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                      </svg>
                      <i class="fa-solid fa-home fa-xl"></i>
-                     <span class="ms-3">Home</span>
+                     <span class="ms-3">Inicio</span>
                   </a>
                </li>
                <li>
-                  <a href="#"
+                  <a href="leads"
                      class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5">
                      <svg
                         class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -43,7 +43,7 @@
                   </a>
                </li>
                <li>
-                  <a  href="#"
+                  <a  href="asignaciones"
                      class=" mt-5 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                      <svg
                         class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
