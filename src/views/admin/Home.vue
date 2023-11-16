@@ -12,7 +12,7 @@
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Inicio</h5>
         </div>
             <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" style="margin-top: 3%;"> <!-- Modificado: Utilizando grid para distribuir tarjetas -->
-                <a href="#"
+                <a href="promotor-list"
                     class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
                     style="background-color: #48c9b0;"> <!-- Cambia el valor hexadecimal aquí -->
                     <i class="fas fa-circle-user text-7xl" style="color: white"></i>
