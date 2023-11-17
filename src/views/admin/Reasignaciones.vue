@@ -2,12 +2,12 @@
     <header>
         <div class="lg:ml-64 p-4">
             <i class="fas fa-circle-plus text-2xl" style="color: #48c9b0"></i>
-            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Asignar</span>
+            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Reasignaciones</span>
         </div>
         <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
         <Search />
         <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Asignaciones</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Reasignaciones</h5>
         </div>
     </header>
 

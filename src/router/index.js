@@ -11,6 +11,8 @@ import TemplateView from '../views/Template.vue'
 import PromotorListView from '../views/admin/PromotorList.vue'
 import HomeVue from '../views/admin/Home.vue'
 import RegisterPromotor from '../views/admin/RegisterPromotor.vue'
+import AsignacionesView from '../views/admin/Asignaciones.vue'
+import Reasignaciones from '../views/admin/Reasignaciones.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -82,6 +84,15 @@ const router = createRouter({
       path:'/register-promotor',
       name:'register-promotor',
       component: RegisterPromotor,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
     },
     
     {
@@ -109,7 +120,12 @@ const router = createRouter({
           next({ name: 'login' });
         }
       }
-    }
+    },
+    {
+      path: '/reasignaciones',
+      name: 'reasignaciones',
+      component: Reasignaciones
+    },
   ]
 })
 export default router;
