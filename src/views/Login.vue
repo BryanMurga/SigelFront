@@ -137,7 +137,7 @@ export default {
                     const userName = response.data.userName;
 
                     if(userRole == 'admin'){
-                        this.$router.push({ name: 'leads' });
+                        this.$router.push({ name: 'home-adm' });
                     }else if(userRole == 'coordinador'){
                         this.$router.push({ name: 'register' });
                     }

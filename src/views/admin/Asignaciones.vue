@@ -46,7 +46,7 @@
                                 {{ lead.CorreoElectronico }}
                             </td>
                             <td class="px-2 py-1">
-                                <select v-model="selectedPromotor"
+                                <select v-model="selectedPromotor" @change="asignarPromotor(lead.LeadID)"
                                     class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                     style="color: black;">
                                     <option v-for="promotor in promotoresActivos" :key="promotor.id" :value="promotor.id"
@@ -58,6 +58,13 @@
                         </tr>
                     </tbody>
                 </table>
+                <br>
+                <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                style="text-align: left; float: right;"
+                    @click="enviarAsignaciones">
+                    <i class="fas fa-regular fa-paper-plane"></i>   Enviar
+                </button>
+
             </div>
         </div>
     </section>
