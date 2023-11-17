@@ -82,9 +82,34 @@ const router = createRouter({
       path:'/register-promotor',
       name:'register-promotor',
       component: RegisterPromotor,
-    }
+    },
     
-
+    {
+      component: HomeView,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/asignaciones',
+      name: 'asignaciones',
+      component: AsignacionesView,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    }
   ]
 })
 export default router;
