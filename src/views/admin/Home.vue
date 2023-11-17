@@ -40,8 +40,9 @@
 
 <script>
 
-import sideBarADM from '../../components/SideBarADM.vue'; // Ruta relativa al componente
-import search from '../../components/Search.vue'; // Ruta relativa al componente
+import sideBarADM from '../../components/SideBarADM.vue'; 
+import search from '../../components/Search.vue';
+
 
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
