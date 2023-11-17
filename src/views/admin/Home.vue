@@ -14,23 +14,23 @@
             <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" style="margin-top: 3%;"> <!-- Modificado: Utilizando grid para distribuir tarjetas -->
                 <a href="promotor-list"
                     class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
-                    style="background-color: #48c9b0;"> <!-- Cambia el valor hexadecimal aquí -->
-                    <i class="fas fa-circle-user text-7xl" style="color: white"></i>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Promotores</h5>
+                    style="background-color: #48c9b0; padding-bottom: 25%; position: relative; "> <!-- Cambia el valor hexadecimal aquí -->
+                    <i class="fas fa-circle-user text-9xl text-white mt-10"></i> <!-- Añadir margen arriba -->
+                    <h5 class="mt-2 mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Promotores</h5> <!-- Añadir margen arriba -->
                 </a>
 
                 <a href="#"
                     class="block max-w-sm p-6 bg-green-300 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
-                    style="background-color: #48c9b0;">
-                    <i class="fas fa-gauge-simple-high text-7xl" style="color: white"></i>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Dashboard</h5>
+                    style="background-color: #48c9b0; padding-bottom: 25%; position: relative; ">
+                    <i class="fas fa-chart-pie text-9xl mt-10" style="color: white"></i>
+                    <h5 class="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Dashboard</h5>
                 </a>
 
                 <a href="#"
                     class="block max-w-sm p-6 bg-yellow-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
-                    style="background-color: #48c9b0;">
-                    <i class="fas fa-arrow-trend-up text-7xl" style="color: white"></i>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Indicadores</h5>
+                    style="background-color: #48c9b0; padding-bottom: 25%; position: relative; ">
+                    <i class="fas fa-arrow-trend-up text-9xl mt-10" style="color: white"></i>
+                    <h5 class="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Indicadores</h5>
                 </a>
             </div>
         </div>
