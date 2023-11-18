@@ -166,7 +166,6 @@ export default {
       try {
         await axios.put(`http://localhost:4000/promotores/update/${this.editingPromotor.PromotorID}`, this.editingPromotor);
         this.closeEditModal();
-        this.loadPromotores();
       } catch (error) {
         console.error('Error al actualizar el promotor:', error);
       }

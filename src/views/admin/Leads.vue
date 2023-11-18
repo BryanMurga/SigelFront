@@ -5,6 +5,77 @@
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
 
             <div class="flex-1 p-4">
+
+
+
+                <!-- Modal toggle -->
+
+                <!-- Main modal -->
+                <div id="verContacto" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Historial de contacto
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="verContacto">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    </svg>
+                                    <span @click="closeEditModal" class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-4 md:p-5 space-y-4">
+
+
+                                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                                    Fecha de contacto
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Comentario
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="contacto in  contactos" :key="contacto.id"
+                                                class="border-b border-gray-200 dark:border-gray-700">
+                                                <th scope="row"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                                    {{ contacto.FechaContacto }}
+                                                </th>
+                                                <td class="px-6 py-4">
+                                                    {{ contacto.Comentario }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- Modal footer -->
+                            <div
+                                class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <button @click="closeEditModal" data-modal-hide="verContacto" type="button"
+                                    class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <form>
                     <label for="default-search"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -48,6 +119,9 @@
                                     <label for="checkbox-all-search" class="sr-only">checkbox</label>
                                 </div>
                             </th> -->
+                            <th scope="col" class="px-6 py-3">
+                                Id
+                            </th>
                             <th scope="col" class="px-6 py-3">
                                 Nombre Completo
                             </th>
@@ -159,6 +233,9 @@
                         <tr v-for="lead in filterList" :key="lead.id"
                             class="item leads px-6 py-4 font-medium text-gray-700 whitespace-nowrap dark:text-white">
                             <th class="px-6 py-4">
+                                {{ lead.LeadID }}
+                            </th>
+                            <th class="px-6 py-4">
                                 {{ lead.NombreCompleto }}
                             </th>
                             <td class="px-6 py-4">
@@ -261,7 +338,8 @@
                                 {{ lead.Comentarios }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ lead.Contacto }}
+                                <button data-modal-target="verContacto" data-modal-toggle="verContacto" type="button"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ver</button>
                             </td>
                         </tr>
                     </tbody>
@@ -285,7 +363,8 @@ import Search from "../../components/Search.vue";
 import axios from "axios";
 import { ref } from "vue";
 import { format } from "date-fns";
-// initialize components based on data attribute selectors
+import { FwbButton, FwbModal } from 'flowbite-vue';
+
 onMounted(() => {
     initFlowbite();
 });
@@ -295,11 +374,14 @@ export default {
     data() {
         return {
             userName: getUserName(),
+            VerContacto: null,
             leads: [],
+            contactos: [],
             buscador: '',
             setTimeoutBuscador: '',
             input: ref(''),
         };
+
 
     },
     computed: {
@@ -317,6 +399,7 @@ export default {
     },
     mounted() {
         this.loadLeads();
+        this.loadContactos();
 
         // Agrega un nuevo estado al historial cuando el componente se monta
         window.history.pushState({ noBackExitsApp: true }, null, null);
@@ -334,11 +417,23 @@ export default {
                 // Reemplaza 'tu-endpoint' con la URL real de tu endpoint
                 const response = await axios.get('http://localhost:4000/leads');
                 if (response.data && response.data.leads) {
-                    this.leads = response.data.leads; // Almacena los leads en el array
+                    this.leads = response.data.leads;
+                    // Almacena los leads en el array
                 }
 
             } catch (error) {
                 console.error('Error al obtener leads:', error);
+            }
+        },
+        async loadContactos() { 
+            try {
+                const response = await axios.get('http://localhost:4000/leads/contacto/' + this.VerContacto);
+                this.closeEditModal;
+                if (response.data && response.data.contactos) {
+                    this.contactos = response.data.contactos;
+                }
+            } catch (error) {
+                console.error('Error al obtener contactos:', error);
             }
         },
         preventBack(event) {
@@ -351,16 +446,16 @@ export default {
             }
         },
         formatDate(date) {
-            if(date){
+            if (date) {
                 const formattedDate = format(new Date(date), "dd/MM/yyyy");
                 return formattedDate;
-            }else{
+            } else {
                 return '';
             }
             // Formatea la fecha utilizando date-fns
-            
+
         },
-        
+
     },
     watch: {
         leads: {
@@ -368,7 +463,7 @@ export default {
                 // Este método se ejecutará cada vez que 'leads' cambie
                 // Puedes realizar cualquier lógica adicional aquí
                 this.filterList; // Llamar a filterList cuando leads cambie
-                this.formatDate; // Llamar a formatDate cuando leads cambie
+                this.formatDate;
             },
         },
         inmediate: true,
