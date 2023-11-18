@@ -126,7 +126,7 @@
 
 
 
-<script>
+  <script>
 import { onMounted, ref } from 'vue';
 import { initFlowbite } from 'flowbite';
 import SideBarADM from '../../components/SideBarADM.vue';
@@ -136,63 +136,26 @@ import { FwbButton, FwbModal } from 'flowbite-vue';
 import { useRouter } from 'vue-router';
 
 onMounted(() => {
-initFlowbite();
+  initFlowbite();
 });
 
 export default {
-data() {
-  return {
-    promotores: [],
-    editingPromotor: null,
-    addingPromotor: {
-      // Agrega las propiedades necesarias para agregar un nuevo promotor
-      Nombre: '',
-      Correo: '',
-      Telefono: '',
-      // Puedes agregar más propiedades según tus necesidades
-    },
-  };
-},
-mounted() {
-  this.loadPromotores();
-},
-methods: {
-  async loadPromotores() {
-    try {
-      const response = await axios.get('http://localhost:4000/promotores');
-      this.promotores = response.data.listPromotores;
-    } catch (error) {
-      console.error('Error al obtener promotores:', error);
-    }
-  },
-  openEditModal(promotor) {
-    this.editingPromotor = { ...promotor };
-  },
-  closeEditModal() {
-    this.editingPromotor = null;
-  },
-  async updatePromotor() {
-    try {
-      await axios.put(`http://localhost:4000/promotores/update/${this.editingPromotor.PromotorID}`, this.editingPromotor);
-      this.closeEditModal();
-      this.loadPromotores();
-    } catch (error) {
-      console.error('Error al actualizar el promotor:', error);
-    }
-  },
-  openAddModal() {
-    this.addingPromotor = {
-      Nombre: '',
-      Correo: '',
-      Telefono: '',
-      // Puedes agregar más propiedades según tus necesidades
+  data() {
+    return {
+      promotores: [],
+      editingPromotor: null,
+      addingPromotor: {
+        // Agrega las propiedades necesarias para agregar un nuevo promotor
+        Nombre: '',
+        Correo: '',
+        Telefono: '',
+        // Puedes agregar más propiedades según tus necesidades
+      },
     };
-    this.$refs.addModal.open();
   },
-  closeAddModal() {
-    this.$refs.addModal.close();
+  mounted() {
+    this.loadPromotores();
   },
-<<<<<<< HEAD
   methods: {
     async loadPromotores() {
       try {
@@ -237,39 +200,27 @@ methods: {
         console.error('Error al agregar el promotor:', error);
       }
     },
-=======
-  async addPromotor() {
-    try {
-      await axios.post('http://localhost:4000/promotores/add', this.addingPromotor);
-      this.closeAddModal();
-      this.loadPromotores();
-    } catch (error) {
-      console.error('Error al agregar el promotor:', error);
-    }
->>>>>>> 31b5734eaec0a36e4b5f3f3c7df51539b79d6899
   },
-  redirectToAgregarPromotor() {
-      this.$router.push('/register-promotor');
-      },
-},
-components: { SideBarADM, Search, FwbButton, FwbModal },
+  components: { SideBarADM, Search, FwbButton, FwbModal },
 };
 </script>
 
+  
 
+  
 
-
-
-<style>
-.modal-wrapper {
-  z-index: 9999;
-}
-
-.modal-content {
-  z-index: 10000;
-}
-
-.sidebar {
-  z-index: 999;
-}
-</style>
+  <style>
+  .modal-wrapper {
+    z-index: 9999;
+  }
+  
+  .modal-content {
+    z-index: 10000;
+  }
+  
+  .sidebar {
+    z-index: 999;
+  }
+  </style>
+  
+  

@@ -5,12 +5,6 @@
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
 
             <div class="flex-1 p-4">
-
-
-
-                <!-- Modal toggle -->
-
-                <!-- Main modal -->
                 <div id="verContacto" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -54,9 +48,9 @@
                                                 class="border-b border-gray-200 dark:border-gray-700">
                                                 <th scope="row"
                                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                                    {{ contacto.FechaContacto }}
+                                                    {{ formatDate(contacto.FechaContacto) }}
                                                 </th>
-                                                <td class="px-6 py-4">
+                                                <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800" >
                                                     {{ contacto.Comentario }}
                                                 </td>
                                             </tr>
@@ -65,10 +59,14 @@
                                 </div>
 
                             </div>
+
+                            <div class="item-error" v-if="!contactos.length">
+                                <p class="p-4">No hay historial de contactos</p>
+                            </div>
                             <!-- Modal footer -->
                             <div
                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                <button @click="closeEditModal" data-modal-hide="verContacto" type="button"
+                                <button data-modal-hide="verContacto" type="button"
                                     class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cerrar</button>
                             </div>
                         </div>
@@ -338,7 +336,8 @@
                                 {{ lead.Comentarios }}
                             </td>
                             <td class="px-6 py-4">
-                                <button data-modal-target="verContacto" data-modal-toggle="verContacto" type="button"
+                                <button @click="VerContactoModal(lead.LeadID)" data-modal-target="verContacto"
+                                    data-modal-toggle="verContacto" type="button"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ver</button>
                             </td>
                         </tr>
@@ -425,16 +424,24 @@ export default {
                 console.error('Error al obtener leads:', error);
             }
         },
-        async loadContactos() { 
-            try {
-                const response = await axios.get('http://localhost:4000/leads/contacto/' + this.VerContacto);
-                this.closeEditModal;
-                if (response.data && response.data.contactos) {
-                    this.contactos = response.data.contactos;
-                }
-            } catch (error) {
-                console.error('Error al obtener contactos:', error);
-            }
+        VerContactoModal(id) {
+            this.loadContactos(id);
+        },
+        loadContactos(id) {
+            console.log('Valor de id:', id);
+            axios.get(`http://localhost:4000/leads/contacto/${id}`)
+                .then(response => {
+                    this.contactos = response.data.contacto;
+                    if (this.contactos) {
+                        this.$modal.show('verContacto');
+                    } else {
+                        console.error('El objeto de comentarios es nulo o indefinido');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener los comentarios del lead:', error);
+                    // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+                });
         },
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
@@ -445,6 +452,7 @@ export default {
                 window.history.pushState({ noBackExitsApp: true }, null, null);
             }
         },
+
         formatDate(date) {
             if (date) {
                 const formattedDate = format(new Date(date), "dd/MM/yyyy");
@@ -464,6 +472,7 @@ export default {
                 // Puedes realizar cualquier lógica adicional aquí
                 this.filterList; // Llamar a filterList cuando leads cambie
                 this.formatDate;
+                this.loadContactos;
             },
         },
         inmediate: true,
