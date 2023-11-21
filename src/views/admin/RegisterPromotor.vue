@@ -147,13 +147,13 @@ export default {
           throw new Error('Por favor, completa todos los campos correctamente.');
         }
 
-        // Llama a tu API para registrar al promotor
-        // await axios.post('http://localhost:4000/promotores/create', {
-        //   Nombre,
-        //   Telefono,
-        //   Correo,
-        //   Passw,
-        // });
+        
+        await axios.post('http://localhost:4000/promotores/create', {
+          Nombre,
+          Telefono,
+          Correo,
+          Passw,
+        });
 
         // // Muestra el Toast de éxito utilizando la función de Flowbite
         // showToast({
@@ -162,7 +162,7 @@ export default {
         // });
 
         // Redirige a la vista de promotores después del registro
-        this.$router.push('/promotores');
+        this.$router.push('/promotor-list');
       } catch (error) {
         console.error('Error al registrar el promotor:', error.message);
 
