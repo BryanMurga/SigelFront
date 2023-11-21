@@ -49,8 +49,8 @@
                                 <select v-model="lead.selectedPromotor" @change="asignarPromotor(lead.LeadID)"
                                     class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                     style="color: black;">
-                                    <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID" :value="promotor.PromotorID"
-                                        style="color: black;">
+                                    <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID"
+                                        :value="promotor.PromotorID" style="color: black;">
                                         {{ promotor.Nombre }}
                                     </option>
                                 </select>
@@ -63,7 +63,7 @@
                     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
-                </button> 
+                </button>
                 <div class="item-center" v-if="!leads.length">
                     <p>No hay leads para asignar</p>
                 </div>
@@ -123,6 +123,8 @@ export default {
             try {
                 const response = await axios.get('http://localhost:4000/promotores/activos');
                 this.promotoresActivos = response.data.promotores;
+
+
             } catch (error) {
                 console.error('Error al obtener promotores activos:', error);
             }
@@ -152,20 +154,31 @@ export default {
         },
 
         enviarAsignaciones() {
-    this.leads.forEach(async lead => {
-        if (lead.selectedPromotor) {
-            try {
-                await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
-                    PromotorActual: lead.selectedPromotor
-                });
-            } catch (error) {
-                console.error('Error al asignar promotor:', error);
-            }
-        } else {
-            console.error(`El lead ${lead.LeadID} no tiene un promotor asignado`);
-        }
-    });
-},
+            this.leads.forEach(async lead => {
+                if (lead.selectedPromotor) {
+                    try {
+                        await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
+                            PromotorActual: lead.selectedPromotor
+                            .then(response => {
+                                console.log(response.data);
+                                Swal.fire({
+                                    title: "Asignaciones enviadas",
+                                    text: "Las asignaciones se han enviado correctamente",
+                                    icon: "success",
+                                    button: "Aceptar",
+                                });
+                                window.location.reload();
+                            })
+
+                        });
+                    } catch (error) {
+                        console.error('Error al asignar promotor:', error);
+                    }
+                } else {
+                    console.error(`El lead ${lead.LeadID} no tiene un promotor asignado`);
+                }
+            });
+        },
 
 
         preventBack(event) {

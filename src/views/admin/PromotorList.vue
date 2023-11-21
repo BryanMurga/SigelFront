@@ -200,6 +200,9 @@ export default {
         console.error('Error al agregar el promotor:', error);
       }
     },
+    redirectToAgregarPromotor() { 
+      this.$router.push('/register-promotor');
+      },
   },
   components: { SideBarADM, Search, FwbButton, FwbModal },
 };

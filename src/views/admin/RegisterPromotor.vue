@@ -123,7 +123,7 @@ export default {
         Telefono: '',
         Correo: '',
         Passw: '',
-      },
+      },  
       confirmarContrasena: '',
     };
   },
@@ -155,11 +155,11 @@ export default {
           Passw,
         });
 
-        // // Muestra el Toast de éxito utilizando la función de Flowbite
-        // showToast({
-        //   text: 'Promotor creado exitosamente',
-        //   type: 'success',
-        // });
+        // Muestra el Toast de éxito utilizando la función de Flowbite
+        showToast({
+          text: 'Promotor creado exitosamente',
+          type: 'success',
+        });
 
         // Redirige a la vista de promotores después del registro
         this.$router.push('/promotor-list');
@@ -167,10 +167,10 @@ export default {
         console.error('Error al registrar el promotor:', error.message);
 
         // Muestra el Toast de error utilizando la función de Flowbite
-        showToast({
-          text: 'Error al registrar el promotor',
-          type: 'danger',
-        });
+        // showToast({
+        //   text: 'Error al registrar el promotor',
+        //   type: 'danger',
+        // });
       }
     },
   },
