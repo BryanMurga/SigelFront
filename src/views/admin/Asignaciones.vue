@@ -40,7 +40,7 @@
                                 {{ lead.NombreCompleto }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ lead.telefono }}
+                                {{ lead.Telefono }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ lead.CorreoElectronico }}
@@ -49,7 +49,7 @@
                                 <select v-model="lead.selectedPromotor" @change="asignarPromotor(lead.LeadID)"
                                     class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                     style="color: black;">
-                                    <option v-for="promotor in promotoresActivos" :key="promotor.id" :value="promotor.id"
+                                    <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID" :value="promotor.PromotorID"
                                         style="color: black;">
                                         {{ promotor.Nombre }}
                                     </option>
@@ -63,7 +63,10 @@
                     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
-                </button>
+                </button> 
+                <div class="item-center" v-if="!leads.length">
+                    <p>No hay leads para asignar</p>
+                </div>
             </div>
         </div>
     </section>
@@ -110,7 +113,7 @@ export default {
         async loadLeads() {
             try {
                 // Reemplaza 'tu-endpoint' con la URL real de tu endpoint
-                const response = await axios.get('http://localhost:4000/leads');
+                const response = await axios.get('http://localhost:4000/leads/asignacion');
                 this.leads = response.data.leads; // Almacena los leads en el array
             } catch (error) {
                 console.error('Error al obtener leads:', error);
@@ -125,40 +128,45 @@ export default {
             }
         },
         async asignarPromotor(leadID) {
-    try {
-        const lead = this.leads.find(lead => lead.LeadID === leadID);
-        if (!lead) {
-            console.error('Lead no encontrado');
-            return;
-        }
+            try {
+                const lead = this.leads.find(lead => lead.LeadID === leadID);
+                if (!lead) {
+                    console.error('Lead no encontrado');
+                    return;
+                }
 
-        console.log('LeadID:', lead.LeadID);
-        console.log('Selected Promotor:', lead.selectedPromotor);
+                console.log('LeadID:', lead.LeadID);
+                console.log('Selected Promotor:', lead.selectedPromotor);
 
-        if (lead.selectedPromotor === undefined || lead.selectedPromotor === null) {
-            console.error('Promotor no seleccionado');
-            return;
-        }
+                if (lead.selectedPromotor === undefined || lead.selectedPromotor === null) {
+                    console.error('Promotor no seleccionado');
+                    return;
+                }
 
-        await axios.put(`http://localhost:4000/leads/update-promotor/${leadID}`, {
-            PromotorActual: lead.selectedPromotor
-        });
-    } catch (error) {
-        console.error('Error al asignar promotor:', error);
-    }
-},
+                await axios.put(`http://localhost:4000/leads/update-promotor/${leadID}`, {
+                    PromotorActual: lead.selectedPromotor
+                });
+            } catch (error) {
+                console.error('Error al asignar promotor:', error);
+            }
+        },
 
         enviarAsignaciones() {
-            this.leads.forEach(async lead => {
-                try {
-                    await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
-                        PromotorActual: lead.selectedPromotor
-                    });
-                } catch (error) {
-                    console.error('Error al asignar promotor:', error);
-                }
-            });
-        },
+    this.leads.forEach(async lead => {
+        if (lead.selectedPromotor) {
+            try {
+                await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
+                    PromotorActual: lead.selectedPromotor
+                });
+            } catch (error) {
+                console.error('Error al asignar promotor:', error);
+            }
+        } else {
+            console.error(`El lead ${lead.LeadID} no tiene un promotor asignado`);
+        }
+    });
+},
+
 
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
@@ -176,5 +184,4 @@ export default {
 
 </script>
 
-<style>
-</style>
+<style></style>

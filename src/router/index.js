@@ -12,7 +12,6 @@ import TemplateView from '../views/Template.vue'
 import PromotorListView from '../views/admin/PromotorList.vue'
 import HomeVue from '../views/admin/Home.vue'
 import RegisterPromotor from '../views/admin/RegisterPromotor.vue'
-import AsignacionesView from '../views/admin/Asignaciones.vue'
 import Reasignaciones from '../views/admin/Reasignaciones.vue'
 
 const router = createRouter({
