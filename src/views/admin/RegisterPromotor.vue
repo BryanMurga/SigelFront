@@ -108,8 +108,6 @@ export default {
           Passw,
         });
 
-        
-
         // Redirige a la vista de promotores después del registro
         this.$router.push('/promotor-list');
       } catch (error) {
