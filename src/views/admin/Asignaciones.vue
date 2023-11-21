@@ -64,7 +64,7 @@
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
                 </button>
-                <div class="item-center" v-if="!leads.length">
+                <div class="grid justify-items-center" v-if="!leads.length">
                     <p>No hay leads para asignar</p>
                 </div>
             </div>
@@ -146,7 +146,7 @@ export default {
                 }
 
                 await axios.put(`http://localhost:4000/leads/update-promotor/${leadID}`, {
-                    PromotorActual: lead.selectedPromotor
+                    PromotorOriginal: lead.selectedPromotor
                 });
             } catch (error) {
                 console.error('Error al asignar promotor:', error);
@@ -158,19 +158,9 @@ export default {
                 if (lead.selectedPromotor) {
                     try {
                         await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
-                            PromotorActual: lead.selectedPromotor
-                            .then(response => {
-                                console.log(response.data);
-                                Swal.fire({
-                                    title: "Asignaciones enviadas",
-                                    text: "Las asignaciones se han enviado correctamente",
-                                    icon: "success",
-                                    button: "Aceptar",
-                                });
-                                window.location.reload();
-                            })
-
+                            PromotorOriginal: lead.selectedPromotor
                         });
+                        this.loadLeads();
                     } catch (error) {
                         console.error('Error al asignar promotor:', error);
                     }
