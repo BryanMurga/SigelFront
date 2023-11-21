@@ -13,7 +13,7 @@
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" class="p-4">
+                <!-- <th scope="col" class="p-4">
                   <div class="flex items-center">
                     <input
                       id="checkbox-all-search"
@@ -22,7 +22,7 @@
                     />
                     <label for="checkbox-all-search" class="sr-only">checkbox</label>
                   </div>
-                </th>
+                </th> -->
                 <th scope="col" class="px-6 py-3">
                   Nombre Completo
                 </th>
@@ -46,7 +46,7 @@
                 :key="promotor.PromotorID"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
-                <td class="w-4 p-4">
+                <!-- <td class="w-4 p-4">
                   <div class="flex items-center">
                     <input
                       id="checkbox-table-search-1"
@@ -55,7 +55,7 @@
                     />
                     <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                   </div>
-                </td>
+                </td> -->
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{ promotor.Nombre }}
                 </th>
@@ -106,6 +106,13 @@
           <input v-model="editingPromotor.Correo" id="editCorreo" type="text" class="w-full mb-4 p-2 border rounded">
           <label for="editTelefono">Teléfono:</label>
           <input v-model="editingPromotor.Telefono" id="editTelefono" type="text" class="w-full mb-4 p-2 border rounded">
+          <label for="editEstatus">Estatus:</label>
+            <select v-model="editingPromotor.Estado" id="editEstatus" class="w-full mb-4 p-2 border rounded">
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <label for="editPassw">Contraseña:</label>
+            <input v-model="editingPromotor.Passw" id="editPassw" type="password" class="w-full mb-4 p-2 border rounded">
           <div class="flex justify-end mt-4">
             <fwb-button @click="updatePromotor" color="blue">Guardar Cambios</fwb-button>
             <fwb-button @click="closeEditModal" color="alternative">Cancelar</fwb-button>
@@ -149,6 +156,8 @@ export default {
         Nombre: '',
         Correo: '',
         Telefono: '',
+        Estado: '',
+        Passw: '',
         // Puedes agregar más propiedades según tus necesidades
       },
     };
@@ -175,6 +184,7 @@ export default {
       try {
         await axios.put(`http://localhost:4000/promotores/update/${this.editingPromotor.PromotorID}`, this.editingPromotor);
         this.closeEditModal();
+        this.loadPromotores();
       } catch (error) {
         console.error('Error al actualizar el promotor:', error);
       }
@@ -184,6 +194,8 @@ export default {
         Nombre: '',
         Correo: '',
         Telefono: '',
+        Estado: '',
+
         // Puedes agregar más propiedades según tus necesidades
       };
       this.$refs.addModal.open();
@@ -191,14 +203,8 @@ export default {
     closeAddModal() {
       this.$refs.addModal.close();
     },
-    async addPromotor() {
-      try {
-        await axios.post('http://localhost:4000/promotores/add', this.addingPromotor);
-        this.closeAddModal();
-        this.loadPromotores();
-      } catch (error) {
-        console.error('Error al agregar el promotor:', error);
-      }
+    redirectToAgregarPromotor() {
+      this.$router.push('/register-promotor');
     },
   },
   components: { SideBarADM, Search, FwbButton, FwbModal },
