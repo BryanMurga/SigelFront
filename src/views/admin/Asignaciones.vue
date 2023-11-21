@@ -40,7 +40,7 @@
                                 {{ lead.NombreCompleto }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ lead.Telefono }}
+                                {{ lead.telefono }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ lead.CorreoElectronico }}
@@ -125,28 +125,41 @@ export default {
             }
         },
         async asignarPromotor(leadID) {
-            try {
-                const lead = this.leads.find(lead => lead.LeadID === leadID);
-                if (lead) {
-                    await axios.put(`http://localhost:4000/leads/update/${leadID}`, {
-                        PromotorID: lead.selectedPromotor
-                    });
-                }
-            } catch (error) {
-                console.error('Error al asignar promotor:', error);
-            }
-        },
+    try {
+        const lead = this.leads.find(lead => lead.LeadID === leadID);
+        if (!lead) {
+            console.error('Lead no encontrado');
+            return;
+        }
+
+        console.log('LeadID:', lead.LeadID);
+        console.log('Selected Promotor:', lead.selectedPromotor);
+
+        if (lead.selectedPromotor === undefined || lead.selectedPromotor === null) {
+            console.error('Promotor no seleccionado');
+            return;
+        }
+
+        await axios.put(`http://localhost:4000/leads/update-promotor/${leadID}`, {
+            PromotorActual: lead.selectedPromotor
+        });
+    } catch (error) {
+        console.error('Error al asignar promotor:', error);
+    }
+},
+
         enviarAsignaciones() {
             this.leads.forEach(async lead => {
                 try {
-                    await axios.put(`http://localhost:4000/leads/update/${lead.LeadID}`, {
-                        PromotorID: lead.selectedPromotor
+                    await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
+                        PromotorActual: lead.selectedPromotor
                     });
                 } catch (error) {
                     console.error('Error al asignar promotor:', error);
                 }
             });
         },
+
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
             if (event.state && event.state.noBackExitsApp) {
