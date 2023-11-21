@@ -156,10 +156,10 @@ export default {
         });
 
         // Muestra el Toast de éxito utilizando la función de Flowbite
-        showToast({
-          text: 'Promotor creado exitosamente',
-          type: 'success',
-        });
+        // showToast({
+        //   text: 'Promotor creado exitosamente',
+        //   type: 'success',
+        // });
 
         // Redirige a la vista de promotores después del registro
         this.$router.push('/promotor-list');
