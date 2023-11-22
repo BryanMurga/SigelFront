@@ -423,6 +423,7 @@ export default {
             } catch (error) {
                 console.error('Error al obtener leads:', error);
             }
+            this.loadContactos();
         },
         VerContactoModal(id) {
             this.loadContactos(id);
