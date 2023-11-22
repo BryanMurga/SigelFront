@@ -117,7 +117,7 @@ export default {
         Telefono: '',
         Correo: '',
         Passw: '',
-      },
+      },  
       confirmarContrasena: '',
     };
   },
@@ -148,6 +148,7 @@ export default {
           Correo,
           Passw,
         });
+
         // Redirige a la vista de promotores después del registro
         this.$router.push('/promotor-list');
         this.notify();

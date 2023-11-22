@@ -258,6 +258,9 @@ export default {
     redirectToAgregarPromotor() {
       this.$router.push("/register-promotor");
     },
+    redirectToAgregarPromotor() { 
+      this.$router.push('/register-promotor');
+      },
   },
   components: { SideBarADM, Search, FwbButton, FwbModal },
 };
