@@ -17,7 +17,9 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-
+                            <th scope="col" class="px-6 py-3">
+                                ID Lead
+                            </th>
                             <th scope="col" class="px-6 py-3">
                                 Nombre Completo
                             </th>
@@ -37,6 +39,9 @@
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ lead.LeadID }}
+                            </th>
+                            <th class="px-6 py-4">
                                 {{ lead.NombreCompleto }}
                             </th>
                             <td class="px-6 py-4">
@@ -81,12 +86,64 @@ import SideBarADM from "../../components/SideBarADM.vue";
 import Search from "../../components/Search.vue";
 import axios from "axios";
 
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
 });
 
 export default {
+
+    //types of toast
+   setup() {
+    const notify = () => {
+      toast("Se ha agregado el Promotor!", {
+        autoClose: 3000,
+        type: 'success'
+      }); // ToastOptions
+    }
+
+    const errAsignacion = (LeadID) =>{
+      toast(`El lead ${LeadID} no tiene un promotor asignado`, {
+        autoClose: 2000,
+        type: 'warning'
+      }); // ToastOptions
+    }
+
+    const errLeads = () =>{
+      toast("Error al obtener los Leads", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const errPromotores = () =>{
+      toast("Error al obtener los Promotores Activos", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const errAsignarPromotor = () =>{
+      toast("Error al asignar promotor", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const infoNotify = () =>{
+      toast("Se ha actualizado la Información... ", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+    
+
+    return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+   },
+
     data() {
         return {
             userName: getUserName(),
@@ -116,7 +173,7 @@ export default {
                 const response = await axios.get('http://localhost:4000/leads/asignacion');
                 this.leads = response.data.leads; // Almacena los leads en el array
             } catch (error) {
-                console.error('Error al obtener leads:', error);
+                this.errLeads();
             }
         },
         async loadActivePromotores() {
@@ -127,6 +184,7 @@ export default {
 
             } catch (error) {
                 console.error('Error al obtener promotores activos:', error);
+                this.errPromotores();
             }
         },
         async asignarPromotor(leadID) {
@@ -134,6 +192,7 @@ export default {
                 const lead = this.leads.find(lead => lead.LeadID === leadID);
                 if (!lead) {
                     console.error('Lead no encontrado');
+
                     return;
                 }
 
@@ -149,7 +208,7 @@ export default {
                     PromotorOriginal: lead.selectedPromotor
                 });
             } catch (error) {
-                console.error('Error al asignar promotor:', error);
+                this.errAsignarPromotor();
             }
         },
 
@@ -161,11 +220,12 @@ export default {
                             PromotorOriginal: lead.selectedPromotor
                         });
                         this.loadLeads();
+                        this.notify();
                     } catch (error) {
-                        console.error('Error al asignar promotor:', error);
+                        this.errAsignarPromotor();
                     }
                 } else {
-                    console.error(`El lead ${lead.LeadID} no tiene un promotor asignado`);
+                    this.errAsignacion(lead.LeadID);
                 }
             });
         },

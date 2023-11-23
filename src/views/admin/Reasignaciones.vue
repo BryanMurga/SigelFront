@@ -49,7 +49,7 @@
                                 {{ lead.CorreoElectronico }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOrig}}
+                                {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOri}}
                             </td>
                             <td class="px-2 py-1">
                                 
@@ -85,12 +85,63 @@ import SideBarADM from "../../components/SideBarADM.vue";
 import Search from "../../components/Search.vue";
 import axios from "axios";
 
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
 });
 
 export default {
+
+    //types of toast
+   setup() {
+    const notify = () => {
+      toast("Se ha agregado el Promotor!", {
+        autoClose: 3000,
+        type: 'success'
+      }); // ToastOptions
+    }
+
+    const errAsignacion = (LeadID) =>{
+      toast(`El lead ${LeadID} no tiene un promotor asignado`, {
+        autoClose: 2000,
+        type: 'warning'
+      }); // ToastOptions
+    }
+
+    const errLeads = () =>{
+      toast("Error al obtener los Leads", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const errPromotores = () =>{
+      toast("Error al obtener los Promotores Activos", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const errAsignarPromotor = () =>{
+      toast("Error al asignar promotor", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const infoNotify = () =>{
+      toast("Se ha actualizado la Información... ", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+   },
+
     data() {
         return {
             userName: getUserName(),
@@ -116,7 +167,7 @@ export default {
                     selectedPromotorID: null // Inicializar el ID del promotor seleccionado como null
                 }));
             } catch (error) {
-                console.error('Error al obtener leads:', error);
+                this.errLeads();
             }
         },
         async loadActivePromotores() {
@@ -124,7 +175,7 @@ export default {
                 const response = await axios.get('http://localhost:4000/promotores/activos');
                 this.promotoresActivos = response.data.promotores;
             } catch (error) {
-                console.error('Error al obtener promotores activos:', error);
+                this.errPromotores();
             }
         },
 
@@ -146,7 +197,7 @@ export default {
         // No realizamos la solicitud PUT aquí
         // Las actualizaciones se manejarán en la función enviarAsignaciones
     } catch (error) {
-        console.error('Error al asignar promotor:', error);
+        this.errAsignarPromotor();
     }
 },
 
@@ -157,6 +208,7 @@ export default {
                 await axios.put(`http://localhost:4000/leads/update-promotor-actual/${lead.LeadID}`, {
                     PromotorActual: lead.selectedPromotor
                 });
+                this.notify();
             }
         });
 
@@ -167,6 +219,7 @@ export default {
         await this.loadLeads();
     } catch (error) {
         console.error('Error al asignar promotores:', error);
+        this.errAsignarPromotor();
     }
 },
 
