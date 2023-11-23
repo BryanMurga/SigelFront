@@ -49,7 +49,7 @@
                                 {{ lead.CorreoElectronico }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOrig}}
+                                {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOri}}
                             </td>
                             <td class="px-2 py-1">
                                 
