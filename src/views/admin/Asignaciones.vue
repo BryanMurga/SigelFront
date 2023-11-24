@@ -185,7 +185,7 @@ export default {
         },
         async loadActivePromotores() {
             try {
-                const response = await axios.get('http://localhost:4000/promotores/activos');
+                const response = await axios.get('http://localhost:4000/promotores/activos/all');
                 this.promotoresActivos = response.data.promotores;
 
 
@@ -236,7 +236,6 @@ export default {
                 }
             });
         },
-
 
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
