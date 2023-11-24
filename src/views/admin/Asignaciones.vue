@@ -38,19 +38,21 @@
         <div class="flex-1 lg:ml-64">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" style="background-color: #48C9B0;">
                         <tr>
-
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-white">
+                                ID Lead
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-white">
                                 Nombre Completo
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-white">
                                 Telefono
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-white">
                                 Correo Electronico
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-white">
                                 Promotor
                             </th>
                         </tr>
@@ -60,6 +62,9 @@
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ lead.LeadID }}
+                            </th>
+                            <th class="px-6 py-4">
                                 {{ lead.NombreCompleto }}
                             </th>
                             <td class="px-6 py-4">
@@ -83,16 +88,13 @@
                 </table>
                 <br>
                 <button type="button"
+                    v-if="hayLeadsConPromotorSeleccionado"
                     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
                 </button>
-                <br>
-                <div class="item-error" v-if="input && !filterList.length">
-                    <p class="grid justify-items-start p-4">No hay coicidencia de registros</p>
-                </div>
-                <div class="grid justify-items-center" v-if="!filterList.length">
-                    <p>No hay leads para asignar</p>
+                <div class="grid justify-items-center" v-if="!leads.length" style="background-color: #F4D03F;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para asignar</h5>
                 </div>
             </div>
         </div>
@@ -110,12 +112,70 @@ import axios from "axios";
 import { ref } from "vue";
 import { format } from "date-fns";
 
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
 });
 
 export default {
+
+    computed: {
+    hayLeadsConPromotorSeleccionado() {
+      return this.leads.some(lead => lead.selectedPromotor !== null);
+    }
+  },
+
+    //types of toast
+   setup() {
+    const notify = () => {
+      toast("Se ha agregado el Promotor!", {
+        autoClose: 3000,
+        type: 'success'
+      }); // ToastOptions
+    }
+
+    const errAsignacion = (LeadID) =>{
+      toast(`El lead ${LeadID} no tiene un promotor asignado`, {
+        autoClose: 2000,
+        type: 'warning'
+      }); // ToastOptions
+    }
+
+    const errLeads = () =>{
+      toast("Error al obtener los Leads", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const errPromotores = () =>{
+      toast("Error al obtener los Promotores Activos", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const errAsignarPromotor = () =>{
+      toast("Error al asignar promotor", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+
+    const infoNotify = () =>{
+      toast("Se ha actualizado la Información... ", {
+        autoClose: 2000,
+        type: 'error'
+      }); // ToastOptions
+    }
+    
+
+    return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+   },
+
     data() {
         return {
             userName: getUserName(),
@@ -158,7 +218,7 @@ export default {
                 const response = await axios.get('http://localhost:4000/leads/asignacion');
                 this.leads = response.data.leads; // Almacena los leads en el array
             } catch (error) {
-                console.error('Error al obtener leads:', error);
+                this.errLeads();
             }
         },
         async loadActivePromotores() {
@@ -169,6 +229,7 @@ export default {
 
             } catch (error) {
                 console.error('Error al obtener promotores activos:', error);
+                this.errPromotores();
             }
         },
         async asignarPromotor(leadID) {
@@ -176,6 +237,7 @@ export default {
                 const lead = this.leads.find(lead => lead.LeadID === leadID);
                 if (!lead) {
                     console.error('Lead no encontrado');
+
                     return;
                 }
 
@@ -191,7 +253,7 @@ export default {
                     PromotorOriginal: lead.selectedPromotor
                 });
             } catch (error) {
-                console.error('Error al asignar promotor:', error);
+                this.errAsignarPromotor();
             }
         },
 
@@ -203,11 +265,12 @@ export default {
                             PromotorOriginal: lead.selectedPromotor
                         });
                         this.loadLeads();
+                        this.notify();
                     } catch (error) {
-                        console.error('Error al asignar promotor:', error);
+                        this.errAsignarPromotor();
                     }
                 } else {
-                    console.error(`El lead ${lead.LeadID} no tiene un promotor asignado`);
+                    this.errAsignacion(lead.LeadID);
                 }
             });
         },
