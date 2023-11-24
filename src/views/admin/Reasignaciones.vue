@@ -17,7 +17,9 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-
+                            <th scope="col" class="px-6 py-3">
+                                ID
+                            </th>
                             <th scope="col" class="px-6 py-3">
                                 Nombre Completo
                             </th>
@@ -38,7 +40,9 @@
                     <tbody>
                         <tr v-for="lead in leads" :key="lead.LeadID"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ lead.LeadID }}
+                            </th>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ lead.NombreCompleto }}
                             </th>
@@ -49,11 +53,10 @@
                                 {{ lead.CorreoElectronico }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOrig}}
+                                {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOri }}
                             </td>
                             <td class="px-2 py-1">
-                                
-                                <select v-model="lead.selectedPromotor" @change="asignarPromotor(lead.LeadID)"
+                                <select v-model="lead.selectedPromotor" @click="loadActivePromotores(lead.LeadID)"
                                     class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                     style="color: black;">
                                     <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID"
@@ -61,6 +64,7 @@
                                         {{ promotor.Nombre }}
                                     </option>
                                 </select>
+
                             </td>
                         </tr>
                     </tbody>
@@ -84,7 +88,7 @@ import { getUserName } from "../../sessions";
 import SideBarADM from "../../components/SideBarADM.vue";
 import Search from "../../components/Search.vue";
 import axios from "axios";
-
+import { th } from "date-fns/locale";
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
@@ -95,12 +99,15 @@ export default {
         return {
             userName: getUserName(),
             leads: [],
+            selectedPromotor: null,
             promotoresActivos: [],
+
         };
     },
     mounted() {
         this.loadLeads();
         this.loadActivePromotores();
+
         window.history.pushState({ noBackExitsApp: true }, null, null);
         window.addEventListener('popstate', this.preventBack);
     },
@@ -108,67 +115,51 @@ export default {
         window.removeEventListener('popstate', this.preventBack);
     },
     methods: {
+
         async loadLeads() {
             try {
                 const response = await axios.get('http://localhost:4000/leads/reasignacion');
                 this.leads = response.data.leads.map(lead => ({
                     ...lead,
-                    selectedPromotorID: null // Inicializar el ID del promotor seleccionado como null
+                    selectedPromotor: null,
+                    // Inicializar el ID del promotor seleccionado como null
                 }));
             } catch (error) {
                 console.error('Error al obtener leads:', error);
             }
         },
-        async loadActivePromotores() {
+        async loadActivePromotores(LeadID) {
             try {
-                const response = await axios.get('http://localhost:4000/promotores/activos');
+                console.log('Valor de id:', LeadID);
+                const response = await axios.get(`http://localhost:4000/promotores/activos/${LeadID}`);
                 this.promotoresActivos = response.data.promotores;
+                this.selectedPromotor = this.promotoresActivos[0].PromotorID;
+                
+
             } catch (error) {
                 console.error('Error al obtener promotores activos:', error);
             }
         },
-
-        async asignarPromotor(leadID) {
-    try {
-        const lead = this.leads.find(lead => lead.LeadID === leadID);
-        if (!lead) {
-            console.error('Lead no encontrado');
-            return;
-        }
-
-        // Actualiza el valor del promotor seleccionado en el lead
-        // pero no realiza la solicitud PUT aquí
-        lead.selectedPromotorID = lead.selectedPromotor;
-
-        console.log('LeadID:', lead.LeadID);
-        console.log('Selected Promotor ID:', lead.selectedPromotorID); // Obtén el ID del promotor directamente
-
-        // No realizamos la solicitud PUT aquí
-        // Las actualizaciones se manejarán en la función enviarAsignaciones
-    } catch (error) {
-        console.error('Error al asignar promotor:', error);
-    }
-},
-
+        
         async enviarAsignaciones() {
-    try {
-        const promises = this.leads.map(async lead => {
-            if (lead.selectedPromotor) {
-                await axios.put(`http://localhost:4000/leads/update-promotor-actual/${lead.LeadID}`, {
-                    PromotorActual: lead.selectedPromotor
+            try {
+                const promises = this.leads.map(async lead => {
+                    if (lead.selectedPromotor) {
+                        await axios.put(`http://localhost:4000/leads/update-promotor-actual/${lead.LeadID}`, {
+                            PromotorActual: lead.selectedPromotor
+                        });
+                    }
                 });
+
+                // Esperar a que todas las actualizaciones se completen antes de recargar los leads
+                await Promise.all(promises);
+
+                // Recargar los leads después de que todas las actualizaciones sean exitosas
+                await this.loadLeads();
+            } catch (error) {
+                console.error('Error al asignar promotores:', error);
             }
-        });
-
-        // Esperar a que todas las actualizaciones se completen antes de recargar los leads
-        await Promise.all(promises);
-
-        // Recargar los leads después de que todas las actualizaciones sean exitosas
-        await this.loadLeads();
-    } catch (error) {
-        console.error('Error al asignar promotores:', error);
-    }
-},
+        },
 
 
         preventBack(event) {

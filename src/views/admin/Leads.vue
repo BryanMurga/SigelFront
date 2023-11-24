@@ -96,6 +96,9 @@
                             </div> -->
                     </div>
                 </form>
+                <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Leads</h5>
+        </div>
             </div>
 
         </div>
@@ -345,7 +348,7 @@
                 </table>
 
                 <div class="item-error" v-if="input && !filterList.length">
-                    <p class="p-4">No hay coicidencia de registros</p>
+                    <p class="grid justify-items-center p-4">No hay coicidencia de registros</p>
                 </div>
 
             </div>
@@ -376,8 +379,6 @@ export default {
             VerContacto: null,
             leads: [],
             contactos: [],
-            buscador: '',
-            setTimeoutBuscador: '',
             input: ref(''),
         };
 

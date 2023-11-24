@@ -1,12 +1,35 @@
 <template>
-    <header>
-        <div class="lg:ml-64 p-4">
+    <header class="lg:ml-64 p-4">
+        <div >
             <i class="fas fa-circle-plus text-2xl" style="color: #48c9b0"></i>
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Asignar</span>
         </div>
         <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
-        <Search />
-        <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
+        <br>
+
+        <form>
+            <label for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input v-model="input" type="search" id="default-search" name="leadSearch"
+                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Buscar registros" required />
+                <!-- <div class="items" v-for="lead in filterList()" :key=lead.id>
+                                <p>{{ lead.NombreCompleto }}</p>
+                            </div>
+                            <div class="item-error" v-if="input&&!filterList().length">
+                                <p>No se encontraron registros</p>
+                            </div> -->
+            </div>
+        </form>
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Asignaciones</h5>
         </div>
     </header>
@@ -33,7 +56,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="lead in leads" :key="lead.LeadID"
+                        <tr v-for="lead in filterList" :key="lead.LeadID"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -64,7 +87,11 @@
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
                 </button>
-                <div class="grid justify-items-center" v-if="!leads.length">
+                <br>
+                <div class="item-error" v-if="input && !filterList.length">
+                    <p class="grid justify-items-start p-4">No hay coicidencia de registros</p>
+                </div>
+                <div class="grid justify-items-center" v-if="!filterList.length">
                     <p>No hay leads para asignar</p>
                 </div>
             </div>
@@ -80,6 +107,8 @@ import { getUserName } from "../../sessions";
 import SideBarADM from "../../components/SideBarADM.vue";
 import Search from "../../components/Search.vue";
 import axios from "axios";
+import { ref } from "vue";
+import { format } from "date-fns";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -92,9 +121,22 @@ export default {
             userName: getUserName(),
             leads: [],
             promotoresActivos: [], // Agrega una variable para almacenar los promotores activos
-            selectedPromotor: null // Variable para almacenar el promotor seleccionado
+            selectedPromotor: null, // Variable para almacenar el promotor seleccionado
+            input: ref('')
         };
 
+    },
+    computed: {
+        filterList() {
+            if (this.leads.length === 0) {
+                return [];
+            }
+
+            return this.leads.filter(lead => {
+                const nombreCompleto = lead && lead.NombreCompleto ? lead.NombreCompleto : "";
+                return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
+            });
+        }
     },
     mounted() {
         this.loadLeads();
@@ -121,7 +163,7 @@ export default {
         },
         async loadActivePromotores() {
             try {
-                const response = await axios.get('http://localhost:4000/promotores/activos');
+                const response = await axios.get('http://localhost:4000/promotores/activos/all');
                 this.promotoresActivos = response.data.promotores;
 
 
@@ -180,6 +222,15 @@ export default {
                 window.history.pushState({ noBackExitsApp: true }, null, null);
             }
         },
+    },
+    watch: {
+        leads: {
+            handler() {
+                this.filterList;
+                this.formatDate;
+            }
+        },
+        inmediate: true,
     },
     components: { SideBarADM, Search }
 };
