@@ -275,7 +275,6 @@ export default {
             });
         },
 
-
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
             if (event.state && event.state.noBackExitsApp) {

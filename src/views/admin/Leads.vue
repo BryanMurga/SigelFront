@@ -367,11 +367,61 @@ import { ref } from "vue";
 import { format } from "date-fns";
 import { FwbButton, FwbModal } from 'flowbite-vue';
 
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 onMounted(() => {
     initFlowbite();
 });
 
 export default {
+
+    //types of toast
+    setup() {
+        const notify = () => {
+            toast("Se ha reasignado el Promotor!", {
+                autoClose: 3000,
+                type: 'success'
+            }); // ToastOptions
+        }
+
+        const errAsignacion = (LeadID) => {
+            toast(`El lead ${LeadID} no tiene un promotor asignado`, {
+                autoClose: 2000,
+                type: 'warning'
+            }); // ToastOptions
+        }
+
+        const errLeads = () => {
+            toast("Error al obtener los Leads", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const errPromotores = () => {
+            toast("Error al obtener los Promotores Activos", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const errAsignarPromotor = () => {
+            toast("Error al asignar promotor", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const infoNotify = () => {
+            toast("Se ha actualizado la Información... ", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+    },
 
     data() {
         return {
@@ -422,7 +472,7 @@ export default {
                 }
 
             } catch (error) {
-                console.error('Error al obtener leads:', error);
+                this.errLeads();
             }
             this.loadContactos();
         },
@@ -438,6 +488,7 @@ export default {
                         this.$modal.show('verContacto');
                     } else {
                         console.error('El objeto de comentarios es nulo o indefinido');
+                        
                     }
                 })
                 .catch(error => {
