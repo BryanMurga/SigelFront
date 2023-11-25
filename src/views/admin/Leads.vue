@@ -127,16 +127,16 @@
                                 Nombre Completo
                             </th>
                             <th scope="col" class="place-items-center px-4 py-3">
-                                Telefono
+                                Teléfono
                             </th>
                             <th scope="col" class="px-6 py-3 text-center">
-                                Telefono 2
+                                Teléfono Secundario
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Correo Electronico
+                                Correo Electrónico
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Correo Electronico 2
+                                Correo Electrónico 2
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Fecha de primer contacto
@@ -148,7 +148,7 @@
                                 Escuela de procedencia
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Pais
+                                País
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Estado
