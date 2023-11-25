@@ -38,16 +38,17 @@
           {{ userName }}!
         </span>
       </a>
-      <ul class="space-y-10 space-x-1 font-medium">
-        <li class="md:mt-5 flex items-center">
+      <ul class="space-y-6  font-medium">
+        <li class="md:mt-3  items-center">
           <a
             href="home-adm"
             :class="{
               'bg-green-500': selectedSection === 'home',
             }"
-            class="flex items-center p-2  text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
+            class="flex items-center p-6  text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
             @click="selectSection('home')"
           >
+          
             <svg
               class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               aria-hidden="true"
@@ -60,13 +61,13 @@
           </a>
         </li>
 
-        <li class="md:mt-5 flex items-center">
+        <li class="md:mt-3  items-center">
           <a
             href="leads"
             :class="{
               'bg-green-500': selectedSection === 'leads',
             }"
-            class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
+            class="flex items-center p-6 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
             @click="selectSection('leads')"
           >
             <svg
@@ -84,13 +85,13 @@
           </a>
         </li>
 
-        <li class="md:mt-5 flex items-center">
+        <li class="md:mt-3  items-center">
           <a
             href="asignaciones"
             :class="{
               'bg-green-500': selectedSection === 'asignaciones',
             }"
-            class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
+            class="flex items-center p-6 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
             @click="selectSection('asignaciones')"
           >
             <svg
@@ -105,13 +106,13 @@
           </a>
         </li>
 
-        <li class="md:mt-5 flex items-center">
+        <li class="md:mt-3  items-center">
           <a
             href="reasignaciones"
             :class="{
               'bg-green-500': selectedSection === 'reasignaciones',
             }"
-            class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
+            class="flex items-center p-6 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
             @click="selectSection('reasignaciones')"
           >
             <svg
@@ -126,11 +127,11 @@
           </a>
         </li>
 
-        <li class="md:mt-5 flex items-center">
+        <li class="md:mt-3  items-center">
           <a
             @click="cerrarSesion"
             href=""
-            class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-red-600 dark:hover:bg-red-700 group transition duration-300"
+            class="flex items-center p-6 text-white rounded-lg dark:text-white hover:bg-red-600 dark:hover:bg-red-700 group transition duration-300"
           >
             <svg
               class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white mt-1"

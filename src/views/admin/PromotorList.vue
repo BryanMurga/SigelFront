@@ -9,32 +9,52 @@
 
     <SideBarADM />
 
-    <div class="mt-6 ml-64 mr-10 mb-5">
-  <div class="relative">
-    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-      </svg>
+    <div
+      class="flex flex-col mt-6 md:flex-row md:items-center md:justify-end lg:ml-64 lg:mr-10 lg:mb-5"
+    >
+      <div class="relative flex-grow">
+        <div
+          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+        </div>
+        <input
+          v-model="searchQuery"
+          type="search"
+          name="leadSearch"
+          class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-2 md:mt-0"
+          placeholder="Buscar registros"
+          required
+        />
+      </div>
     </div>
-    <input
-      v-model="searchQuery"
-      type="search"
-      name="leadSearch"
-      class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Buscar registros"
-      required
-    />
-  </div>
-</div>
-
-
+    <br>
 
     <section>
       <div class="flex-1 lg:ml-64">
-        <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
-          <table  class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" >
+        <div
+          class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg"
+        >
+          <table
+            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+          >
             <thead
-              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              style="background-color: #48c9b0"
+              class="text-xs uppercase dark:bg-gray-700 text-white"
             >
               <tr>
                 <th scope="col" class="px-6 py-3">Nombre Completo</th>
@@ -62,8 +82,14 @@
                 <td class="px-6 py-4">
                   {{ promotor.Telefono }}
                 </td>
-                <td class="px-6 py-4" :class="{ 'text-green-500': promotor.Estado, 'text-red-500': !promotor.Estado }">
-                   {{ promotor.Estado ? "Activo" : "Inactivo" }}
+                <td
+                  class="px-6 py-4"
+                  :class="{
+                    'text-green-500': promotor.Estado,
+                    'text-red-500': !promotor.Estado,
+                  }"
+                >
+                  {{ promotor.Estado ? "Activo" : "Inactivo" }}
                 </td>
                 <td class="px-6 py-4">
                   <fwb-button @click="openEditModal(promotor)" color="blue">
@@ -84,13 +110,16 @@
           Agregar Promotor
         </button>
       </div>
-
     </section>
-
   </div>
 
-  <div v-if="editingPromotor" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 dark:bg-opacity-80">
-    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-md p-6">
+  <div
+    v-if="editingPromotor"
+    class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 dark:bg-opacity-80"
+  >
+    <div
+      class="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-md p-6"
+    >
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
           Editar Promotor
@@ -162,9 +191,6 @@
       </form>
     </div>
   </div>
-
-
-
 </template>
 
 <script>
@@ -249,13 +275,12 @@ export default {
     async updatePromotor() {
       try {
         await axios.put(
-
           `http://localhost:4000/promotores/update/${this.editingPromotor.PromotorID}`,
           this.editingPromotor
         );
-        
+
         this.closeEditModal();
-        this.loadPromotores()
+        this.loadPromotores();
 
         this.notify();
       } catch (error) {
@@ -280,11 +305,9 @@ export default {
     redirectToAgregarPromotor() {
       this.$router.push("/register-promotor");
     },
-   
   },
   components: { SideBarADM, FwbButton, FwbModal },
 };
-
 </script>
 
 <style>
