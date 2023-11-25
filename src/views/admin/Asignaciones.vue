@@ -3,9 +3,33 @@
         <div class="lg:ml-64 p-4">
             <i class="fas fa-circle-plus text-2xl" style="color: #48c9b0"></i>
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Asignar</span>
+
+            <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
+            <br><br>
+
+            <form>
+                <label for="default-search"
+                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input v-model="input" type="search" id="default-search" name="leadSearch"
+                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Buscar registros" required />
+                    <!-- <div class="items" v-for="lead in filterList()" :key=lead.id>
+                                <p>{{ lead.NombreCompleto }}</p>
+                            </div>
+                            <div class="item-error" v-if="input&&!filterList().length">
+                                <p>No se encontraron registros</p>
+                            </div> -->
+                </div>
+            </form>
         </div>
-        <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
-        <Search />
         <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Asignaciones</h5>
         </div>
@@ -15,7 +39,8 @@
         <div class="flex-1 lg:ml-64">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" style="background-color: #48C9B0;">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                        style="background-color: #48C9B0;">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-white">
                                 ID Lead
@@ -32,10 +57,11 @@
                             <th scope="col" class="px-6 py-3 text-white">
                                 Promotor
                             </th>
+                           
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="lead in leads" :key="lead.LeadID"
+                        <tr v-for="lead in filterList" :key="lead.LeadID"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -64,14 +90,14 @@
                     </tbody>
                 </table>
                 <br>
-                <button type="button"
-                    v-if="hayLeadsConPromotorSeleccionado"
+                <button type="button" v-if="hayLeadsConPromotorSeleccionado"
                     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
                 </button>
-                <div class="grid justify-items-center" v-if="!leads.length" style="background-color: #F4D03F;">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para asignar</h5>
+                <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
+                        asignar</h5>
                 </div>
             </div>
         </div>
@@ -84,8 +110,8 @@ import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import { getUserName } from "../../sessions";
 import SideBarADM from "../../components/SideBarADM.vue";
-import Search from "../../components/Search.vue";
 import axios from "axios";
+import { ref } from "vue";
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
@@ -98,65 +124,77 @@ onMounted(() => {
 export default {
 
     computed: {
-    hayLeadsConPromotorSeleccionado() {
-      return this.leads.some(lead => lead.selectedPromotor !== null);
-    }
-  },
+        hayLeadsConPromotorSeleccionado() {
+            return this.leads.some(lead => lead.selectedPromotor !== null);
+        },
+        filterList() {
+
+            if (this.leads.length === 0) {
+                return [];
+            }
+
+            return this.leads.filter(lead => {
+                const nombreCompleto = lead && lead.NombreCompleto ? lead.NombreCompleto : "";
+                return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
+            });
+        },
+    },
 
     //types of toast
-   setup() {
-    const notify = () => {
-      toast("Se ha agregado el Promotor!", {
-        autoClose: 3000,
-        type: 'success'
-      }); // ToastOptions
-    }
+    setup() {
+        const notify = () => {
+            toast("Se ha agregado el Promotor!", {
+                autoClose: 3000,
+                type: 'success'
+            }); // ToastOptions
+        }
 
-    const errAsignacion = (LeadID) =>{
-      toast(`El lead ${LeadID} no tiene un promotor asignado`, {
-        autoClose: 2000,
-        type: 'warning'
-      }); // ToastOptions
-    }
+        const errAsignacion = (LeadID) => {
+            toast(`El lead ${LeadID} no tiene un promotor asignado`, {
+                autoClose: 2000,
+                type: 'warning'
+            }); // ToastOptions
+        }
 
-    const errLeads = () =>{
-      toast("Error al obtener los Leads", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
+        const errLeads = () => {
+            toast("Error al obtener los Leads", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
 
-    const errPromotores = () =>{
-      toast("Error al obtener los Promotores Activos", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
+        const errPromotores = () => {
+            toast("Error al obtener los Promotores Activos", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
 
-    const errAsignarPromotor = () =>{
-      toast("Error al asignar promotor", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
+        const errAsignarPromotor = () => {
+            toast("Error al asignar promotor", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
 
-    const infoNotify = () =>{
-      toast("Se ha actualizado la Información... ", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
-    
+        const infoNotify = () => {
+            toast("Se ha actualizado la Información... ", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
 
-    return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
-   },
+
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+    },
 
     data() {
         return {
             userName: getUserName(),
             leads: [],
             promotoresActivos: [], // Agrega una variable para almacenar los promotores activos
-            selectedPromotor: null // Variable para almacenar el promotor seleccionado
+            selectedPromotor: null,// Variable para almacenar el promotor seleccionado
+            input: ref(''),
         };
 
     },
@@ -248,7 +286,19 @@ export default {
             }
         },
     },
-    components: { SideBarADM, Search }
+    watch: {
+        leads: {
+            handler() {
+                // Este método se ejecutará cada vez que 'leads' cambie
+                // Puedes realizar cualquier lógica adicional aquí
+                this.filterList; // Llamar a filterList cuando leads cambie
+                this.formatDate;
+                this.loadContactos;
+            },
+        },
+        inmediate: true,
+    },
+    components: { SideBarADM }
 };
 
 
