@@ -194,7 +194,7 @@ export default {
         },
         async loadActivePromotores(LeadID) {
             try {
-                const response = await axios.get('http://localhost:4000/promotores/activos/all');
+                const response = await axios.get('http://localhost:4000/promotores/activos/'+LeadID);
                 console.log('Valor de id:', LeadID);
                 this.promotoresActivos = response.data.promotores;
                 this.selectedPromotor = this.promotoresActivos[0].PromotorID;
@@ -233,12 +233,8 @@ export default {
                         
                         await axios.put(`http://localhost:4000/leads/update-promotor-actual/${lead.LeadID}`, {
                             PromotorActual: lead.selectedPromotor
-                            
                         });
-                        
                     }
-                    
-                    
                 });
                 this.notify();
                 // Esperar a que todas las actualizaciones se completen antes de recargar los leads
