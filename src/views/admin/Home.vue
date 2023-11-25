@@ -26,7 +26,7 @@
                     <h5 class="mb-2 text-4xl font-bold tracking-tight text-white">Dashboard</h5>
                 </a>
 
-                <a href="#"
+                <a href="indicadores"
                     class="block max-w-sm p-6 bg-yellow-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
                     style="background-color: #48c9b0; padding-bottom: 25%; position: relative; ">
                     <i class="fas fa-arrow-trend-up text-9xl mt-10" style="color: white"></i>

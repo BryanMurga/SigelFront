@@ -13,6 +13,7 @@ import PromotorListView from '../views/admin/PromotorList.vue'
 import HomeVue from '../views/admin/Home.vue'
 import RegisterPromotor from '../views/admin/RegisterPromotor.vue'
 import Reasignaciones from '../views/admin/Reasignaciones.vue'
+import IndicadoresView from '../views/admin/Indicadores.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -126,6 +127,11 @@ const router = createRouter({
       name: 'reasignaciones',
       component: Reasignaciones
     },
+    {
+      path: '/indicadores',
+      name: 'indicadores',
+      component: IndicadoresView,
+    }
   ]
 })
 export default router;
