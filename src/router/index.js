@@ -17,6 +17,8 @@ import IndicadoresView from '../views/admin/Indicadores.vue'
 import DashPromotor from '../views/promotor/DashPromotor.vue'
 import RegistrarLead from '../views/promotor/RegistrarLead.vue'
 
+import LeadsPromotor from '../views/promotor/Leads.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -124,6 +126,7 @@ const router = createRouter({
       name: 'indicadores',
       component: IndicadoresView,
     },
+<<<<<<< HEAD
 
     {
       path: '/dash-promotor',
@@ -154,6 +157,13 @@ const router = createRouter({
       }
     }
 
+=======
+    {
+      path: '/leads-promotor',
+      name: 'leads-promotor',
+      component: LeadsPromotor,
+    },
+>>>>>>> 63c3e09fe5bf7fce949c15247a101ca99da1c390
     
   ]
 })
