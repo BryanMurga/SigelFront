@@ -126,7 +126,6 @@ const router = createRouter({
       name: 'indicadores',
       component: IndicadoresView,
     },
-<<<<<<< HEAD
 
     {
       path: '/dash-promotor',
@@ -157,13 +156,6 @@ const router = createRouter({
       }
     }
 
-=======
-    {
-      path: '/leads-promotor',
-      name: 'leads-promotor',
-      component: LeadsPromotor,
-    },
->>>>>>> 63c3e09fe5bf7fce949c15247a101ca99da1c390
     
   ]
 })

@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: [
     "./index.html",
@@ -5,7 +7,10 @@ module.exports = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {colors: {
+      "vtd-primary": colors.sky, // Light mode Datepicker color
+      "vtd-secondary": colors.gray, // Dark mode Datepicker color
+    },},
   },
   plugins: [require("flowbite/plugin")],
 };
