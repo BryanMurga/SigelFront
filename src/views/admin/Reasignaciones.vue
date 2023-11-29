@@ -121,11 +121,14 @@
                             <th scope="col" class="text-justify px-8 py-3 text-white">
                                 Promotor Actual
                             </th>
+                            <th scope="col" class="text-justify px-8 py-3 text-white">
+                                Fecha de promotor actual
+                            </th>
                             <th scope="col" class="px-6 py-3 text-white">
                                 Reasignar
                             </th>
                             <th scope="col" class="px-6 py-3 text-white">
-                                Historial de Reacciones
+                                Historial de Reasignaciones
                             </th>
                         </tr>
                     </thead>
@@ -147,6 +150,9 @@
                             </td>
                             <td class="px-8 py-4">
                                 {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOri }}
+                            </td>
+                            <td class="px-8 py-4">
+                                {{ formatDate(lead.FechaPromotorActual) ? formatDate(lead.FechaPromotorActual) : formatDate(lead.FechaPromotorOriginal) }}
                             </td>
                             <td class="px-6 py-4">
 
