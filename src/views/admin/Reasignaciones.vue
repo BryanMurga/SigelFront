@@ -155,7 +155,6 @@
                                 {{ formatDate(lead.FechaPromotorActual) ? formatDate(lead.FechaPromotorActual) : formatDate(lead.FechaPromotorOriginal) }}
                             </td>
                             <td class="px-6 py-4">
-
                                 <select v-model="lead.selectedPromotor" @click="loadActivePromotores(lead.LeadID)"
                                     class="block rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                     style="height: 50px; width: 300px; color: black;">
@@ -364,7 +363,6 @@ export default {
                 await this.loadLeads();
             } catch (error) {
                 console.error('Error al asignar promotores:', error);
-                this.errAsignarPromotor();
             }
         },
         VerReasignacioModal(LeadID) {

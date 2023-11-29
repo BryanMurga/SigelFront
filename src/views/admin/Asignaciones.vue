@@ -228,7 +228,6 @@ export default {
 
 
             } catch (error) {
-                console.error('Error al obtener promotores activos:', error);
                 this.errPromotores();
             }
         },
