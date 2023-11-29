@@ -14,6 +14,8 @@ import HomeVue from '../views/admin/Home.vue'
 import RegisterPromotor from '../views/admin/RegisterPromotor.vue'
 import Reasignaciones from '../views/admin/Reasignaciones.vue'
 import IndicadoresView from '../views/admin/Indicadores.vue'
+import DashPromotor from '../views/promotor/DashPromotor.vue'
+import RegistrarLead from '../views/promotor/RegistrarLead.vue'
 
 import LeadsPromotor from '../views/promotor/Leads.vue'
 
@@ -98,18 +100,7 @@ const router = createRouter({
       }
     },
     
-    {
-      component: HomeView,
-      beforeEnter: (to, from, next) => {
-        if (getRole() === 'admin') {
-          // Acceso permitido para administradores
-          next();
-        } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-          next({ name: 'login' });
-        }
-      }
-    },
+   
     {
       path: '/asignaciones',
       name: 'asignaciones',
@@ -124,6 +115,7 @@ const router = createRouter({
         }
       }
     },
+
     {
       path: '/reasignaciones',
       name: 'reasignaciones',
@@ -134,11 +126,44 @@ const router = createRouter({
       name: 'indicadores',
       component: IndicadoresView,
     },
+<<<<<<< HEAD
+
+    {
+      path: '/dash-promotor',
+      name: 'dash-promotor',
+      component: DashPromotor,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'promotor') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/registrar-lead',
+      name: 'registrar-lead',
+      component: RegistrarLead,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'promotor') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    }
+
+=======
     {
       path: '/leads-promotor',
       name: 'leads-promotor',
       component: LeadsPromotor,
     },
+>>>>>>> 63c3e09fe5bf7fce949c15247a101ca99da1c390
     
   ]
 })

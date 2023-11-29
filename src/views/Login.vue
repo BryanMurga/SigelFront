@@ -140,6 +140,8 @@ export default {
                         this.$router.push({ name: 'home-adm' });
                     }else if(userRole == 'coordinador'){
                         this.$router.push({ name: 'register' });
+                    }else if(userRole == 'promotor'){
+                        this.$router.push({ name: 'dash-promotor' });
                     }
 
                     setRole(userRole)
