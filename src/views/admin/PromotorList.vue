@@ -208,6 +208,54 @@ onMounted(() => {
 });
 
 export default {
+
+//types of toast
+setup() {
+        const notify = () => {
+            toast("Se ha reasignado el Promotor!", {
+                autoClose: 3000,
+                type: 'success'
+            }); // ToastOptions
+        }
+
+        const errAsignacion = (LeadID) => {
+            toast(`El lead ${LeadID} no tiene un promotor asignado`, {
+                autoClose: 2000,
+                type: 'warning'
+            }); // ToastOptions
+        }
+
+        const errLeads = () => {
+            toast("Error al obtener los Leads", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const errPromotores = () => {
+            toast("Error al obtener los Promotores Activos", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const errAsignarPromotor = () => {
+            toast("Error al asignar promotor", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const infoNotify = () => {
+            toast("Se ha actualizado la Información... ", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+    },
+
   setup() {
     const notify = () => {
       toast("Se ha Actualizado al Promotor!", {
@@ -263,7 +311,7 @@ export default {
         const response = await axios.get("http://localhost:4000/promotores");
         this.promotores = response.data.listPromotores;
       } catch (error) {
-        console.error("Error al obtener promotores:", error);
+        this.errPromotores();
       }
     },
     openEditModal(promotor) {
@@ -284,7 +332,6 @@ export default {
 
         this.notify();
       } catch (error) {
-        console.error("Error al actualizar el promotor:", error);
         this.errNotify();
       }
     },

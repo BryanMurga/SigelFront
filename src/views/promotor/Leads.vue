@@ -114,13 +114,9 @@
                     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <!-- <th scope="col" class="p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-all-search" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                                </div>
-                            </th> -->
+                            <th scope="col" class="p-4">
+                                Seleccionar
+                            </th>
                             <th scope="col" class="px-6 py-3">
                                 Id
                             </th>
@@ -234,6 +230,14 @@
                     <tbody class="item leads">
                         <tr v-for="lead in filterList" :key="lead.id"
                             class="item leads px-6 py-4 font-medium text-gray-700 whitespace-nowrap dark:text-white">
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        :value="lead" v-model="selectedLeads">
+                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
                             <th class="px-6 py-4">
                                 {{ lead.LeadID }}
                             </th>
@@ -262,7 +266,16 @@
                                 {{ lead.EscuelaProcedencia }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ lead.NombrePais }}
+                                <select 
+                                    class="block rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    style="height: 35px; width: 150px; color: black;">
+                                    <option value="Mexico" style="color: black;">
+                                        México
+                                    </option>
+                                    <option value="Estados Unidos" style="color: black;">
+                                        Estados Unidos
+                                    </option>
+                                </select>
                             </td>
                             <td class="px-6 py-4">
                                 {{ lead.NombreEstado }}
@@ -347,11 +360,15 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <div class="item-error" v-if="input && !filterList.length">
-                    <p class="grid justify-items-center p-4">No hay coicidencia de registros</p>
-                </div>
-
+            </div>
+            <br>
+            <button type="button"
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                style="text-align: left; float: right;" @click="enviarAsignaciones">
+                <i class="fas fa-regular fa-paper-plane"></i> Enviar
+            </button>
+            <div class="item-error" v-if="input && !filterList.length">
+                <p class="grid justify-items-center p-4">No hay coicidencia de registros</p>
             </div>
         </div>
     </section>
@@ -429,6 +446,7 @@ export default {
             VerContacto: null,
             leads: [],
             contactos: [],
+            selectedLeads: [], // Arreglo para almacenar los leads seleccionados
             input: ref(''),
         };
 
@@ -440,7 +458,6 @@ export default {
             if (this.leads.length === 0) {
                 return [];
             }
-
             return this.leads.filter(lead => {
                 const nombreCompleto = lead && lead.NombreCompleto ? lead.NombreCompleto : "";
                 return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
@@ -462,6 +479,43 @@ export default {
         window.removeEventListener('popstate', this.preventBack);
     },
     methods: {
+
+        handleLeadSelection(lead) {
+    const leadIndex = this.selectedLeads.findIndex(item => item.id === lead.LeadID);
+
+    if (leadIndex === -1) {
+        const nuevosDatos = {
+            EscuelaProcedencia: lead.EscuelaProcedencia,
+            Pais: lead.NombrePais,
+            Estado: lead.NombreEstado,
+            Ciudad: lead.NombreCiudad,
+            PSeguimiento: lead.PSeguimiento,
+            CarreraInteres: lead.CarreraInteres,
+            Grado: lead.Grado,
+            Programa: lead.Programa,
+            EstatusInscripcion: lead.EstatusInsc,
+            SemestreIngreso: lead.SemestreIngreso,
+            Ciclo: lead.Ciclo,
+            Campana: lead.CampanaID,
+            AsetNameForm: lead.AsetNameForm,
+            IsOrganic: lead.IsOrganic
+        };
+
+        const newLead = {
+            id: lead.LeadID,
+            nuevosDatos,
+            MedioContacto: lead.MedioDeContactoID,
+            selectedDate: new Date(), // Fecha en que fue seleccionado
+            otroAtributo: 'Información adicional',
+        };
+
+        this.selectedLeads.push(newLead);
+    } else {
+        this.selectedLeads.splice(leadIndex, 1);
+    }
+},
+
+
         async loadLeads() {
             try {
                 // Reemplaza 'tu-endpoint' con la URL real de tu endpoint
@@ -488,7 +542,7 @@ export default {
                         this.$modal.show('verContacto');
                     } else {
                         console.error('El objeto de comentarios es nulo o indefinido');
-                        
+
                     }
                 })
                 .catch(error => {
@@ -515,6 +569,12 @@ export default {
             }
             // Formatea la fecha utilizando date-fns
 
+        },
+
+        enviarAsignaciones() {
+            // Aquí puedes acceder a los leads seleccionados en this.selectedLeads
+            console.log('Leads seleccionados:', this.selectedLeads);
+            // Puedes hacer lo que necesites con estos datos, como enviarlos al servidor, etc.
         },
 
     },
