@@ -122,7 +122,7 @@
                fill="currentColor"
                viewBox="0 0 18 18"
              ></svg>
-             <i class="fa-solid fa-user-pen fa-xl"></i>
+             <i class="fa-solid fa-address-book fa-xl"></i>
              <span class="flex-1 ms-3 whitespace-nowrap">Alumnos</span>
            </a>
          </li>
@@ -141,9 +141,7 @@
                viewBox="0 0 20 20"
              ></svg>
              <i class="fa-solid fa-right-to-bracket fa-2xl mt-1"></i>
-             <span class="flex-1 ms-3 whitespace-nowrap text-sm md:text-base">
-               Cerrar sesión
-             </span>
+             <span class="flex-1 ms-3 whitespace-nowrap text-sm md:text-base">Cerrar sesión</span>
            </a>
          </li>
        </ul>
