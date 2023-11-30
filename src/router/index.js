@@ -126,10 +126,7 @@ const router = createRouter({
       name: 'indicadores',  
       component: IndicadoresView,
     },
-<<<<<<< HEAD
 
-=======
->>>>>>> a511832e7a79343ca18073444d9d7d235fc25d34
     {
       path: '/dash-promotor',
       name: 'dash-promotor',
@@ -159,15 +156,12 @@ const router = createRouter({
       }
     },
 
-<<<<<<< HEAD
-    
-=======
     {
       path: '/leads-promotor',
       name: 'leads-promotor',
       component: LeadsPromotor,
-    },    
->>>>>>> a511832e7a79343ca18073444d9d7d235fc25d34
+    },
+    
   ]
-}) 
+})
 export default router;
