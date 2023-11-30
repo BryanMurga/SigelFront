@@ -101,7 +101,7 @@
 
     <section>
         <div class="flex-1 p-4 lg:ml-64">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
                 <table v-if="filterList.length > 0" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
                         style="background-color: #48C9B0;">
