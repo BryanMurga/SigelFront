@@ -270,9 +270,8 @@
                                         <select id="grado"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge un Grado</option>
-                                            <option v-for="grado in Grados" :key="grado"
-                                                :value="grado">{{ grado }}</option>
-                                        </select>   
+                                            <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option>
+                                        </select>
                                     </div>
 
                                     <div>
@@ -281,31 +280,33 @@
                                         <select id="programa"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge un Grado</option>
-                                            <option v-for="programa in Programas" :key="programa"
-                                                :value="programa">{{ programa }}</option>
-                                        </select>   
+                                            <option v-for="programa in Programas" :key="programa" :value="programa">{{
+                                                programa }}</option>
+                                        </select>
                                     </div>
 
                                     <div>
                                         <label for="estatus-inscripcion"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de inscripción</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de
+                                            inscripción</label>
                                         <select id="estatus-inscripcion"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge el Estatus de inscripcion</option>
-                                            <option v-for="estatus in EstatusIncripcion" :key="estatus"
-                                                :value="estatus">{{ estatus }}</option>
-                                        </select>   
+                                            <option v-for="estatus in EstatusIncripcion" :key="estatus" :value="estatus">{{
+                                                estatus }}</option>
+                                        </select>
                                     </div>
 
                                     <div>
                                         <label for="semestre-ingreso"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de ingreso</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de
+                                            ingreso</label>
                                         <select id="semestre-ingreso"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge el semestre</option>
-                                            <option v-for="semestre in SemestreIngreso" :key="semestre"
-                                                :value="semestre">{{ semestre }}</option>
-                                        </select>   
+                                            <option v-for="semestre in SemestreIngreso" :key="semestre" :value="semestre">{{
+                                                semestre }}</option>
+                                        </select>
                                     </div>
 
                                     <div>
@@ -315,6 +316,17 @@
                                         <input type="text" id="ciclo"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="2022-1" required>
+                                    </div>
+
+                                    <div>
+                                        <label for="campana"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campaña</label>
+                                            <select id="semestre-ingreso"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge la campaña</option>
+                                            <option v-for="camapana in Campanas" :key="camapana" :value="camapana">{{
+                                                camapana.Nombre}}</option>
+                                        </select>
                                     </div>
 
                                 </div>
@@ -540,10 +552,11 @@ export default {
             PSeguimientos: ['AU-ALUMNO UNINTER', 'INSC-INSCRIPCIÓN', 'NI-NO INTERESA', 'P-PROSPECTO', 'PI-INSCRIPCIÓN', 'PS-SEGUIMIENTO', 'SC-SIN CONTACTO', 'PU-PERSONAL UNINTER', 'DU-DUPLICADO', 'DI-DATO NO VALIDO', 'BA-BAJA ALUMNO', 'VACIO'],
             CarreraInteres: [],
             Grados: ['SECUNDARIA', 'BACHILLERATO', 'PREPA-A', 'LIC/ING', 'ESPECIALIDAD', 'DIPLOMADO', 'MAESTRIA', 'DOCTORADO', 'NO ESPECIFICA'],
-            Programas: ['ADMINISTRACIÓN','ADMINISTRACION DE EMPRESAS','ADMINISTRACION DE NEGOCIOS INTERNACIONALES','ARQ','BACHILLERATO SEMESTRAL','BILINGÜE','BIU','BIUB','BIUM','CIENCIAS POLÍTICAS, RELACIONES INT.','CLS PRT','CORP','CURSO DE VERANO','Curso Intensivo','DAD','DDI','DDPAI','DEI','DEPU','DHU','DI','DIP','DISEÑO DE MODAS','DISEÑO GRÁFICO','DMD','DPU','EAO','EAPD','EAPD y LADD','EATL', 'LDI','LDM','LECE','LED','LEF','LEM',
-	                    'LEMK','LEMP','LIC','LICENCIATURA','LID','LPS','LRI','MADE','MADEL','MARET','MDG','MEL','MELE','MERCADOTECNIA','MGC','MI','NIÑOS','OFERTA EDUCATIVA','PEDAGOGÍA','PREPA A','PREPA-A','REGLR','SIU','SIUB','SIUM','UNI LAE','LPE'],
+            Programas: ['ADMINISTRACIÓN', 'ADMINISTRACION DE EMPRESAS', 'ADMINISTRACION DE NEGOCIOS INTERNACIONALES', 'ARQ', 'BACHILLERATO SEMESTRAL', 'BILINGÜE', 'BIU', 'BIUB', 'BIUM', 'CIENCIAS POLÍTICAS, RELACIONES INT.', 'CLS PRT', 'CORP', 'CURSO DE VERANO', 'Curso Intensivo', 'DAD', 'DDI', 'DDPAI', 'DEI', 'DEPU', 'DHU', 'DI', 'DIP', 'DISEÑO DE MODAS', 'DISEÑO GRÁFICO', 'DMD', 'DPU', 'EAO', 'EAPD', 'EAPD y LADD', 'EATL', 'LDI', 'LDM', 'LECE', 'LED', 'LEF', 'LEM',
+                'LEMK', 'LEMP', 'LIC', 'LICENCIATURA', 'LID', 'LPS', 'LRI', 'MADE', 'MADEL', 'MARET', 'MDG', 'MEL', 'MELE', 'MERCADOTECNIA', 'MGC', 'MI', 'NIÑOS', 'OFERTA EDUCATIVA', 'PEDAGOGÍA', 'PREPA A', 'PREPA-A', 'REGLR', 'SIU', 'SIUB', 'SIUM', 'UNI LAE', 'LPE'],
             EstatusIncripcion: ['INSO', 'REZA', 'INSC', 'BAJA', 'ARCHIVAR'],
-            SemestreIngreso: ['1 Semestre', '2 Semestre', '3 Semestre', '4 Semestre', '5 Semestre', '6 Semestre', '7 Semestre', '8 Semestre','Maestria', 'Doctorado', 'Licenciatura', 'Diplomados']
+            SemestreIngreso: ['1 Semestre', '2 Semestre', '3 Semestre', '4 Semestre', '5 Semestre', '6 Semestre', '7 Semestre', '8 Semestre', 'Maestria', 'Doctorado', 'Licenciatura', 'Diplomados'],
+            Campanas: [],
         };
 
 
@@ -567,6 +580,7 @@ export default {
         this.loadCountries();
         this.loadEstadoMunicipio();
         this.loadCarreras();
+        this.loadCampana();
 
         // Agrega un nuevo estado al historial cuando el componente se monta
         window.history.pushState({ noBackExitsApp: true }, null, null);
@@ -678,6 +692,16 @@ export default {
                 console.log('Error al obtener las carreras:', error);
             }
         },
+        async loadCampana() {
+            try {
+                const response = await axios.get('http://localhost:4000/campanas');
+                if (response.data && response.data.campanas) {
+                    this.Campanas = response.data.campanas;
+                }   
+            } catch (error) {
+                console.log('Error al obtener las carreras:', error);
+            }
+        },
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
             if (event.state && event.state.noBackExitsApp) {
@@ -717,6 +741,7 @@ export default {
                 this.loadCountries;
                 this.loadEstadoMunicipio;
                 this.loadCarreras;
+                this.loadCampana;
             },
         },
         inmediate: true,
