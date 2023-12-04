@@ -5,7 +5,7 @@
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
 
             <div class="flex-1 p-4">
-                <div id="verContacto" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+                <div id="verContacto" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-2xl max-h-full">
                         <!-- Modal content -->
@@ -72,6 +72,9 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Main modal -->
                 <!-- Modal de gestion -->
                 <div id="crud-modal" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -82,7 +85,7 @@
                             <div
                                 class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                    Create New Product
+                                    Actualizar Lead
                                 </h3>
                                 <button type="button"
                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -100,10 +103,10 @@
                                 <div class="grid gap-4 mb-4 grid-cols-2">
                                     <div class="col-span-2">
                                         <label for="name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
                                         <input type="text" name="name" id="name"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Type product name" required="">
+                                            v-model="inputValue" placeholder="name" required="">{{ lead.NombreCompleto }}
                                     </div>
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="price"
@@ -443,14 +446,16 @@
                                 {{ lead.CorreoElectronico2 }}
                             </td>
                             <td class="px-6 py-4">
-                                <button @click="VerContactoModal(lead.LeadID)" data-modal-target="crud-modal"
+                                <button @click="GestionarLead(lead.LeadID)" data-modal-target="crud-modal"
                                     data-modal-toggle="crud-modal" type="button"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Gestionar</button>
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                    Gestionar</button>
                             </td>
                             <td class="px-6 py-4">
                                 <button @click="VerContactoModal(lead.LeadID)" data-modal-target="verContacto"
                                     data-modal-toggle="verContacto" type="button"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ver</button>
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                    Ver</button>
                             </td>
                         </tr>
                     </tbody>
@@ -491,6 +496,9 @@ export default {
 
     //types of toast
     setup() {
+
+        const input = ref('');
+
         const notify = () => {
             toast("Se ha reasignado el Promotor!", {
                 autoClose: 3000,
@@ -533,7 +541,7 @@ export default {
             }); // ToastOptions
         }
 
-        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor, input };
     },
 
     data() {
@@ -541,8 +549,10 @@ export default {
             userName: getUserName(),
             VerContacto: null,
             leads: [],
+            leadIndividual: [],
             contactos: [],
             selectedLeads: [], // Arreglo para almacenar los leads seleccionados
+            leadParaGestionar: null
             input: ref(''),
             countries: [],
             estadosMunicipios: {},
@@ -558,8 +568,6 @@ export default {
             SemestreIngreso: ['1 Semestre', '2 Semestre', '3 Semestre', '4 Semestre', '5 Semestre', '6 Semestre', '7 Semestre', '8 Semestre', 'Maestria', 'Doctorado', 'Licenciatura', 'Diplomados'],
             Campanas: [],
         };
-
-
     },
     computed: {
         filterList() {
@@ -644,9 +652,35 @@ export default {
             }
             this.loadContactos();
         },
+
         VerContactoModal(id) {
             this.loadContactos(id);
         },
+
+        async GestionarLead(LeadID) {
+            try {
+                const response = await axios.get(`http://localhost:4000/leads/${LeadID}`);
+
+                const { lead } = response.data;
+
+                // Verificar si el lead se encontró
+                if (!lead) {
+                    // Manejar el caso en el que el lead no se encuentre
+                    console.error('Lead no encontrado');
+                    return;
+                }
+
+                // Aquí puedes asignar la información del lead al modal o a otras variables para mostrarla en el modal
+                this.inputValue = lead.NombreCompleto;
+                // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
+
+            } catch (error) {
+                // Manejar errores de la solicitud HTTP
+                console.error('Error al obtener el lead:', error);
+                // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+            }
+        },
+
         loadContactos(id) {
             console.log('Valor de id:', id);
             axios.get(`http://localhost:4000/leads/contacto/${id}`)
