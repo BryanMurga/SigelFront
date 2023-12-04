@@ -30,7 +30,6 @@
                             <!-- Modal body -->
                             <div class="p-4 md:p-5 space-y-4">
 
-
                                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
@@ -73,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Main modal -->
+                <!-- Modal de gestion -->
                 <div id="crud-modal" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-md max-h-full">
@@ -149,7 +148,190 @@
                     </div>
                 </div>
 
+                <!-- Modal de Actualizar varios -->
+                <div id="update-many" tabindex="-1" aria-hidden="true"
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]">
+                    <div class="relative p-4 w-full max-w-4xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                    Actualizar varios registros
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="update-many">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    </svg>
+                                    <span @click="closeEditModal" class="sr-only">Close modal</span>
+                                </button>
 
+                            </div>
+                            <!-- Modal body -->
+
+                            <form>
+                                <div class="grid gap-6 mb-6 md:grid-cols-2 p-4">
+                                    <div>
+                                        <label for="escuela-procedencia"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
+                                            Procedencia</label>
+                                        <input type="text" id="escuela-procedencia"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Bachilleres" required>
+                                    </div>
+                                    <div>
+                                        <label for="countries"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
+                                            una país</label>
+                                        <select v-model="selectedCountry" id="countries"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="country in countries" :key="country.name.common"
+                                                :value="country.name.common">
+                                                {{ country.name.common }}
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                    <div v-if="selectedCountry === 'Mexico'">
+                                        <label for="states"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
+                                            una estado</label>
+                                        <select v-model="selectedState" id="states"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="state in Object.keys(estadosMunicipios)" :key="state"
+                                                :value="state">
+                                                {{ state }}
+                                            </option>
+                                        </select>
+
+                                    </div>
+
+                                    <div v-if="selectedCountry === 'Mexico' && selectedState">
+                                        <label for="municipios"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
+                                            una municipio</label>
+                                        <select v-model="selectedMunicipio" id="municipios"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="municipio in estadosMunicipios[selectedState]" :key="municipio"
+                                                :value="municipio">
+                                                {{ municipio }}
+                                            </option>
+                                        </select>
+
+                                    </div>
+
+                                    <div v-if="selectedCountry !== 'Mexico'">
+                                        <label for="otro-estado"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Estado</label>
+                                        <input type="text" id="otro-estado"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required>
+                                    </div>
+
+                                    <div v-if="selectedCountry !== 'Mexico'">
+                                        <label for="otro-ciudad"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
+                                        <input type="text" id="otro-ciudad"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required>
+                                    </div>
+
+                                    <div>
+                                        <label for="ps-seguimiento"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PS-Seguimiento</label>
+                                        <select id="ps-seguimiento"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge un status</option>
+                                            <option v-for="ps in PSeguimientos" :key="ps" :value="ps">{{ ps }}</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="carrera-interes"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera de
+                                            interes</label>
+                                        <select id="carrera-interes"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge un carrera</option>
+                                            <option v-for="carreras in CarreraInteres" :key="carreras.Nombre"
+                                                :value="carreras.Nombre">{{ carreras.Nombre }}</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="grado"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grado</label>
+                                        <select id="grado"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge un Grado</option>
+                                            <option v-for="grado in Grados" :key="grado"
+                                                :value="grado">{{ grado }}</option>
+                                        </select>   
+                                    </div>
+
+                                    <div>
+                                        <label for="programa"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programa</label>
+                                        <select id="programa"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge un Grado</option>
+                                            <option v-for="programa in Programas" :key="programa"
+                                                :value="programa">{{ programa }}</option>
+                                        </select>   
+                                    </div>
+
+                                    <div>
+                                        <label for="estatus-inscripcion"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de inscripción</label>
+                                        <select id="estatus-inscripcion"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge el Estatus de inscripcion</option>
+                                            <option v-for="estatus in EstatusIncripcion" :key="estatus"
+                                                :value="estatus">{{ estatus }}</option>
+                                        </select>   
+                                    </div>
+
+                                    <div>
+                                        <label for="semestre-ingreso"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de ingreso</label>
+                                        <select id="semestre-ingreso"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge el semestre</option>
+                                            <option v-for="semestre in SemestreIngreso" :key="semestre"
+                                                :value="semestre">{{ semestre }}</option>
+                                        </select>   
+                                    </div>
+
+                                    <div>
+                                        <label for="ciclo"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
+                                            Ciclo</label>
+                                        <input type="text" id="ciclo"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="2022-1" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="grid gap-5 mb-6 md:grid-cols-5 p-4">
+                                    <button @click="VerContactoModal(lead.LeadID)" data-modal-target="verContacto"
+                                        data-modal-toggle="verContacto" type="button"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                        Guardar
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
 
                 <form>
                     <label for="default-search"
@@ -263,7 +445,7 @@
                 </table>
             </div>
             <br>
-            <button type="button"
+            <button type="button" data-modal-target="update-many" data-modal-toggle="update-many"
                 class="focus:outline-none text-black bg-yellow-400 hover:bg-yellow-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 style="text-align: left; float: left;" @click="enviarAsignaciones">
                 <i class="fas fa-regular fa-paper-plane"></i> Actualizar varios
@@ -287,6 +469,7 @@ import { FwbButton, FwbModal } from 'flowbite-vue';
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import { es } from "date-fns/locale";
 
 onMounted(() => {
     initFlowbite();
@@ -349,6 +532,18 @@ export default {
             contactos: [],
             selectedLeads: [], // Arreglo para almacenar los leads seleccionados
             input: ref(''),
+            countries: [],
+            estadosMunicipios: {},
+            selectedCountry: 'Mexico',
+            selectedState: '',
+            selectedMunicipio: '',
+            PSeguimientos: ['AU-ALUMNO UNINTER', 'INSC-INSCRIPCIÓN', 'NI-NO INTERESA', 'P-PROSPECTO', 'PI-INSCRIPCIÓN', 'PS-SEGUIMIENTO', 'SC-SIN CONTACTO', 'PU-PERSONAL UNINTER', 'DU-DUPLICADO', 'DI-DATO NO VALIDO', 'BA-BAJA ALUMNO', 'VACIO'],
+            CarreraInteres: [],
+            Grados: ['SECUNDARIA', 'BACHILLERATO', 'PREPA-A', 'LIC/ING', 'ESPECIALIDAD', 'DIPLOMADO', 'MAESTRIA', 'DOCTORADO', 'NO ESPECIFICA'],
+            Programas: ['ADMINISTRACIÓN','ADMINISTRACION DE EMPRESAS','ADMINISTRACION DE NEGOCIOS INTERNACIONALES','ARQ','BACHILLERATO SEMESTRAL','BILINGÜE','BIU','BIUB','BIUM','CIENCIAS POLÍTICAS, RELACIONES INT.','CLS PRT','CORP','CURSO DE VERANO','Curso Intensivo','DAD','DDI','DDPAI','DEI','DEPU','DHU','DI','DIP','DISEÑO DE MODAS','DISEÑO GRÁFICO','DMD','DPU','EAO','EAPD','EAPD y LADD','EATL', 'LDI','LDM','LECE','LED','LEF','LEM',
+	                    'LEMK','LEMP','LIC','LICENCIATURA','LID','LPS','LRI','MADE','MADEL','MARET','MDG','MEL','MELE','MERCADOTECNIA','MGC','MI','NIÑOS','OFERTA EDUCATIVA','PEDAGOGÍA','PREPA A','PREPA-A','REGLR','SIU','SIUB','SIUM','UNI LAE','LPE'],
+            EstatusIncripcion: ['INSO', 'REZA', 'INSC', 'BAJA', 'ARCHIVAR'],
+            SemestreIngreso: ['1 Semestre', '2 Semestre', '3 Semestre', '4 Semestre', '5 Semestre', '6 Semestre', '7 Semestre', '8 Semestre','Maestria', 'Doctorado', 'Licenciatura', 'Diplomados']
         };
 
 
@@ -364,10 +559,14 @@ export default {
                 return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
             });
         },
+
     },
     mounted() {
         this.loadLeads();
         this.loadContactos();
+        this.loadCountries();
+        this.loadEstadoMunicipio();
+        this.loadCarreras();
 
         // Agrega un nuevo estado al historial cuando el componente se monta
         window.history.pushState({ noBackExitsApp: true }, null, null);
@@ -451,6 +650,34 @@ export default {
                     // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
                 });
         },
+        async loadCountries() {
+            axios.get('https://restcountries.com/v3.1/all')
+                .then(response => {
+                    this.countries = response.data;
+                })
+                .catch(error => {
+                    console.error('Error al obtener los paises:', error);
+                    // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+                });
+        },
+        async loadEstadoMunicipio() {
+            axios.get('/estados-municipios.json')
+                .then(response => {
+                    this.estadosMunicipios = response.data;
+                })
+                .catch(error => console.error('Error al obtener los estados y municipios:', error));
+        },
+
+        async loadCarreras() {
+            try {
+                const response = await axios.get('http://localhost:4000/carrera');
+                if (response.data && response.data.carreras) {
+                    this.CarreraInteres = response.data.carreras;
+                }
+            } catch (error) {
+                console.log('Error al obtener las carreras:', error);
+            }
+        },
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial
             if (event.state && event.state.noBackExitsApp) {
@@ -487,6 +714,9 @@ export default {
                 this.filterList; // Llamar a filterList cuando leads cambie
                 this.formatDate;
                 this.loadContactos;
+                this.loadCountries;
+                this.loadEstadoMunicipio;
+                this.loadCarreras;
             },
         },
         inmediate: true,
