@@ -5,7 +5,7 @@ import router from './router'
 import './style.css'
 import Swal from 'sweetalert2'
 import { getRole } from './sessions'
-//import VueTailwindDatepicker from "vue-tailwind-datepicker";
+
 
 
 
@@ -14,9 +14,6 @@ import { getRole } from './sessions'
 
 const app = createApp(App);
 app.use(VueFinalModal());
-
-//app.use(VueTailwindDatepicker);
-
 app.use(router)
 
 

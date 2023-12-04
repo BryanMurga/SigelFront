@@ -156,11 +156,6 @@ const router = createRouter({
       }
     },
 
-    {
-      path: '/leads-promotor',
-      name: 'leads-promotor',
-      component: LeadsPromotor,
-    },
     
   ]
 })
