@@ -552,7 +552,7 @@ export default {
             leadIndividual: [],
             contactos: [],
             selectedLeads: [], // Arreglo para almacenar los leads seleccionados
-            leadParaGestionar: null
+            leadParaGestionar: null,
             input: ref(''),
             countries: [],
             estadosMunicipios: {},
