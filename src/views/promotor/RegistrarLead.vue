@@ -177,7 +177,6 @@
                 </div>
 
                 <!-- Campo para seleccionar el país -->
-                <!-- Campo para seleccionar el país -->
                 <div class="mb-4 col-span-5 md:col-span-2">
                   <label
                     class="block text-gray-700 text-sm font-bold mb-2"

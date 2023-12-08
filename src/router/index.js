@@ -156,7 +156,20 @@ const router = createRouter({
       }
     },
 
-    
+    {
+      path: '/leads-promotor',
+      name: 'leads-promotor',
+      component: LeadsPromotor,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'promotor') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    }
   ]
 })
 export default router;
