@@ -87,7 +87,7 @@
  
          <li class="md:mt-3  items-center">
            <a
-             href="asignaciones"
+             href="registrar-lead"
              :class="{
                'bg-green-500': selectedSection === 'asignaciones',
              }"
@@ -108,7 +108,7 @@
  
          <li class="md:mt-3  items-center">
            <a
-             href="reasignaciones"
+             href="#"
              :class="{
                'bg-green-500': selectedSection === 'reasignaciones',
              }"
