@@ -149,7 +149,7 @@
                 </div>
 
                 <!-- Modal de Actualizar varios -->
-                <div id="update-many" tabindex="-1" aria-hidden="true"
+                <div v-show="hasSelectedLeads" id="update-many" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]">
                     <div class="relative p-4 w-full max-w-4xl max-h-full">
                         <!-- Modal content -->
@@ -168,27 +168,29 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                     </svg>
-                                    <span @click="closeEditModal" class="sr-only">Close modal</span>
+                                    <span @click="cerrarModal" class="sr-only">Close modal</span>
                                 </button>
 
                             </div>
                             <!-- Modal body -->
 
-                            <form>
+                            <form @submit.prevent="guardarDatos">
+
+                                <div hidden>{{ selectedLeads }}</div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2 p-4">
                                     <div>
                                         <label for="escuela-procedencia"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
                                             Procedencia</label>
-                                        <input type="text" id="escuela-procedencia"
+                                        <input v-model="updateLead.EscuelaProcedencia" type="text" id="escuela-procedencia"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Bachilleres" required>
+                                            placeholder="Bachilleres">
                                     </div>
                                     <div>
                                         <label for="countries"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
                                             una país</label>
-                                        <select v-model="selectedCountry" id="countries"
+                                        <select v-model="updateLead.NombrePais" id="countries"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option v-for="country in countries" :key="country.name.common"
                                                 :value="country.name.common">
@@ -197,11 +199,11 @@
                                         </select>
 
                                     </div>
-                                    <div v-if="selectedCountry === 'Mexico'">
+                                    <div v-if="updateLead.NombrePais === 'Mexico'">
                                         <label for="states"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
                                             una estado</label>
-                                        <select v-model="selectedState" id="states"
+                                        <select v-model="updateLead.NombreEstado" id="states"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option v-for="state in Object.keys(estadosMunicipios)" :key="state"
                                                 :value="state">
@@ -211,41 +213,39 @@
 
                                     </div>
 
-                                    <div v-if="selectedCountry === 'Mexico' && selectedState">
+                                    <div v-if="updateLead.NombrePais === 'Mexico' && updateLead.NombreEstado">
                                         <label for="municipios"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
                                             una municipio</label>
-                                        <select v-model="selectedMunicipio" id="municipios"
+                                        <select v-model="updateLead.NombreCiudad" id="municipios"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option v-for="municipio in estadosMunicipios[selectedState]" :key="municipio"
-                                                :value="municipio">
+                                            <option v-for="municipio in estadosMunicipios[updateLead.NombreEstado]"
+                                                :key="municipio" :value="municipio">
                                                 {{ municipio }}
                                             </option>
                                         </select>
 
                                     </div>
 
-                                    <div v-if="selectedCountry !== 'Mexico'">
+                                    <div v-if="updateLead.NombrePais !== 'Mexico'">
                                         <label for="otro-estado"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             Estado</label>
-                                        <input type="text" id="otro-estado"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            required>
+                                        <input v-model="updateLead.NombreEstado" type="text" id="otro-estado"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
 
-                                    <div v-if="selectedCountry !== 'Mexico'">
+                                    <div v-if="updateLead.NombrePais !== 'Mexico'">
                                         <label for="otro-ciudad"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
-                                        <input type="text" id="otro-ciudad"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            required>
+                                        <input v-model="updateLead.NombreCiudad" type="text" id="otro-ciudad"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
 
                                     <div>
                                         <label for="ps-seguimiento"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PS-Seguimiento</label>
-                                        <select id="ps-seguimiento"
+                                        <select v-model="updateLead.PSeguimiento" id="ps-seguimiento"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge un status</option>
                                             <option v-for="ps in PSeguimientos" :key="ps" :value="ps">{{ ps }}</option>
@@ -256,18 +256,18 @@
                                         <label for="carrera-interes"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera de
                                             interes</label>
-                                        <select id="carrera-interes"
+                                        <select v-model="updateLead.CarreraInteresID" id="carrera-interes"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge un carrera</option>
                                             <option v-for="carreras in CarreraInteres" :key="carreras.Nombre"
-                                                :value="carreras.Nombre">{{ carreras.Nombre }}</option>
+                                                :value="carreras.CarreraID">{{ carreras.Nombre }}</option>
                                         </select>
                                     </div>
 
                                     <div>
                                         <label for="grado"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grado</label>
-                                        <select id="grado"
+                                        <select v-model="updateLead.Grado" id="grado"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge un Grado</option>
                                             <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option>
@@ -277,7 +277,7 @@
                                     <div>
                                         <label for="programa"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programa</label>
-                                        <select id="programa"
+                                        <select v-model="updateLead.Programa" id="programa"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge un Grado</option>
                                             <option v-for="programa in Programas" :key="programa" :value="programa">{{
@@ -289,7 +289,7 @@
                                         <label for="estatus-inscripcion"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de
                                             inscripción</label>
-                                        <select id="estatus-inscripcion"
+                                        <select v-model="updateLead.EstatusInsc" id="estatus-inscripcion"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge el Estatus de inscripcion</option>
                                             <option v-for="estatus in EstatusIncripcion" :key="estatus" :value="estatus">{{
@@ -301,7 +301,7 @@
                                         <label for="semestre-ingreso"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de
                                             ingreso</label>
-                                        <select id="semestre-ingreso"
+                                        <select v-model="updateLead.SemestreIngreso" id="semestre-ingreso"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge el semestre</option>
                                             <option v-for="semestre in SemestreIngreso" :key="semestre" :value="semestre">{{
@@ -313,27 +313,56 @@
                                         <label for="ciclo"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
                                             Ciclo</label>
-                                        <input type="text" id="ciclo"
+                                        <input v-model="updateLead.Ciclo" type="text" id="ciclo"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="2022-1" required>
+                                            placeholder="2022-1">
                                     </div>
 
                                     <div>
                                         <label for="campana"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campaña</label>
-                                            <select id="semestre-ingreso"
+                                        <select v-model="updateLead.CampanaID" id="semestre-ingreso"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Escoge la campaña</option>
-                                            <option v-for="camapana in Campanas" :key="camapana" :value="camapana">{{
-                                                camapana.Nombre}}</option>
+                                            <option v-for="camapana in Campanas" :key="camapana"
+                                                :value="camapana.CampanaID">{{
+                                                    camapana.Nombre }}</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="asetform"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">AsetNameForm</label>
+                                        <input v-model="updateLead.AsetNameForm" type="text" id="asetform"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+
+                                    <div>
+                                        <label for="isOrg"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Is
+                                            Organic</label>
+                                        <select v-model="updateLead.IsOrganic" id="isOrg"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="isOrga in isOrganic" :key="isOrga" :value="isOrga">{{
+                                                isOrga }}</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="semestre"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medio de
+                                            contacto</label>
+                                        <select v-model="updateLead.MedioDeContactoID" id="semestre"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="medio in medioContactos" :key="medio" :value="medio.MedioID">{{
+                                                medio.Nombre }}</option>
                                         </select>
                                     </div>
 
                                 </div>
 
                                 <div class="grid gap-5 mb-6 md:grid-cols-5 p-4">
-                                    <button @click="VerContactoModal(lead.LeadID)" data-modal-target="verContacto"
-                                        data-modal-toggle="verContacto" type="button"
+                                    <button type="submit"
                                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                         Guardar
                                     </button>
@@ -420,7 +449,7 @@
                                 <div class="flex items-center">
                                     <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                        :value="lead" v-model="selectedLeads">
+                                        :value="lead.LeadID" v-model="selectedLeads">
                                     <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                                 </div>
                             </td>
@@ -457,7 +486,7 @@
                 </table>
             </div>
             <br>
-            <button type="button" data-modal-target="update-many" data-modal-toggle="update-many"
+            <button v-show="hasSelectedLeads" type="button" data-modal-target="update-many" data-modal-toggle="update-many"
                 class="focus:outline-none text-black bg-yellow-400 hover:bg-yellow-300 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 style="text-align: left; float: left;" @click="enviarAsignaciones">
                 <i class="fas fa-regular fa-paper-plane"></i> Actualizar varios
@@ -492,7 +521,7 @@ export default {
     //types of toast
     setup() {
         const notify = () => {
-            toast("Se ha reasignado el Promotor!", {
+            toast("Se ha actualizado los leads Seleccionados!", {
                 autoClose: 3000,
                 type: 'success'
             }); // ToastOptions
@@ -506,7 +535,7 @@ export default {
         }
 
         const errLeads = () => {
-            toast("Error al obtener los Leads", {
+            toast("Tienes que seleccionar leads antes de actualizarlos", {
                 autoClose: 2000,
                 type: 'error'
             }); // ToastOptions
@@ -519,11 +548,11 @@ export default {
             }); // ToastOptions
         }
 
-        const errAsignarPromotor = () => {
-            toast("Error al asignar promotor", {
+        const errActualizarPromotores = () => {
+            toast("Error al actualizar los leads", {
                 autoClose: 2000,
                 type: 'error'
-            }); // ToastOptions
+            }); // ToastOptionsnopm
         }
 
         const infoNotify = () => {
@@ -533,7 +562,8 @@ export default {
             }); // ToastOptions
         }
 
-        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
+
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errActualizarPromotores };
     },
 
     data() {
@@ -557,6 +587,27 @@ export default {
             EstatusIncripcion: ['INSO', 'REZA', 'INSC', 'BAJA', 'ARCHIVAR'],
             SemestreIngreso: ['1 Semestre', '2 Semestre', '3 Semestre', '4 Semestre', '5 Semestre', '6 Semestre', '7 Semestre', '8 Semestre', 'Maestria', 'Doctorado', 'Licenciatura', 'Diplomados'],
             Campanas: [],
+            isOrganic: ['PAUTA', 'ORGÁNICO'],
+            medioContactos: [],
+            updateLead: {
+                EscuelaProcedencia: null,
+                NombrePais: null,
+                NombreEstado: null,
+                NombreCiudad: null,
+                PSeguimiento: null,
+                Programa: null,
+                CarreraInteresID: null,
+                Grado: null,
+                EstatusInsc: null,
+                SemestreIngreso: null,
+                Ciclo: null,
+                CampanaID: null,
+                AsetNameForm: null,
+                IsOrganic: null,
+                MedioDeContactoID: null,
+                ids: null,
+            },
+            updateManyModalVisible: false,
         };
 
 
@@ -572,6 +623,9 @@ export default {
                 return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
             });
         },
+        hasSelectedLeads() {
+            return this.selectedLeads.length > 0;
+        },
 
     },
     mounted() {
@@ -581,6 +635,7 @@ export default {
         this.loadEstadoMunicipio();
         this.loadCarreras();
         this.loadCampana();
+        this.loadMedioContacto();
 
         // Agrega un nuevo estado al historial cuando el componente se monta
         window.history.pushState({ noBackExitsApp: true }, null, null);
@@ -593,40 +648,33 @@ export default {
         window.removeEventListener('popstate', this.preventBack);
     },
     methods: {
+        async guardarDatos() {
 
-        handleLeadSelection(lead) {
-            const leadIndex = this.selectedLeads.findIndex(item => item.id === lead.LeadID);
+            this.updateLead.ids = this.selectedLeads;
 
-            if (leadIndex === -1) {
-                const nuevosDatos = {
-                    EscuelaProcedencia: lead.EscuelaProcedencia,
-                    Pais: lead.NombrePais,
-                    Estado: lead.NombreEstado,
-                    Ciudad: lead.NombreCiudad,
-                    PSeguimiento: lead.PSeguimiento,
-                    CarreraInteres: lead.CarreraInteres,
-                    Grado: lead.Grado,
-                    Programa: lead.Programa,
-                    EstatusInscripcion: lead.EstatusInsc,
-                    SemestreIngreso: lead.SemestreIngreso,
-                    Ciclo: lead.Ciclo,
-                    Campana: lead.CampanaID,
-                    AsetNameForm: lead.AsetNameForm,
-                    IsOrganic: lead.IsOrganic
-                };
+            // Imprime datosConID en la consola
+            console.log('Datos con ID:', this.updateLead);
 
-                const newLead = {
-                    id: lead.LeadID,
-                    nuevosDatos,
-                    MedioContacto: lead.MedioDeContactoID,
-                    selectedDate: new Date(), // Fecha en que fue seleccionado
-                    otroAtributo: 'Información adicional',
-                };
+            const endpoint = 'http://localhost:4000/funciones/update';
 
-                this.selectedLeads.push(newLead);
-            } else {
-                this.selectedLeads.splice(leadIndex, 1);
+            try {
+                const response = await axios.post(endpoint, this.updateLead);
+                console.log(response);
+
+                this.loadLeads();
+                this.notify();
+                this.updateLead = [];
+
+                setTimeout(() => {
+                    // Recargar la página después del tiempo de espera
+                    window.location.reload();
+                }, 1500);
+
+
+            } catch (errorUpdate) {
+                console.log(errorUpdate);
             }
+
         },
 
 
@@ -697,7 +745,17 @@ export default {
                 const response = await axios.get('http://localhost:4000/campanas');
                 if (response.data && response.data.campanas) {
                     this.Campanas = response.data.campanas;
-                }   
+                }
+            } catch (error) {
+                console.log('Error al obtener las carreras:', error);
+            }
+        },
+        async loadMedioContacto() {
+            try {
+                const response = await axios.get('http://localhost:4000/medio-contacto');
+                if (response.data && response.data.listMediosDeContacto) {
+                    this.medioContactos = response.data.listMediosDeContacto;
+                }
             } catch (error) {
                 console.log('Error al obtener las carreras:', error);
             }
@@ -725,8 +783,31 @@ export default {
 
         enviarAsignaciones() {
             // Aquí puedes acceder a los leads seleccionados en this.selectedLeads
-            console.log('Leads seleccionados:', this.selectedLeads);
+            console.log('Leads seleccionados:', this.updateLead);
+
+            this.abrirModal();
+            console.log("Modal visible:", this.updateManyModalVisible);
             // Puedes hacer lo que necesites con estos datos, como enviarlos al servidor, etc.
+        },
+
+        async updateSelectedLeads() {
+            try {
+                // Filtrar los leads seleccionados
+                const selectedLeadsData = this.leads.filter((lead) => this.selectedLeads.includes(lead.LeadID));
+
+                // Realizar la solicitud al backend
+                const response = await axios.put('/update-multiple', selectedLeadsData);
+                console.log(response.data); // Manejar la respuesta del backend
+            } catch (error) {
+                console.error('Error al actualizar los leads:', error);
+            }
+        },
+
+        abrirModal() {
+        },
+
+        cerrarModal() {
+            this.window.location.reload();
         },
 
     },
@@ -742,6 +823,7 @@ export default {
                 this.loadEstadoMunicipio;
                 this.loadCarreras;
                 this.loadCampana;
+                this.loadMedioContacto;
             },
         },
         inmediate: true,

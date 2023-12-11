@@ -336,7 +336,7 @@
                             <td class="px-6 py-4">
                                 {{ formatDate(lead.FechaPromotorActual) }}
                             </td>
-                            <td class="px-6 py-4">|
+                            <td class="px-6 py-4">
                                 {{ lead.Comentarios }}
                             </td>
                             <td class="px-6 py-4">
