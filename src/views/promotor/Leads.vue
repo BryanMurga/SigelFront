@@ -101,14 +101,15 @@
                             <!-- Modal body -->
                             <form class="p-4 md:p-5">
                                 <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                                        Datos Personales
-                                    </h2>
-                                    <!-- Datos Personales -->
+                                    Datos Personales
+                                </h2>
+                                <!-- Datos Personales -->
                                 <div class="grid gap-4 mb-4 grid-cols-2">
                                     <!-- NombreCompleto -->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Completo</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
+                                            Completo</label>
                                         <input type="text" name="name" id="name"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputName" placeholder="Nombre Completo" required="">
@@ -124,7 +125,8 @@
                                     <!-- Telefono 2 -->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="number"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono Adicional</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono
+                                            Adicional</label>
                                         <input type="text" name="number" id="number"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputTelefono2" placeholder="Número de teléfono" required="">
@@ -132,7 +134,8 @@
                                     <!-- CorreoElectronico -->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="price"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo Electrónico</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo
+                                            Electrónico</label>
                                         <input type="text" name="price" id="number"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputCorreo" placeholder="Correo Electrónico" required="">
@@ -140,7 +143,8 @@
                                     <!-- CorreoElectronico2 -->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="price"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo Electrónico Adicional</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo
+                                            Electrónico Adicional</label>
                                         <input type="text" name="price" id="price"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputCorreo2" placeholder="Correo Electrónico" required="">
@@ -148,100 +152,95 @@
                                     <!-- FechaNacimiento -->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="date"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Nacimiento</label>
-                                            <DatePicker
-                                            :placeholder="inputFechaNacimiento"
-                                            class="input-field rounded-md"
-                                            />
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
+                                            Nacimiento</label>
+                                        <DatePicker :placeholder="inputFechaNacimiento" class="input-field rounded-md" />
                                     </div>
                                 </div>
-                                 
-                                    <hr class="my-1 border-black" />
-                                      <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                                          Datos de Procedencia Académica
-                                      </h2>
-                                      <!-- Datos de Procedencia Académica -->
-                                    <div class="grid gap-4 mb-4 grid-cols-2">
-                                        <!-- EscuelaProcedencia -->
-                                        <div class="col-span-2 sm:col-span-1">
-                                            <label for="price"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela de Procedencia</label>
-                                            <input type="text" name="price" id="price"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                v-model="inputEscuelaProcedencia" placeholder="Escuela de Procedencia" required="">
-                                        </div>
-                                        <!-- Pais -->
-                                        <div>
-                                            <label for="countries"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
-                                                una país</label>
-                                            <select v-model="selectedCountry" id="countries"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <option v-for="country in countries" :key="country.name.common"
-                                                    :value="country.name.common"
-                                                    :placeholder="selectedCountry">
-                                                    {{ country.name.common }}
-                                                </option>
-                                            </select>
-                                        </div>
 
-                                        <div v-if="selectedCountry === 'Mexico'">
-                                            <label for="states"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
-                                                una estado</label>
-                                            <select v-model="selectedState" id="states"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <option v-for="state in Object.keys(estadosMunicipios)" :key="state"
-                                                    :value="state"
-                                                    :placeholder="selectedMunicipio">
-                                                    {{ state }}
-                                                </option>
-                                            </select>
-                                        </div>
-
-                                        <div v-if="selectedCountry === 'Mexico' && selectedState">
-                                            <label for="municipios"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
-                                                una municipio</label>
-                                            <select v-model="selectedMunicipio" id="municipios"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <option v-for="municipio in estadosMunicipios[selectedState]" :key="municipio"
-                                                    :value="municipio"
-                                                    :placeholder="selectedMunicipio">
-                                                    {{ municipio }}
-                                                </option>
-                                            </select>
-                                        </div>
-
-                                        <div v-if="selectedCountry !== 'Mexico'">
-                                            <label for="otro-estado"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Estado</label>
-                                            <input type="text" id="otro-estado"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                required
-                                                v-model="selectedState">
-                                        </div>
-
-                                        <div v-if="selectedCountry !== 'Mexico'">
-                                            <label for="otro-ciudad"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
-                                            <input type="text" id="otro-ciudad"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                required
-                                                v-model="selectedMunicipio">
-                                        </div>
+                                <hr class="my-1 border-black" />
+                                <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
+                                    Datos de Procedencia Académica
+                                </h2>
+                                <!-- Datos de Procedencia Académica -->
+                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                    <!-- EscuelaProcedencia -->
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="price"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela de
+                                            Procedencia</label>
+                                        <input type="text" name="price" id="price"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            v-model="inputEscuelaProcedencia" placeholder="Escuela de Procedencia"
+                                            required="">
+                                    </div>
+                                    <!-- Pais -->
+                                    <div>
+                                        <label for="countries"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
+                                            una país</label>
+                                        <select v-model="selectedCountry" id="countries"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="country in countries" :key="country.name.common"
+                                                :value="country.name.common" :placeholder="selectedCountry">
+                                                {{ country.name.common }}
+                                            </option>
+                                        </select>
                                     </div>
 
-                                    <!-- Datos de Seguimiento -->
-                                    <hr class="my-1 border-black" />
-                                      <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                                          Datos de Seguimiento
-                                      </h2>
-                                      <div class="grid gap-4 mb-4 grid-cols-2">
+                                    <div v-if="selectedCountry === 'Mexico'">
+                                        <label for="states"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
+                                            una estado</label>
+                                        <select v-model="selectedState" id="states"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="state in Object.keys(estadosMunicipios)" :key="state"
+                                                :value="state" :placeholder="selectedMunicipio">
+                                                {{ state }}
+                                            </option>
+                                        </select>
+                                    </div>
 
-                                        <!-- PS-Seguimiento -->
-                                        <div>
+                                    <div v-if="selectedCountry === 'Mexico' && selectedState">
+                                        <label for="municipios"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
+                                            una municipio</label>
+                                        <select v-model="selectedMunicipio" id="municipios"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option v-for="municipio in estadosMunicipios[selectedState]" :key="municipio"
+                                                :value="municipio" :placeholder="selectedMunicipio">
+                                                {{ municipio }}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div v-if="selectedCountry !== 'Mexico'">
+                                        <label for="otro-estado"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Estado</label>
+                                        <input type="text" id="otro-estado"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required v-model="selectedState">
+                                    </div>
+
+                                    <div v-if="selectedCountry !== 'Mexico'">
+                                        <label for="otro-ciudad"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
+                                        <input type="text" id="otro-ciudad"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required v-model="selectedMunicipio">
+                                    </div>
+                                </div>
+
+                                <!-- Datos de Seguimiento -->
+                                <hr class="my-1 border-black" />
+                                <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
+                                    Datos de Seguimiento
+                                </h2>
+                                <div class="grid gap-4 mb-4 grid-cols-2">
+
+                                    <!-- PS-Seguimiento -->
+                                    <div>
                                         <label for="ps-seguimiento"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PS-Seguimiento</label>
                                         <select id="ps-seguimiento"
@@ -249,89 +248,89 @@
                                             v-model="inputPSeguimiento">
                                             <option v-for="ps in PSeguimientos" :key="ps" :value="ps">{{ ps }}</option>
                                         </select>
-                                        </div>
-                                        <!-- CarreraInteres -->
-                                        <div>
-                                            <label for="carrera-interes"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera de
-                                                interes</label>
-                                            <select id="carrera-interes"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                v-model="inputCarreraInteres">
-                                                <option selected >Escoge un carrera</option>
-                                                <option v-for="carreras in CarreraInteres" :key="carreras.Nombre"
-                                                    :value="carreras.Nombre" >{{ carreras.Nombre }}</option>
-                                            </select>
-                                        </div>
-                                        <!-- Grado -->
-                                        <div>
-                                            <label for="grado"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grado</label>
-                                            <select id="grado"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                v-model="inputGrado">
-                                                <option selected>Escoge un Grado</option>
-                                                <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option>
-                                            </select>
-                                        </div>
-                                        <!-- Programa -->
-                                        <div>
-                                            <label for="programa"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programa</label>
-                                            <select id="programa"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                v-model="inputPrograma">
-                                                <option selected>Escoge un Grado</option>
-                                                <option v-for="programa in Programas" :key="programa" :value="programa">{{
-                                                    programa }}</option>
-                                            </select>
-                                        </div>
+                                    </div>
+                                    <!-- CarreraInteres -->
+                                    <div>
+                                        <label for="carrera-interes"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera de
+                                            interes</label>
+                                        <select id="carrera-interes"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputCarreraInteres">
+                                            <option selected>Escoge un carrera</option>
+                                            <option v-for="carreras in CarreraInteres" :key="carreras.Nombre"
+                                                :value="carreras.Nombre">{{ carreras.Nombre }}</option>
+                                        </select>
+                                    </div>
+                                    <!-- Grado -->
+                                    <div>
+                                        <label for="grado"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grado</label>
+                                        <select id="grado"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputGrado">
+                                            <option selected>Escoge un Grado</option>
+                                            <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option>
+                                        </select>
+                                    </div>
+                                    <!-- Programa -->
+                                    <div>
+                                        <label for="programa"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programa</label>
+                                        <select id="programa"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputPrograma">
+                                            <option selected>Escoge un Grado</option>
+                                            <option v-for="programa in Programas" :key="programa" :value="programa">{{
+                                                programa }}</option>
+                                        </select>
+                                    </div>
 
-                                        <div>
-                                            <label for="estatus-inscripcion"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de
-                                                inscripción</label>
-                                            <select id="estatus-inscripcion"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <option selected>Escoge el Estatus de inscripcion</option>
-                                                <option v-for="estatus in EstatusIncripcion" :key="estatus" :value="estatus">{{
-                                                    estatus }}</option>
-                                            </select>
-                                        </div>
+                                    <div>
+                                        <label for="estatus-inscripcion"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de
+                                            inscripción</label>
+                                        <select id="estatus-inscripcion"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge el Estatus de inscripcion</option>
+                                            <option v-for="estatus in EstatusIncripcion" :key="estatus" :value="estatus">{{
+                                                estatus }}</option>
+                                        </select>
+                                    </div>
 
-                                        <div>
-                                            <label for="semestre-ingreso"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de
-                                                ingreso</label>
-                                            <select id="semestre-ingreso"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <option selected>Escoge el semestre</option>
-                                                <option v-for="semestre in SemestreIngreso" :key="semestre" :value="semestre">{{
-                                                    semestre }}</option>
-                                            </select>
-                                        </div>
+                                    <div>
+                                        <label for="semestre-ingreso"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de
+                                            ingreso</label>
+                                        <select id="semestre-ingreso"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge el semestre</option>
+                                            <option v-for="semestre in SemestreIngreso" :key="semestre" :value="semestre">{{
+                                                semestre }}</option>
+                                        </select>
+                                    </div>
 
-                                        <div>
-                                            <label for="ciclo"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
-                                                Ciclo</label>
-                                            <input type="text" id="ciclo"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="2022-1" required>
-                                        </div>
+                                    <div>
+                                        <label for="ciclo"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
+                                            Ciclo</label>
+                                        <input type="text" id="ciclo"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="2022-1" required>
+                                    </div>
 
-                                        <div>
-                                            <label for="campana"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campaña</label>
-                                            <select id="semestre-ingreso"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                <option selected>Escoge la campaña</option>
-                                                <option v-for="camapana in Campanas" :key="camapana" :value="camapana">{{
-                                                    camapana.Nombre }}</option>
-                                            </select>
-                                        </div>
+                                    <div>
+                                        <label for="campana"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campaña</label>
+                                        <select id="semestre-ingreso"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected>Escoge la campaña</option>
+                                            <option v-for="camapana in Campanas" :key="camapana" :value="camapana">{{
+                                                camapana.Nombre }}</option>
+                                        </select>
+                                    </div>
 
-                                      </div>
+                                </div>
 
                                 <button type="submit"
                                     class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -549,18 +548,15 @@
                                     </div>
 
                                     <div>
-                                        <label for="semestre"
+                                        <label for="medio-contacto"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medio de
                                             contacto</label>
-                                        <select v-model="updateLead.MedioDeContactoID" id="semestre"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <select v-model="updateLead.MedioDeContactoID" id="medio-contacto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
+                                            dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                                            dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option v-for="medio in medioContactos" :key="medio" :value="medio.MedioID">{{
                                                 medio.Nombre }}</option>
-                                        <select id="semestre-ingreso"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option selected>Escoge la campaña</option>
-                                            <option v-for="camapana in Campanas" :key="camapana" :value="camapana">{{
-                                                camapana.Nombre }}</option>
                                         </select>
                                     </div>
 
@@ -773,7 +769,7 @@ export default {
             }); // ToastOptions
         }
 
-        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor, input };
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, input };
     },
 
     data() {
