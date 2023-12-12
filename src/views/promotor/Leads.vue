@@ -259,7 +259,7 @@
                                             v-model="inputCarreraInteres">
                                             <option selected>Escoge un carrera</option>
                                             <option v-for="carreras in CarreraInteres" :key="carreras.Nombre"
-                                                :value="carreras.Nombre">{{ carreras.Nombre }}</option>
+                                                :value="carreras.CarreraID">{{ carreras.Nombre }}</option>
                                         </select>
                                     </div>
                                     <!-- Grado -->
@@ -291,7 +291,8 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de
                                             inscripción</label>
                                         <select id="estatus-inscripcion"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputEstatusInscripcion">
                                             <option selected>Escoge el Estatus de inscripcion</option>
                                             <option v-for="estatus in EstatusIncripcion" :key="estatus" :value="estatus">{{
                                                 estatus }}</option>
@@ -303,7 +304,8 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de
                                             ingreso</label>
                                         <select id="semestre-ingreso"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputSemestreIngreso">
                                             <option selected>Escoge el semestre</option>
                                             <option v-for="semestre in SemestreIngreso" :key="semestre" :value="semestre">{{
                                                 semestre }}</option>
@@ -316,17 +318,19 @@
                                             Ciclo</label>
                                         <input type="text" id="ciclo"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="2022-1" required>
+                                            v-model="inputCiclo" placeholder="2022-1" required="">
                                     </div>
 
                                     <div>
                                         <label for="campana"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campaña</label>
                                         <select id="semestre-ingreso"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputCampana">
                                             <option selected>Escoge la campaña</option>
-                                            <option v-for="camapana in Campanas" :key="camapana" :value="camapana">{{
-                                                camapana.Nombre }}</option>
+                                            <option v-for="campanas in Campanas" :key="campanas.CampanaID"
+                                                :value="campanas.CampanaID">{{
+                                                    campanas.Nombre }}</option>
                                         </select>
                                     </div>
 
@@ -348,7 +352,7 @@
                 </div>
 
                 <!-- Modal de Actualizar varios -->
-                <div v-show="hasSelectedLeads" id="update-many" tabindex="-1" aria-hidden="true"
+                <div v-show="hasSelectedLeads" id="update" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]">
                     <div class="relative p-4 w-full max-w-4xl max-h-full">
                         <!-- Modal content -->
@@ -361,7 +365,7 @@
                                 </h3>
                                 <button type="button"
                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                    data-modal-hide="update-many">
+                                    data-modal-hide="update">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                         viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -909,6 +913,8 @@ export default {
 
                 const { lead } = response.data;
 
+                console.log('Lead:', lead);
+
                 // Verificar si el lead se encontró
                 if (!lead) {
                     // Manejar el caso en el que el lead no se encuentre
@@ -919,8 +925,8 @@ export default {
 
                 // Aquí puedes asignar la información del lead al modal o a otras variables para mostrarla en el modal
                 this.inputName = lead.NombreCompleto;
-                this.inputTelefono = lead.Telefono;
-                this.inputTelefono2 = lead.Telefono2;
+                this.inputTelefono = lead.telefono;
+                this.inputTelefono2 = lead.telefono2;
                 this.inputCorreo = lead.CorreoElectronico;
                 this.inputCorreo2 = lead.CorreoElectronico2;
                 // Obtenemos solo la parte de la fecha
@@ -931,9 +937,13 @@ export default {
                 this.selectedState = lead.NombreEstado;
                 this.selectedMunicipio = lead.NombreCiudad;
                 this.inputPSeguimiento = lead.PSeguimiento;
-                this.inputCarreraInteres = lead.CarreraInteres;
+                this.inputCarreraInteres = lead.CarreraInteresID;
                 this.inputGrado = lead.Grado;
                 this.inputPrograma = lead.Programa;
+                this.inputEstatusInscripcion = lead.EstatusInsc;
+                this.inputSemestreIngreso = lead.SemestreIngreso;
+                this.inputCiclo = lead.Ciclo;
+                this.inputCampana = lead.CampanaID;
 
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
@@ -942,6 +952,7 @@ export default {
                 console.error('Error al obtener el lead:', error);
                 // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
             }
+
         },
 
         loadContactos(id) {
