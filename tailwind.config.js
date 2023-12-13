@@ -12,5 +12,7 @@ module.exports = {
       "vtd-secondary": colors.gray, // Dark mode Datepicker color
     },},
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin")({
+    charts: true,
+  })],
 };

@@ -9,10 +9,6 @@ import { getRole } from './sessions'
 //import VueTailwindDatepicker from "vue-tailwind-datepicker";
 
 
-
-
-
-
 const app = createApp(App);
 app.use(VueFinalModal());
 app.use(router)

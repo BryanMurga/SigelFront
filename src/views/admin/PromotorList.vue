@@ -266,6 +266,7 @@ export default {
     },
     closeAddModal() {
       this.$refs.addModal.close();
+      
     },
     redirectToAgregarPromotor() {
       this.$router.push("/register-promotor");

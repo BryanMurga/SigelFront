@@ -16,7 +16,6 @@ import Reasignaciones from '../views/admin/Reasignaciones.vue'
 import IndicadoresView from '../views/admin/Indicadores.vue'
 import DashPromotor from '../views/promotor/DashPromotor.vue'
 import RegistrarLead from '../views/promotor/RegistrarLead.vue'
-
 import LeadsPromotor from '../views/promotor/Leads.vue'
 
 const router = createRouter({
@@ -145,6 +144,20 @@ const router = createRouter({
       path: '/registrar-lead',
       name: 'registrar-lead',
       component: RegistrarLead,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'promotor') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/leads-promotor',
+      name: 'leads-promotor',
+      component: LeadsPromotor,
       beforeEnter: (to, from, next) => {
         if (getRole() === 'promotor') {
           // Acceso permitido para administradores
