@@ -181,7 +181,7 @@
                 </button>
                 <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
-                        asignar</h5>
+                        reasignar</h5>
                 </div>
             </div>
         </div>

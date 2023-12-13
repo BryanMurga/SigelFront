@@ -286,51 +286,54 @@
                                                     programa }}</option>
                                             </select>
                                         </div>
-
+                                        <!-- EstatusIncripcion -->
                                         <div>
                                             <label for="estatus-inscripcion"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de
                                                 inscripción</label>
                                             <select id="estatus-inscripcion"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="inputEstatusInscripcion">
                                                 <option selected>Escoge el Estatus de inscripcion</option>
                                                 <option v-for="estatus in EstatusIncripcion" :key="estatus" :value="estatus">{{
                                                     estatus }}</option>
                                             </select>
                                         </div>
-
+                                        <!-- SemestreIngreso -->
                                         <div>
                                             <label for="semestre-ingreso"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de
                                                 ingreso</label>
                                             <select id="semestre-ingreso"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="inputSemestreIngreso">
                                                 <option selected>Escoge el semestre</option>
                                                 <option v-for="semestre in SemestreIngreso" :key="semestre" :value="semestre">{{
                                                     semestre }}</option>
                                             </select>
                                         </div>
-
+                                        <!-- Ciclo -->
                                         <div>
                                             <label for="ciclo"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
                                                 Ciclo</label>
                                             <input type="text" id="ciclo"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="2022-1" required>
+                                                placeholder="2022-1" required="" v-model="inputCiclo">
                                         </div>
-
+                                        <!-- Campana -->
                                         <div>
                                             <label for="campana"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campaña</label>
                                             <select id="semestre-ingreso"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                v-model="inputCampana">
                                                 <option selected>Escoge la campaña</option>
                                                 <option v-for="camapana in Campanas" :key="camapana" :value="camapana">{{
                                                     camapana.Nombre }}</option>
                                             </select>
                                         </div>
-
+                                        
                                       </div>
 
                                 <button type="submit"
@@ -515,7 +518,7 @@
                                             Ciclo</label>
                                         <input type="text" id="ciclo"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="2022-1" required>
+                                            >
                                     </div>
 
                                     <div>
@@ -886,6 +889,10 @@ export default {
                 this.inputCarreraInteres = lead.CarreraInteres;
                 this.inputGrado = lead.Grado;
                 this.inputPrograma = lead.Programa;
+                this.inputEstatusInscripcion = lead.EstatusInsc;
+                this.inputSemestreIngreso = lead.SemestreIngreso;
+                this.inputCiclo = lead.Ciclo;
+                this.inputCampana = lead.NombreCampana;
 
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
