@@ -40,6 +40,9 @@
                                                 <th scope="col" class="px-6 py-3">
                                                     Comentario
                                                 </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                    Promotor
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,6 +56,10 @@
                                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                                                     {{ contacto.Comentario }}
                                                 </td>
+                                                <td
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                                    {{ contacto.nombrePromotor }}
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -65,10 +72,18 @@
                             </div>
                             <!-- Modal footer -->
                             <div
-                                class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                class="flex justify-between items-start p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                 <button data-modal-hide="verContacto" type="button"
-                                    class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cerrar</button>
+                                    class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                    Cerrar
+                                </button>
+                                <button data-modal-hide="verContacto" type="button" @click="navigateToRegisterContacto()"
+                                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                    Añadir Contacto
+                                </button>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -352,7 +367,7 @@
                 </div>
 
                 <!-- Modal de Actualizar varios -->
-                <div v-show="hasSelectedLeads" id="update" tabindex="-1" aria-hidden="true"
+                <div id="update-many" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]">
                     <div class="relative p-4 w-full max-w-4xl max-h-full">
                         <!-- Modal content -->
@@ -365,7 +380,7 @@
                                 </h3>
                                 <button type="button"
                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                    data-modal-hide="update">
+                                    data-modal-hide="update-many">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                         viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -567,7 +582,7 @@
                                 </div>
 
                                 <div class="grid gap-5 mb-6 md:grid-cols-5 p-4">
-                                    <button type="submit"
+                                    <button type="submit" data-modal-hide="update-many"
                                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                         Guardar
                                     </button>
@@ -593,7 +608,7 @@
                         <input v-model="input" type="search" id="default-search" name="leadSearch"
                             class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Buscar registros" required />
-                        <!-- <div class="items" v-for="lead in filterList()" :key=lead.id>
+                        <!-- <div class="items" v-for="lead in filterList()" :key=lead.id
                                 <p>{{ lead.NombreCompleto }}</p>
                             </div>
                             <div class="item-error" v-if="input&&!filterList().length">
@@ -691,6 +706,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads asignados</h5>
+                </div>
             </div>
             <br>
             <button v-show="hasSelectedLeads" type="button" data-modal-target="update-many" data-modal-toggle="update-many"
@@ -713,7 +731,7 @@ import SideBarProm from "../../components/SideBarProm.vue";
 import axios from "axios";
 import { ref } from "vue";
 import { format } from "date-fns";
-import { FwbButton, FwbModal } from 'flowbite-vue';
+import { FlowbiteThemable, FwbButton, FwbModal } from 'flowbite-vue';
 import DatePicker from "vue3-datepicker";
 
 import { toast } from "vue3-toastify";
@@ -728,8 +746,6 @@ export default {
 
     //types of toast
     setup() {
-
-        const input = ref('');
 
         const notify = () => {
             toast("Se ha actualizado los leads Seleccionados!", {
@@ -773,8 +789,9 @@ export default {
             }); // ToastOptions
         }
 
-        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, input };
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores };
     },
+    props: ['selectContacto'],
 
     data() {
         return {
@@ -782,7 +799,7 @@ export default {
             VerContacto: null,
             leads: [],
             leadIndividual: [],
-            contactos: [],
+            contactos: [],  
             selectedLeads: [], // Arreglo para almacenar los leads seleccionados
             leadParaGestionar: null,
             input: ref(''),
@@ -820,6 +837,26 @@ export default {
                 ids: null,
             },
             updateManyModalVisible: false,
+            selectContacto: null,
+            inputName: null,
+            inputTelefono: null,
+            inputTelefono2: null,
+            inputCorreo: null,
+            inputCorreo2: null,
+            inputFechaNacimiento: null,
+            inputEscuelaProcedencia: null,
+            inputPSeguimiento: null,
+            inputCarreraInteres: null,
+            inputGrado: null,
+            inputPrograma: null,
+            inputEstatusInscripcion: null,
+            inputSemestreIngreso: null,
+            inputCiclo: null,
+            inputCampana: null,
+            inputAsetNameForm: null,
+            inputIsOrganic: null,
+            inputMedioDeContactoID: null,
+
         };
     },
     computed: {
@@ -858,6 +895,14 @@ export default {
         window.removeEventListener('popstate', this.preventBack);
     },
     methods: {
+        navigateToRegisterContacto() {
+
+            this.$router.push({
+                name: 'register-contacto',
+                params: { selectContacto: this.selectContacto },
+            });
+        },
+
         async guardarDatos() {
 
             this.updateLead.ids = this.selectedLeads;
@@ -889,14 +934,18 @@ export default {
 
 
         async loadLeads() {
+            console.log('Valor de userName:', this.userName)
             try {
                 // Reemplaza 'tu-endpoint' con la URL real de tu endpoint
-                const response = await axios.get('http://localhost:4000/leads');
-                if (response.data && response.data.leads) {
+                const response = await axios.get('http://localhost:4000/promotores/leads', {
+                    params: {
+                        userName: this.userName
+                    }
+                });
+                if (response.data && response.data) {
                     this.leads = response.data.leads;
                     // Almacena los leads en el array
                 }
-
             } catch (error) {
                 this.errLeads();
             }
@@ -905,8 +954,9 @@ export default {
 
         VerContactoModal(id) {
             this.loadContactos(id);
+            this.selectContacto = id;
+            console.log('Valor de id:', id);
         },
-
         async GestionarLead(LeadID) {
             try {
                 const response = await axios.get(`http://localhost:4000/leads/${LeadID}`);
@@ -944,18 +994,15 @@ export default {
                 this.inputSemestreIngreso = lead.SemestreIngreso;
                 this.inputCiclo = lead.Ciclo;
                 this.inputCampana = lead.CampanaID;
-
-                // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
-                this.loadContactos(LeadID);
+                // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del mo
             } catch (error) {
                 // Manejar errores de la solicitud HTTP
                 console.error('Error al obtener el lead:', error);
                 // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
             }
-
         },
 
-        loadContactos(id) {
+        async loadContactos(id) {
             console.log('Valor de id:', id);
             axios.get(`http://localhost:4000/leads/contacto/${id}`)
                 .then(response => {
@@ -969,6 +1016,7 @@ export default {
                 })
                 .catch(error => {
                     console.error('Error al obtener los comentarios del lead:', error);
+                    console.log('Contactos:', this.contactos);
                     // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
                 });
         },
@@ -1084,6 +1132,7 @@ export default {
                 this.loadCarreras;
                 this.loadCampana;
                 this.loadMedioContacto;
+                this.VerContactoModal;
             },
         },
         inmediate: true,

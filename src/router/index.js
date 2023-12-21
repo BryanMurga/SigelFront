@@ -17,6 +17,7 @@ import IndicadoresView from '../views/admin/Indicadores.vue'
 import DashPromotor from '../views/promotor/DashPromotor.vue'
 import RegistrarLead from '../views/promotor/RegistrarLead.vue'
 import LeadsPromotor from '../views/promotor/Leads.vue'
+import RegisterContacto from '../views/promotor/RegisterContacto.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -182,7 +183,22 @@ const router = createRouter({
           next({ name: 'login' });
         }
       }
+    },
+    {
+    path: '/register-contacto/:selectContacto',
+    name: 'register-contacto',
+    component: RegisterContacto,
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (getRole() === 'promotor') {
+        // Acceso permitido para administradores
+        next();
+      } else {
+        // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+        next({ name: 'login' });
+      }
     }
+    },
   ]
 })
 export default router;

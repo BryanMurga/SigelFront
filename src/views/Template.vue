@@ -6,7 +6,6 @@
         </div>
         
         <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
-        <Search />
 
     </header>
 
@@ -24,7 +23,6 @@ import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import { getUserName } from "../sessions";
 import SideBarADM from "../components/SideBarADM.vue";
-import Search from "../components/Search.vue";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -53,7 +51,7 @@ export default {
 
         }
     },
-    components: { SideBarADM, Search }
+    components: { SideBarADM }
 };
 
 </script>

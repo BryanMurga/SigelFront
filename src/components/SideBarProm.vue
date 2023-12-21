@@ -41,12 +41,12 @@
        <ul class="space-y-6  font-medium">
          <li class="md:mt-3  items-center">
            <a
-             href="#"
+             href="dash-promotor"
              :class="{
-               'bg-green-500': selectedSection === 'home',
+               'bg-green-500': selectedSection === 'dash-promotor',
              }"
              class="flex items-center p-6  text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
-             @click="selectSection('home')"
+             @click="selectSection('dash-promotor')"
            >
            
              <svg
@@ -167,7 +167,9 @@
    },
    methods: {
      selectSection(section) {
+      console.log(section);
        this.selectedSection = section;
+       this.$router.push("/" + this.selectSection);
      },
      cerrarSesion() {
        clearRole();
