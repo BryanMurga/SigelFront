@@ -971,7 +971,6 @@ export default {
                     console.error('Lead no encontrado');
                     return;
                 }
-                const fechaNacimiento = lead.FechaNac.split('T')[0]; // Suponiendo que el formato es ISO (yyyy-mm-dd)
 
                 // Aquí puedes asignar la información del lead al modal o a otras variables para mostrarla en el modal
                 this.inputName = lead.NombreCompleto;
@@ -981,7 +980,7 @@ export default {
                 this.inputCorreo2 = lead.CorreoElectronico2;
                 // Obtenemos solo la parte de la fecha
                 // Asignamos la parte de la fecha al modal
-                this.inputFechaNacimiento = fechaNacimiento;
+                this.inputFechaNacimiento = lead.FechaNac.split('T')[0];
                 this.inputEscuelaProcedencia = lead.EscuelaProcedencia;
                 this.selectedCountry = lead.NombrePais;
                 this.selectedState = lead.NombreEstado;

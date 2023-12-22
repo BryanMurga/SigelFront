@@ -1138,8 +1138,10 @@ export default {
       // Redirige a la vista deseada después del registro
       // Puedes ajustar esto según la estructura de tu aplicación
       this.$router.push('/leads-promotor');
+      notifySuccess();
     } catch (error) {
       console.error('Error al registrar el lead:', error.message);
+
       console.log(this.lead)
     }
   },

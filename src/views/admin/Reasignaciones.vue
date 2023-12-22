@@ -351,7 +351,7 @@ export default {
                     if (lead.selectedPromotor) {
                         
                         await axios.put(`http://localhost:4000/leads/update-promotor-actual/${lead.LeadID}`, {
-                            PromotorActual: lead.selectedPromotor
+                            promotorActual: lead.selectedPromotor
                         });
                     }
                 });
