@@ -154,7 +154,7 @@
                                         <label for="date"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
                                             Nacimiento</label>
-                                        <DatePicker :placeholder="inputFechaNacimiento" class="input-field rounded-md" />
+                                        <DatePicker v-model="leads.FechaNac" :placeholder="inputFechaNacimiento" class="input-field rounded-md" />
                                     </div>
                                 </div>
 
@@ -187,7 +187,7 @@
                                             </option>
                                         </select>
                                     </div>
-
+                                    <!-- Estado -->
                                     <div v-if="selectedCountry === 'Mexico'">
                                         <label for="states"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
@@ -200,7 +200,7 @@
                                             </option>
                                         </select>
                                     </div>
-
+                                    <!-- Municipio -->
                                     <div v-if="selectedCountry === 'Mexico' && selectedState">
                                         <label for="municipios"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
@@ -213,7 +213,7 @@
                                             </option>
                                         </select>
                                     </div>
-
+                                    <!-- Estado otro-->
                                     <div v-if="selectedCountry !== 'Mexico'">
                                         <label for="otro-estado"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -222,7 +222,7 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required v-model="selectedState">
                                     </div>
-
+                                    <!-- Municipio otro -->
                                     <div v-if="selectedCountry !== 'Mexico'">
                                         <label for="otro-ciudad"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
@@ -238,6 +238,14 @@
                                     Datos de Seguimiento
                                 </h2>
                                 <div class="grid gap-4 mb-4 grid-cols-2">
+
+                                    <!-- Fecha Primer Contacto-->
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="date"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha Primer
+                                            Contacto</label>
+                                        <DatePicker v-model="leads.FechaPrimerContacto" :placeholder="inputFechaPrimerContacto" class="input-field rounded-md" />
+                                    </div>
 
                                     <!-- PS-Seguimiento -->
                                     <div>
@@ -285,7 +293,7 @@
                                                 programa }}</option>
                                         </select>
                                     </div>
-
+                                    <!-- EstatusInsc -->
                                     <div>
                                         <label for="estatus-inscripcion"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estatus de
@@ -298,7 +306,7 @@
                                                 estatus }}</option>
                                         </select>
                                     </div>
-
+                                    <!-- SemestreIngreso -->
                                     <div>
                                         <label for="semestre-ingreso"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semestre de
@@ -311,16 +319,16 @@
                                                 semestre }}</option>
                                         </select>
                                     </div>
-
+                                    <!-- Ciclo -->
                                     <div>
                                         <label for="ciclo"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             Ciclo</label>
                                         <input type="text" id="ciclo"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            v-model="inputCiclo" placeholder="2022-1" required="">
+                                            v-model="inputCiclo" placeholder="Ingresa el ciclo 2022-1" required="">
                                     </div>
-
+                                    <!-- Campana -->
                                     <div>
                                         <label for="campana"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campaña</label>
@@ -333,7 +341,151 @@
                                                     campanas.Nombre }}</option>
                                         </select>
                                     </div>
+                                    <!--Organico/Pauta-->
+                                    <div>
+                                        <label for="pauta-organica"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pauta/Organic</label>
+                                        <select id="pauta-organica"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputIsOrganic">
+                                            <option selected>Escoge un status</option>
+                                            <option v-for="pauta in isOrganic" :key="pauta" :value="pauta">{{ pauta }}</option>
+                                        </select>
+                                    </div>
+                                    <!--Medio de Contacto-->
+                                    <div>
+                                        <label for="ps-seguimiento"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medio de Contacto</label>
+                                        <select id="ps-seguimiento"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputMedioContacto">
+                                            <option selected>Escoge un Medio de Contacto</option>
+                                            <option v-for="contacto in medioContactos" :key="contacto.MedioID" :value="contacto.MedioID">{{ contacto.Nombre }}</option>
+                                        </select>
+                                    </div>
+                                    <!--Tipo de referido-->
+                                    <div>
+                                        <label for="tipo-referido"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Referido</label>
+                                        <select id="tipo-referido"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputTipoReferido">
+                                            <option selected>Escoge un Tipo de Referido</option>
+                                            <option v-for="referido in tipoReferido" :key="referido" :value="referido">{{ referido }}</option>
+                                        </select>
+                                    </div>
+                                    <!--Nombre del Referido-->
+                                    <div>
+                                        <label for="referido"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Nombre del Referido</label>
+                                        <input type="text" id="referido"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputNombreReferido" placeholder="Ingresa el nombre del referido" required="">
+                                    </div>
+                                    <!--DondeObtDato-->
+                                    <div>
+                                        <label for="donde-obtuvo-dato"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Donde obtuvo el dato</label>
+                                        <select id="donde-obtuvo-dato"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                            v-model="inputDondeObtuvoDato">
+                                            <option selected>Escoge un Donde obtuvo el dato</option>
+                                            <option v-for="dato in dondeObtuvoDato" :key="dato" :value="dato">{{ dato }}</option>
+                                        </select>
+                                    </div>
 
+                                </div>
+
+                                <!-- Datos de Inscripcion -->
+                                <hr class="my-1 border-black" />
+                                <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
+                                    Datos de Inscripcion
+                                </h2>
+                                <div class="grid gap-4 mb-4 grid-cols-2">
+
+                                    <!-- Fecha Inscripcion-->
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="date"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
+                                            Inscripción</label>
+                                        <DatePicker v-model="leads.FechaInscripcion" :placeholder="inputFechaInscripcion" class="input-field rounded-md" />
+                                    </div>
+                                    <!--Carrera Inscripción-->
+                                    <div>
+                                        <label for="carrera-inscripcion"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera de
+                                            Inscripción</label>
+                                        <select id="carrera-inscripcion"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputCarreraInscripcion">
+                                            <option selected>Escoge un carrera</option>
+
+                                            <option v-for="carrera in CarreraInscrita" :key="carrera.CarreraID"
+                                                :value="carrera.CarreraID">{{ carrera.Nombre }}</option>
+                                        </select>
+                                    </div>
+                                    <!--Beca Ofrecida-->
+                                    <div>
+                                        <label for="becaOfrecida"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Beca Ofrecida</label>
+                                        <input type="text" id="becaOfrecida"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputBecaOfrecida" placeholder="Ingresa el valor de la Beca" required="">
+                                    </div>
+                                    <!--Numero de Lista-->
+                                    <div>
+                                        <label for="numeroLista"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Número de Lista</label>
+                                        <input type="text" id="numeroLista"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputNumeroLista" placeholder="Ingresa el Numero de lista" required="">
+                                    </div>
+                                    <!--Promotor Original-->
+                                    <div>
+                                        <label for="promotor-original"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotor
+                                            Original</label>
+                                        <select id="promotor-original"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputPromotorOriginal">
+                                            <option selected>Escoge un promotor</option>
+
+                                            <option v-for="promotores in Promotores" :key="promotores.PromotorID"
+                                                :value="promotores.PromotorID">{{ promotores.Nombre }}</option>
+                                        </select>
+                                    </div>
+                                    <!--Fecha Promotor Original-->
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="date"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
+                                            Promotor Orignal</label>
+                                        <DatePicker v-model="leads.FechaPromotorOriginal" :placeholder="inputFechaPromotorOriginal" class="input-field rounded-md" />
+                                    </div>
+                                    <!--Promotor Actual-->
+                                    <div>
+                                        <label for="promotor-actual"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotor
+                                            Actual</label>
+                                        <select id="promotor-actual"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputPromotorActual">
+                                            <option selected>Escoge un promotor</option>
+
+                                            <option v-for="promotores in Promotores" :key="promotores.PromotorID"
+                                                :value="promotores.PromotorID">{{ promotores.Nombre }}</option>
+                                        </select>
+                                    </div>
+                                    <!--Fecha Promotor Actual-->
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="date"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
+                                            Promotor Actual</label>
+                                        <DatePicker v-model="leads.FechaPromotorActual" :placeholder="inputFechaPromotorActual" class="input-field rounded-md" />
+                                    </div>
+                                
                                 </div>
 
                                 <button type="submit"
@@ -514,8 +666,8 @@
 
                                     <div>
                                         <label for="ciclo"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela
-                                            Ciclo</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciclo
+                                            </label>
                                         <input v-model="updateLead.Ciclo" type="text" id="ciclo"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             >
@@ -793,14 +945,21 @@ export default {
             selectedMunicipio: '',
             PSeguimientos: ['AU-ALUMNO UNINTER', 'INSC-INSCRIPCIÓN', 'NI-NO INTERESA', 'P-PROSPECTO', 'PI-INSCRIPCIÓN', 'PS-SEGUIMIENTO', 'SC-SIN CONTACTO', 'PU-PERSONAL UNINTER', 'DU-DUPLICADO', 'DI-DATO NO VALIDO', 'BA-BAJA ALUMNO', 'VACIO'],
             CarreraInteres: [],
+            CarreraInscrita: [],
             Grados: ['SECUNDARIA', 'BACHILLERATO', 'PREPA-A', 'LIC/ING', 'ESPECIALIDAD', 'DIPLOMADO', 'MAESTRIA', 'DOCTORADO', 'NO ESPECIFICA'],
             Programas: ['ADMINISTRACIÓN', 'ADMINISTRACION DE EMPRESAS', 'ADMINISTRACION DE NEGOCIOS INTERNACIONALES', 'ARQ', 'BACHILLERATO SEMESTRAL', 'BILINGÜE', 'BIU', 'BIUB', 'BIUM', 'CIENCIAS POLÍTICAS, RELACIONES INT.', 'CLS PRT', 'CORP', 'CURSO DE VERANO', 'Curso Intensivo', 'DAD', 'DDI', 'DDPAI', 'DEI', 'DEPU', 'DHU', 'DI', 'DIP', 'DISEÑO DE MODAS', 'DISEÑO GRÁFICO', 'DMD', 'DPU', 'EAO', 'EAPD', 'EAPD y LADD', 'EATL', 'LDI', 'LDM', 'LECE', 'LED', 'LEF', 'LEM',
                 'LEMK', 'LEMP', 'LIC', 'LICENCIATURA', 'LID', 'LPS', 'LRI', 'MADE', 'MADEL', 'MARET', 'MDG', 'MEL', 'MELE', 'MERCADOTECNIA', 'MGC', 'MI', 'NIÑOS', 'OFERTA EDUCATIVA', 'PEDAGOGÍA', 'PREPA A', 'PREPA-A', 'REGLR', 'SIU', 'SIUB', 'SIUM', 'UNI LAE', 'LPE'],
             EstatusIncripcion: ['INSO', 'REZA', 'INSC', 'BAJA', 'ARCHIVAR'],
             SemestreIngreso: ['1 Semestre', '2 Semestre', '3 Semestre', '4 Semestre', '5 Semestre', '6 Semestre', '7 Semestre', '8 Semestre', 'Maestria', 'Doctorado', 'Licenciatura', 'Diplomados'],
             Campanas: [],
+            Promotores: [],
             isOrganic: ['PAUTA', 'ORGÁNICO'],
             medioContactos: [],
+            tipoReferido: ['ESTUDIANTE', 'FAMILIAR DE ALGÚN ESTUDIANTE', 'PERSONAL UNINTER', 'NINGUNO'],
+            dondeObtuvoDato: ["B_AFC", "B_EMPRESAS", "B_ESTRATEGIA VACACIONES EQUI", "B_PERSONAL", "B_POSGRADOS", "BARRIDO BASE", "BARRIDO EGRESADOS",
+            "BASE EGRESADOS", "BASE FAMILIAR", "CLIENGO", "ESTRATEGIA EQUIPO MORADO", "EXPO EDUCATIVA", "REDES SOCIALES META FACEBOOK", "REDES SOCIALES META INSTAGRAM",
+            "LANDING", "LANDING CARRERAS", "LANDING FORMULARIO", "LANDING TOT", "LLAMADA UNINTER", "OPEN SCHOOL ESPECIAL POR CONVENIO CON EMPRESA", 
+            "VISITA UNINTER"],
             updateLead: {
                 EscuelaProcedencia: null,
                 NombrePais: null,
@@ -809,6 +968,7 @@ export default {
                 PSeguimiento: null,
                 Programa: null,
                 CarreraInteresID: null,
+                CarreraInscripcion:null,
                 Grado: null,
                 EstatusInsc: null,
                 SemestreIngreso: null,
@@ -818,8 +978,40 @@ export default {
                 IsOrganic: null,
                 MedioDeContactoID: null,
                 ids: null,
+                TipoReferido: null,
+                DondeObtuvoDato:null,
             },
             updateManyModalVisible: false,
+            selectContacto: null,
+            inputName: null,
+            inputTelefono: null,
+            inputTelefono2: null,
+            inputCorreo: null,
+            inputCorreo2: null,
+            inputFechaNacimiento: null,
+            inputEscuelaProcedencia: null,
+            inputPSeguimiento: null,
+            inputCarreraInteres: null,
+            inputGrado: null,
+            inputPrograma: null,
+            inputEstatusInscripcion: null,
+            inputSemestreIngreso: null,
+            inputCiclo: null,
+            inputCampana: null,
+            fechaPrimerContacto:null,
+            inputIsOrganic:null,
+            inputMedioContacto:null,
+            inputTipoReferido:null,
+            inputNombreReferido:null,
+            inputDondeObtuvoDato:null,
+            inputFechaInscripcion:null,
+            inputFechaPromotorOriginal:null,
+            inputCarreraInscripcion:null,
+            inputBecaOfrecida:null,
+            inputNumeroLista:null,
+            inputPromotorOriginal:null,
+            inputPromotorActual:null,
+            inputFechaPromotorActual:null,
         };
     },
     computed: {
@@ -845,6 +1037,7 @@ export default {
         this.loadEstadoMunicipio();
         this.loadCarreras();
         this.loadCampana();
+        this.loadPromotor();
         this.loadMedioContacto();
 
         // Agrega un nuevo estado al historial cuando el componente se monta
@@ -921,7 +1114,12 @@ export default {
                     console.error('Lead no encontrado');
                     return;
                 }
-                const fechaNacimiento = lead.FechaNac.split('T')[0]; // Suponiendo que el formato es ISO (yyyy-mm-dd)
+
+                const fechaNacimiento = lead.FechaNac ? lead.FechaNac.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
+                const fechaPrimerContacto = lead.FechaPrimerContacto ? lead.FechaPrimerContacto.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
+                const fechaInscripcion = lead.FechaInscripcion ? lead.FechaInscripcion.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
+                const fechaPromotorOriginal = lead.FechaPromotorOriginal ? lead.FechaPromotorOriginal.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
+                const fechaPromotorActual = lead.FechaPromotorActual ? lead.FechaPromotorActual.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
 
                 // Aquí puedes asignar la información del lead al modal o a otras variables para mostrarla en el modal
                 this.inputName = lead.NombreCompleto;
@@ -944,6 +1142,20 @@ export default {
                 this.inputSemestreIngreso = lead.SemestreIngreso;
                 this.inputCiclo = lead.Ciclo;
                 this.inputCampana = lead.CampanaID;
+                this.inputFechaPrimerContacto = fechaPrimerContacto;
+                this.inputIsOrganic = lead.IsOrganic;
+                this.inputMedioContacto = lead.MedioDeContactoID;
+                this.inputTipoReferido = lead.TipoReferido;
+                this.inputNombreReferido = lead.NombreReferido;
+                this.inputDondeObtuvoDato = lead.DondeObtDato;
+                this.inputFechaInscripcion = fechaInscripcion;
+                this.inputCarreraInscripcion= lead.CarreraInscripcion;
+                this.inputBecaOfrecida = lead.BecaOfrecida;
+                this.inputNumeroLista = lead.NumeroLista;
+                this.inputPromotorOriginal = lead.PromotorOriginal;
+                this.inputFechaPromotorOriginal = fechaPromotorOriginal;
+                this.inputPromotorActual = lead.PromotorActual;
+                this.inputFechaPromotorActual = fechaPromotorActual;
 
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
@@ -995,6 +1207,7 @@ export default {
                 const response = await axios.get('http://localhost:4000/carrera');
                 if (response.data && response.data.carreras) {
                     this.CarreraInteres = response.data.carreras;
+                    this.CarreraInscrita = response.data.carreras;
                 }
             } catch (error) {
                 console.log('Error al obtener las carreras:', error);
@@ -1005,6 +1218,16 @@ export default {
                 const response = await axios.get('http://localhost:4000/campanas');
                 if (response.data && response.data.campanas) {
                     this.Campanas = response.data.campanas;
+                }
+            } catch (error) {
+                console.log('Error al obtener las carreras:', error);
+            }
+        },
+        async loadPromotor(){
+            try {
+                const response = await axios.get('http://localhost:4000/promotores');
+                if (response.data && response.data.listPromotores) {
+                    this.Promotores = response.data.listPromotores;
                 }
             } catch (error) {
                 console.log('Error al obtener las carreras:', error);
@@ -1083,6 +1306,7 @@ export default {
                 this.loadEstadoMunicipio;
                 this.loadCarreras;
                 this.loadCampana;
+                this.loadPromotor;
                 this.loadMedioContacto;
             },
         },

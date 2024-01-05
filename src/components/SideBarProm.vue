@@ -41,7 +41,7 @@
        <ul class="space-y-6  font-medium">
          <li class="md:mt-3  items-center">
            <a
-             href="#"
+             href="dash-promotor"
              :class="{
                'bg-green-500': selectedSection === 'home',
              }"
