@@ -263,8 +263,8 @@ export default {
                         await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
                             promotorOriginal: lead.selectedPromotor
                         });
+                        
                         this.loadLeads();
-                        this.notify();
                     } catch (error) {
                         this.errAsignarPromotor();
                     }
@@ -272,6 +272,8 @@ export default {
                     this.errAsignacion(lead.LeadID);
                 }
             });
+            //checar si esta bien colocado la notificacion
+            this.notify();
         },
 
         preventBack(event) {
