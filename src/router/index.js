@@ -18,6 +18,8 @@ import DashPromotor from '../views/promotor/DashPromotor.vue'
 import RegistrarLead from '../views/promotor/RegistrarLead.vue'
 import LeadsPromotor from '../views/promotor/Leads.vue'
 import RegisterContacto from '../views/promotor/RegisterContacto.vue'
+import CargarArchivo from '../views/admin/CargarArchivo.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -199,6 +201,21 @@ const router = createRouter({
       }
     }
     },
+
+    {
+      path: '/cargar-archivo',
+      name: 'cargar-archivo',
+      component: CargarArchivo,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    }
   ]
 })
 export default router;

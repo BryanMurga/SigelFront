@@ -1092,7 +1092,7 @@ export default {
       } = this.lead;
 
       // Agrega validaciones según tus requerimientos
-      if (!NombreCompleto || !Telefono || !CorreoElectronico) {
+      if (!NombreCompleto || !Telefono || !CorreoElectronico || !promotorOriginal || !promotorActual) {
         throw new Error('Por favor, completa todos los campos obligatorios correctamente.');
       }
 
