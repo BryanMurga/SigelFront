@@ -19,6 +19,7 @@ import RegistrarLead from '../views/promotor/RegistrarLead.vue'
 import LeadsPromotor from '../views/promotor/Leads.vue'
 import RegisterContacto from '../views/promotor/RegisterContacto.vue'
 import CargarArchivo from '../views/admin/CargarArchivo.vue'
+import AlumnoPromotor from '../views/promotor/AlumnoPromotor.vue'
 
 
 const router = createRouter({
@@ -208,6 +209,20 @@ const router = createRouter({
       component: CargarArchivo,
       beforeEnter: (to, from, next) => {
         if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/alumno-promotor',
+      name: 'alumno-promotor',
+      component: AlumnoPromotor,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'promotor') {
           // Acceso permitido para administradores
           next();
         } else {
