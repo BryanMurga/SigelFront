@@ -144,7 +144,7 @@
                                             Adicional</label>
                                         <input type="text" name="number" id="number"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            v-model="inputTelefono2" placeholder="Número de teléfono" required="">
+                                            v-model="inputTelefono2" placeholder="Número de teléfono" >
                                     </div>
                                     <!-- CorreoElectronico -->
                                     <div class="col-span-2 sm:col-span-1">
@@ -162,7 +162,7 @@
                                             Electrónico Adicional</label>
                                         <input type="text" name="price" id="price"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            v-model="inputCorreo2" placeholder="Correo Electrónico" required="">
+                                            v-model="inputCorreo2" placeholder="Correo Electrónico">
                                     </div>
                                     <!-- FechaNacimiento -->
                                     <div class="col-span-2 sm:col-span-1">
@@ -186,8 +186,7 @@
                                             Procedencia</label>
                                         <input type="text" name="price" id="price"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            v-model="inputEscuelaProcedencia" placeholder="Escuela de Procedencia"
-                                            required="">
+                                            v-model="inputEscuelaProcedencia" placeholder="Escuela de Procedencia">
                                     </div>
                                     <!-- Pais -->
                                     <div>
@@ -253,15 +252,13 @@
                                     Datos de Seguimiento
                                 </h2>
                                 <div class="grid gap-4 mb-4 grid-cols-2">
-
                                     <!-- Fecha Primer Contacto-->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="date"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha Primer
                                             Contacto</label>
-                                        <DatePicker v-model="leads.FechaPrimerContacto" :placeholder="inputFechaPrimerContacto" class="input-field rounded-md" />
+                                        <DatePicker v-model="leads.FechaPrimerContacto" :placeholder="inputFechaPrimerContacto" class="input-field rounded-md" required=""/>
                                     </div>
-
                                     <!-- PS-Seguimiento -->
                                     <div>
                                         <label for="ps-seguimiento"
@@ -282,7 +279,7 @@
                                             v-model="inputCarreraInteres">
                                             <option selected>Escoge un carrera</option>
                                             <option v-for="carreras in CarreraInteres" :key="carreras.Nombre"
-                                                :value="carreras.CarreraID">{{ carreras.Nombre }}</option>
+                                                :value="carreras.CarreraID" required="">{{ carreras.Nombre }}</option>
                                         </select>
                                     </div>
                                     <!-- Grado -->
@@ -356,6 +353,15 @@
                                                     campanas.Nombre }}</option>
                                         </select>
                                     </div>
+                                    <!--AsetNameForm-->
+                                    <div>
+                                        <label for="asetNameForm"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            AsetNameForm</label>
+                                        <input type="text" id="asetNameForm"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            v-model="inputAsetNameForm" placeholder="Ingresa el nombre de la campaña">
+                                    </div>
                                     <!--Organico/Pauta-->
                                     <div>
                                         <label for="pauta-organica"
@@ -409,7 +415,6 @@
                                             <option v-for="dato in dondeObtuvoDato" :key="dato" :value="dato">{{ dato }}</option>
                                         </select>
                                     </div>
-
                                 </div>
 
                                 <!-- Datos de Inscripcion -->
@@ -458,58 +463,16 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputNumeroLista" placeholder="Ingresa el Numero de lista" required="">
                                     </div>
-                                    <!--Promotor Original-->
-                                    <div>
-                                        <label for="promotor-original"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotor
-                                            Original</label>
-                                        <select id="promotor-original"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            v-model="inputPromotorOriginal">
-                                            <option selected>Escoge un promotor</option>
 
-                                            <option v-for="promotores in Promotores" :key="promotores.PromotorID"
-                                                :value="promotores.PromotorID">{{ promotores.Nombre }}</option>
-                                        </select>
-                                    </div>
-                                    <!--Fecha Promotor Original-->
-                                    <div class="col-span-2 sm:col-span-1">
-                                        <label for="date"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
-                                            Promotor Orignal</label>
-                                        <DatePicker v-model="leads.FechaPromotorOriginal" :placeholder="inputFechaPromotorOriginal" class="input-field rounded-md" />
-                                    </div>
-                                    <!--Promotor Actual-->
-                                    <div>
-                                        <label for="promotor-actual"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotor
-                                            Actual</label>
-                                        <select id="promotor-actual"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            v-model="inputPromotorActual">
-                                            <option selected>Escoge un promotor</option>
-
-                                            <option v-for="promotores in Promotores" :key="promotores.PromotorID"
-                                                :value="promotores.PromotorID">{{ promotores.Nombre }}</option>
-                                        </select>
-                                    </div>
-                                    <!--Fecha Promotor Actual-->
-                                    <div class="col-span-2 sm:col-span-1">
-                                        <label for="date"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
-                                            Promotor Actual</label>
-                                        <DatePicker v-model="leads.FechaPromotorActual" :placeholder="inputFechaPromotorActual" class="input-field rounded-md" />
-                                    </div>
-                                
                                 </div>
 
-                                <button type="submit"
+                                <button @click="actualizarLead(leadParaGestionar, $event)" type="submit" data-modal-toggle="crud-modal"
                                     class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            clip-rule="evenodd"></path>
+                                            ></path>
                                     </svg>
                                     Actualizar datos
                                 </button>
@@ -888,7 +851,7 @@ import DatePicker from "vue3-datepicker";
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-import { es } from "date-fns/locale";
+import { es, th } from "date-fns/locale";
 
 onMounted(() => {
     initFlowbite();
@@ -934,6 +897,21 @@ export default {
             }); // ToastOptionsnopm
         }
 
+        const actualizarLeadNotify = () => {
+            toast("Lead actualizado con éxito", {
+                autoClose: 3000,
+                type: 'success'
+            }); // ToastOptions
+            
+        }
+
+        const errorActualizarLeadNotify = () => {
+            toast("Error al actualizar el lead", {
+                autoClose: 3000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
         const infoNotify = () => {
             toast("Se ha actualizado la Información... ", {
                 autoClose: 2000,
@@ -941,7 +919,7 @@ export default {
             }); // ToastOptions
         }
 
-        return { notify, errAsignacion, infoNotify, errLeads, errPromotores };
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, actualizarLeadNotify,errorActualizarLeadNotify };
     },
     props: ['selectContacto'],
 
@@ -957,6 +935,7 @@ export default {
             input: ref(''),
             countries: [],
             estadosMunicipios: {},
+            selectedLeadFechaNacimiento: '',
             selectedCountry: 'Mexico',
             selectedState: '',
             selectedMunicipio: '',
@@ -1015,6 +994,7 @@ export default {
             inputSemestreIngreso: null,
             inputCiclo: null,
             inputCampana: null,
+            inputAsetNameForm: null,
             fechaPrimerContacto:null,
             inputIsOrganic:null,
             inputMedioContacto:null,
@@ -1130,6 +1110,7 @@ export default {
             this.selectContacto = id;
             console.log('Valor de id:', id);
         },
+
         async GestionarLead(LeadID) {
             try {
                 const response = await axios.get(`http://localhost:4000/leads/${LeadID}`);
@@ -1153,13 +1134,13 @@ export default {
 
                 // Aquí puedes asignar la información del lead al modal o a otras variables para mostrarla en el modal
                 this.inputName = lead.NombreCompleto;
-                this.inputTelefono = lead.telefono;
-                this.inputTelefono2 = lead.telefono2;
+                this.inputTelefono = lead.Telefono;
+                this.inputTelefono2 = lead.Telefono2;
                 this.inputCorreo = lead.CorreoElectronico;
                 this.inputCorreo2 = lead.CorreoElectronico2;
                 // Obtenemos solo la parte de la fecha
                 // Asignamos la parte de la fecha al modal
-                this.inputFechaNacimiento = lead.FechaNac.split('T')[0];
+                this.inputFechaNacimiento = fechaNacimiento;
                 this.inputEscuelaProcedencia = lead.EscuelaProcedencia;
                 this.selectedCountry = lead.NombrePais;
                 this.selectedState = lead.NombreEstado;
@@ -1172,6 +1153,7 @@ export default {
                 this.inputSemestreIngreso = lead.SemestreIngreso;
                 this.inputCiclo = lead.Ciclo;
                 this.inputCampana = lead.CampanaID;
+                this.inputAsetNameForm = lead.AsetNameForm;
                 this.inputFechaPrimerContacto = fechaPrimerContacto;
                 this.inputIsOrganic = lead.IsOrganic;
                 this.inputMedioContacto = lead.MedioDeContactoID;
@@ -1182,16 +1164,64 @@ export default {
                 this.inputCarreraInscripcion= lead.CarreraInscripcion;
                 this.inputBecaOfrecida = lead.BecaOfrecida;
                 this.inputNumeroLista = lead.NumeroLista;
-                this.inputPromotorOriginal = lead.PromotorOriginal;
-                this.inputFechaPromotorOriginal = fechaPromotorOriginal;
-                this.inputPromotorActual = lead.PromotorActual;
-                this.inputFechaPromotorActual = fechaPromotorActual;
-
+                
+                this.leads = {
+                    
+                    // otras propiedades...
+                };
+                this.leadParaGestionar = lead.LeadID;
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
             } catch (error) {
                 // Manejar errores de la solicitud HTTP
                 console.error('Error al obtener el lead:', error);
+                // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+            }
+        },
+
+        async actualizarLead(LeadID, event) {
+            event.preventDefault();
+            try {
+                
+                const response = await axios.put(`http://localhost:4000/leads/update/${LeadID}`, {
+                // Datos a actualizar
+                NombreCompleto: this.inputName,
+                Telefono: this.inputTelefono,
+                Telefono2: this.inputTelefono2,
+                CorreoElectronico: this.inputCorreo,
+                CorreoElectronico2: this.inputCorreo2,
+                FechaNac: this.leads.FechaNac,
+                EscuelaProcedencia: this.inputEscuelaProcedencia, 
+                NombrePais: this.selectedCountry,
+                NombreEstado: this.selectedState, 
+                NombreCiudad: this.selectedMunicipio,
+                FechaPrimerContacto: this.leads.FechaPrimerContacto,
+                PSeguimiento: this.inputPSeguimiento,
+                CarreraInteresID: this.inputCarreraInteres,
+                Grado: this.inputGrado,
+                Programa: this.inputPrograma,
+                EstatusInsc: this.inputEstatusInscripcion,
+                SemestreIngreso: this.inputSemestreIngreso,
+                Ciclo: this.inputCiclo,
+                CampanaID: this.inputCampana,
+                AsetNameForm: this.inputAsetNameForm,
+                IsOrganic: this.inputIsOrganic, 
+                MedioDeContactoID: this.inputMedioContacto,
+                TipoReferido: this.inputTipoReferido,
+                NombreReferido: this.inputNombreReferido,
+                DondeObtDato: this.inputDondeObtuvoDato, 
+                FechaInscripcion: this.leads.FechaInscripcion,
+                CarreraInscripcion: this.inputCarreraInscripcion,
+                BecaOfrecida: this.inputBecaOfrecida,
+                NumeroLista: this.inputNumeroLista, 
+                
+                // ... otros campos que deseas actualizar
+                });
+                this.actualizarLeadNotify();
+                console.log(response.data); // Manejar la respuesta del servidor
+                // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
+            } catch (error) {
+                this.errorActualizarLeadNotify();
                 // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
             }
         },
