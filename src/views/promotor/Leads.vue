@@ -1165,10 +1165,7 @@ export default {
                 this.inputBecaOfrecida = lead.BecaOfrecida;
                 this.inputNumeroLista = lead.NumeroLista;
                 
-                this.leads = {
-                    
-                    // otras propiedades...
-                };
+                
                 this.leadParaGestionar = lead.LeadID;
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
