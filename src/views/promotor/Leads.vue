@@ -169,7 +169,7 @@
                                         <label for="date"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
                                             Nacimiento</label>
-                                        <DatePicker v-model="leads.FechaNac" :placeholder="inputFechaNacimiento" class="input-field rounded-md" />
+                                        <DatePicker v-model="leads.FechaNac" :placeholder="inputFechaNacimiento" class="input-field rounded-md"  :clearable="true" />
                                     </div>
                                 </div>
 
@@ -1009,6 +1009,7 @@ export default {
             inputPromotorOriginal:null,
             inputPromotorActual:null,
             inputFechaPromotorActual:null,
+            inputFechaPrimerContacto: null, 
         };
     },
     computed: {
@@ -1112,10 +1113,13 @@ export default {
         },
 
         async GestionarLead(LeadID) {
+
             try {
                 const response = await axios.get(`http://localhost:4000/leads/${LeadID}`);
+                console.log(response.data);
 
                 const { lead } = response.data;
+                
 
                 console.log('Lead:', lead);
 
@@ -1126,21 +1130,16 @@ export default {
                     return;
                 }
 
-                const fechaNacimiento = lead.FechaNac ? lead.FechaNac.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
-                const fechaPrimerContacto = lead.FechaPrimerContacto ? lead.FechaPrimerContacto.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
-                const fechaInscripcion = lead.FechaInscripcion ? lead.FechaInscripcion.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
-                const fechaPromotorOriginal = lead.FechaPromotorOriginal ? lead.FechaPromotorOriginal.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
-                const fechaPromotorActual = lead.FechaPromotorActual ? lead.FechaPromotorActual.split('T')[0] : ''; // Suponiendo que el formato es ISO (yyyy-mm-dd)
-
+                
                 // Aquí puedes asignar la información del lead al modal o a otras variables para mostrarla en el modal
                 this.inputName = lead.NombreCompleto;
                 this.inputTelefono = lead.Telefono;
-                this.inputTelefono2 = lead.Telefono2;
+                this.inputTelefono2 = lead.telefono2;
                 this.inputCorreo = lead.CorreoElectronico;
                 this.inputCorreo2 = lead.CorreoElectronico2;
                 // Obtenemos solo la parte de la fecha
                 // Asignamos la parte de la fecha al modal
-                this.inputFechaNacimiento = fechaNacimiento;
+                this.inputFechaNacimiento = lead.FechaNac ? lead.FechaNac.split('T')[0] : ''; ;
                 this.inputEscuelaProcedencia = lead.EscuelaProcedencia;
                 this.selectedCountry = lead.NombrePais;
                 this.selectedState = lead.NombreEstado;
@@ -1154,26 +1153,29 @@ export default {
                 this.inputCiclo = lead.Ciclo;
                 this.inputCampana = lead.CampanaID;
                 this.inputAsetNameForm = lead.AsetNameForm;
-                this.inputFechaPrimerContacto = fechaPrimerContacto;
+                this.inputFechaPrimerContacto = lead.FechaPrimerContacto ? lead.FechaPrimerContacto.split('T')[0] : '';;
                 this.inputIsOrganic = lead.IsOrganic;
                 this.inputMedioContacto = lead.MedioDeContactoID;
                 this.inputTipoReferido = lead.TipoReferido;
                 this.inputNombreReferido = lead.NombreReferido;
                 this.inputDondeObtuvoDato = lead.DondeObtDato;
-                this.inputFechaInscripcion = fechaInscripcion;
+                this.inputFechaInscripcion = lead.FechaInscripcion ? lead.FechaInscripcion.split('T')[0] : '';;
                 this.inputCarreraInscripcion= lead.CarreraInscripcion;
                 this.inputBecaOfrecida = lead.BecaOfrecida;
                 this.inputNumeroLista = lead.NumeroLista;
                 
-                
                 this.leadParaGestionar = lead.LeadID;
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
+                lead.FechaNac = null;
             } catch (error) {
                 // Manejar errores de la solicitud HTTP
                 console.error('Error al obtener el lead:', error);
                 // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
             }
+            this.leads.FechaNac = null;
+            this.leads.FechaPrimerContacto = null;
+            this.leads.FechaInscripcion = null;
         },
 
         async actualizarLead(LeadID, event) {
@@ -1221,6 +1223,7 @@ export default {
                 this.errorActualizarLeadNotify();
                 // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
             }
+            this.loadLeads();
         },
 
         async loadContactos(id) {
