@@ -5,7 +5,6 @@
             <i class="fa-solid fa-home fa-xl" style="color: #48c9b0"></i>
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Home</span>
         </div>
-            <search /> <!-- Importa y utiliza el componente serch -->
             <sideBarADM /> <!-- Importa y utiliza el componente SidebarADM -->
             <!-- Otro contenido de tu vista -->
             <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
@@ -41,7 +40,6 @@
 <script>
 
 import sideBarADM from '../../components/SideBarADM.vue'; 
-import search from '../../components/Search.vue';
 
 
 import { onMounted } from "vue";
@@ -55,8 +53,8 @@ onMounted(() => {
 
 export default {
     components: {
-        sideBarADM,
-        search
+        sideBarADM
+        
     },
     data() {
         return {

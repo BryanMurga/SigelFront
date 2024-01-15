@@ -145,7 +145,7 @@
               fill="currentColor"
               viewBox="0 0 20 20"
             ></svg>
-            <i class="fa-solid fa-circle-plus fa-xl"></i>
+            <i class="fa-solid fa-cloud-upload-alt fa-xl"></i>
             <span class="flex-1 ms-3 whitespace-nowrap">Cargar Base</span>
           </a>
         </li>
