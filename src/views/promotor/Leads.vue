@@ -170,6 +170,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
                                             Nacimiento</label>
                                         <DatePicker v-model="leads.FechaNac" :placeholder="inputFechaNacimiento" class="input-field rounded-md"  :clearable="true" />
+                                        <Datepicker v-model="picked" :clearable="true"/>
                                     </div>
                                 </div>
 
@@ -453,15 +454,6 @@
                                         <input type="text" id="becaOfrecida"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputBecaOfrecida" placeholder="Ingresa el valor de la Beca" required="">
-                                    </div>
-                                    <!--Numero de Lista-->
-                                    <div>
-                                        <label for="numeroLista"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Número de Lista</label>
-                                        <input type="text" id="numeroLista"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            v-model="inputNumeroLista" placeholder="Ingresa el Numero de lista" required="">
                                     </div>
 
                                 </div>
@@ -849,9 +841,13 @@ import { format } from "date-fns";
 import { FlowbiteThemable, FwbButton, FwbModal } from 'flowbite-vue';
 import DatePicker from "vue3-datepicker";
 
+
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { es, th } from "date-fns/locale";
+
+const picked = ref(new Date())
+
 
 onMounted(() => {
     initFlowbite();
@@ -1005,7 +1001,6 @@ export default {
             inputFechaPromotorOriginal:null,
             inputCarreraInscripcion:null,
             inputBecaOfrecida:null,
-            inputNumeroLista:null,
             inputPromotorOriginal:null,
             inputPromotorActual:null,
             inputFechaPromotorActual:null,
@@ -1162,7 +1157,6 @@ export default {
                 this.inputFechaInscripcion = lead.FechaInscripcion ? lead.FechaInscripcion.split('T')[0] : '';;
                 this.inputCarreraInscripcion= lead.CarreraInscripcion;
                 this.inputBecaOfrecida = lead.BecaOfrecida;
-                this.inputNumeroLista = lead.NumeroLista;
                 
                 this.leadParaGestionar = lead.LeadID;
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
@@ -1212,7 +1206,6 @@ export default {
                 FechaInscripcion: this.leads.FechaInscripcion,
                 CarreraInscripcion: this.inputCarreraInscripcion,
                 BecaOfrecida: this.inputBecaOfrecida,
-                NumeroLista: this.inputNumeroLista, 
                 
                 // ... otros campos que deseas actualizar
                 });
