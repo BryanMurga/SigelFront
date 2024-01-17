@@ -144,7 +144,7 @@
                                             Adicional</label>
                                         <input type="text" name="number" id="number"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            v-model="inputTelefono2" placeholder="Número de teléfono" >
+                                            v-model="inputTelefono2" placeholder="Número de teléfono">
                                     </div>
                                     <!-- CorreoElectronico -->
                                     <div class="col-span-2 sm:col-span-1">
@@ -169,7 +169,8 @@
                                         <label for="date"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
                                             Nacimiento</label>
-                                        <DatePicker v-model="leads.FechaNac" :placeholder="inputFechaNacimiento" class="input-field rounded-md"  :clearable="true" />
+                                        <DatePicker v-model="leads.FechaNac" :placeholder="inputFechaNacimiento"
+                                            class="input-field rounded-md" :clearable="true" />
                                     </div>
                                 </div>
 
@@ -255,9 +256,12 @@
                                     <!-- Fecha Primer Contacto-->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="date"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha Primer
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
+                                            Primer
                                             Contacto</label>
-                                        <DatePicker v-model="leads.FechaPrimerContacto" :placeholder="inputFechaPrimerContacto" class="input-field rounded-md" required=""/>
+                                        <DatePicker v-model="leads.FechaPrimerContacto"
+                                            :placeholder="inputFechaPrimerContacto" class="input-field rounded-md"
+                                            required="" />
                                     </div>
                                     <!-- PS-Seguimiento -->
                                     <div>
@@ -370,29 +374,34 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputIsOrganic">
                                             <option selected>Escoge un status</option>
-                                            <option v-for="pauta in isOrganic" :key="pauta" :value="pauta">{{ pauta }}</option>
+                                            <option v-for="pauta in isOrganic" :key="pauta" :value="pauta">{{ pauta }}
+                                            </option>
                                         </select>
                                     </div>
                                     <!--Medio de Contacto-->
                                     <div>
                                         <label for="ps-seguimiento"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medio de Contacto</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medio de
+                                            Contacto</label>
                                         <select id="ps-seguimiento"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputMedioContacto">
                                             <option selected>Escoge un Medio de Contacto</option>
-                                            <option v-for="contacto in medioContactos" :key="contacto.MedioID" :value="contacto.MedioID">{{ contacto.Nombre }}</option>
+                                            <option v-for="contacto in medioContactos" :key="contacto.MedioID"
+                                                :value="contacto.MedioID">{{ contacto.Nombre }}</option>
                                         </select>
                                     </div>
                                     <!--Tipo de referido-->
                                     <div>
                                         <label for="tipo-referido"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Referido</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de
+                                            Referido</label>
                                         <select id="tipo-referido"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputTipoReferido">
                                             <option selected>Escoge un Tipo de Referido</option>
-                                            <option v-for="referido in tipoReferido" :key="referido" :value="referido">{{ referido }}</option>
+                                            <option v-for="referido in tipoReferido" :key="referido" :value="referido">{{
+                                                referido }}</option>
                                         </select>
                                     </div>
                                     <!--Nombre del Referido-->
@@ -402,17 +411,20 @@
                                             Nombre del Referido</label>
                                         <input type="text" id="referido"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            v-model="inputNombreReferido" placeholder="Ingresa el nombre del referido" required="">
+                                            v-model="inputNombreReferido" placeholder="Ingresa el nombre del referido"
+                                            required="">
                                     </div>
                                     <!--DondeObtDato-->
                                     <div>
                                         <label for="donde-obtuvo-dato"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Donde obtuvo el dato</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Donde
+                                            obtuvo el dato</label>
                                         <select id="donde-obtuvo-dato"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputDondeObtuvoDato">
                                             <option selected>Escoge un Donde obtuvo el dato</option>
-                                            <option v-for="dato in dondeObtuvoDato" :key="dato" :value="dato">{{ dato }}</option>
+                                            <option v-for="dato in dondeObtuvoDato" :key="dato" :value="dato">{{ dato }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -429,7 +441,8 @@
                                         <label for="date"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de
                                             Inscripción</label>
-                                        <DatePicker v-model="leads.FechaInscripcion" :placeholder="inputFechaInscripcion" class="input-field rounded-md" />
+                                        <DatePicker v-model="leads.FechaInscripcion" :placeholder="inputFechaInscripcion"
+                                            class="input-field rounded-md" />
                                     </div>
                                     <!--Carrera Inscripción-->
                                     <div>
@@ -452,7 +465,8 @@
                                             Beca Ofrecida</label>
                                         <input type="text" id="becaOfrecida"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            v-model="inputBecaOfrecida" placeholder="Ingresa el valor de la Beca" required="">
+                                            v-model="inputBecaOfrecida" placeholder="Ingresa el valor de la Beca"
+                                            required="">
                                     </div>
                                     <!--Numero de Lista-->
                                     <div>
@@ -466,13 +480,14 @@
 
                                 </div>
 
-                                <button @click="actualizarLead(leadParaGestionar, $event)" type="submit" data-modal-toggle="crud-modal"
+                                <button @click="actualizarLead(leadParaGestionar, $event)" type="submit"
+                                    data-modal-toggle="crud-modal"
                                     class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            ></path>
+                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z">
+                                        </path>
                                     </svg>
                                     Actualizar datos
                                 </button>
@@ -645,10 +660,9 @@
                                     <div>
                                         <label for="ciclo"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciclo
-                                            </label>
+                                        </label>
                                         <input v-model="updateLead.Ciclo" type="text" id="ciclo"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            >
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
 
                                     <div>
@@ -709,10 +723,74 @@
                     </div>
                 </div>
 
-                <form>
-                    <label for="default-search"
-                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                    <div class="relative">
+                <form class="flex items-center relative">
+                    <div class="relative flex-shrink-0">
+                        <button id="dropdown-button" data-dropdown-toggle="dropdown" @click="toggleDropdown"
+                            class="flex-shrink-0 inline-flex items-center py-3.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                            type="button">
+                            {{ selectedCategory }} <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <div v-if="isDropdownOpen" id="dropdown"
+                            class="absolute top-full left-0 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                            style="z-index: 999;">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                                <li>
+                                    <button type="button"
+                                        class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        @click="selectCategory('Nombre')">
+                                        Nombre
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        @click="selectCategory('Telefono')">
+                                        Teléfono
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        @click="selectCategory('CorreoElectronico')">
+                                        CorreoElectronico
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        @click="selectCategory('EscuelaProcedencia')">
+                                        Escuela de Procedencia
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        @click="selectCategory('Pais')">
+                                        Nombre Pais
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        @click="selectCategory('Estado')">
+                                        Nombre Estado
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button"
+                                        class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        @click="selectCategory('Ciudad')">
+                                        Nombre Ciudad
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -723,17 +801,87 @@
                         <input v-model="input" type="search" id="default-search" name="leadSearch"
                             class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Buscar registros" required />
-                        <!-- <div class="items" v-for="lead in filterList()" :key=lead.id
-                                <p>{{ lead.NombreCompleto }}</p>
-                            </div>
-                            <div class="item-error" v-if="input&&!filterList().length">
-                                <p>No se encontraron registros</p>
-                            </div> -->
                     </div>
                 </form>
-                <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Leads</h5>
+
+                <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+                    <div>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Leads</h5>
+                    </div>
+
+                    <div>
+                        <label for="select1" class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">
+                            Filtrado de categoria</label>
+                        <select id="select1" v-model="selectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge un filtro</option>
+                            <option v-for="filtrado in filtradoSelect" :key="filtrado" :value="filtrado">{{ filtrado }}</option>
+                        </select>
+                    </div>
+
+                    <div v-if="selectedFiltrado === 'PSeguimiento'">
+                        <select id="ps-seguimiento" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge estatus</option>
+                            <option v-for="ps in PSeguimientos" :key="ps" :value="ps">{{ ps }}</option>
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Promotor Actual'">
+                        <select id="promotor-actual" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge un promotor</option>
+                            <option v-for="promotor in Promotores" :key="promotor" :value="promotor.PromotorID">{{ promotor.Nombre }}</option>
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Medio de Contacto'">
+                        <select id="medio-contacto" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge un medio de contacto</option>
+                            <option v-for="medio in medioContactos" :key="medio" :value="medio.MedioID">{{ medio.Nombre }}</option> 
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Carrera'">
+                        <select id="carrea-interes" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge una carrera</option> 
+                            <option v-for="carrera in CarreraInteres" :key="carrera" :value="carrera">{{ carrera.Nombre }}</option> 
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Grado'">
+                        <select id="grado"  v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge un programa</option> 
+                            <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option> 
+
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Programa'">
+                        <select id="programa" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge un programa</option> 
+                            <option v-for="programa in Programas" :key="programa" :value="programa">{{ programa }}</option> 
+
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Campaña'">
+                        <select id="campaña" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge una campaña</option>
+                            <option v-for="campana in Campanas" :key="campana" :value="campana.CampanaID">{{ campana.Nombre }}</option> 
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'IsOrganic'">
+                        <select id="isOrganic" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge una opción</option> 
+                            <option v-for="isO in isOrganic" :key="isO" :value="isO">{{ isO }}</option> 
+                        </select>
+                    </div>
+                    <button type="button" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    @click="BorrarFiltros()">Borrar Filtros</button>
+
                 </div>
+
             </div>
 
         </div>
@@ -774,6 +922,18 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Contacto
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Escuela Procedencia
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                País
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Estado
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Ciudad
                             </th>
                         </tr>
                     </thead>
@@ -818,11 +978,24 @@
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                     Ver</button>
                             </td>
+                            <td class="px-6 py-4">
+                                {{ lead.EscuelaProcedencia }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ lead.NombrePais }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ lead.NombreEstado }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ lead.NombreCiudad }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads asignados</h5>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads asignados
+                    </h5>
                 </div>
             </div>
             <br>
@@ -831,9 +1004,7 @@
                 style="text-align: left; float: left;" @click="enviarAsignaciones">
                 <i class="fas fa-regular fa-paper-plane"></i> Actualizar varios
             </button>
-            <div class="item-error" v-if="input && !filterList.length">
-                <p class="grid justify-items-center p-4">No hay coicidencia de registros</p>
-            </div>
+
         </div>
     </section>
 </template>
@@ -902,7 +1073,7 @@ export default {
                 autoClose: 3000,
                 type: 'success'
             }); // ToastOptions
-            
+
         }
 
         const errorActualizarLeadNotify = () => {
@@ -919,17 +1090,19 @@ export default {
             }); // ToastOptions
         }
 
-        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, actualizarLeadNotify,errorActualizarLeadNotify };
+        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, actualizarLeadNotify, errorActualizarLeadNotify };
     },
     props: ['selectContacto'],
 
     data() {
         return {
+            isDropdownOpen: false,
+            selectedCategory: 'Nombre',
             userName: getUserName(),
             VerContacto: null,
             leads: [],
             leadIndividual: [],
-            contactos: [],  
+            contactos: [],
             selectedLeads: [], // Arreglo para almacenar los leads seleccionados
             leadParaGestionar: null,
             input: ref(''),
@@ -953,9 +1126,9 @@ export default {
             medioContactos: [],
             tipoReferido: ['ESTUDIANTE', 'FAMILIAR DE ALGÚN ESTUDIANTE', 'PERSONAL UNINTER', 'NINGUNO'],
             dondeObtuvoDato: ["B_AFC", "B_EMPRESAS", "B_ESTRATEGIA VACACIONES EQUI", "B_PERSONAL", "B_POSGRADOS", "BARRIDO BASE", "BARRIDO EGRESADOS",
-            "BASE EGRESADOS", "BASE FAMILIAR", "CLIENGO", "ESTRATEGIA EQUIPO MORADO", "EXPO EDUCATIVA", "REDES SOCIALES META FACEBOOK", "REDES SOCIALES META INSTAGRAM",
-            "LANDING", "LANDING CARRERAS", "LANDING FORMULARIO", "LANDING TOT", "LLAMADA UNINTER", "OPEN SCHOOL ESPECIAL POR CONVENIO CON EMPRESA", 
-            "VISITA UNINTER"],
+                "BASE EGRESADOS", "BASE FAMILIAR", "CLIENGO", "ESTRATEGIA EQUIPO MORADO", "EXPO EDUCATIVA", "REDES SOCIALES META FACEBOOK", "REDES SOCIALES META INSTAGRAM",
+                "LANDING", "LANDING CARRERAS", "LANDING FORMULARIO", "LANDING TOT", "LLAMADA UNINTER", "OPEN SCHOOL ESPECIAL POR CONVENIO CON EMPRESA",
+                "VISITA UNINTER"],
             updateLead: {
                 EscuelaProcedencia: null,
                 NombrePais: null,
@@ -964,7 +1137,7 @@ export default {
                 PSeguimiento: null,
                 Programa: null,
                 CarreraInteresID: null,
-                CarreraInscripcion:null,
+                CarreraInscripcion: null,
                 Grado: null,
                 EstatusInsc: null,
                 SemestreIngreso: null,
@@ -975,7 +1148,7 @@ export default {
                 MedioDeContactoID: null,
                 ids: null,
                 TipoReferido: null,
-                DondeObtuvoDato:null,
+                DondeObtuvoDato: null,
             },
             updateManyModalVisible: false,
             selectContacto: null,
@@ -995,21 +1168,24 @@ export default {
             inputCiclo: null,
             inputCampana: null,
             inputAsetNameForm: null,
-            fechaPrimerContacto:null,
-            inputIsOrganic:null,
-            inputMedioContacto:null,
-            inputTipoReferido:null,
-            inputNombreReferido:null,
-            inputDondeObtuvoDato:null,
-            inputFechaInscripcion:null,
-            inputFechaPromotorOriginal:null,
-            inputCarreraInscripcion:null,
-            inputBecaOfrecida:null,
-            inputNumeroLista:null,
-            inputPromotorOriginal:null,
-            inputPromotorActual:null,
-            inputFechaPromotorActual:null,
-            inputFechaPrimerContacto: null, 
+            fechaPrimerContacto: null,
+            inputIsOrganic: null,
+            inputMedioContacto: null,
+            inputTipoReferido: null,
+            inputNombreReferido: null,
+            inputDondeObtuvoDato: null,
+            inputFechaInscripcion: null,
+            inputFechaPromotorOriginal: null,
+            inputCarreraInscripcion: null,
+            inputBecaOfrecida: null,
+            inputNumeroLista: null,
+            inputPromotorOriginal: null,
+            inputPromotorActual: null,
+            inputFechaPromotorActual: null,
+            inputFechaPrimerContacto: null,
+            filtradoSelect: ['PSeguimiento','Promotor Actual','Medio de Contacto', 'Carrera', 'Grado', 'Programa', 'Campaña', 'IsOrganic'],
+            selectedFiltrado: 'PSeguimiento',
+            subSelectedFiltrado: null,
         };
     },
     computed: {
@@ -1018,10 +1194,115 @@ export default {
             if (this.leads.length === 0) {
                 return [];
             }
-            return this.leads.filter(lead => {
-                const nombreCompleto = lead && lead.NombreCompleto ? lead.NombreCompleto : "";
-                return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
-            });
+
+            console.log('Valor de lead:', this.leads);
+            console.log('Valor de SubselectedFiltrado:', this.subSelectedFiltrado);
+
+            if( this.selectedFiltrado == 'PSeguimiento' && this.subSelectedFiltrado){
+                return this.leads.filter(lead => {
+                    const pSeguimiento = lead && lead.PSeguimiento ? lead.PSeguimiento : "";
+                    return pSeguimiento.includes(this.subSelectedFiltrado);
+                });
+            }
+
+            if( this.selectedFiltrado == 'Promotor Actual' && this.subSelectedFiltrado){
+                return this.leads.filter(lead => {
+                    const promotorActualSelect = lead && lead.promotorActual ? lead.promotorActual : "";
+                    return promotorActualSelect === this.subSelectedFiltrado;
+                });
+            }
+
+            if( this.selectedFiltrado == 'Medio de Contacto' && this.subSelectedFiltrado){
+                return this.leads.filter(lead => {
+                    const medioContactoSelect = lead && lead.MedioDeContactoID ? lead.MedioDeContactoID : "";
+                    return medioContactoSelect === this.subSelectedFiltrado;
+                });
+            }
+
+            if (this.selectedFiltrado == 'Carrera' && this.subSelectedFiltrado) {
+                return this.leads.filter(lead => {
+                    const carreraSelect = lead && lead.CarreraInteresID ? lead.CarreraInteresID : "";
+                    return carreraSelect === this.subSelectedFiltrado;
+                });
+            }
+
+            if( this.selectedFiltrado == 'Grado' && this.subSelectedFiltrado){
+                return this.leads.filter(lead => {
+                    const gradoSelect = lead && lead.Grado ? lead.Grado : "";
+                    return gradoSelect === this.subSelectedFiltrado;
+                });
+            }
+            
+            if ( this.selectedFiltrado == 'Programa' && this.subSelectedFiltrado) {
+                return this.leads.filter(lead => {
+                    const programaSelect = lead && lead.Programa ? lead.Programa : "";
+                    return programaSelect === this.subSelectedFiltrado;
+                });
+            }
+
+            if ( this.selectedFiltrado == 'Campaña' && this.subSelectedFiltrado) {
+                return this.leads.filter(lead => {
+                    const campanaSelect = lead && lead.CampanaID ? lead.CampanaID : "";
+                    return campanaSelect === this.subSelectedFiltrado;
+                });
+            }
+
+            if ( this.selectedFiltrado == 'IsOrganic' && this.subSelectedFiltrado) {
+                return this.leads.filter(lead => {
+                    const isOrganicSelect = lead && lead.IsOrganic ? lead.IsOrganic : "";
+                    return isOrganicSelect === this.subSelectedFiltrado;
+                });
+            }
+
+            if( this.selectedCategory == 'Nombre'){
+                return this.leads.filter(lead => {
+                    const nombreCompleto = lead && lead.NombreCompleto ? lead.NombreCompleto : "";
+                    return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
+                });
+            }
+            
+            if( this.selectedCategory == 'Telefono'){
+                return this.leads.filter(lead => {
+                    const telefonoSearch = lead && lead.telefono ? lead.telefono : "";
+                    return telefonoSearch.toLowerCase().includes(this.input.toLowerCase());
+                });
+            }
+
+            if( this.selectedCategory == 'CorreoElectronico'){
+                return this.leads.filter(lead => {
+                    const correoElectronicoSearch = lead && lead.CorreoElectronico ? lead.CorreoElectronico : "";
+                    return correoElectronicoSearch.toLowerCase().includes(this.input.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'EscuelaProcedencia') {
+                return this.leads.filter(lead => {
+                    const escuelaProcedenciaSearch = lead && lead.EscuelaProcedencia ? lead.EscuelaProcedencia : "";
+                    return escuelaProcedenciaSearch.toLowerCase().includes(this.input.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'Pais') {
+                return this.leads.filter(lead => {
+                    const paisSearch = lead && lead.NombrePais ? lead.NombrePais : "";
+                    return paisSearch.toLowerCase().includes(this.input.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'Estado') {
+                return this.leads.filter(lead => {
+                    const estadoSearch = lead && lead.NombreEstado ? lead.NombreEstado : "";
+                    return estadoSearch.toLowerCase().includes(this.input.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'Ciudad') {
+                return this.leads.filter(lead => {
+                    const ciudadSearch = lead && lead.NombreCiudad ? lead.NombreCiudad : "";
+                    return ciudadSearch.toLowerCase().includes(this.input.toLowerCase());
+                });
+            }
+
         },
         hasSelectedLeads() {
             return this.selectedLeads.length > 0;
@@ -1119,7 +1400,7 @@ export default {
                 console.log(response.data);
 
                 const { lead } = response.data;
-                
+
 
                 console.log('Lead:', lead);
 
@@ -1130,7 +1411,7 @@ export default {
                     return;
                 }
 
-                
+
                 // Aquí puedes asignar la información del lead al modal o a otras variables para mostrarla en el modal
                 this.inputName = lead.NombreCompleto;
                 this.inputTelefono = lead.Telefono;
@@ -1139,7 +1420,7 @@ export default {
                 this.inputCorreo2 = lead.CorreoElectronico2;
                 // Obtenemos solo la parte de la fecha
                 // Asignamos la parte de la fecha al modal
-                this.inputFechaNacimiento = lead.FechaNac ? lead.FechaNac.split('T')[0] : ''; ;
+                this.inputFechaNacimiento = lead.FechaNac ? lead.FechaNac.split('T')[0] : '';;
                 this.inputEscuelaProcedencia = lead.EscuelaProcedencia;
                 this.selectedCountry = lead.NombrePais;
                 this.selectedState = lead.NombreEstado;
@@ -1160,10 +1441,10 @@ export default {
                 this.inputNombreReferido = lead.NombreReferido;
                 this.inputDondeObtuvoDato = lead.DondeObtDato;
                 this.inputFechaInscripcion = lead.FechaInscripcion ? lead.FechaInscripcion.split('T')[0] : '';;
-                this.inputCarreraInscripcion= lead.CarreraInscripcion;
+                this.inputCarreraInscripcion = lead.CarreraInscripcion;
                 this.inputBecaOfrecida = lead.BecaOfrecida;
                 this.inputNumeroLista = lead.NumeroLista;
-                
+
                 this.leadParaGestionar = lead.LeadID;
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
@@ -1181,40 +1462,40 @@ export default {
         async actualizarLead(LeadID, event) {
             event.preventDefault();
             try {
-                
+
                 const response = await axios.put(`http://localhost:4000/leads/update/${LeadID}`, {
-                // Datos a actualizar
-                NombreCompleto: this.inputName,
-                Telefono: this.inputTelefono,
-                Telefono2: this.inputTelefono2,
-                CorreoElectronico: this.inputCorreo,
-                CorreoElectronico2: this.inputCorreo2,
-                FechaNac: this.leads.FechaNac,
-                EscuelaProcedencia: this.inputEscuelaProcedencia, 
-                NombrePais: this.selectedCountry,
-                NombreEstado: this.selectedState, 
-                NombreCiudad: this.selectedMunicipio,
-                FechaPrimerContacto: this.leads.FechaPrimerContacto,
-                PSeguimiento: this.inputPSeguimiento,
-                CarreraInteresID: this.inputCarreraInteres,
-                Grado: this.inputGrado,
-                Programa: this.inputPrograma,
-                EstatusInsc: this.inputEstatusInscripcion,
-                SemestreIngreso: this.inputSemestreIngreso,
-                Ciclo: this.inputCiclo,
-                CampanaID: this.inputCampana,
-                AsetNameForm: this.inputAsetNameForm,
-                IsOrganic: this.inputIsOrganic, 
-                MedioDeContactoID: this.inputMedioContacto,
-                TipoReferido: this.inputTipoReferido,
-                NombreReferido: this.inputNombreReferido,
-                DondeObtDato: this.inputDondeObtuvoDato, 
-                FechaInscripcion: this.leads.FechaInscripcion,
-                CarreraInscripcion: this.inputCarreraInscripcion,
-                BecaOfrecida: this.inputBecaOfrecida,
-                NumeroLista: this.inputNumeroLista, 
-                
-                // ... otros campos que deseas actualizar
+                    // Datos a actualizar
+                    NombreCompleto: this.inputName,
+                    Telefono: this.inputTelefono,
+                    Telefono2: this.inputTelefono2,
+                    CorreoElectronico: this.inputCorreo,
+                    CorreoElectronico2: this.inputCorreo2,
+                    FechaNac: this.leads.FechaNac,
+                    EscuelaProcedencia: this.inputEscuelaProcedencia,
+                    NombrePais: this.selectedCountry,
+                    NombreEstado: this.selectedState,
+                    NombreCiudad: this.selectedMunicipio,
+                    FechaPrimerContacto: this.leads.FechaPrimerContacto,
+                    PSeguimiento: this.inputPSeguimiento,
+                    CarreraInteresID: this.inputCarreraInteres,
+                    Grado: this.inputGrado,
+                    Programa: this.inputPrograma,
+                    EstatusInsc: this.inputEstatusInscripcion,
+                    SemestreIngreso: this.inputSemestreIngreso,
+                    Ciclo: this.inputCiclo,
+                    CampanaID: this.inputCampana,
+                    AsetNameForm: this.inputAsetNameForm,
+                    IsOrganic: this.inputIsOrganic,
+                    MedioDeContactoID: this.inputMedioContacto,
+                    TipoReferido: this.inputTipoReferido,
+                    NombreReferido: this.inputNombreReferido,
+                    DondeObtDato: this.inputDondeObtuvoDato,
+                    FechaInscripcion: this.leads.FechaInscripcion,
+                    CarreraInscripcion: this.inputCarreraInscripcion,
+                    BecaOfrecida: this.inputBecaOfrecida,
+                    NumeroLista: this.inputNumeroLista,
+
+                    // ... otros campos que deseas actualizar
                 });
                 this.actualizarLeadNotify();
                 console.log(response.data); // Manejar la respuesta del servidor
@@ -1283,7 +1564,7 @@ export default {
                 console.log('Error al obtener las carreras:', error);
             }
         },
-        async loadPromotor(){
+        async loadPromotor() {
             try {
                 const response = await axios.get('http://localhost:4000/promotores');
                 if (response.data && response.data.listPromotores) {
@@ -1351,6 +1632,20 @@ export default {
 
         cerrarModal() {
             this.window.location.reload();
+        },
+        toggleDropdown() {
+            this.isDropdownOpen = !this.isDropdownOpen;
+        },
+        selectCategory(category) {
+            this.selectedCategory = category;
+            this.isDropdownOpen = false;
+            // Aquí puedes realizar cualquier otra acción necesaria con la categoría seleccionada
+        },
+
+        BorrarFiltros() {
+            this.selectedFiltrado = 'PSeguimiento';
+            this.subSelectedFiltrado = null;
+            this.input = '';
         },
 
     },
