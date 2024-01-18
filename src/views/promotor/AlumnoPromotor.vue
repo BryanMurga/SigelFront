@@ -3,6 +3,122 @@
         <div class="lg:ml-64 p-4">
             <i class="fa-solid fa-users text-2xl" style="color: #48c9b0"></i>
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Alumnos</span>
+            <br><br>
+
+            <form class="flex items-center relative">
+                <div class="relative flex-shrink-0">
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown" @click="toggleDropdown"
+                        class="flex-shrink-0 inline-flex items-center py-3.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                        type="button">
+                        {{ selectedCategory }} <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
+                        </svg>
+                    </button>
+                    <div v-if="isDropdownOpen" id="dropdown"
+                        class="absolute top-full left-0 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                        style="z-index: 999;">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                            <li>
+                                <button type="button"
+                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    @click="selectCategory('Nombre')">
+                                    Nombre
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    @click="selectCategory('Telefono')">
+                                    Teléfono
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    @click="selectCategory('Escuela')">
+                                    Escuela de Procedencia
+                                </button>
+                            </li>
+                            <li>    
+                                <button type="button"
+                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    @click="selectCategory('NumeroRecibo')">
+                                    No. Recibo
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    @click="selectCategory('Matricula')">
+                                    Matricula
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button"
+                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    @click="selectCategory('CorreoInstitucional')">
+                                    Correo Institucional
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input v-model="searchQuery" type="search" id="default-search" name="leadSearch"
+                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Buscar registros" required />
+                </div>
+            </form>
+
+            <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+                    <div>
+                    </div>
+
+                    <div>
+                        <label for="select1" class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">
+                            Filtrado de categoria</label>
+                        <select id="select1" v-model="selectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge un filtro</option>
+                            <option v-for="filtrado in filtradoSelect" :key="filtrado" :value="filtrado">{{ filtrado }}</option>
+                        </select>
+                    </div>
+
+                    <div v-if="selectedFiltrado === 'Carrera'">
+                        <select id="carrera" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge estatus</option>
+                            <option v-for="carrera in Carreras" :key="carrera" :value="carrera.Nombre">{{ carrera.Nombre }}</option>
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Procedencia'">
+                        <select id="carrera" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge estatus</option>
+                            <option v-for="pro in Procedencia" :key="pro" :value="pro">{{ pro }}</option>
+                        </select>
+                    </div>
+                    <div v-if="selectedFiltrado === 'Estatus'">
+                        <select id="estatus" v-model="subSelectedFiltrado"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Escoge un promotor</option>
+                            <option v-for="est in Estatus" :key="est" :value="est">{{ est }}</option>
+                        </select>
+                    </div>
+                    <button type="button" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    @click="BorrarFiltros()">Borrar Filtros</button>
+
+                </div>
+            
         </div>
 
         <SideBarPromotor class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
@@ -59,8 +175,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="redes"
-                                        class="border-b border-gray-200 dark:border-gray-700">
+                                    <tr v-if="redes" class="border-b border-gray-200 dark:border-gray-700">
                                         <th scope="row"
                                             class="px-6 py-10 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                                             {{ redes.RSFacebook || 'N/A' }}
@@ -111,20 +226,6 @@
 
     </header>
 
-    <div class="flex flex-col mt-6 md:flex-row md:items-center md:justify-end lg:ml-64 lg:mr-10 lg:mb-5">
-        <div class="relative flex-grow">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                </svg>
-            </div>
-            <input v-model="searchQuery" type="search" name="leadSearch"
-                class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-2 md:mt-0"
-                placeholder="Buscar Alumnos" required />
-        </div>
-    </div>
     <br>
 
     <section>
@@ -220,19 +321,91 @@ export default {
             alumnos: [],
             searchQuery: "",
             redes: null,
+            isDropdownOpen: false,
+            selectedCategory: 'Nombre',
+            filtradoSelect: ['Carrera','Procedencia','Estatus'],
+            selectedFiltrado: 'Carrera',
+            subSelectedFiltrado: null,
+            Carreras: [],
+            Procedencia: ['Local','Foraneo'],
+            Estatus: ['INSC','BAJA']
         };
 
     },
     mounted() {
         this.loadAlumnos();
         this.loadRedes();
+        this.loadCarreras();
     },
     computed: {
         filteredAlumnos() {
-            if (!this.searchQuery) return this.alumnos;
-            return this.alumnos.filter((alumno) =>
-                alumno.Nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
-            );
+            if (this.alumnos.length === 0) {
+                return [];
+            }
+            console.log(this.subSelectedFiltrado); 
+
+            if (this.selectedFiltrado == 'Carrera' && this.subSelectedFiltrado) {
+                return this.alumnos.filter(alumno => {
+                    const carreraSelect = alumno && alumno.CarreraInsc ? alumno.CarreraInsc : "";
+                    return carreraSelect.includes(this.subSelectedFiltrado);
+                });
+            }
+
+            if (this.selectedFiltrado == 'Procedencia' && this.subSelectedFiltrado) {
+                return this.alumnos.filter(alumno => {
+                    const procedenciaSelect = alumno && alumno.Procedencia ? alumno.Procedencia : "";
+                    return procedenciaSelect.includes(this.subSelectedFiltrado);
+                });
+            }
+
+            if (this.selectedFiltrado == 'Estatus' && this.subSelectedFiltrado) {
+                return this.alumnos.filter(alumno => {
+                    const estatusSelect = alumno && alumno.Estatus ? alumno.Estatus : "";
+                    return estatusSelect.includes(this.subSelectedFiltrado);
+                });
+            }
+
+            if( this.selectedCategory == 'Nombre'){
+                return this.alumnos.filter(alumno => {
+                    const nombreCompleto = alumno && alumno.NombreAlumno ? alumno.NombreAlumno : "";
+                    return nombreCompleto.toLowerCase().includes(this.searchQuery.toLowerCase());
+                });
+            }
+            
+            if( this.selectedCategory == 'Telefono'){
+                return this.alumnos.filter(alumno => {
+                    const telefonoSearch = alumno && alumno.Telefono ? alumno.Telefono : "";
+                    return telefonoSearch.toLowerCase().includes(this.searchQuery.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'Escuela') {
+                return this.alumnos.filter(alumno => {
+                    const escuelaProcedenciaSearch = alumno && alumno.EscuelaProcedencia ? alumno.EscuelaProcedencia : "";
+                    return escuelaProcedenciaSearch.toLowerCase().includes(this.searchQuery.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'NumeroRecibo') {
+                return this.alumnos.filter(alumno => {
+                    const alumnoSearch = alumno && alumno.NoRecibo ? alumno.NoRecibo : "";
+                    return alumnoSearch.toLowerCase().includes(this.searchQuery.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'Matricula') {
+                return this.alumnos.filter(alumno => {
+                    const matriculaSearch = alumno && alumno.Matricula ? alumno.Matricula : "";
+                    return matriculaSearch.toLowerCase().includes(this.searchQuery.toLowerCase());
+                });
+            }
+
+            if (this.selectedCategory == 'CorreoInstitucional') {
+                return this.alumnos.filter(alumno => {
+                    const correoSearch = alumno && alumno.CorreoInstitucional ? alumno.CorreoInstitucional : "";
+                    return correoSearch.toLowerCase().includes(this.searchQuery.toLowerCase());
+                });
+            }
         },
     },
     methods: {
@@ -248,6 +421,7 @@ export default {
                     this.alumnos = response.data.alumnos;
                     // Almacena los leads en el array
                 }
+                console.log(this.alumnos);
             } catch (error) {
             }
         },
@@ -267,14 +441,39 @@ export default {
 
                 console.error('Error al cargar las redes', error);
             }
-        }
+        },
+        async loadCarreras() {
+            try {
+                const response = await axios.get('http://localhost:4000/carrera');
+                if (response.data && response.data.carreras) {
+                    this.Carreras = response.data.carreras;
+                    this.Carreras = response.data.carreras;
+                }
+            } catch (error) {
+                console.log('Error al obtener las carreras:', error);
+            }
+        },
+        toggleDropdown() {
+            this.isDropdownOpen = !this.isDropdownOpen;
+        },
+        selectCategory(category) {
+            this.selectedCategory = category;
+            this.isDropdownOpen = false;
+            // Aquí puedes realizar cualquier otra acción necesaria con la categoría seleccionada
+        },
+        BorrarFiltros() {
+            this.selectedFiltrado = 'Carrera';
+            this.subSelectedFiltrado = null;
+            this.input = '';
+        },
     },
     watch: {
         alumnos: {
             handler() {
-                this.loadRedes; 
+                this.loadRedes;
                 this.filteredAlumnos;
                 this.loadAlumnos;
+                this.loadCarreras;
             },
 
         },

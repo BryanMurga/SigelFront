@@ -797,7 +797,7 @@
 
                 <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
                     <div>
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Leads</h5>
+
                     </div>
 
                     <div>
@@ -885,9 +885,9 @@
             <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
                 <table v-if="filterList.length > 0"
                     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white">
                         <tr>
-                            <th scope="col">
+                            <th scope="col" class="px-6 py-3">
                                 Seleccionar
                             </th>
                             <th scope="col" class="px-6 py-3">
