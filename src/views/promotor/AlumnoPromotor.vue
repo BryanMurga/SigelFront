@@ -290,6 +290,10 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="grid justify-items-center" v-if="!filteredAlumnos.length" style="background-color: #F4D03F;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay alumnos registrados
+                    </h5>
+                </div>
 
             </div>
         </div>
