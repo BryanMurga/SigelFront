@@ -195,9 +195,7 @@
     </div>
 
     </div>
-    <button @click="redirectToAgregarPromotor" class="px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800">
-      Agregar Promotor
-    </button>
+    
 
   </div>
 </template>
@@ -419,9 +417,7 @@ window.addEventListener("load", function () {
 export default {
 
   methods: {
-    redirectToAgregarPromotor() {
-      this.$router.push("/registrar-lead");
-    },
+    
   },
   components: {
     SideBarProm

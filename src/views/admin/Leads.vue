@@ -365,7 +365,6 @@ import SideBarADM from "../../components/SideBarADM.vue";
 import axios from "axios";
 import { ref } from "vue";
 import { format } from "date-fns";
-import { FwbButton, FwbModal } from 'flowbite-vue';
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
@@ -505,7 +504,7 @@ export default {
                 window.history.pushState({ noBackExitsApp: true }, null, null);
             }
         },
-
+        
         formatDate(date) {
             if (date) {
                 const formattedDate = format(new Date(date), "dd/MM/yyyy");
