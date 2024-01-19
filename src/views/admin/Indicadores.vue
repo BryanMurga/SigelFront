@@ -96,6 +96,9 @@
                 <td class="px-6 py-4">
                   {{ data.Datos_Asignados }}
                 </td>
+                <td class="px-6 py-4">
+                  {{ data.Datos_Trabajando }} %
+                </td>
               </tr>
             </tbody>
           </table>
@@ -177,6 +180,9 @@
                 </td>
                 <td class="px-6 py-4">
                   {{ data.Datos_Asignados }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.Datos_Trabajando }} %
                 </td>
               </tr>
             </tbody>
@@ -327,7 +333,6 @@ export default {
         console.error("Error al obtener promotores:", error);
       }
     },
-
 
     openEditModal(promotor) {
       this.editingPromotor = { ...promotor };
