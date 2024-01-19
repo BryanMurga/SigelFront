@@ -124,7 +124,7 @@
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="name"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
-                                            Completo</label>
+                                            Completo *</label>
                                         <input type="text" name="name" id="name"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputName" placeholder="Nombre Completo" required="">
@@ -132,7 +132,7 @@
                                     <!-- Telefono -->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="number"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono *</label>
                                         <input type="text" name="number" id="number"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputTelefono" placeholder="Número de teléfono" required="">
@@ -150,7 +150,7 @@
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="price"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo
-                                            Electrónico</label>
+                                            Electrónico *</label>
                                         <input type="text" name="price" id="number"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputCorreo" placeholder="Correo Electrónico" required="">
@@ -277,7 +277,7 @@
                                     <div>
                                         <label for="carrera-interes"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera de
-                                            interes</label>
+                                            interes *</label>
                                         <select id="carrera-interes"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputCarreraInteres">
