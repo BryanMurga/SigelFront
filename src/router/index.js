@@ -6,11 +6,9 @@ import HomeView from '../views/admin/Home.vue'
 import LoginView from '../views/Login.vue'
 import RegisterView from '../views/Register.vue'
 import AsignacionesView from '../views/admin/Asignaciones.vue'
-import PruebaView from '../views/Prueba.vue'
 import LeadsView from '../views/admin/Leads.vue'
 import TemplateView from '../views/Template.vue'
 import PromotorListView from '../views/admin/PromotorList.vue'
-import HomeVue from '../views/admin/Home.vue'
 import RegisterPromotor from '../views/admin/RegisterPromotor.vue'
 import Reasignaciones from '../views/admin/Reasignaciones.vue'
 import IndicadoresView from '../views/admin/Indicadores.vue'
@@ -20,6 +18,7 @@ import LeadsPromotor from '../views/promotor/Leads.vue'
 import RegisterContacto from '../views/promotor/RegisterContacto.vue'
 import CargarArchivo from '../views/admin/CargarArchivo.vue'
 import AlumnoPromotor from '../views/promotor/AlumnoPromotor.vue'
+import DashAdmin from '../views/admin/DashAdmin.vue'
 
 
 const router = createRouter({
@@ -230,7 +229,22 @@ const router = createRouter({
           next({ name: 'login' });
         }
       }
-    }
+    },
+      
+      {
+        path: '/dash-admin',
+        name: 'dash-admin',
+        component: DashAdmin,
+        beforeEnter: (to, from, next) => {
+          if (getRole() === 'admin') {
+            // Acceso permitido para administradores
+            next();
+          } else {
+            // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+            next({ name: '/login' });
+          }
+        }
+      },
   ]
 })
 export default router;
