@@ -447,6 +447,7 @@
     <div class="ml-4">
       <p class="text-base font-medium text-gray-900 dark:text-gray-400">Total Donde se Obtiene el Dato</p>
       <h2 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100">Total de Inscripciones {{ totalDondeObtDatoData.reduce((acc, item) => acc + item.total, 0) }}</h2>
+      
     </div>
   </div>
   <div id="totalDondeObtDato-chart"></div>
@@ -505,6 +506,8 @@ export default {
       return nombresMeses[numeroMes - 1] || "Sin especificar";
     },
 
+    
+
     renderBarChart() {
       const options = {
         chart: {
@@ -552,24 +555,47 @@ export default {
 
       const optionsStatus = {
         chart: {
-          type: "bar",
-          height: 320,
-          fontFamily: "Inter, sans-serif",
-          toolbar: {
-            show: true,
-          },
+        type: "pie",
+        height: 320,
+        fontFamily: "Inter, sans-serif",
+        toolbar: {
+          show: true,
         },
-        series: [
-          {
-            name: "Total de inscripciones",
-            data: this.inscripcionesPorStatusData.map((item) => item.total),
-          },
-        ],
-        xaxis: {
-          categories: this.inscripcionesPorStatusData.map(
-            (item) => `${item.EstatusInsc || "Sin especificar"}`
-          ),
+      },
+      series: this.inscripcionesPorStatusData.map(item => item.total),
+      labels: this.inscripcionesPorStatusData.map(item => item.EstatusInsc || "Desconocido"),
+      colors: ['#008FFB', '#00E396', '#feb019', '#FF4560'],
+      legend: {
+        show: true,
+        position: 'bottom',
+        horizontalAlign: 'center',
+        verticalAlign: 'middle',
+        floating: false,
+        fontSize: '14px',
+        offsetX: 0,
+        offsetY: 0,
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function (val, opts) {
+          return opts.w.globals.series[opts.seriesIndex];
         },
+        style: {
+          fontSize: '16px',
+          colors: ['#ffffff']
+        },
+      },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
       };
 
       const optionsGrado = {
@@ -596,7 +622,7 @@ export default {
 
       const optionsBeca = {
         chart: {
-          type: "bar",
+          type: "area",
           height: 320,
           fontFamily: "Inter, sans-serif",
           toolbar: {
@@ -609,15 +635,37 @@ export default {
             data: this.totalPorBecaData.map((item) => item.total),
           },
         ],
+
+        
         xaxis: {
           categories: this.totalPorBecaData.map(
             (item) => `${item.BecaOfrecida || "Sin especificar"}`
           ),
         },
+        markers:{
+          size: 6,
+          shape: 'circle',
+          colors: ['#008FFB', '#00E396', '#feb019', '#FF4560'],
+          strokeColors: '#fff',
+          strokeWidth: 2,
+          hover: {
+            size: 8,
+          }
+
+        },
+        dropShadow:{
+          enabled: true,
+          enabledOnSeries: undefined,
+          top: 1,
+          left: 1,
+          blur: 1,
+          opacity: 0.45,
+        }
+        
       };
       const optionsPais = {
         chart: {
-          type: "bar",
+          type: "area",
           height: 320,
           fontFamily: "Inter, sans-serif",
           toolbar: {
@@ -683,7 +731,7 @@ export default {
 
       const optionsCiclo = {
         chart: {
-          type: "bar",
+          type: "area",
           height: 320,
           fontFamily: "Inter, sans-serif",
           toolbar: {
@@ -749,7 +797,7 @@ export default {
 
       const optionsReferido = {
         chart: {
-          type: "bar",
+          type: "area",
           height: 320,
           fontFamily: "Inter, sans-serif",
           toolbar: {
@@ -771,7 +819,7 @@ export default {
 
       const optionsEscuela = {
         chart: {
-          type: "bar",
+          type: "scatter",
           height: 320,
           fontFamily: "Inter, sans-serif",
           toolbar: {
@@ -840,7 +888,7 @@ export default {
 
       const optionsDondeObtDato = {
     chart: {
-      type: "bar",
+      type: "area",
       height: 320,
       fontFamily: "Inter, sans-serif",
       toolbar: {
