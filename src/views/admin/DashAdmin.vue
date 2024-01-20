@@ -753,24 +753,47 @@ export default {
 
       const optionsPrograma = {
         chart: {
-          type: "bar",
-          height: 320,
-          fontFamily: "Inter, sans-serif",
-          toolbar: {
-            show: true,
-          },
+      type: "pie",
+      height: 320,
+      fontFamily: "Inter, sans-serif",
+      toolbar: {
+        show: true,
+      },
+    },
+    series: this.totalPorProgramaData.map(item => item.total),
+    labels: this.totalPorProgramaData.map(item => item.Programa || "Desconocido"),
+    colors: ['#008FFB', '#00E396', '#feb019', '#FF4560'],
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'center',
+      verticalAlign: 'middle',
+      floating: false,
+      fontSize: '14px',
+      offsetX: 0,
+      offsetY: 0,
+    },
+    dataLabels: {
+      enabled: true,
+      formatter: function (val, opts) {
+        return opts.w.globals.series[opts.seriesIndex];
+      },
+      style: {
+        fontSize: '16px',
+        colors: ['#ffffff']
+      },
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 200
         },
-        series: [
-          {
-            name: "Total de inscripciones",
-            data: this.totalPorProgramaData.map((item) => item.total),
-          },
-        ],
-        xaxis: {
-          categories: this.totalPorProgramaData.map(
-            (item) => `${item.Programa || "Sin especificar"}`
-          ),
-        },
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }]
       };
 
       const optionsSemestre = {
