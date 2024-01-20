@@ -22,9 +22,143 @@
       </div>
     </div>
 
+    
+
+    <br>
+    <div class="grid justify-items-center" style="background-color: #2e79db;">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">  Registros Generales</h5>
+    </div>
+    <br>
+
+    <section>
+      <div class="flex-1 lg:ml-64">
+        <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400"
+            :style="{ backgroundColor: '#2e79db' }">
+              <tr>
+                <th scope="col" class="px-6 py-3">NOMBRE PROMOTOR</th>
+                <th scope="col" class="px-6 py-3">INSC-INSCRIPCION</th>
+                <th scope="col" class="px-6 py-3">P-PROSPECTO</th>
+                <th scope="col" class="px-6 py-3">PS-SEGUIMIENTO</th>
+                <th scope="col" class="px-6 py-3">PI-INSCRIPCION</th>
+                <th scope="col" class="px-6 py-3">NI-NO INTERASA</th>
+                <th scope="col" class="px-6 py-3">SC-SIN CONTACTO</th>
+                <th scope="col" class="px-6 py-3">DI-DATO NO VALIDO</th>
+                <th scope="col" class="px-6 py-3">NC-NO CONTESTA</th>
+                <th scope="col" class="px-6 py-3">PU-PERSONAL UNINTER</th>
+                <th scope="col" class="px-6 py-3">AU-ALUMNO UNINTER</th>
+                <th scope="col" class="px-6 py-3">DU-DUPLICADO</th>
+                <th scope="col" class="px-6 py-3">DATOS TRABAJADO</th>
+                <th scope="col" class="px-6 py-3">DATOS ASIGNADOS</th>
+                <th scope="col" class="px-6 py-3">% TRABAJANDO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="data in datosGeneral" :key="data.promotorActual"
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {{ data.NombrePromotor }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.Count_insc }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.P_Prospecto }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.PS_Seguimiento }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.PI_Inscripcion }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.NI_NO_Interesa }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.SC_Sin_Contacto }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.DI_Dato_No_Valido }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.NC_NO_Contesta }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.PU_Personal_UNINTER }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.AU_Alumno_UNINTER }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.DU_Duplicado }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.Datos_Trabajados }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.Datos_Asignados }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ data.Datos_Trabajando }} %
+                </td>
+              </tr>
+              <tr class="bg-white dark:bg-gray-800" style="background-color: #2e79db">
+                <td class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">
+                  Total
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('Count_insc') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('P_Prospecto') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('PS_Seguimiento') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('PI_Inscripcion') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('NI_NO_Interesa') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('SC_Sin_Contacto') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('DI_Dato_No_Valido') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('NC_NO_Contesta') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('PU_Personal_UNINTER') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('AU_Alumno_UNINTER') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('DU_Duplicado') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('Datos_Trabajados') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotal('Datos_Asignados') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularPorcentajeTotal() }} %
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <br>
     <div class="grid justify-items-center" style="background-color: #000000;">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Registros Tiktoks</h5>
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">  Registros Tiktoks</h5>
     </div>
     <br>
 
@@ -100,6 +234,53 @@
                   {{ data.Datos_Trabajando }} %
                 </td>
               </tr>
+              <tr class="bg-black dark:bg-gray-800">
+                <td class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">
+                  Total
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('Count_insc') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('P_Prospecto') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('PS_Seguimiento') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('PI_Inscripcion') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('NI_NO_Interesa') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('SC_Sin_Contacto') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('DI_Dato_No_Valido') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('NC_NO_Contesta') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('PU_Personal_UNINTER') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('AU_Alumno_UNINTER') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('DU_Duplicado') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('Datos_Trabajados') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalTiktok('Datos_Asignados') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularPorcentajeTotalTiktok() }} %
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -108,7 +289,7 @@
 
     <br>
     <div class="grid justify-items-center" style="background-color: #d3912f;">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">Registros de META</h5>
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">  Registros de META</h5>
     </div>
     <br>
 
@@ -183,6 +364,54 @@
                 </td>
                 <td class="px-6 py-4">
                   {{ data.Datos_Trabajando }} %
+                </td>
+
+              </tr>
+              <tr class="bg-white dark:bg-gray-800" style="background-color: #d3912f">
+                <td class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">
+                  Total
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('Count_insc') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('P_Prospecto') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('PS_Seguimiento') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('PI_Inscripcion') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('NI_NO_Interesa') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('SC_Sin_Contacto') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('DI_Dato_No_Valido') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('NC_NO_Contesta') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('PU_Personal_UNINTER') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('AU_Alumno_UNINTER') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('DU_Duplicado') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('Datos_Trabajados') }}
+                </td>
+                <td class="px-6 py-4 text-white">
+                  {{ calcularTotalMeta('Datos_Asignados') }}
+                </td>
+                <td class="px-6 py-4 text-white" >
+                  {{ calcularPorcentajeTotalMeta() }} %
                 </td>
               </tr>
             </tbody>
@@ -276,6 +505,7 @@ export default {
       promotores: [],
       datos: [],
       datosMeta: [],
+      datosGeneral: [],
       editingPromotor: null,
       addingPromotor: {
         Nombre: "",
@@ -291,6 +521,7 @@ export default {
     this.loadPromotores();
     this.countData();
     this.countDataMeta();
+    this.countGeneral();
   },
   computed: {
     filteredPromotores() {
@@ -312,9 +543,20 @@ export default {
       }
     },
 
+    async countGeneral() {
+      try {
+        const response = await axios.get("http://localhost:4000/promotores/count/general");
+        this.datosGeneral = response.data.count;
+        console.log( "General"+this.datosGeneral);
+
+      } catch (error) {
+        console.error("Error al obtener promotores:", error);
+      }
+    },
+
     async countData() {
       try {
-        const response = await axios.get("http://localhost:4000/promotores/count");
+        const response = await axios.get("http://localhost:4000/promotores/count/tiktok");
         this.datos = response.data.count;
         console.log(this.datos);
 
@@ -332,6 +574,60 @@ export default {
       } catch (error) {
         console.error("Error al obtener promotores:", error);
       }
+    },
+
+    calcularTotal(columna) {
+      // Suma los valores de la columna especificada
+      return this.datosGeneral.reduce((total, data) => total + (data[columna] || 0), 0);
+    },
+
+    calcularTotalTiktok(columna) {
+      // Suma los valores de la columna especificada
+      return this.datos.reduce((total, data) => total + (data[columna] || 0), 0);
+    },
+
+    calcularTotalMeta(columna) {
+      // Suma los valores de la columna especificada
+      return this.datosMeta.reduce((total, data) => total + (data[columna] || 0), 0);
+    },
+
+    calcularPorcentajeTotal() {
+      // Calcula el promedio de la columna de porcentajes
+      const totalTrabajando = this.datosGeneral.reduce((total, data) => total + (data.Datos_Trabajados || 0), 0);
+      const totalAsignados = this.datosGeneral.reduce((total, data) => total + (data.Datos_Asignados || 0), 0);
+      
+      if (totalAsignados === 0) {
+        return 0;
+      }
+
+      const promedio = (totalTrabajando / totalAsignados) * 100;
+      return promedio.toFixed(2); // Redondea a dos decimales
+    },
+
+    calcularPorcentajeTotalTiktok() {
+      // Calcula el promedio de la columna de porcentajes
+      const totalTrabajando = this.datos.reduce((total, data) => total + (data.Datos_Trabajados || 0), 0);
+      const totalAsignados = this.datos.reduce((total, data) => total + (data.Datos_Asignados || 0), 0);
+      
+      if (totalAsignados === 0) {
+        return 0;
+      }
+
+      const promedio = (totalTrabajando / totalAsignados) * 100;
+      return promedio.toFixed(2); // Redondea a dos decimales
+    },
+
+    calcularPorcentajeTotalMeta() {
+      // Calcula el promedio de la columna de porcentajes
+      const totalTrabajando = this.datosMeta.reduce((total, data) => total + (data.Datos_Trabajados || 0), 0);
+      const totalAsignados = this.datosMeta.reduce((total, data) => total + (data.Datos_Asignados || 0), 0);
+      
+      if (totalAsignados === 0) {
+        return 0;
+      }
+
+      const promedio = (totalTrabajando / totalAsignados) * 100;
+      return promedio.toFixed(2); // Redondea a dos decimales
     },
 
     openEditModal(promotor) {
