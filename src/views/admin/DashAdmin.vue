@@ -438,24 +438,35 @@
           <div id="totalInscripcionesPorMes-chart"></div>
         </div>
 
-   <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-<div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-  <div class="flex items-center">
-    <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
-      <i class="fa-solid fa-chart-line fa-2x"></i>
-    </div>
-    <div class="ml-4">
-      <p class="text-base font-medium text-gray-900 dark:text-gray-400">Total Donde se Obtiene el Dato</p>
-      <h2 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100">Total de Inscripciones {{ totalDondeObtDatoData.reduce((acc, item) => acc + item.total, 0) }}</h2>
-      
-    </div>
-  </div>
-  <div id="totalDondeObtDato-chart"></div>
-</div>
-
-
-
-
+        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-chart-line fa-2x"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total Donde se Obtiene el Dato
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de Inscripciones
+                {{
+                  totalDondeObtDatoData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalDondeObtDato-chart"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -506,8 +517,6 @@ export default {
       return nombresMeses[numeroMes - 1] || "Sin especificar";
     },
 
-    
-
     renderBarChart() {
       const options = {
         chart: {
@@ -555,47 +564,51 @@ export default {
 
       const optionsStatus = {
         chart: {
-        type: "pie",
-        height: 320,
-        fontFamily: "Inter, sans-serif",
-        toolbar: {
-          show: true,
-        },
-      },
-      series: this.inscripcionesPorStatusData.map(item => item.total),
-      labels: this.inscripcionesPorStatusData.map(item => item.EstatusInsc || "Desconocido"),
-      colors: ['#008FFB', '#00E396', '#feb019', '#FF4560'],
-      legend: {
-        show: true,
-        position: 'bottom',
-        horizontalAlign: 'center',
-        verticalAlign: 'middle',
-        floating: false,
-        fontSize: '14px',
-        offsetX: 0,
-        offsetY: 0,
-      },
-      dataLabels: {
-        enabled: true,
-        formatter: function (val, opts) {
-          return opts.w.globals.series[opts.seriesIndex];
-        },
-        style: {
-          fontSize: '16px',
-          colors: ['#ffffff']
-        },
-      },
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
+          type: "pie",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
           },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
+        },
+        series: this.inscripcionesPorStatusData.map((item) => item.total),
+        labels: this.inscripcionesPorStatusData.map(
+          (item) => item.EstatusInsc || "Desconocido"
+        ),
+        colors: ["#008FFB", "#00E396", "#feb019", "#FF4560"],
+        legend: {
+          show: true,
+          position: "bottom",
+          horizontalAlign: "center",
+          verticalAlign: "middle",
+          floating: false,
+          fontSize: "14px",
+          offsetX: 0,
+          offsetY: 0,
+        },
+        dataLabels: {
+          enabled: true,
+          formatter: function (val, opts) {
+            return opts.w.globals.series[opts.seriesIndex];
+          },
+          style: {
+            fontSize: "16px",
+            colors: ["#ffffff"],
+          },
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
       };
 
       const optionsGrado = {
@@ -636,32 +649,29 @@ export default {
           },
         ],
 
-        
         xaxis: {
           categories: this.totalPorBecaData.map(
             (item) => `${item.BecaOfrecida || "Sin especificar"}`
           ),
         },
-        markers:{
+        markers: {
           size: 6,
-          shape: 'circle',
-          colors: ['#008FFB', '#00E396', '#feb019', '#FF4560'],
-          strokeColors: '#fff',
+          shape: "circle",
+          colors: ["#008FFB", "#00E396", "#feb019", "#FF4560"],
+          strokeColors: "#fff",
           strokeWidth: 2,
           hover: {
             size: 8,
-          }
-
+          },
         },
-        dropShadow:{
+        dropShadow: {
           enabled: true,
           enabledOnSeries: undefined,
           top: 1,
           left: 1,
           blur: 1,
           opacity: 0.45,
-        }
-        
+        },
       };
       const optionsPais = {
         chart: {
@@ -753,47 +763,51 @@ export default {
 
       const optionsPrograma = {
         chart: {
-      type: "pie",
-      height: 320,
-      fontFamily: "Inter, sans-serif",
-      toolbar: {
-        show: true,
-      },
-    },
-    series: this.totalPorProgramaData.map(item => item.total),
-    labels: this.totalPorProgramaData.map(item => item.Programa || "Desconocido"),
-    colors: ['#008FFB', '#00E396', '#feb019', '#FF4560'],
-    legend: {
-      show: true,
-      position: 'bottom',
-      horizontalAlign: 'center',
-      verticalAlign: 'middle',
-      floating: false,
-      fontSize: '14px',
-      offsetX: 0,
-      offsetY: 0,
-    },
-    dataLabels: {
-      enabled: true,
-      formatter: function (val, opts) {
-        return opts.w.globals.series[opts.seriesIndex];
-      },
-      style: {
-        fontSize: '16px',
-        colors: ['#ffffff']
-      },
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        chart: {
-          width: 200
+          type: "pie",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
         },
+        series: this.totalPorProgramaData.map((item) => item.total),
+        labels: this.totalPorProgramaData.map(
+          (item) => item.Programa || "Desconocido"
+        ),
+        colors: ["#008FFB", "#00E396", "#feb019", "#FF4560"],
         legend: {
-          position: 'bottom'
-        }
-      }
-    }]
+          show: true,
+          position: "bottom",
+          horizontalAlign: "center",
+          verticalAlign: "middle",
+          floating: false,
+          fontSize: "14px",
+          offsetX: 0,
+          offsetY: 0,
+        },
+        dataLabels: {
+          enabled: true,
+          formatter: function (val, opts) {
+            return opts.w.globals.series[opts.seriesIndex];
+          },
+          style: {
+            fontSize: "16px",
+            colors: ["#ffffff"],
+          },
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
       };
 
       const optionsSemestre = {
@@ -910,25 +924,32 @@ export default {
       };
 
       const optionsDondeObtDato = {
-    chart: {
-      type: "area",
-      height: 320,
-      fontFamily: "Inter, sans-serif",
-      toolbar: {
-        show: true,
-      },
-    },
-    series: [{
-      name: 'Total de inscripciones',
-      data: this.totalDondeObtDatoData.map(item => item.total),
-    }],
-    xaxis: {
-      categories: this.totalDondeObtDatoData.map(item => `${item.DondeObtDato || 'Sin especificar'}`),
-    },
-  };
+        chart: {
+          type: "area",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+        series: [
+          {
+            name: "Total de inscripciones",
+            data: this.totalDondeObtDatoData.map((item) => item.total),
+          },
+        ],
+        xaxis: {
+          categories: this.totalDondeObtDatoData.map(
+            (item) => `${item.DondeObtDato || "Sin especificar"}`
+          ),
+        },
+      };
 
-  const chartDondeObtDato = new ApexCharts(document.getElementById('totalDondeObtDato-chart'), optionsDondeObtDato);
-  chartDondeObtDato.render();
+      const chartDondeObtDato = new ApexCharts(
+        document.getElementById("totalDondeObtDato-chart"),
+        optionsDondeObtDato
+      );
+      chartDondeObtDato.render();
 
       const chartMes = new ApexCharts(
         document.getElementById("totalInscripcionesPorMes-chart"),
@@ -1052,19 +1073,13 @@ export default {
 
         this.totalDondeObtDatoData = response.data.data.totalDondeObtDato || [];
 
-
         this.renderBarChart();
       } catch (error) {
         console.error("Error al obtener datos del backend:", error);
       }
     },
-
-    
-    
   },
 
-
-  
   mounted() {
     this.fetchData();
   },
