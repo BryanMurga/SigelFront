@@ -596,81 +596,6 @@
                   placeholder="117"
                 />
               </div>
-
-              <!-- PromotorOriginal -->
-              <div class="mb-4 mx-auto">
-                <label
-                  class="block text-sm font-bold mb-2 text-center"
-                  for="promotorOriginal"
-                  >Promotor Original:</label
-                >
-                <select
-                  v-model="lead.promotorOriginal"
-                  id="promotorOriginal"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                  <option
-                    v-for="promotor in listaPromotores"
-                    :key="promotor.PromotorID"
-                    :value="promotor.PromotorID"
-                  >
-                    {{ promotor.Nombre }}
-                  </option>
-                </select>
-              </div>
-
-              <!-- FechaPromotorOriginal -->
-              <div class="mb-4 mx-auto">
-                <label
-                  class="block text-sm font-bold mb-2 text-center"
-                  for="fechaPromotorOriginal"
-                  >Fecha Promotor Original:</label
-                >
-                <DatePicker
-                  v-model="lead.FechaPromotorOriginal"
-                  placeholder="Fecha Promotor Original"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                </DatePicker>
-              </div>
-
-              <!-- PromotorActual -->
-              <div class="mb-4 mx-auto">
-                <label
-                  class="block text-sm font-bold mb-2 text-center"
-                  for="promotorActual"
-                  >Promotor Actual:</label
-                >
-                <select
-                  v-model="lead.promotorActual"
-                  id="promotorActual"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                  <option
-                    v-for="promotor in listaPromotores"
-                    :key="promotor.PromotorID"
-                    :value="promotor.PromotorID"
-                  >
-                    {{ promotor.Nombre }}
-                  </option>
-                </select>
-              </div>
-
-              <!-- FechaPromotorActual -->
-              <div class="mb-4 mx-auto">
-                <label
-                  class="block text-sm font-bold mb-2 text-center"
-                  for="fechaPromotorActual"
-                  >Fecha Promotor Actual:</label
-                >
-                <DatePicker
-                  v-model="lead.FechaPromotorActual"
-                  placeholder="Fecha Promotor Actual"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                </DatePicker>
-              </div>
-
               <!-- Comentarios -->
               <div class="mb-4 col-span-full md:col-span-1 text-center">
                 <label class="block text-sm font-bold mb-2" for="comentarios"
@@ -723,6 +648,7 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 // import { municipiosEstados } from '../../utils/municipiosEstados';
 import municipiosEstados from "../../data/municipiosEstados.json";
+import { getUserName } from "../../sessions"; 
 
 export default {
   setup() {
@@ -811,6 +737,8 @@ export default {
 
         // Otros campos...
       },
+      promotorID: null,
+      userName: getUserName(),
 
       //types of toast
 
@@ -1087,9 +1015,13 @@ export default {
         NombreCiudad, PSeguimiento, CarreraInteresID, Grado, Programa, EstatusInsc,
         SemestreIngreso, Ciclo, CampanaID, AsetNameForm, IsOrganic, MedioDeContactoID,
         TipoReferido, NombreReferido, DondeObtDato, FechaInscripcion, CarreraInscripcion,
-        BecaOfrecida, NumeroLista, promotorOriginal, FechaPromotorOriginal, promotorActual,
-        FechaPromotorActual, Comentarios
+        BecaOfrecida, NumeroLista, Comentarios
       } = this.lead;
+
+      const promotorOriginal = this.promotorID;
+      const promotorActual = this.promotorID;
+      const FechaPromotorOriginal = new Date();
+      const FechaPromotorActual = new Date();
 
       // Agrega validaciones según tus requerimientos
       if (!NombreCompleto || !Telefono || !CorreoElectronico || !promotorOriginal || !promotorActual) {
@@ -1145,11 +1077,23 @@ export default {
       console.log(this.lead)
     }
   },
+  async PromotorID() {
 
+    try {
+      const response = await axios.get("http://localhost:4000/promotores/getPromotorID", {
+        params: {
+          userName: this.userName,
+        },
+      });
+      this.promotorID = response.data.promotor.promotorID;
+      console.log(this.promotorID)
+    } catch (error) {
+      console.error("Error al cargar la lista de promotores:", error);
+      // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+    }
+
+  }, 
     
-
-    
-
     cancelarRegistro() {
       // Limpia el formulario u otras acciones al cancelar el registro
       this.limpiarFormulario();
@@ -1218,6 +1162,7 @@ export default {
     await this.loadMediosDeContacto();
     await this.loadCarreras();
     await this.loadPromotores();
+    this.PromotorID();
 
     // ... Tu código existente ...
   },

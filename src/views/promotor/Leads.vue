@@ -4,7 +4,7 @@
             <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Leads</span>
 
-            <div class="flex-1 p-4">
+            <div v-if="leads.length" class="flex-1 p-4">
                 <div id="verContacto" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -838,7 +838,7 @@
                             <option v-for="carrera in CarreraInteres" :key="carrera" :value="carrera.CarreraID">{{ carrera.Nombre }}</option> 
                         </select>
                     </div>
-                    <div v-if="selectedFiltrado === 'Grado'">
+                    <div v-if="selectedFiltrado === 'Grado'">   
                         <select id="grado"  v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Escoge un programa</option> 
@@ -1313,7 +1313,7 @@ export default {
         this.loadCampana();
         this.loadPromotor();
         this.loadMedioContacto();
-
+        this.VerContactoModal();
         // Agrega un nuevo estado al historial cuando el componente se monta
         window.history.pushState({ noBackExitsApp: true }, null, null);
 
@@ -1501,16 +1501,13 @@ export default {
         },
 
         async loadContactos(id) {
+            if (!id) {
+                return;
+            }
             console.log('Valor de id:', id);
             axios.get(`http://localhost:4000/leads/contacto/${id}`)
                 .then(response => {
                     this.contactos = response.data.contacto;
-                    if (this.contactos) {
-                        this.$modal.show('verContacto');
-                    } else {
-                        console.error('El objeto de comentarios es nulo o indefinido');
-
-                    }
                 })
                 .catch(error => {
                     console.error('Error al obtener los comentarios del lead:', error);

@@ -2,7 +2,7 @@
     <header>
         <div class="lg:ml-64 p-4">
             <i class="fa-solid fa-users text-2xl" style="color: #48c9b0"></i>
-            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Alumnos</span>
+            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Inscritos</span>
             <br><br>
 
             <form class="flex items-center relative">
