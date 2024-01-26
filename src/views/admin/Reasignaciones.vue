@@ -6,73 +6,72 @@
             <br><br>
 
             <div id="verReasignacion" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative p-4 w-full max-w-2xl max-h-full">
-                        <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                            <!-- Modal header -->
-                            <div
-                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                    Historial de promotores reasignaciones
-                                </h3>
-                                <button type="button"
-                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                    data-modal-hide="verReasignacion">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                    </svg>
-                                    <span @click="closeEditModal" class="sr-only">Close modal</span>
-                                </button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="p-4 md:p-5 space-y-4">
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-2xl max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Historial de promotores reasignaciones
+                            </h3>
+                            <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-hide="verReasignacion">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span @click="closeEditModal" class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-4 md:p-5 space-y-4">
 
 
-                                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-                                                    Fecha de Reasignacion
-                                                </th>
-                                                <th scope="col" class="px-6 py-3">
-                                                    Nombre del promotor
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="historyReasignacion in  historyReasignaciones" :key="historyReasignacion.id"
-                                                class="border-b border-gray-200 dark:border-gray-700">
-                                                <th scope="row"
-                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                                    {{ formatDate(historyReasignacion.FechaReasignacion) }}
-                                                </th>
-                                                <td
-                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                                                    {{ historyReasignacion.NombrePromotor }}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                                Fecha de Reasignacion
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Nombre del promotor
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="historyReasignacion in  historyReasignaciones"
+                                            :key="historyReasignacion.id"
+                                            class="border-b border-gray-200 dark:border-gray-700">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                                {{ formatDate(historyReasignacion.FechaReasignacion) }}
+                                            </th>
+                                            <td
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                                {{ historyReasignacion.NombrePromotor }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
-                            <div class="item-error" v-if="!historyReasignaciones.length">
-                                <p class="p-4">No hay historial de contactos</p>
-                            </div>
-                            <!-- Modal footer -->
-                            <div
-                                class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                <button data-modal-hide="verReasignacion" type="button"
-                                    class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cerrar</button>
-                            </div>
+                        </div>
+
+                        <div class="item-error" v-if="!historyReasignaciones.length">
+                            <p class="p-4">No hay historial de contactos</p>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button data-modal-hide="verReasignacion" type="button"
+                                class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cerrar</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
             <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
 
@@ -102,10 +101,19 @@
     <section>
         <div class="flex-1 p-4 lg:ml-64">
             <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
-                <table v-if="filterList.length > 0" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table v-if="filterList.length > 0"
+                    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
                         style="background-color: #48C9B0;">
                         <tr>
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        v-model="selectedAll" @change="selectedAllLeads">
+                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
                             <th scope="col" class="px-6 py-3 text-white">
                                 ID Lead
                             </th>
@@ -136,6 +144,15 @@
                         <tr v-for="lead in filterList" :key="lead.LeadID"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        :value="lead.LeadID" v-model="selectedLeads">
+                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
+
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ lead.LeadID }}
                             </th>
@@ -152,7 +169,8 @@
                                 {{ lead.NombrePromotorAct ? lead.NombrePromotorAct : lead.NombrePromotorOri }}
                             </td>
                             <td class="px-8 py-4">
-                                {{ formatDate(lead.FechaPromotorActual) ? formatDate(lead.FechaPromotorActual) : formatDate(lead.FechaPromotorOriginal) }}
+                                {{ formatDate(lead.FechaPromotorActual) ? formatDate(lead.FechaPromotorActual) :
+                                    formatDate(lead.FechaPromotorOriginal) }}
                             </td>
                             <td class="px-6 py-4">
                                 <select v-model="lead.selectedPromotor" @click="loadActivePromotores(lead.LeadID)"
@@ -169,7 +187,7 @@
                                     data-modal-toggle="verReasignacion" type="button"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ver</button>
                             </td>
-                            
+
                         </tr>
                     </tbody>
                 </table>
@@ -183,7 +201,25 @@
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
                         reasignar</h5>
                 </div>
-            </div>
+            </div> <br>
+            <div v-show="selectedLeads.length > 0" class="flex items-center space-x-4">
+                    <label for="asignacion-promotores"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asignación Multiple</label>
+
+                    <select v-model="selectPromotorMultiple" id="asignacion-promotores"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID"
+                            :value="promotor.PromotorID" style="color: black;">
+                            {{ promotor.Nombre }}
+                        </option>
+                    </select>
+
+                    <button @click="asignarPromotorMultiple()" type="button"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        style="text-align: left;">
+                        <i class="fas fa-regular fa-paper-plane"></i> Asignar
+                    </button>
+                </div>
         </div>
     </section>
 </template>
@@ -281,8 +317,13 @@ export default {
             promotoresActivos: [],
             historyReasignaciones: [],
             input: ref(''),
-            
-
+            selectedLeads: [],
+            selectedAll: false,
+            selectPromotorMultiple: null,
+            updateMultipleLeads: {
+                leadIDs: null,
+                promotorOriginal: null
+            }
         };
     },
     mounted() {
@@ -313,7 +354,7 @@ export default {
         },
         async loadActivePromotores(LeadID) {
             try {
-                const response = await axios.get('http://localhost:4000/promotores/activos/'+LeadID);
+                const response = await axios.get('http://localhost:4000/promotores/activos/' + LeadID);
                 console.log('Valor de id:', LeadID);
                 this.promotoresActivos = response.data.promotores;
                 this.selectedPromotor = this.promotoresActivos[0].PromotorID;
@@ -349,7 +390,7 @@ export default {
             try {
                 const promises = this.leads.map(async lead => {
                     if (lead.selectedPromotor) {
-                        
+
                         await axios.put(`http://localhost:4000/leads/update-promotor-actual/${lead.LeadID}`, {
                             promotorActual: lead.selectedPromotor
                         });
@@ -383,6 +424,35 @@ export default {
                     console.error('Error al obtener los comentarios del lead:', error);
                     // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
                 });
+        },
+        async asignarPromotorMultiple() {
+            this.updateMultipleLeads.leadIDs = this.selectedLeads;
+            this.updateMultipleLeads.promotorOriginal = this.selectPromotorMultiple;
+            console.log(this.updateMultipleLeads);
+            if (this.updateMultipleLeads.leadIDs === null || this.updateMultipleLeads.promotorOriginal === null) {
+                console.error('Promotor no seleccionado');
+                return;
+            }
+            try {
+                await axios.put(`http://localhost:4000/leads/update-multiple-leads-promotor`, this.updateMultipleLeads
+                );
+                this.loadLeads();
+                this.notify();
+
+            }
+            catch (error) {
+                this.errAsignarPromotor();
+            }
+            selectedLeads = [];
+
+        },
+        selectedAllLeads() {
+            if (this.selectedAll) {
+                this.selectedLeads = this.leads.map(lead => lead.LeadID);
+                console.log(this.selectedLeads);
+            } else {
+                this.selectedLeads = [];
+            }
         },
         preventBack(event) {
             // Verifica si hay un estado personalizado en el historial

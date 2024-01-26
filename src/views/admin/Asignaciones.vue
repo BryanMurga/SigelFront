@@ -42,6 +42,14 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky-header"
                         style="background-color: #48C9B0;">
                         <tr>
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        v-model="selectedAll" @change="selectedAllLeads">
+                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
                             <th scope="col" class="px-6 py-3 text-white">
                                 ID Lead
                             </th>
@@ -57,13 +65,20 @@
                             <th scope="col" class="px-6 py-3 text-white">
                                 Promotor
                             </th>
-                           
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="lead in filterList" :key="lead.LeadID"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        :value="lead.LeadID" v-model="selectedLeads">
+                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ lead.LeadID }}
                             </th>
@@ -95,12 +110,34 @@
                     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
-            </button>
-            <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
-                    asignar</h5>
+                </button>
+                <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
+                        asignar</h5>
+                </div>
+
+                <label for="underline_select" class="sr-only">Underline select</label>
+
             </div>
-        </div>
+            <br>
+            <div v-show="selectedLeads.length > 0" class="flex items-center space-x-4">
+                <label for="asignacion-promotores"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asignación Multiple</label>
+
+                <select v-model="selectPromotorMultiple" id="asignacion-promotores"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID" :value="promotor.PromotorID"
+                        style="color: black;">
+                        {{ promotor.Nombre }}
+                    </option>
+                </select>
+
+                <button @click="asignarPromotorMultiple()" type="button"
+                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    style="text-align: left;">
+                    <i class="fas fa-regular fa-paper-plane"></i> Asignar
+                </button>
+            </div>    
     </section>
 </template>
 
@@ -198,12 +235,20 @@ export default {
             promotoresActivos: [], // Agrega una variable para almacenar los promotores activos
             selectedPromotor: null,// Variable para almacenar el promotor seleccionado
             input: ref(''),
+            selectedLeads: [],
+            selectedAll: false,
+            selectPromotorMultiple: null,
+            updateMultipleLeads: {
+                leadIDs: null,
+                promotorOriginal: null
+            }
         };
 
     },
     mounted() {
         this.loadLeads();
         this.loadActivePromotores(); // Llama a la función para cargar promotores activos
+
         // Agrega un nuevo estado al historial cuando el componente se monta
         window.history.pushState({ noBackExitsApp: true }, null, null);
 
@@ -256,6 +301,26 @@ export default {
             }
         },
 
+        async asignarPromotorMultiple() {
+            this.updateMultipleLeads.leadIDs = this.selectedLeads;
+            this.updateMultipleLeads.promotorOriginal = this.selectPromotorMultiple;
+            console.log(this.updateMultipleLeads);
+            if(this.updateMultipleLeads.leadIDs === null || this.updateMultipleLeads.promotorOriginal === null){
+                console.error('Promotor no seleccionado');
+                return;
+            }
+            try{    
+                await axios.put(`http://localhost:4000/leads/update-multiple-leads-promotor`, this.updateMultipleLeads 
+                );
+                this.loadLeads();
+                this.notify();
+                
+            }
+            catch(error){
+                this.errAsignarPromotor();
+            }
+
+        },
         enviarAsignaciones() {
             let alertaMostrada = false;
             this.leads.forEach(async lead => {
@@ -277,6 +342,15 @@ export default {
             });
             //checar si esta bien colocado la notificacion
             this.notify();
+        },
+
+        selectedAllLeads() {
+            if (this.selectedAll) {
+                this.selectedLeads = this.leads.map(lead => lead.LeadID);
+                console.log(this.selectedLeads);
+            } else {
+                this.selectedLeads = [];
+            }
         },
 
         preventBack(event) {
