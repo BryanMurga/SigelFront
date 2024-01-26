@@ -39,7 +39,7 @@
         <div class="flex-1 lg:ml-64">
             <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky-header"
                         style="background-color: #48C9B0;">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-white">
@@ -89,16 +89,16 @@
                         </tr>
                     </tbody>
                 </table>
-                <br>
-                <button type="button" v-if="hayLeadsConPromotorSeleccionado"
+            </div>
+            <br>
+            <button type="button" v-if="promotorSeleccionado"
                     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                     style="text-align: left; float: right;" @click="enviarAsignaciones">
                     <i class="fas fa-regular fa-paper-plane"></i> Enviar
-                </button>
-                <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
-                        asignar</h5>
-                </div>
+            </button>
+            <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
+                    asignar</h5>
             </div>
         </div>
     </section>
@@ -124,9 +124,12 @@ onMounted(() => {
 export default {
 
     computed: {
-        hayLeadsConPromotorSeleccionado() {
-            return this.leads.some(lead => lead.selectedPromotor !== null);
+
+        promotorSeleccionado() {
+            // Comprueba si hay al menos un lead con promotor seleccionado
+            return this.filterList.some(lead => lead.selectedPromotor);
         },
+        
         filterList() {
 
             if (this.leads.length === 0) {
@@ -248,28 +251,28 @@ export default {
                     return;
                 }
 
-                await axios.put(`http://localhost:4000/leads/update-promotor/${leadID}`, {
-                    promotorOriginal: lead.selectedPromotor
-                });
             } catch (error) {
                 this.errAsignarPromotor();
             }
         },
 
         enviarAsignaciones() {
+            let alertaMostrada = false;
             this.leads.forEach(async lead => {
                 if (lead.selectedPromotor) {
                     try {
                         await axios.put(`http://localhost:4000/leads/update-promotor/${lead.LeadID}`, {
                             promotorOriginal: lead.selectedPromotor
                         });
-                        
                         this.loadLeads();
                     } catch (error) {
                         this.errAsignarPromotor();
                     }
                 } else {
-                    this.errAsignacion(lead.LeadID);
+                    if (!alertaMostrada) {
+                        this.errAsignacion(lead.LeadID);
+                        alertaMostrada = true; // Marcar que la alerta ha sido mostrada
+                    }
                 }
             });
             //checar si esta bien colocado la notificacion
@@ -304,4 +307,11 @@ export default {
 
 </script>
 
-<style></style>
+<style>
+.sticky-header th {
+        position: sticky;
+        top: 0;
+        background-color: #48C9B0; /* Color de fondo del encabezado */
+        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
+    }
+</style>

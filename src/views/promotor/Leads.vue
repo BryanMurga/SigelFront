@@ -132,7 +132,8 @@
                                     <!-- Telefono -->
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="number"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono *</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono
+                                            *</label>
                                         <input type="text" name="number" id="number"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             v-model="inputTelefono" placeholder="Número de teléfono" required="">
@@ -260,8 +261,7 @@
                                             Primer
                                             Contacto</label>
                                         <DatePicker v-model="leads.FechaPrimerContacto"
-                                            :placeholder="inputFechaPrimerContacto" class="input-field rounded-md"
-                                            required="" />
+                                            :placeholder="inputFechaPrimerContacto" class="input-field rounded-md" :clearable="true"/>
                                     </div>
                                     <!-- PS-Seguimiento -->
                                     <div>
@@ -281,7 +281,6 @@
                                         <select id="carrera-interes"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputCarreraInteres">
-                                            <option selected>Escoge un carrera</option>
                                             <option v-for="carreras in CarreraInteres" :key="carreras.Nombre"
                                                 :value="carreras.CarreraID" required="">{{ carreras.Nombre }}</option>
                                         </select>
@@ -293,7 +292,6 @@
                                         <select id="grado"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputGrado">
-                                            <option selected>Escoge un Grado</option>
                                             <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option>
                                         </select>
                                     </div>
@@ -304,7 +302,6 @@
                                         <select id="programa"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputPrograma">
-                                            <option selected>Escoge un Grado</option>
                                             <option v-for="programa in Programas" :key="programa" :value="programa">{{
                                                 programa }}</option>
                                         </select>
@@ -317,7 +314,6 @@
                                         <select id="estatus-inscripcion"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputEstatusInscripcion">
-                                            <option selected>Escoge el Estatus de inscripcion</option>
                                             <option v-for="estatus in EstatusIncripcion" :key="estatus" :value="estatus">{{
                                                 estatus }}</option>
                                         </select>
@@ -330,7 +326,6 @@
                                         <select id="semestre-ingreso"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputSemestreIngreso">
-                                            <option selected>Escoge el semestre</option>
                                             <option v-for="semestre in SemestreIngreso" :key="semestre" :value="semestre">{{
                                                 semestre }}</option>
                                         </select>
@@ -351,7 +346,6 @@
                                         <select id="semestre-ingreso"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputCampana">
-                                            <option selected>Escoge la campaña</option>
                                             <option v-for="campanas in Campanas" :key="campanas.CampanaID"
                                                 :value="campanas.CampanaID">{{
                                                     campanas.Nombre }}</option>
@@ -373,7 +367,6 @@
                                         <select id="pauta-organica"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputIsOrganic">
-                                            <option selected>Escoge un status</option>
                                             <option v-for="pauta in isOrganic" :key="pauta" :value="pauta">{{ pauta }}
                                             </option>
                                         </select>
@@ -386,7 +379,6 @@
                                         <select id="ps-seguimiento"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputMedioContacto">
-                                            <option selected>Escoge un Medio de Contacto</option>
                                             <option v-for="contacto in medioContactos" :key="contacto.MedioID"
                                                 :value="contacto.MedioID">{{ contacto.Nombre }}</option>
                                         </select>
@@ -399,7 +391,6 @@
                                         <select id="tipo-referido"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputTipoReferido">
-                                            <option selected>Escoge un Tipo de Referido</option>
                                             <option v-for="referido in tipoReferido" :key="referido" :value="referido">{{
                                                 referido }}</option>
                                         </select>
@@ -422,7 +413,6 @@
                                         <select id="donde-obtuvo-dato"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputDondeObtuvoDato">
-                                            <option selected>Escoge un Donde obtuvo el dato</option>
                                             <option v-for="dato in dondeObtuvoDato" :key="dato" :value="dato">{{ dato }}
                                             </option>
                                         </select>
@@ -452,8 +442,6 @@
                                         <select id="carrera-inscripcion"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             v-model="inputCarreraInscripcion">
-                                            <option selected>Escoge un carrera</option>
-
                                             <option v-for="carrera in CarreraInscrita" :key="carrera.CarreraID"
                                                 :value="carrera.CarreraID">{{ carrera.Nombre }}</option>
                                         </select>
@@ -806,7 +794,8 @@
                         <select id="select1" v-model="selectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Escoge un filtro</option>
-                            <option v-for="filtrado in filtradoSelect" :key="filtrado" :value="filtrado">{{ filtrado }}</option>
+                            <option v-for="filtrado in filtradoSelect" :key="filtrado" :value="filtrado">{{ filtrado }}
+                            </option>
                         </select>
                     </div>
 
@@ -821,36 +810,39 @@
                         <select id="promotor-actual" v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Escoge un promotor</option>
-                            <option v-for="promotor in Promotores" :key="promotor" :value="promotor.PromotorID">{{ promotor.Nombre }}</option>
+                            <option v-for="promotor in Promotores" :key="promotor" :value="promotor.PromotorID">{{
+                                promotor.Nombre }}</option>
                         </select>
                     </div>
                     <div v-if="selectedFiltrado === 'Medio de Contacto'">
                         <select id="medio-contacto" v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Escoge un medio de contacto</option>
-                            <option v-for="medio in medioContactos" :key="medio" :value="medio.MedioID">{{ medio.Nombre }}</option> 
+                            <option v-for="medio in medioContactos" :key="medio" :value="medio.MedioID">{{ medio.Nombre }}
+                            </option>
                         </select>
                     </div>
                     <div v-if="selectedFiltrado === 'Carrera'">
                         <select id="carrea-interes" v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Escoge una carrera</option> 
-                            <option v-for="carrera in CarreraInteres" :key="carrera" :value="carrera.CarreraID">{{ carrera.Nombre }}</option> 
+                            <option selected>Escoge una carrera</option>
+                            <option v-for="carrera in CarreraInteres" :key="carrera" :value="carrera.CarreraID">{{
+                                carrera.Nombre }}</option>
                         </select>
                     </div>
                     <div v-if="selectedFiltrado === 'Grado'">
-                        <select id="grado"  v-model="subSelectedFiltrado"
+                        <select id="grado" v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Escoge un programa</option> 
-                            <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option> 
+                            <option selected>Escoge un programa</option>
+                            <option v-for="grado in Grados" :key="grado" :value="grado">{{ grado }}</option>
 
                         </select>
                     </div>
                     <div v-if="selectedFiltrado === 'Programa'">
                         <select id="programa" v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Escoge un programa</option> 
-                            <option v-for="programa in Programas" :key="programa" :value="programa">{{ programa }}</option> 
+                            <option selected>Escoge un programa</option>
+                            <option v-for="programa in Programas" :key="programa" :value="programa">{{ programa }}</option>
 
                         </select>
                     </div>
@@ -858,18 +850,20 @@
                         <select id="campaña" v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Escoge una campaña</option>
-                            <option v-for="campana in Campanas" :key="campana" :value="campana.CampanaID">{{ campana.Nombre }}</option> 
+                            <option v-for="campana in Campanas" :key="campana" :value="campana.CampanaID">{{ campana.Nombre
+                            }}</option>
                         </select>
                     </div>
                     <div v-if="selectedFiltrado === 'IsOrganic'">
                         <select id="isOrganic" v-model="subSelectedFiltrado"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Escoge una opción</option> 
-                            <option v-for="isO in isOrganic" :key="isO" :value="isO">{{ isO }}</option> 
+                            <option selected>Escoge una opción</option>
+                            <option v-for="isO in isOrganic" :key="isO" :value="isO">{{ isO }}</option>
                         </select>
                     </div>
-                    <button type="button" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    @click="BorrarFiltros()">Borrar Filtros</button>
+                    <button type="button"
+                        class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        @click="BorrarFiltros()">Borrar Filtros</button>
 
                 </div>
 
@@ -885,7 +879,8 @@
             <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
                 <table v-if="filterList.length > 0"
                     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white">
+                    <thead style="background-color: #48c9b0"
+                        class="text-xs uppercase dark:bg-gray-700 text-white sticky-header">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 Seleccionar
@@ -1035,8 +1030,8 @@ export default {
             }); // ToastOptions
         }
 
-        const errAsignacion = (LeadID) => {
-            toast(`El lead ${LeadID} no tiene un promotor asignado`, {
+        const errUpdate = () => {
+            toast(`"No hay cambios para actualizar.`, {
                 autoClose: 2000,
                 type: 'warning'
             }); // ToastOptions
@@ -1085,7 +1080,7 @@ export default {
             }); // ToastOptions
         }
 
-        return { notify, errAsignacion, infoNotify, errLeads, errPromotores, actualizarLeadNotify, errorActualizarLeadNotify };
+        return { notify, errUpdate, infoNotify, errLeads, errPromotores, actualizarLeadNotify, errorActualizarLeadNotify };
     },
     props: ['selectContacto'],
 
@@ -1096,7 +1091,7 @@ export default {
             userName: getUserName(),
             VerContacto: null,
             leads: [],
-            leadIndividual: [],
+            LeadIndividual: [],
             contactos: [],
             selectedLeads: [], // Arreglo para almacenar los leads seleccionados
             leadParaGestionar: null,
@@ -1154,6 +1149,7 @@ export default {
             inputCorreo2: null,
             inputFechaNacimiento: null,
             inputEscuelaProcedencia: null,
+            inputFechaPrimerContacto: null,
             inputPSeguimiento: null,
             inputCarreraInteres: null,
             inputGrado: null,
@@ -1163,7 +1159,6 @@ export default {
             inputCiclo: null,
             inputCampana: null,
             inputAsetNameForm: null,
-            fechaPrimerContacto: null,
             inputIsOrganic: null,
             inputMedioContacto: null,
             inputTipoReferido: null,
@@ -1177,8 +1172,7 @@ export default {
             inputPromotorOriginal: null,
             inputPromotorActual: null,
             inputFechaPromotorActual: null,
-            inputFechaPrimerContacto: null,
-            filtradoSelect: ['PSeguimiento','Promotor Actual','Medio de Contacto', 'Carrera', 'Grado', 'Programa', 'Campaña', 'IsOrganic'],
+            filtradoSelect: ['PSeguimiento', 'Promotor Actual', 'Medio de Contacto', 'Carrera', 'Grado', 'Programa', 'Campaña', 'IsOrganic'],
             selectedFiltrado: 'PSeguimiento',
             subSelectedFiltrado: null,
         };
@@ -1193,21 +1187,21 @@ export default {
             console.log('Valor de lead:', this.leads);
             console.log('Valor de SubselectedFiltrado:', this.subSelectedFiltrado);
 
-            if( this.selectedFiltrado == 'PSeguimiento' && this.subSelectedFiltrado){
+            if (this.selectedFiltrado == 'PSeguimiento' && this.subSelectedFiltrado) {
                 return this.leads.filter(lead => {
                     const pSeguimiento = lead && lead.PSeguimiento ? lead.PSeguimiento : "";
                     return pSeguimiento.includes(this.subSelectedFiltrado);
                 });
             }
 
-            if( this.selectedFiltrado == 'Promotor Actual' && this.subSelectedFiltrado){
+            if (this.selectedFiltrado == 'Promotor Actual' && this.subSelectedFiltrado) {
                 return this.leads.filter(lead => {
                     const promotorActualSelect = lead && lead.promotorActual ? lead.promotorActual : "";
                     return promotorActualSelect === this.subSelectedFiltrado;
                 });
             }
 
-            if( this.selectedFiltrado == 'Medio de Contacto' && this.subSelectedFiltrado){
+            if (this.selectedFiltrado == 'Medio de Contacto' && this.subSelectedFiltrado) {
                 return this.leads.filter(lead => {
                     const medioContactoSelect = lead && lead.MedioDeContactoID ? lead.MedioDeContactoID : "";
                     return medioContactoSelect === this.subSelectedFiltrado;
@@ -1221,49 +1215,49 @@ export default {
                 });
             }
 
-            if( this.selectedFiltrado == 'Grado' && this.subSelectedFiltrado){
+            if (this.selectedFiltrado == 'Grado' && this.subSelectedFiltrado) {
                 return this.leads.filter(lead => {
                     const gradoSelect = lead && lead.Grado ? lead.Grado : "";
                     return gradoSelect === this.subSelectedFiltrado;
                 });
             }
-            
-            if ( this.selectedFiltrado == 'Programa' && this.subSelectedFiltrado) {
+
+            if (this.selectedFiltrado == 'Programa' && this.subSelectedFiltrado) {
                 return this.leads.filter(lead => {
                     const programaSelect = lead && lead.Programa ? lead.Programa : "";
                     return programaSelect === this.subSelectedFiltrado;
                 });
             }
 
-            if ( this.selectedFiltrado == 'Campaña' && this.subSelectedFiltrado) {
+            if (this.selectedFiltrado == 'Campaña' && this.subSelectedFiltrado) {
                 return this.leads.filter(lead => {
                     const campanaSelect = lead && lead.CampanaID ? lead.CampanaID : "";
                     return campanaSelect === this.subSelectedFiltrado;
                 });
             }
 
-            if ( this.selectedFiltrado == 'IsOrganic' && this.subSelectedFiltrado) {
+            if (this.selectedFiltrado == 'IsOrganic' && this.subSelectedFiltrado) {
                 return this.leads.filter(lead => {
                     const isOrganicSelect = lead && lead.IsOrganic ? lead.IsOrganic : "";
                     return isOrganicSelect === this.subSelectedFiltrado;
                 });
             }
 
-            if( this.selectedCategory == 'Nombre'){
+            if (this.selectedCategory == 'Nombre') {
                 return this.leads.filter(lead => {
                     const nombreCompleto = lead && lead.NombreCompleto ? lead.NombreCompleto : "";
                     return nombreCompleto.toLowerCase().includes(this.input.toLowerCase());
                 });
             }
-            
-            if( this.selectedCategory == 'Telefono'){
+
+            if (this.selectedCategory == 'Telefono') {
                 return this.leads.filter(lead => {
                     const telefonoSearch = lead && lead.telefono ? lead.telefono : "";
                     return telefonoSearch.toLowerCase().includes(this.input.toLowerCase());
                 });
             }
 
-            if( this.selectedCategory == 'CorreoElectronico'){
+            if (this.selectedCategory == 'CorreoElectronico') {
                 return this.leads.filter(lead => {
                     const correoElectronicoSearch = lead && lead.CorreoElectronico ? lead.CorreoElectronico : "";
                     return correoElectronicoSearch.toLowerCase().includes(this.input.toLowerCase());
@@ -1396,6 +1390,7 @@ export default {
 
                 const { lead } = response.data;
 
+                this.LeadIndividual = response.data.lead;
 
                 console.log('Lead:', lead);
 
@@ -1438,7 +1433,7 @@ export default {
                 this.inputFechaInscripcion = lead.FechaInscripcion ? lead.FechaInscripcion.split('T')[0] : '';;
                 this.inputCarreraInscripcion = lead.CarreraInscripcion;
                 this.inputBecaOfrecida = lead.BecaOfrecida;
-                
+
                 this.leadParaGestionar = lead.LeadID;
                 // Puedes realizar otras acciones, como mostrar el modal o asignar la información a variables del modal
                 this.loadContactos(LeadID);
@@ -1455,49 +1450,80 @@ export default {
 
         async actualizarLead(LeadID, event) {
             event.preventDefault();
-            try {
 
-                const response = await axios.put(`http://localhost:4000/leads/update/${LeadID}`, {
-                // Datos a actualizar
-                NombreCompleto: this.inputName,
-                Telefono: this.inputTelefono,
-                Telefono2: this.inputTelefono2,
-                CorreoElectronico: this.inputCorreo,
-                CorreoElectronico2: this.inputCorreo2,
-                FechaNac: this.leads.FechaNac,
-                EscuelaProcedencia: this.inputEscuelaProcedencia, 
-                NombrePais: this.selectedCountry,
-                NombreEstado: this.selectedState, 
-                NombreCiudad: this.selectedMunicipio,
-                FechaPrimerContacto: this.leads.FechaPrimerContacto,
-                PSeguimiento: this.inputPSeguimiento,
-                CarreraInteresID: this.inputCarreraInteres,
-                Grado: this.inputGrado,
-                Programa: this.inputPrograma,
-                EstatusInsc: this.inputEstatusInscripcion,
-                SemestreIngreso: this.inputSemestreIngreso,
-                Ciclo: this.inputCiclo,
-                CampanaID: this.inputCampana,
-                AsetNameForm: this.inputAsetNameForm,
-                IsOrganic: this.inputIsOrganic, 
-                MedioDeContactoID: this.inputMedioContacto,
-                TipoReferido: this.inputTipoReferido,
-                NombreReferido: this.inputNombreReferido,
-                DondeObtDato: this.inputDondeObtuvoDato, 
-                FechaInscripcion: this.leads.FechaInscripcion,
-                CarreraInscripcion: this.inputCarreraInscripcion,
-                BecaOfrecida: this.inputBecaOfrecida,
-                
-                // ... otros campos que deseas actualizar
-                });
-                this.actualizarLeadNotify();
-                console.log(response.data); // Manejar la respuesta del servidor
-                // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
-            } catch (error) {
-                this.errorActualizarLeadNotify();
-                // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+            // Verificar si hay cambios
+            const hayCambios = this.hayCambiosEnDatos();
+
+            if (hayCambios) {
+                try {
+
+                    const response = await axios.put(`http://localhost:4000/leads/update/${LeadID}`, {
+                        
+                        // Datos a actualizar
+                        NombreCompleto: this.inputName,
+                        Telefono: this.inputTelefono,
+                        Telefono2: this.inputTelefono2,
+                        CorreoElectronico: this.inputCorreo,
+                        CorreoElectronico2: this.inputCorreo2,
+                        FechaNac: this.leads.FechaNac,
+                        EscuelaProcedencia: this.inputEscuelaProcedencia,
+                        NombrePais: this.selectedCountry,
+                        NombreEstado: this.selectedState,
+                        NombreCiudad: this.selectedMunicipio,
+                        FechaPrimerContacto: this.leads.FechaPrimerContacto,
+                        PSeguimiento: this.inputPSeguimiento,
+                        CarreraInteresID: this.inputCarreraInteres,
+                        Grado: this.inputGrado,
+                        Programa: this.inputPrograma,
+                        EstatusInsc: this.inputEstatusInscripcion,
+                        SemestreIngreso: this.inputSemestreIngreso,
+                        Ciclo: this.inputCiclo,
+                        CampanaID: this.inputCampana,
+                        AsetNameForm: this.inputAsetNameForm,
+                        IsOrganic: this.inputIsOrganic,
+                        MedioDeContactoID: this.inputMedioContacto,
+                        TipoReferido: this.inputTipoReferido,
+                        NombreReferido: this.inputNombreReferido,
+                        DondeObtDato: this.inputDondeObtuvoDato,
+                        FechaInscripcion: this.leads.FechaInscripcion,
+                        CarreraInscripcion: this.inputCarreraInscripcion,
+                        BecaOfrecida: this.inputBecaOfrecida,
+
+                        // ... otros campos que deseas actualizar
+                    });
+                    this.actualizarLeadNotify();
+                    console.log(response.data); // Manejar la respuesta del servidor
+                    // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
+                } catch (error) {
+                    this.errorActualizarLeadNotify();
+                    // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+                }
+            } else {
+                console.log("No hay cambios para actualizar.");
+                this.errUpdate();
             }
             this.loadLeads();
+        },
+
+        hayCambiosEnDatos() {
+            // Aquí debes comparar los datos actuales con los datos originales para determinar si hay cambios
+            // Puedes utilizar condiciones como (this.inputName !== this.leads.NombreCompleto) para cada campo
+            // Devuelve true si hay algún cambio, y false si no hay cambios
+
+            return this.inputName !== this.LeadIndividual.NombreCompleto || this.inputTelefono !== this.LeadIndividual.Telefono 
+            || this.inputTelefono2 !== this.LeadIndividual.telefono2 || this.inputCorreo !== this.LeadIndividual.CorreoElectronico
+            || this.inputCorreo2 !== this.LeadIndividual.CorreoElectronico2 || this.leads.FechaNac !== this.LeadIndividual.FechaNac
+            || this.inputEscuelaProcedencia !== this.LeadIndividual.EscuelaProcedencia || this.selectedCountry !== this.LeadIndividual.NombrePais
+            || this.selectedState !== this.LeadIndividual.NombreEstado || this.selectedMunicipio !== this.LeadIndividual.NombreCiudad
+            || this.leads.FechaPrimerContacto !== null || this.inputPSeguimiento !== this.LeadIndividual.PSeguimiento
+            || this.inputCarreraInteres !== this.LeadIndividual.CarreraInteresID || this.inputGrado !== this.LeadIndividual.Grado
+            || this.inputPrograma !== this.LeadIndividual.Programa || this.inputEstatusInscripcion !== this.LeadIndividual.EstatusInsc
+            || this.inputSemestreIngreso !== this.LeadIndividual.SemestreIngreso || this.inputCiclo !== this.LeadIndividual.Ciclo
+            || this.inputCampana !== this.LeadIndividual.CampanaID || this.inputAsetNameForm !== this.LeadIndividual.AsetNameForm
+            || this.inputIsOrganic !== this.LeadIndividual.IsOrganic || this.inputMedioContacto !== this.LeadIndividual.MedioDeContactoID
+            || this.inputTipoReferido !== this.LeadIndividual.TipoReferido || this.inputNombreReferido !== this.LeadIndividual.NombreReferido
+            || this.inputDondeObtuvoDato !== this.LeadIndividual.DondeObtDato || this.leads.FechaInscripcion !== null
+            || this.inputCarreraInscripcion !== this.LeadIndividual.CarreraInscripcion || this.inputBecaOfrecida !== this.LeadIndividual.BecaOfrecida;
         },
 
         async loadContactos(id) {
@@ -1666,4 +1692,11 @@ export default {
 
 </script>
  
-<style></style>
+<style>.sticky-header th {
+    position: sticky;
+    top: 0;
+    background-color: #48C9B0;
+    /* Color de fondo del encabezado */
+    z-index: 1;
+    /* Para asegurarse de que esté encima del contenido al hacer scroll */
+}</style>

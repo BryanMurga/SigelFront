@@ -39,7 +39,7 @@
                     <br><br>
                     <div class="text-center">
                         <a href="" class=" transition p-4 w-full text-blue-500 hover:text-blue-700">
-                            <b>Olvidaste contraseña?</b>
+                            <b>Olvidaste contraseña</b>
                         </a>
                     </div>
                 </div>
