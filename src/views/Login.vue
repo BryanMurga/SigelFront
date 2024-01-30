@@ -139,7 +139,7 @@ export default {
                     if(userRole == 'admin'){
                         this.$router.push({ name: 'home-adm' });
                     }else if(userRole == 'coordinador'){
-                        this.$router.push({ name: 'register' });
+                        this.$router.push({ name: 'alumno-coordinador' });
                     }else if(userRole == 'promotor'){
                         this.$router.push({ name: 'dash-promotor' });
                     }

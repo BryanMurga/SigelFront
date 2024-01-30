@@ -19,6 +19,7 @@ import RegisterContacto from '../views/promotor/RegisterContacto.vue'
 import CargarArchivo from '../views/admin/CargarArchivo.vue'
 import AlumnoPromotor from '../views/promotor/AlumnoPromotor.vue'
 import DashAdmin from '../views/admin/DashAdmin.vue'
+import AlumnoCoordinador from '../views/coordinador/AlumnoCoordinador.vue'
 
 
 const router = createRouter({
@@ -245,6 +246,20 @@ const router = createRouter({
           }
         }
       },
+      {
+        path: '/alumno-coordinador',
+        name: 'alumno-coordinador',
+        component: AlumnoCoordinador,
+        beforeEnter: (to, from, next) => {
+          if (getRole() === 'coordinador') {
+            // Acceso permitido para administradores
+            next();
+          } else {
+            // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+            next({ name: '/login' });
+          }
+        }
+      }
   ]
 })
 export default router;

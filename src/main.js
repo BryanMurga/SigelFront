@@ -13,5 +13,4 @@ const app = createApp(App);
 app.use(VueFinalModal());
 app.use(router)
 
-
 app.mount('#app');
