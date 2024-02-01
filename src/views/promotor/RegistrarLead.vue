@@ -348,7 +348,7 @@
                   >Estatus de Inscripción:</label
                 >
                 <select
-                  v-model="lead.EstatusInscripcion"
+                  v-model="lead.EstatusInsc"
                   id="estatusInscripcion"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
@@ -714,7 +714,7 @@ export default {
         CarreraInteresID: null,
         Grado: "",
         Programa: "",
-        EstatusInscripcion: "",
+        EstatusInsc: "",
         SemestreIngreso: "",
         Ciclo: "",
         CampanaID: null,
@@ -1064,7 +1064,8 @@ export default {
         FechaPromotorActual,
         Comentarios,
       };
-
+      
+      console.log(leadData)
       await axios.post('http://localhost:4000/leads/create', leadData);
 
       // Redirige a la vista deseada después del registro
@@ -1116,7 +1117,7 @@ export default {
         CarreraInteresID: null,
         Grado: "",
         Programa: "",
-        EstatusInscripcion: "",
+        EstatusInsc: "",
         SemestreIngreso: "",
         Ciclo: "",
         CampanaID: null,

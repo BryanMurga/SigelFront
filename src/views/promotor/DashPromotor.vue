@@ -22,7 +22,7 @@
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de Inscripciones
+                Total de Leads edad:
                 {{
                   inscripcionesPorEdadData.reduce(
                     (acc, item) => acc + item.total,
@@ -53,7 +53,7 @@
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de inscripciones:
+                Total de Leads asignados:
                 {{
                   inscripcionesPorStatusData.reduce(
                     (acc, item) => acc + item.total,
@@ -83,7 +83,7 @@
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de Inscripciones
+                Total de Leads por Grado:
                 {{
                   totalPorGradoData.reduce((acc, item) => acc + item.total, 0)
                 }}
@@ -109,7 +109,7 @@
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de Inscripciones
+                Total de Leads por Beca:
                 {{
                   totalPorBecaData.reduce((acc, item) => acc + item.total, 0)
                 }}
