@@ -244,7 +244,7 @@
             <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
                 <table v-if="filterList.length > 0"
                     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white">
+                    <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white sticky-header" >
                         <tr>
                             <!-- <th scope="col" class="p-4">
                                 <div class="flex items-center">
@@ -847,4 +847,11 @@ export default {
 
 </script>
  
-<style></style>
+<style>
+.sticky-header th {
+        position: sticky;
+        top: 0;
+        background-color: #48C9B0; /* Color de fondo del encabezado */
+        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
+    }
+</style>
