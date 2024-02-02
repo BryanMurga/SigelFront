@@ -88,8 +88,6 @@
                     </div>
                 </div>
 
-
-                <!-- Main modal -->
                 <!-- Modal de gestion -->
                 <div id="crud-modal" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -261,7 +259,8 @@
                                             Primer
                                             Contacto</label>
                                         <DatePicker v-model="leads.FechaPrimerContacto"
-                                            :placeholder="inputFechaPrimerContacto" class="input-field rounded-md" :clearable="true"/>
+                                            :placeholder="inputFechaPrimerContacto" class="input-field rounded-md"
+                                            :clearable="true" />
                                     </div>
                                     <!-- PS-Seguimiento -->
                                     <div>
@@ -1458,7 +1457,7 @@ export default {
                 try {
 
                     const response = await axios.put(`http://localhost:4000/leads/update/${LeadID}`, {
-                        
+
                         // Datos a actualizar
                         NombreCompleto: this.inputName,
                         Telefono: this.inputTelefono,
@@ -1510,20 +1509,20 @@ export default {
             // Puedes utilizar condiciones como (this.inputName !== this.leads.NombreCompleto) para cada campo
             // Devuelve true si hay algún cambio, y false si no hay cambios
 
-            return this.inputName !== this.LeadIndividual.NombreCompleto || this.inputTelefono !== this.LeadIndividual.Telefono 
-            || this.inputTelefono2 !== this.LeadIndividual.telefono2 || this.inputCorreo !== this.LeadIndividual.CorreoElectronico
-            || this.inputCorreo2 !== this.LeadIndividual.CorreoElectronico2 || this.leads.FechaNac !== this.LeadIndividual.FechaNac
-            || this.inputEscuelaProcedencia !== this.LeadIndividual.EscuelaProcedencia || this.selectedCountry !== this.LeadIndividual.NombrePais
-            || this.selectedState !== this.LeadIndividual.NombreEstado || this.selectedMunicipio !== this.LeadIndividual.NombreCiudad
-            || this.leads.FechaPrimerContacto !== null || this.inputPSeguimiento !== this.LeadIndividual.PSeguimiento
-            || this.inputCarreraInteres !== this.LeadIndividual.CarreraInteresID || this.inputGrado !== this.LeadIndividual.Grado
-            || this.inputPrograma !== this.LeadIndividual.Programa || this.inputEstatusInscripcion !== this.LeadIndividual.EstatusInsc
-            || this.inputSemestreIngreso !== this.LeadIndividual.SemestreIngreso || this.inputCiclo !== this.LeadIndividual.Ciclo
-            || this.inputCampana !== this.LeadIndividual.CampanaID || this.inputAsetNameForm !== this.LeadIndividual.AsetNameForm
-            || this.inputIsOrganic !== this.LeadIndividual.IsOrganic || this.inputMedioContacto !== this.LeadIndividual.MedioDeContactoID
-            || this.inputTipoReferido !== this.LeadIndividual.TipoReferido || this.inputNombreReferido !== this.LeadIndividual.NombreReferido
-            || this.inputDondeObtuvoDato !== this.LeadIndividual.DondeObtDato || this.leads.FechaInscripcion !== null
-            || this.inputCarreraInscripcion !== this.LeadIndividual.CarreraInscripcion || this.inputBecaOfrecida !== this.LeadIndividual.BecaOfrecida;
+            return this.inputName !== this.LeadIndividual.NombreCompleto || this.inputTelefono !== this.LeadIndividual.Telefono
+                || this.inputTelefono2 !== this.LeadIndividual.telefono2 || this.inputCorreo !== this.LeadIndividual.CorreoElectronico
+                || this.inputCorreo2 !== this.LeadIndividual.CorreoElectronico2 || this.leads.FechaNac !== this.LeadIndividual.FechaNac
+                || this.inputEscuelaProcedencia !== this.LeadIndividual.EscuelaProcedencia || this.selectedCountry !== this.LeadIndividual.NombrePais
+                || this.selectedState !== this.LeadIndividual.NombreEstado || this.selectedMunicipio !== this.LeadIndividual.NombreCiudad
+                || this.leads.FechaPrimerContacto !== null || this.inputPSeguimiento !== this.LeadIndividual.PSeguimiento
+                || this.inputCarreraInteres !== this.LeadIndividual.CarreraInteresID || this.inputGrado !== this.LeadIndividual.Grado
+                || this.inputPrograma !== this.LeadIndividual.Programa || this.inputEstatusInscripcion !== this.LeadIndividual.EstatusInsc
+                || this.inputSemestreIngreso !== this.LeadIndividual.SemestreIngreso || this.inputCiclo !== this.LeadIndividual.Ciclo
+                || this.inputCampana !== this.LeadIndividual.CampanaID || this.inputAsetNameForm !== this.LeadIndividual.AsetNameForm
+                || this.inputIsOrganic !== this.LeadIndividual.IsOrganic || this.inputMedioContacto !== this.LeadIndividual.MedioDeContactoID
+                || this.inputTipoReferido !== this.LeadIndividual.TipoReferido || this.inputNombreReferido !== this.LeadIndividual.NombreReferido
+                || this.inputDondeObtuvoDato !== this.LeadIndividual.DondeObtDato || this.leads.FechaInscripcion !== null
+                || this.inputCarreraInscripcion !== this.LeadIndividual.CarreraInscripcion || this.inputBecaOfrecida !== this.LeadIndividual.BecaOfrecida;
         },
 
         async loadContactos(id) {
@@ -1689,7 +1688,8 @@ export default {
 
 </script>
  
-<style>.sticky-header th {
+<style>
+.sticky-header th {
     position: sticky;
     top: 0;
     background-color: #48C9B0;
