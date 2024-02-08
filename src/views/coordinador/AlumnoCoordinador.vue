@@ -726,10 +726,7 @@ export default {
                     });
                     this.actualizarLeadNotify();
                     console.log(response.data); // Manejar la respuesta del servidor
-                    setTimeout(() => {
-                    // Recargar la página después del tiempo de espera
-                    window.location.reload();
-                    }, 3500);
+                    
                     // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
                 } catch (error) {
                     this.errorActualizarLeadNotify();
@@ -808,7 +805,7 @@ export default {
             handler() {
                 this.loadRedes;
                 this.filteredAlumnos;
-                this.loadAlumnos;
+                this.loadAlumnos();
                 this.loadCarreras;
                 this.loadDatosAlumnos;
                 this.loadPromotor;
