@@ -311,13 +311,9 @@
                         <TableDataCell>{{ formatDate(lead.FechaPromotorActual) }}</TableDataCell>
                         <TableDataCell>{{ lead.Comentarios }}</TableDataCell>
                         <TableDataCell>
-                            <button 
-                                @click="VerContactoModal(lead.LeadID)" 
-                                data-modal-target="verContacto"
-                                data-modal-toggle="verContacto" 
-                                type="button"
-                                class="py-2 px-4 bg-sky-600 hover:bg-sky-700 rounded-md text-white text-xs duration-150"
-                            >
+                            <button @click="VerContactoModal(lead.LeadID)" data-modal-target="verContacto"
+                                data-modal-toggle="verContacto" type="button"
+                                class="py-2 px-4 bg-sky-600 hover:bg-sky-700 rounded-md text-white text-xs duration-150">
                                 Ver
                             </button>
                         </TableDataCell>
