@@ -1,60 +1,40 @@
 <template>
-    <div class="flex-1">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
-            <div class="lg:ml-64 p-4">
-            <i class="fa-solid fa-home fa-xl" style="color: #48c9b0"></i>
-            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Home</span>
-        </div>
-            <sideBarADM /> <!-- Importa y utiliza el componente SidebarADM -->
-            <!-- Otro contenido de tu vista -->
-            <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Inicio</h5>
-        </div>
-            <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" style="margin-top: 3%;"> <!-- Modificado: Utilizando grid para distribuir tarjetas -->
-                <a href="promotor-list"
-                    class="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
-                    style="background-color: #48c9b0; padding-bottom: 25%; position: relative; "> <!-- Cambia el valor hexadecimal aquí -->
-                    <i class="fas fa-circle-user text-9xl text-white mt-10"></i> <!-- Añadir margen arriba -->
-                    <h5 class="mb-2 text-4xl font-bold tracking-tight text-white">Promotores</h5> <!-- Añadir margen arriba -->
-                </a>
+    <DashboardLayout name="Dashboard">
+        <section class="h-fit w-full grid grid-cols-3 gap-6">
+            <CardLink 
+                url="promotor-list" 
+                name="Promotores" 
+            />
 
-                <a href="dash-admin"
-                    class="block max-w-sm p-6 bg-green-300 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
-                    style="background-color: #48c9b0; padding-bottom: 25%; position: relative; ">
-                    <i class="fas fa-chart-pie text-9xl mt-10" style="color: white"></i>
-                    <h5 class="mb-2 text-4xl font-bold tracking-tight text-white">Dashboard</h5>
-                </a>
+            <CardLink 
+                url="dash-admin" 
+                name="Dashboard" 
+            />
 
-                <a href="indicadores"
-                    class="block max-w-sm p-6 bg-yellow-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center"
-                    style="background-color: #48c9b0; padding-bottom: 25%; position: relative; ">
-                    <i class="fas fa-arrow-trend-up text-9xl mt-10" style="color: white"></i>
-                    <h5 class="mb-2 text-4xl font-bold tracking-tight text-white">Indicadores</h5>
-                </a>
-            </div>
-        </div>
-    </div>
+            <CardLink 
+                url="indicadores" 
+                name="Indicadores" 
+            />
+
+            <CardLink 
+                url="campania" 
+                name="Campañas" 
+            />
+        </section>
+    </DashboardLayout>
 </template>
 
 
 <script>
-
-import sideBarADM from '../../components/SideBarADM.vue'; 
-
-
-import { onMounted } from "vue";
-import { initFlowbite } from "flowbite";
 import { getUserName } from "../../sessions";
 
-// initialize components based on data attribute selectors
-onMounted(() => {
-    initFlowbite();
-});
+import DashboardLayout from '../../layouts/DashboardLayout.vue';
+import CardLink from "../../components/CardLink.vue";
 
 export default {
     components: {
-        sideBarADM
-        
+        DashboardLayout, CardLink
+
     },
     data() {
         return {
