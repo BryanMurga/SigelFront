@@ -149,7 +149,7 @@
                     <!-- Modal body -->
                     <form class="p-4 md:p-5">
                         <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                            Datos Personales
+                            Datos Académicos
                         </h2>
                         <!-- Datos Personales -->
                         <div class="grid gap-4 mb-4 grid-cols-2">
@@ -157,45 +157,36 @@
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
-                                    Completo *</label>
+                                    Alumno</label>
                                 <input type="text" name="name" id="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     v-model="updateAlumno.inputNombre" placeholder="Nombre Completo" required="">
-                            </div>
-                            <!-- Telefono -->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="number"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono
-                                    *</label>
-                                <input type="text" name="number" id="number"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputTelefono" placeholder="Número de teléfono" required="">
                             </div>
                             <!-- CorreoElectronico -->
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="price"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo
-                                    Electrónico *</label>
+                                    Institucional</label>
                                 <input type="text" name="price" id="number"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputCorreo" placeholder="Correo Electrónico" required="">
+                                    v-model="updateAlumno.inputCorreoInstitucional" placeholder="Correo Electrónico" required="">
                             </div>
-                            <!-- FechaNacimiento -->
+                            <!-- No. Recibo-->
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
-                                    de
-                                    Nacimiento</label>
-                                <DatePicker :placeholder="updateAlumno.inputFechaNacimiento" class="input-field rounded-md"
-                                    :clearable="true" />
+                                <label for="number"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Recibo</label>
+                                <input type="text" name="number" id="number"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    v-model="updateAlumno.inputNoRecibo" placeholder="Número de teléfono" required="">
                             </div>
-                        </div>
-
-                        <hr class="my-1 border-black" />
-                        <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                            Datos de Procedencia Académica
-                        </h2>
-                        <!-- Datos de Procedencia Académica -->
-                        <div class="grid gap-4 mb-4 grid-cols-2">
+                            <!--Matricula-->
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="matricula"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matricula</label>
+                                <input type="text" name="matricula" id="matricula"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    v-model="updateAlumno.inputMatricula" placeholder="Matricula" required="">
+                            </div>
                             <!-- EscuelaProcedencia -->
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="price"
@@ -205,70 +196,21 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     v-model="updateAlumno.inputEscuelaProcedencia" placeholder="Escuela de Procedencia">
                             </div>
-                            <!-- Pais -->
-                            <div>
-                                <label for="countries"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
-                                    una país</label>
-                                <select v-model="updateAlumno.selectedCountry" id="countries"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option v-for="country in countries" :key="country.name.common"
-                                        :value="country.name.common" :placeholder="updateAlumno.selectedCountry">
-                                        {{ country.name.common }}
-                                    </option>
-                                </select>
-                            </div>
-                            <!-- Estado -->
-                            <div v-if="updateAlumno.selectedCountry === 'Mexico'">
-                                <label for="states"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
-                                    una estado</label>
-                                <select v-model="selectedState" id="states"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option v-for="state in Object.keys(estadosMunicipios)" :key="state" :value="state"
-                                        :placeholder="updateAlumno.selectedMunicipio">
-                                        {{ state }}
-                                    </option>
-                                </select>
-                            </div>
-                            <!-- Municipio -->
-                            <div v-if="updateAlumno.selectedCountry === 'Mexico' && updateAlumno.selectedState">
-                                <label for="municipios"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona
-                                    una municipio</label>
-                                <select v-model="selectedMunicipio" id="municipios"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option v-for="municipio in estadosMunicipios[selectedState]" :key="municipio"
-                                        :value="municipio" :placeholder="updateAlumno.selectedMunicipio">
-                                        {{ municipio }}
-                                    </option>
-                                </select>
-                            </div>
-                            <!-- Estado otro-->
-                            <div v-if="updateAlumno.selectedCountry !== 'Mexico'">
-                                <label for="otro-estado"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Estado</label>
-                                <input type="text" id="otro-estado"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required v-model="updateAlumno.selectedState">
-                            </div>
-                            <!-- Municipio otro -->
-                            <div v-if="updateAlumno.selectedCountry !== 'Mexico'">
-                                <label for="otro-ciudad"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
-                                <input type="text" id="otro-ciudad"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required v-model="updateAlumno.selectedMunicipio">
-                            </div>
                         </div>
-
                         <!-- Datos de Redes -->
                         <hr class="my-1 border-black" />
                         <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
                             Datos de Redes
                         </h2>
                         <div class="grid gap-4 mb-4 grid-cols-2">
+                            <!-- Telefono -->
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="number"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono Familiar</label>
+                                <input type="text" name="number" id="number"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    v-model="updateAlumno.inputTelefonoFamiliar" placeholder="Número de teléfono" required="">
+                            </div>
                             <!-- Facebook -->
                             <div>
                                 <label for="rsFacebook"
@@ -326,17 +268,9 @@
                         <!-- Datos de Inscripcion -->
                         <hr class="my-1 border-black" />
                         <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                            Datos de Inscripcion
+                            Datos de Programa
                         </h2>
                         <div class="grid gap-4 mb-4 grid-cols-2">
-
-                            <!-- Fecha Inscripcion-->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha
-                                    de
-                                    Inscripción</label>
-                                <DatePicker :placeholder="updateAlumno.inputFechaInscripcion" class="input-field rounded-md" />
-                            </div>
                             <!--Carrera Inscripción-->
                             <div>
                                 <label for="carrera-inscripcion"
@@ -345,23 +279,35 @@
                                 <select id="carrera-inscripcion"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     v-model="updateAlumno.inputCarreraInscripcion">
-                                    <option v-for="carrera in CarreraInscrita" :key="carrera.CarreraID"
+                                    <option v-for="carrera in carreraInscrita" :key="carrera.CarreraID"
                                         :value="carrera.CarreraID">{{ carrera.Nombre }}</option>
                                 </select>
                             </div>
-                            <!--Beca Ofrecida-->
+                            <!--Porcedencia-->
                             <div>
-                                <label for="becaOfrecida"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Beca Ofrecida</label>
-                                <input type="text" id="becaOfrecida"
+                                <label for="procedencia"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Procedencia</label>
+                                <select id="procedencia"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputBecaOfrecida" placeholder="Ingresa el valor de la Beca" required="">
+                                    v-model="updateAlumno.inputProcedencia">
+                                    <option v-for="procedencia in Procedencia" :key="procedencia"
+                                        :value="procedencia">{{ procedencia }}</option>
+                                </select>
                             </div>
-
+                            <!--Promotor ID-->
+                            <div>
+                                <label for="promotor"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotor</label>
+                                <select id="promotor"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    v-model="updateAlumno.inputPromotor">
+                                    <option v-for="promotor in Promotores" :key="promotor.PromotorID"
+                                        :value="promotor.PromotorID">{{ promotor.Nombre }}</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <button @click="actualizarLead(leadParaGestionar, $event)" type="submit"
+                        <button @click="actualizarAlumno(alumnoParaGestionar, $event)" type="submit"
                             data-modal-toggle="gestion-modal"
                             class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -465,6 +411,9 @@ import { ref } from "vue";
 import { id } from "date-fns/locale";
 import DatePicker from "vue3-datepicker";
 
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 // initialize components based on data attribute selectors
 
 onMounted(() => {
@@ -473,12 +422,75 @@ onMounted(() => {
 
 export default {
 
+    //types of toast
+    setup() {
 
+        const notify = () => {
+            toast("Se ha actualizado los leads Seleccionados!", {
+                autoClose: 3000,
+                type: 'success'
+            }); // ToastOptions
+        }
+
+        const errUpdate = () => {
+            toast(`"No hay cambios para actualizar.`, {
+                autoClose: 2000,
+                type: 'warning'
+            }); // ToastOptions
+        }
+
+        const errLeads = () => {
+            toast("Tienes que seleccionar leads antes de actualizarlos", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const errPromotores = () => {
+            toast("Error al obtener los Promotores Activos", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const errActualizarPromotores = () => {
+            toast("Error al actualizar los leads", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptionsnopm
+        }
+
+        const actualizarLeadNotify = () => {
+            toast("Lead actualizado con éxito", {
+                autoClose: 3000,
+                type: 'success'
+            }); // ToastOptions
+
+        }
+
+        const errorActualizarLeadNotify = () => {
+            toast("Error al actualizar el lead", {
+                autoClose: 3000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        const infoNotify = () => {
+            toast("Se ha actualizado la Información... ", {
+                autoClose: 2000,
+                type: 'error'
+            }); // ToastOptions
+        }
+
+        return { notify, errUpdate, infoNotify, errLeads, errPromotores, actualizarLeadNotify, errorActualizarLeadNotify };
+        },
 
     data() {
         return {
             userName: getUserName(),
             alumnos: [],
+            leadIndividual: [],
+            comparacionAlumno: [],
             searchQuery: "",
             redes: null,
             isDropdownOpen: false,
@@ -486,21 +498,23 @@ export default {
             filtradoSelect: ['Carrera', 'Procedencia', 'Estatus'],
             selectedFiltrado: 'Carrera',
             subSelectedFiltrado: null,
-            Carreras: [],
+            carreraInscrita: [],
+            Promotores: [],
             Procedencia: ['Local', 'Foraneo'],
             Estatus: ['INSC', 'BAJA'],
+            alumnoParaGestionar: null,
             input: '',
             updateAlumno: {
                 inputNombre: null,
-                inputTelefono: null,
-                inputTelefono2: null,
-                inputEscuelaProcedencia: null,
+                inputCorreoInstitucional: null,
                 inputNoRecibo: null,
                 inputMatricula: null,
+                inputEscuelaProcedencia: null,
+                inputTelefonoFamiliar: null,
                 inputCarreraInscripcion: null,
                 inputProcedencia: null,
+                inputPromotor: null,
                 inputEstatus: null,
-                inputCorreo: null,
                 inputCorreo2: null,
                 inputFechaNacimiento: null,
                 inputFechaPrimerContacto: null,
@@ -513,7 +527,7 @@ export default {
                 inputFacebook: null,
                 inputInsta: null,
                 inputTikTok: null,
-                inputLinknull: null,
+                inputLink: null,
                 inputTwiter: null,
                 inputWhatsapp: null,
                 inputOtro:null,
@@ -522,7 +536,6 @@ export default {
                 inputDondeObtuvoDato: null,
                 inputFechaInscripcion: null,
             },
-            leadIndividual: [],
 
         };
 
@@ -532,6 +545,7 @@ export default {
         this.loadRedes();
         this.loadCarreras();
         this.loadDatosAlumnos();
+        this.loadPromotor();
     },
     computed: {
         filteredAlumnos() {
@@ -617,11 +631,13 @@ export default {
             } catch (error) {
             }
         },
+
         async asignarAlumno(alumnoID) {
             await this.loadRedes(alumnoID);
             await this.loadDatosAlumnos(alumnoID);
 
         },
+
         async loadRedes(alumnoID) {
             console.log(alumnoID);
 
@@ -650,23 +666,126 @@ export default {
             try {
                 const response = await axios.get(`http://localhost:4000/alumno/${alumnoID}`);
                 if (response.data && response.data.alumno) {
+
+                    this.comparacionAlumno = response.data.alumno;
+
                     this.leadIndividual = response.data.alumno;
+                    this.updateAlumno.inputNombre = this.leadIndividual.nombreAlumno;
+                    this.updateAlumno.inputCorreoInstitucional = this.leadIndividual.CorreoInstitucional;
+                    this.updateAlumno.inputNoRecibo = this.leadIndividual.NoRecibo;
+                    this.updateAlumno.inputMatricula = this.leadIndividual.Matricula;
+                    this.updateAlumno.inputEscuelaProcedencia = this.leadIndividual.EscuelaProcedencia;
+                    this.updateAlumno.inputTelefonoFamiliar = this.leadIndividual.Telefono;
+                    this.updateAlumno.inputFacebook = this.leadIndividual.RSFacebook;
+                    this.updateAlumno.inputInsta = this.leadIndividual.RSInstagram;
+                    this.updateAlumno.inputTikTok = this.leadIndividual.RSTiktok;
+                    this.updateAlumno.inputLink = this.leadIndividual.RSLinkedln;
+                    this.updateAlumno.inputTwiter = this.leadIndividual.RSTwiter;
+                    this.updateAlumno.inputWhatsapp = this.leadIndividual.RSWhatsapp;
+                    this.updateAlumno.inputOtro = this.leadIndividual.RSOtro;
+                    this.updateAlumno.inputCarreraInscripcion = this.leadIndividual.CarreraInscripcion;
+                    this.updateAlumno.inputProcedencia = this.leadIndividual.Procedencia;
+                    this.updateAlumno.inputPromotor = this.leadIndividual.PromotorID;
+                    this.alumnoParaGestionar = this.leadIndividual.AlumnoID;
+                    
                 }
             } catch (error) {
                 console.log('Error al obtener los datos del alumno:', error);
             }
         },
+        
+        async actualizarAlumno(alumnoID, event) {
+            event.preventDefault();
+
+            // Verificar si hay cambios
+            const hayCambios = this.hayCambiosEnDatos();
+
+            if (hayCambios) {
+                try {
+
+                    const response = await axios.put(`http://localhost:4000/Alumno/update/${alumnoID}`, {
+
+                        // Datos a actualizar
+                        Nombre: this.updateAlumno.inputNombre,
+                        CorreoInstitucional: this.updateAlumno.inputCorreoInstitucional,
+                        NoRecibo: this.updateAlumno.inputNoRecibo,
+                        Matricula: this.updateAlumno.inputMatricula,
+                        EscuelaProcedencia: this.updateAlumno.inputEscuelaProcedencia,
+                        Telefono: this.updateAlumno.inputTelefonoFamiliar,
+                        RSFacebook: this.updateAlumno.inputFacebook,
+                        RSInstagram: this.updateAlumno.inputInsta,
+                        RSTiktok: this.updateAlumno.inputTikTok,
+                        RSLinkedln: this.updateAlumno.inputLink,
+                        RSTwiter: this.updateAlumno.inputTwiter,
+                        RSWhatsapp: this.updateAlumno.inputWhatsapp,
+                        RSOtro: this.updateAlumno.inputOtro,
+                        CarreraInscripcion: this.updateAlumno.inputCarreraInscripcion,
+                        Procedencia: this.updateAlumno.inputProcedencia,
+                        PromotorID: this.updateAlumno.inputPromotor,
+                        // ... otros campos que deseas actualizar
+                    });
+                    this.actualizarLeadNotify();
+                    console.log(response.data); // Manejar la respuesta del servidor
+                    
+                    // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
+                } catch (error) {
+                    this.errorActualizarLeadNotify();
+                    // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+                }
+            } else {
+                console.log("No hay cambios para actualizar.");
+                this.errUpdate();
+            }
+            this.loadLeads();
+        },
+
+        hayCambiosEnDatos() {
+            // Aquí debes comparar los datos actuales con los datos originales para determinar si hay cambios
+            // Puedes utilizar condiciones como (this.inputName !== this.leads.NombreCompleto) para cada campo
+            // Devuelve true si hay algún cambio, y false si no hay cambios
+            
+            return this.updateAlumno.inputNombre !== this.comparacionAlumno.nombreAlumno
+                || this.updateAlumno.inputCorreoInstitucional !== this.comparacionAlumno.CorreoInstitucional
+                || this.updateAlumno.inputNoRecibo !== this.comparacionAlumno.NoRecibo
+                || this.updateAlumno.inputMatricula !== this.comparacionAlumno.Matricula
+                || this.updateAlumno.inputEscuelaProcedencia !== this.comparacionAlumno.EscuelaProcedencia
+                || this.updateAlumno.inputTelefonoFamiliar !== this.comparacionAlumno.Telefono
+                || this.updateAlumno.inputFacebook !== this.comparacionAlumno.RSFacebook
+                || this.updateAlumno.inputInsta !== this.comparacionAlumno.RSInstagram
+                || this.updateAlumno.inputTikTok !== this.comparacionAlumno.RSTiktok
+                || this.updateAlumno.inputLink !== this.comparacionAlumno.RSLinkedln
+                || this.updateAlumno.inputTwiter !== this.comparacionAlumno.RSTwiter
+                || this.updateAlumno.inputWhatsapp !== this.comparacionAlumno.RSWhatsapp
+                || this.updateAlumno.inputOtro !== this.comparacionAlumno.RSOtro
+                || this.updateAlumno.inputCarreraInscripcion !== this.comparacionAlumno.CarreraInscripcion
+                || this.updateAlumno.inputProcedencia !== this.comparacionAlumno.Procedencia
+                || this.updateAlumno.inputPromotor !== this.comparacionAlumno.PromotorID;
+                // ... otras comparaciones
+        },
+
+        
         async loadCarreras() {
             try {
                 const response = await axios.get('http://localhost:4000/carrera');
                 if (response.data && response.data.carreras) {
-                    this.Carreras = response.data.carreras;
-                    this.Carreras = response.data.carreras;
+                    this.carreraInscrita = response.data.carreras;
                 }
             } catch (error) {
                 console.log('Error al obtener las carreras:', error);
             }
         },
+
+        async loadPromotor() {
+            try {
+                const response = await axios.get('http://localhost:4000/promotores');
+                if (response.data && response.data.listPromotores) {
+                    this.Promotores = response.data.listPromotores;
+                }
+            } catch (error) {
+                console.log('Error al obtener las carreras:', error);
+            }
+        },
+
         toggleDropdown() {
             this.isDropdownOpen = !this.isDropdownOpen;
         },
@@ -686,9 +805,10 @@ export default {
             handler() {
                 this.loadRedes;
                 this.filteredAlumnos;
-                this.loadAlumnos;
+                this.loadAlumnos();
                 this.loadCarreras;
                 this.loadDatosAlumnos;
+                this.loadPromotor;
             },
 
         },

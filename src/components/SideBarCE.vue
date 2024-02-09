@@ -60,21 +60,6 @@
              <span class="flex-1 ms-3">Alumnos</span>
            </a>
          </li> 
-         
-        <li class="md:mt-3  items-center">
-          <a href="alumno-promotor" :class="{
-            'bg-green-500': selectedSection === 'alumno-promotor',
-          }"
-            class="flex items-center p-6 text-white rounded-lg dark:text-white hover:bg-green-600 dark:hover:bg-green-700 group transition duration-300"
-            @click="selectSection('alumno-promotor')">
-            <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"></svg>
-            <i class="fa-solid fa-circle-plus fa-xl"></i>
-            <span class="flex-1 ms-3 whitespace-nowrap">Registrar</span>
-          </a>
-        </li>
- 
          <li class="md:mt-3  items-center">
            <a
              @click="cerrarSesion"
