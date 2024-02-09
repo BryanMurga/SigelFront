@@ -34,7 +34,7 @@
                                 <div class="mt-6">
                                     <InputLabel for="password" value="Contraseña" />
                                     <TextInput id="password" v-model="formData.password" type="password"
-                                        class="mt-1 block w-full" placeholder="Ingrese su contraseña" autofocus />
+                                        class="mt-1 block w-full" placeholder="Ingrese su contraseña" />
                                 </div>
 
                                 <div class="flex mt-4">
@@ -168,6 +168,5 @@ export default {
     mounted: function () {
     },
 }
-
 
 </script>
