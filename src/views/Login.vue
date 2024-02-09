@@ -1,74 +1,77 @@
 <template>
-    <div class="p-10 bg-gray-200 absolute h-[100%] w-full flex items-center justify-center">
-        <div class="bg-white shadow-lg overflow-hidden rounded-xl  lg:w-[50%] xs:w-full sm:w-full h-[38em]">
-            <div class="flex space-between items-center">
-                <div class="image-container lg:w-[50%] xs:hidden">
-                    <!-- Agregar la imagen -->
+    <main class="h-screen w-full bg-gray-200">
+        <section class="container mx-auto h-full w-full lg:max-w-6xl py-12">
+            <div class="flex h-full w-full bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- Imagen representativa -->
+                <div class="hidden lg:block h-full w-1/2">
+                    <figure class="h-full w-full">
+                        <img src="/uninterlogo.webp" alt="logo-uninter" class="w-full h-full object-cover">
+                    </figure>
                 </div>
-                <div class="lg:w-[50%] xs:w-full sm:w-full p-10 ">
-                    <div>
-                        <b class="text-2xl text-gray-800">Sistema de Gestión y control de Leads.</b>
-                    </div>
-                    <br><br>
-                    <form @submit="entrar">
-                        <div>
-                            <div class="flex flex-col">
-                                <span class="font-bold mb-1">
-                                    <i class="fa fa-user-circle"></i> Correo Electronico</span>
-                                <input type="email" v-model="formData.email" name="email"
-                                    placeholder="Introduzca un usuario"
-                                    class="p-4 rounded-lg border border-gray-300 w-full">
+                <!-- Formulario -->
+                <div class="h-full w-full lg:w-1/2">
+                    <div class="flex flex-col items-center justify-center h-full w-full py-8">
+                        <div class="my-10">
+                            <div class="flex justify-center w-full pb-6">
+                                <figure class="block lg:hidden w-28 h-28">
+                                    <img src="/Uninter - Logo (Responsive).webp" alt="logo-uninter">
+                                </figure>
                             </div>
+                            <h1 class="text-center text-lg md:text-2xl font-bold uppercase">Inicio de sesión</h1>
+                            <h2 class="text-center text-base md:text-lg font-semibold text-[#273746] capitalize">
+                                Sistema de Gestión y control de Leads.
+                            </h2>
                         </div>
-                        <br>
-                        <div>
-                            <div class="flex flex-col">
-                                <span class="font-bold mb-1">
-                                    <i class="fa fa-unlock-alt "></i> Contraseña</span>
-                                <input type="password" v-model="formData.password" name="password"
-                                    placeholder="Introduzca una contraseña"
-                                    class="p-4 rounded-lg border border-gray-300 w-full">
-                            </div>
+
+                        <div class="w-full max-w-xs md:max-w-xl lg:max-w-md">
+                            <form @submit="entrar">
+                                <div>
+                                    <InputLabel for="email" value="Correo Electrónico" />
+                                    <TextInput id="email" v-model="formData.email" type="email" class="mt-1 block w-full"
+                                        placeholder="Ingrese su correo electrónico" autofocus autocomplete="email" />
+                                </div>
+
+                                <div class="mt-6">
+                                    <InputLabel for="password" value="Contraseña" />
+                                    <TextInput id="password" v-model="formData.password" type="password"
+                                        class="mt-1 block w-full" placeholder="Ingrese su contraseña" />
+                                </div>
+
+                                <div class="flex mt-4">
+                                    <button v-on:click="validateFields()" type="submit"
+                                        class="py-3 w-full text-white bg-[#00457B] hover:bg-[#003167] lg:bg-[#3d566d] lg:hover:bg-[#273746] rounded-xl duration-200">
+                                        Iniciar Sesión
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <br>
-                        <button v-on:click="validateFields()" type="submit"
-                            class=" transition p-4 w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg">
-                            Entrar <i class="fa fa-paper-plane"></i>
-                        </button>
-                    </form>
-                    <br><br>
-                    <div class="text-center">
-                        <a href="" class=" transition p-4 w-full text-blue-500 hover:text-blue-700">
-                            <b>Olvidaste contraseña</b>
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="text-center p-8 text-[10px] font-bold absolute bottom-0 left-0 w-full">
-            Copyrigth Universidad Internacional. {{ new Date().getFullYear() }}
-        </div>
-
-    </div>
+            <!-- Copyrigth -->
+            <footer class="flex justify-center w-full h-fit py-3">
+                <h5 class="text-sm font-semibold">
+                    © {{ new Date().getFullYear() }} - Universidad Internacional.
+                </h5>
+            </footer>
+        </section>
+    </main>
 </template>
 
-<style scoped>
-.image-container {
-    background-image: url(/uninterlogo.png    );
-    background-position: center;
-    background-size: cover;
-    height: 38em;
-}
-</style>
-
 <script>
-
 import axios from 'axios';
 import { setRole } from '../sessions';
 import { setUserName } from '../sessions';
 
+// Componentes
+import TextInput from './../components/TextInput.vue';
+import InputLabel from './../components/InputLabel.vue';
+
 export default {
+    components: {
+        TextInput, InputLabel
+    },
     data() {
         return {
             formData: {
@@ -93,7 +96,7 @@ export default {
             if (!this.validateEmail(this.email)) {
                 Swal.fire({
                     title: "Error",
-                    text: "Correo electronico invalido",
+                    text: "Correo electrónico invalido",
                     icon: "error",
                     button: "Aceptar",
                 });
@@ -136,18 +139,18 @@ export default {
                     const userRole = response.data.role;
                     const userName = response.data.userName;
 
-                    if(userRole == 'admin'){
+                    if (userRole == 'admin') {
                         this.$router.push({ name: 'home-adm' });
-                    }else if(userRole == 'coordinador'){
+                    } else if (userRole == 'coordinador') {
                         this.$router.push({ name: 'alumno-coordinador' });
-                    }else if(userRole == 'promotor'){
+                    } else if (userRole == 'promotor') {
                         this.$router.push({ name: 'dash-promotor' });
                     }
 
                     setRole(userRole)
                     setUserName(userName)
-                    
-                    
+
+
                 })
                 .catch(error => {
                     // Maneja el error aquí
@@ -165,6 +168,5 @@ export default {
     mounted: function () {
     },
 }
-
 
 </script>

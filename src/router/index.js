@@ -20,6 +20,7 @@ import CargarArchivo from '../views/admin/CargarArchivo.vue'
 import AlumnoPromotor from '../views/promotor/AlumnoPromotor.vue'
 import DashAdmin from '../views/admin/DashAdmin.vue'
 import AlumnoCoordinador from '../views/coordinador/AlumnoCoordinador.vue'
+import Campaign from '../views/admin/Campaign.vue'
 
 
 const router = createRouter({
@@ -88,6 +89,7 @@ const router = createRouter({
       name: 'home-adm',
       component: HomeView, 
     },
+
     {
       path:'/register-promotor',
       name:'register-promotor',
@@ -102,12 +104,26 @@ const router = createRouter({
         }
       }
     },
-    
-   
+      
     {
       path: '/asignaciones',
       name: 'asignaciones',
       component: AsignacionesView,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          // Acceso permitido para administradores
+          next();
+        } else {
+          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+
+    {
+      path: '/campania',
+      name: 'campania',
+      component: Campaign,
       beforeEnter: (to, from, next) => {
         if (getRole() === 'admin') {
           // Acceso permitido para administradores
@@ -217,6 +233,7 @@ const router = createRouter({
         }
       }
     },
+
     {
       path: '/alumno-promotor',
       name: 'alumno-promotor',
