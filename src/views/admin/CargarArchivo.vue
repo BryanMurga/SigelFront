@@ -1,56 +1,52 @@
 <template>
-  <div class="flex-1">
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <div class="lg:ml-64 p-4">
-        <i class="fa-solid fa-home fa-xl" style="color: #48c9b0"></i>
-        <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Subir Archivos</span>
-      </div>
+  <DashboardLayout name="Subir archivos">
 
-      <sideBarADM />
-      <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Selecciona los archivos</h5>
-      </div>
-
-      <div class="flex items-center justify-center mt-8 h-full">
-  <!-- Vue3 Dropzone Component -->
-  <div v-bind="getRootProps()" class="bg-slate-600 p-8 rounded-lg text-center text-white">
-    <i class="fas fa-cloud-upload-alt text-4xl mb-4"></i>
-    <input v-bind="getInputProps()" />
-    <p v-if="isDragActive">Suelta el archivo seleccionado aquí para poder cargarlo al sistema...</p>
-    <p v-else>Para subir un archivo, haz clic o arrastra el archivo que deseas subir.</p>
-    <div v-show="isDragActive" class="mt-4">
-      <progress ref="progressBar" max="100" value="0"></progress>
-    </div>
-  </div>
-</div>
-
-
-     
-      <div class="flex items-center justify-center mt-4">
-        <button @click="$router.go(-1)" class="px-4 py-2
-        text-sm font-medium leading-5 text-white transition-colors
-        duration-150 bg-red-500 border border-transparent rounded-lg
-        active:bg-red-600 hover:bg-red-700 focus:outline-none
-        focus:shadow-outline-red">Cancelar</button>
+    <!-- Drag and Drop -->
+    <div v-bind="getRootProps()" class="flex items-center justify-center w-full">
+      <label for="dropzone-file"
+        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 duration-150">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+          <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 20 16">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+          </svg>
+          <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">
+            Haz clic para subir</span> o arrastra y suelta</p>
+          <p class="text-xs text-gray-500 text-center max-w-xs md:max-w-2xl w-full">
+            Recuerda que los archivos compatibles tienen que tener la siguiente extensión <span class="underline">.CSV</span>
+          </p>
         </div>
-
-      
+        <input v-bind="getInputProps()" type="file" class="hidden" />
+      </label>
+      <div v-show="isDragActive" class="mt-4">
+        <progress ref="progressBar" max="100" value="0"></progress>
+      </div>
     </div>
-  </div>
+    <!-- Fin de Drag and Drop -->
+
+    <div class="flex justify-center my-6 w-full">
+      <button @click="$router.go(-1)" class="py-2 px-4 text-white bg-red-500 hover:bg-red-600 active:bg-red-700 rounded-md duration-150">
+        Cancelar
+      </button>
+    </div>
+
+  </DashboardLayout>
 </template>
 
 
 <script>
 import { ref, watch } from "vue";
 import { useDropzone } from "vue3-dropzone";
-import sideBarADM from "../../components/SideBarADM.vue";
 import axios from "axios";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
+import DashboardLayout from '../../layouts/DashboardLayout.vue';
+
 export default {
   components: {
-    sideBarADM,
+    DashboardLayout
   },
   setup() {
     const progressBar = ref(null);
@@ -94,8 +90,6 @@ export default {
           hideProgressBar: true,
           dangerouslyHTMLString: true,
         });
-
-        
 
         // Puedes manejar la respuesta del servidor después de cargar el archivo
         // Por ejemplo, mostrar un mensaje de éxito al usuario
@@ -146,19 +140,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.image-container {
-  background-image: url(/uninterlogo.png);
-  background-position: center;
-  background-size: cover;
-  height: 16em;
-  width: 16em;
-}
-
-progress {
-  width: 100%;
-  height: 20px;
-  margin-top: 8px;
-}
-</style>
