@@ -736,7 +736,8 @@ export default {
                 console.log("No hay cambios para actualizar.");
                 this.errUpdate();
             }
-            this.loadLeads();
+            this.loadAlumnos();
+            
         },
 
         hayCambiosEnDatos() {
@@ -805,7 +806,7 @@ export default {
             handler() {
                 this.loadRedes;
                 this.filteredAlumnos;
-                this.loadAlumnos();
+                this.loadAlumnos;
                 this.loadCarreras;
                 this.loadDatosAlumnos;
                 this.loadPromotor;
