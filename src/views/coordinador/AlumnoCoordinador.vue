@@ -1,479 +1,298 @@
 <template>
-    <header>
-        <div class="lg:ml-64 p-4">
-            <i class="fa-solid fa-users text-2xl" style="color: #48c9b0"></i>
-            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Alumnos</span>
-            <br><br>
+    <DashboardLayout name="Alumnos">
 
-            <form class="flex items-center relative">
-                <div class="relative flex-shrink-0">
-                    <button id="dropdown-button" data-dropdown-toggle="dropdown" @click="toggleDropdown"
-                        class="flex-shrink-0 inline-flex items-center py-3.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                        type="button">
-                        {{ selectedCategory }} <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <div v-if="isDropdownOpen" id="dropdown"
-                        class="absolute top-full left-0 mt-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                        style="z-index: 999;">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                            <li>
-                                <button type="button"
-                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    @click="selectCategory('Nombre')">
-                                    Nombre
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button"
-                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    @click="selectCategory('Telefono')">
-                                    Teléfono
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button"
-                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    @click="selectCategory('Escuela')">
-                                    Escuela de Procedencia
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button"
-                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    @click="selectCategory('NumeroRecibo')">
-                                    No. Recibo
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button"
-                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    @click="selectCategory('Matricula')">
-                                    Matricula
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button"
-                                    class="dropdown-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    @click="selectCategory('CorreoInstitucional')">
-                                    Correo Institucional
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+        <form class="flex items-center relative gap-2">
+            <!-- Dropdown button -->
+            <div class="relative flex-shrink-0">
+                <button @click="toggleDropdown"
+                    class="flex-shrink-0 inline-flex items-center py-3.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                    type="button">
+                    {{ selectedCategory }}
+                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div v-if="isDropdownOpen" id="dropdown"
+                    class="absolute top-full left-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-50">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdown-button">
+                        <SearchListItem v-for="category in categories" :key="category" :label="category"
+                            :onClick="selectCategory" />
+                    </ul>
                 </div>
-                <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-                    <input v-model="searchQuery" type="search" id="default-search" name="leadSearch"
-                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Buscar registros" required />
+            </div>
+            <!-- Search input -->
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
                 </div>
-            </form>
+                <input v-model="searchQuery" type="search" id="default-search" name="leadSearch"
+                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+                    placeholder="Buscar registros" required />
+            </div>
+        </form>
 
-            <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
-                <div>
-                </div>
+        <!-- Modal -->
+        <Modal id="gestion-modal" name="Gestión Alumno" modalToggle="gestion-modal">
+            <!-- Datos Personales -->
+            <ModalSection name="Datos Académicos">
+                <!-- Nombre -->
+                <SectionInput label="Nombre de Alumno">
+                    <template #input>
+                        <InputModal id="name" type="text" placeholder="Ingresa nombre completo" v-model:student="updateAlumno.inputNombre" />
+                    </template>
+                </SectionInput>
+                <!-- Correo -->
+                <SectionInput label="Correo Institucional">
+                    <template #input>
+                        <InputModal type="email" placeholder="Ingresa correo electrónico" v-model:student="updateAlumno.inputCorreoInstitucional" />
+                    </template>
+                </SectionInput>
+                <!-- Num recibo -->
+                <SectionInput label="Número de recibo">
+                    <template #input>
+                        <InputModal type="text" placeholder="Ingresa número de recibo" v-model:student="updateAlumno.inputNoRecibo" />
+                    </template>
+                </SectionInput>
+                <!-- Matricula -->
+                <SectionInput label="Matricula">
+                    <template #input>
+                        <InputModal type="text" placeholder="Ingresa matrícula" v-model:student="updateAlumno.inputMatricula" />
+                    </template>
+                </SectionInput>
+                <!-- Escuela -->
+                <SectionInput label="Escuela de Procedencia">
+                    <template #input>
+                        <InputModal type="text" placeholder="Ingresa escuela de procedencia" v-model:student="updateAlumno.inputEscuelaProcedencia" />
+                    </template>
+                </SectionInput>
+            </ModalSection>
 
-                <div>
-                    <label for="select1" class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">
-                        Filtrado de categoria</label>
-                    <select id="select1" v-model="selectedFiltrado"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Escoge un filtro</option>
-                        <option v-for="filtrado in filtradoSelect" :key="filtrado" :value="filtrado">{{ filtrado }}</option>
-                    </select>
-                </div>
+            <!-- Datos de Redes -->
+            <ModalSection name="Datos de redes">
+                <!-- Telefono -->
+                <SectionInput label="Teléfono familiar (Papá, Mamá, Tutor, etc)">
+                    <template #input>
+                        <InputModal type="tel" id="number" placeholder="Ingresa número de teléfono" v-model:student="updateAlumno.inputTelefonoFamiliar" />
+                    </template>
+                </SectionInput>
+                <!-- Facebook -->
+                <SectionInput label="Facebook">
+                    <template #input>
+                        <InputModal type="text" id="rsFacebook" placeholder="Ingresa usuario de Facebook" v-model:student="updateAlumno.inputFacebook" />
+                    </template>
+                </SectionInput>
+                <!-- Instagram -->
+                <SectionInput label="Instagram">
+                    <template #input>
+                        <InputModal type="text" id="rsInsta" placeholder="Ingresa usuario de Instagram" v-model:student="updateAlumno.inputInsta" />
+                    </template>
+                </SectionInput>
+                <!-- Tiktok -->
+                <SectionInput label="TikTok">
+                    <template #input>
+                        <InputModal type="text" id="rsTK" placeholder="Ingresa usuario de Tiktok" v-model:student="updateAlumno.inputTikTok" />
+                    </template>
+                </SectionInput>
+                <!-- LinkedIn -->
+                <SectionInput label="LinkedIn">
+                    <template #input>
+                        <InputModal type="text" id="rsLink" placeholder="Ingresa usuario de LinkedIn" v-model:student="updateAlumno.inputLink" />
+                    </template>
+                </SectionInput>
+                <!-- Twitter -->
+                <SectionInput label="X (Twitter)">
+                    <template #input>
+                        <InputModal type="text" id="rsTwiter" placeholder="Ingresa usuario de X (Twitter)" v-model:student="updateAlumno.inputTwiter" />
+                    </template>
+                </SectionInput>
+                <!-- WhatsApp -->
+                <SectionInput label="WhatsApp">
+                    <template #input>
+                        <InputModal type="tel" id="rsWhatsapp" placeholder="Ingresa número de teléfono personal" v-model:student="updateAlumno.inputWhatsapp" />
+                    </template>
+                </SectionInput>
+                <!-- Otro -->
+                <SectionInput label="Otro">
+                    <template #input>
+                        <InputModal type="tel" id="rsOtro" placeholder="Ingresa..." v-model:student="updateAlumno.inputOtro" />
+                    </template>
+                </SectionInput>
+            </ModalSection>
 
-                <div v-if="selectedFiltrado === 'Carrera'">
-                    <select id="carrera" v-model="subSelectedFiltrado"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Escoge estatus</option>
-                        <option v-for="carrera in Carreras" :key="carrera" :value="carrera.Nombre">{{ carrera.Nombre }}
+            <!-- Datos de Inscripcion -->
+            <ModalSection name="Datos de programa">
+                <!-- Carrera Inscripcion -->
+                <SectionInput label="Carrera de Inscripción">
+                    <template #input>
+                        <SelectModal id="carrera-inscripcion" v-model:student="updateAlumno.inputCarreraInscripcion">
+                            <option 
+                                v-for=" carrera in carreraInscrita" 
+                                :key="carrera.CarreraID"
+                                :value="carrera.CarreraID"
+                            >
+                                {{ carrera.Nombre }}
+                            </option>
+                        </SelectModal>
+                    </template>
+                </SectionInput>
+                <!-- Procedencia -->
+                <SectionInput label="Procedencia">
+                    <template #input>
+                        <SelectModal id="procedencia" v-model:student="updateAlumno.inputProcedencia">
+                            <option 
+                                v-for=" procedencia  in  Procedencia " 
+                                :key="procedencia" :value="procedencia"
+                            >
+                                {{ procedencia }}
+                            </option>
+                        </SelectModal>
+                    </template>
+                </SectionInput>
+                <!-- Promotor -->
+                <SectionInput label="Promotor">
+                    <template #input>
+                        <SelectModal id="promotor" v-model:student="updateAlumno.inputPromotor">
+                            <option 
+                                v-for=" promotor in Promotores" 
+                                :key="promotor.PromotorID"
+                                :value="promotor.PromotorID"
+                            >
+                                {{ promotor.Nombre }}
+                            </option>
+                        </SelectModal>
+                    </template>
+                </SectionInput>
+            </ModalSection>
+
+            <button @click="actualizarAlumno(alumnoParaGestionar, $event)" type="submit" data-modal-toggle="gestion-modal"
+                class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z">
+                    </path>
+                </svg>
+                Actualizar datos
+            </button>
+        </Modal>
+
+        <!-- Modal de baja alumno -->
+        <Modal id="delete-modal" name="Baja Alumno" modalToggle="delete-modal">
+            <!-- Carrera Inscripcion -->
+            <SectionInput label="Selecciona un mótivo de baja">
+                <template #input>
+                    <SelectModal id="estatus" v-model:student="updateAlumno.inputTipoBaja">
+                        <option 
+                            v-for="est in tipoBaja" 
+                            :key="est"
+                            :value="est"
+                        >
+                            {{ est }}
                         </option>
-                    </select>
-                </div>
-                <div v-if="selectedFiltrado === 'Procedencia'">
-                    <select id="carrera" v-model="subSelectedFiltrado"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Escoge estatus</option>
-                        <option v-for="pro in Procedencia" :key="pro" :value="pro">{{ pro }}</option>
-                    </select>
-                </div>
-                <div v-if="selectedFiltrado === 'Estatus'">
-                    <select id="estatus" v-model="subSelectedFiltrado"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Escoge un promotor</option>
-                        <option v-for="est in Estatus" :key="est" :value="est">{{ est }}</option>
-                    </select>
-                </div>
-                <button type="button"
-                    class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    @click="BorrarFiltros()">Borrar Filtros</button>
+                    </SelectModal>
+                </template>
+            </SectionInput>
 
+            <div class="mt-4">
+                <button 
+                    @click="bajaTipoAlumno(alumnoParaGestionar, $event)" type="submit"
+                    data-modal-toggle="delete-modal"
+                    class="flex flex-row py-2 px-4 gap-2 text-white bg-red-700 hover:bg-red-800 rounded-md duration-200"
+                >
+                    Dar de Baja
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 3v4a1 1 0 0 0 1 1h4" /><path d="M17 17h-6a2 2 0 0 1 -2 -2v-6m0 -4a2 2 0 0 1 2 -2h4l5 5v7c0 .294 -.063 .572 -.177 .823" /><path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2" /><path d="M3 3l18 18" /></svg>
+                    
+                </button>
             </div>
+        </Modal>
 
-        </div>
 
-        <SideBarCE class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
-
-        <div id="gestion-modal" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative p-4 w-full max-w-2xl mx-auto max-h-full">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <!-- Modal header -->
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Gestión Alumno
-                        </h3>
-                        <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-toggle="gestion-modal">
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <form class="p-4 md:p-5">
-                        <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                            Datos Académicos
-                        </h2>
-                        <!-- Datos Personales -->
-                        <div class="grid gap-4 mb-4 grid-cols-2">
-                            <!-- NombreCompleto -->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
-                                    Alumno</label>
-                                <input type="text" name="name" id="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputNombre" placeholder="Nombre Completo" required="">
+        <!-- Tabla -->
+        <section class="pt-14">
+            <Table>
+                <template #header>
+                    <TableRow>
+                        <TableHeaderCell>ID</TableHeaderCell>
+                        <TableHeaderCell>Nombre</TableHeaderCell>
+                        <TableHeaderCell>Teléfono</TableHeaderCell>
+                        <TableHeaderCell>Escuela de Procedencia</TableHeaderCell>
+                        <TableHeaderCell>Numero de recibo</TableHeaderCell>
+                        <TableHeaderCell>Matricula</TableHeaderCell>
+                        <TableHeaderCell>Carrera de Inscripción</TableHeaderCell>
+                        <TableHeaderCell>Procedencia</TableHeaderCell>
+                        <TableHeaderCell>Estatus</TableHeaderCell>
+                        <TableHeaderCell>Correo Institucional</TableHeaderCell>
+                        <TableHeaderCell>Acciones</TableHeaderCell>
+                    </TableRow>
+                </template>
+                <template #default>
+                    <TableRow v-for=" alumno  in  filteredAlumnos " :key="alumno.AlumnoID">
+                        <TableDataCell>{{ alumno.AlumnoID }}</TableDataCell>
+                        <TableDataCell>{{ alumno.NombreAlumno }}</TableDataCell>
+                        <TableDataCell>{{ alumno.Telefono }}</TableDataCell>
+                        <TableDataCell>{{ alumno.EscuelaProcedencia }}</TableDataCell>
+                        <TableDataCell>{{ alumno.NoRecibo }}</TableDataCell>
+                        <TableDataCell>{{ alumno.Matricula }}</TableDataCell>
+                        <TableDataCell>{{ alumno.CarreraInsc }}</TableDataCell>
+                        <TableDataCell>{{ alumno.Procedencia }}</TableDataCell>
+                        <TableDataCell>{{ alumno.Estatus }}</TableDataCell>
+                        <TableDataCell>{{ alumno.CorreoInstitucional }}</TableDataCell>
+                        <TableDataCell>
+                            <div class="flex flex-col lg:flex-row gap-4 w-56">
+                                <button 
+                                    @click="asignarAlumno(alumno.AlumnoID)" 
+                                    data-modal-target="gestion-modal"
+                                    data-modal-toggle="gestion-modal" 
+                                    type="button"
+                                    class="py-2 px-4 text-white text-sm font-normal bg-blue-700 hover:bg-blue-800 rounded-md duration-150"
+                                >
+                                    Gestionar
+                                </button>
+                                <button 
+                                    @click="asignarAlumno(alumno.AlumnoID)" 
+                                    data-modal-target="delete-modal" 
+                                    data-modal-toggle="delete-modal" 
+                                    type="button"
+                                    class="py-2 px-4 text-white text-sm font-normal bg-red-700 hover:bg-red-800 rounded-md duration-150"
+                                >
+                                    Dar de baja
+                                </button>
                             </div>
-                            <!-- CorreoElectronico -->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="price"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo
-                                    Institucional</label>
-                                <input type="text" name="price" id="number"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputCorreoInstitucional" placeholder="Correo Electrónico" required="">
-                            </div>
-                            <!-- No. Recibo-->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="number"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Recibo</label>
-                                <input type="text" name="number" id="number"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputNoRecibo" placeholder="Número de teléfono" required="">
-                            </div>
-                            <!--Matricula-->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="matricula"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matricula</label>
-                                <input type="text" name="matricula" id="matricula"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputMatricula" placeholder="Matricula" required="">
-                            </div>
-                            <!-- EscuelaProcedencia -->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="price"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela de
-                                    Procedencia</label>
-                                <input type="text" name="price" id="price"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputEscuelaProcedencia" placeholder="Escuela de Procedencia">
-                            </div>
-                        </div>
-                        <!-- Datos de Redes -->
-                        <hr class="my-1 border-black" />
-                        <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                            Datos de Redes
-                        </h2>
-                        <div class="grid gap-4 mb-4 grid-cols-2">
-                            <!-- Telefono -->
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="number"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono Familiar</label>
-                                <input type="text" name="number" id="number"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    v-model="updateAlumno.inputTelefonoFamiliar" placeholder="Número de teléfono" required="">
-                            </div>
-                            <!-- Facebook -->
-                            <div>
-                                <label for="rsFacebook"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Facebook <span class="fa-brands fa-facebook"></span></label>
-                                <input type="text" id="rsFacebook"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputFacebook" required="">
-                            </div>
-                            <div>
-                                <label for="rsInsta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Instagram <span class="fa-brands fa-instagram"></span></label>
-                                <input type="text" id="rsInsta"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputInsta" required="">
-                            </div>
-                            <div>
-                                <label for="rsTK" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    TikTok <span class="fa-brands fa-tiktok"></span></label>
-                                <input type="text" id="rsTK"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputTikTok" required="">
-                            </div>
-                            <div>
-                                <label for="rsLink" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Linkedln <span class="fa-brands fa-linkedin"></span></label>
-                                <input type="text" id="rsLink"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputLink" required="">
-                            </div>
-                            <div>
-                                <label for="rsTwiter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    X(Twiter) <span class="fa-brands fa-x-twitter"></span></label>
-                                <input type="text" id="rsTwiter"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputTwiter" required="">
-                            </div>
-                            <div>
-                                <label for="rsWhatsapp"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Whatsapp <span class="fa-brands fa-whatsapp"></span></label>
-                                <input type="text" id="rsWhatsapp"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputWhatsapp" required="">
-                            </div>
-                            <div>
-                                <label for="rsOtro" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Otro <span class="fa-regular fa-comment"></span></label>
-                                <input type="text" id="rsOtro"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputOtro" required="">
-                            </div>
-                        </div>
-
-                        <!-- Datos de Inscripcion -->
-                        <hr class="my-1 border-black" />
-                        <h2 class="text-2xl text-white text-center font-bold mb-4 bg-emerald-500 rounded-xl">
-                            Datos de Programa
-                        </h2>
-                        <div class="grid gap-4 mb-4 grid-cols-2">
-                            <!--Carrera Inscripción-->
-                            <div>
-                                <label for="carrera-inscripcion"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera de
-                                    Inscripción</label>
-                                <select id="carrera-inscripcion"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputCarreraInscripcion">
-                                    <option v-for="carrera in carreraInscrita" :key="carrera.CarreraID"
-                                        :value="carrera.CarreraID">{{ carrera.Nombre }}</option>
-                                </select>
-                            </div>
-                            <!--Porcedencia-->
-                            <div>
-                                <label for="procedencia"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Procedencia</label>
-                                <select id="procedencia"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputProcedencia">
-                                    <option v-for="procedencia in Procedencia" :key="procedencia"
-                                        :value="procedencia">{{ procedencia }}</option>
-                                </select>
-                            </div>
-                            <!--Promotor ID-->
-                            <div>
-                                <label for="promotor"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotor</label>
-                                <select id="promotor"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    v-model="updateAlumno.inputPromotor">
-                                    <option v-for="promotor in Promotores" :key="promotor.PromotorID"
-                                        :value="promotor.PromotorID">{{ promotor.Nombre }}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <button @click="actualizarAlumno(alumnoParaGestionar, $event)" type="submit"
-                            data-modal-toggle="gestion-modal"
-                            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z">
-                                </path>
-                            </svg>
-                            Actualizar datos
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal de Baja -->
-        <div id="delete-modal" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative p-4 w-full max-w-2xl mx-auto max-h-full">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <!-- Modal header -->
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Baja Alumno SEGURO?
-                        </h3>
-                        <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-toggle="delete-modal">
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <form class="p-4 md:p-5">
-                        <!-- Tipo de Baja -->
-                        <div class="grid gap-4 mb-4">
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingresa el Tipo de Baja</label>
-                                    <select id="estatus" v-model="updateAlumno.inputTipoBaja"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option v-for="est in tipoBaja" :key="est" :value="est">{{ est }}</option>
-                                    </select>
-                            </div>
-                        </div>
-                        
-                        <button @click="bajaTipoAlumno(alumnoParaGestionar, $event)" type="submit"
-                            data-modal-toggle="delete-modal"
-                            class="text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z">
-                                </path>
-                            </svg>
-                            Dar de Baja
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    </header>
-
-    <br>
-
-    <section>
-        <div class="flex-1 lg:ml-64">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">ID</th>
-                            <th scope="col" class="px-6 py-3">Nombre</th>
-                            <th scope="col" class="px-6 py-3">Telefono</th>
-                            <th scope="col" class="px-6 py-3">Escuela de Procedencia</th>
-                            <th scope="col" class="px-6 py-3">Numero de recibo</th>
-                            <th scope="col" class="px-6 py-3">Matricula</th>
-                            <th scope="col" class="px-6 py-3">Carrera de Inscripción</th>
-                            <th scope="col" class="px-6 py-3">Procedencia</th>
-                            <th scope="col" class="px-6 py-3">Estatus</th>
-                            <th scope="col" class="px-6 py-3">Correo Institucional</th>
-                            <th scope="col" class="px-6 py-3">Gestionar</th>
-                            <th scope="col" class="px-6 py-3">Dar de Baja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="alumno in filteredAlumnos" :key="alumno.AlumnoID"
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.AlumnoID }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.NombreAlumno }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.Telefono }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.EscuelaProcedencia }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.NoRecibo }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.Matricula }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.CarreraInsc }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.Procedencia }}
-                            </th>
-                            <th scope="row" :style="{ color: alumno.Estatus === 'INSC' ? 'green' : 'red' }"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.Estatus }}
-                            </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ alumno.CorreoInstitucional }}
-                            </th>
-                            <td class="px-6 py-4">
-                                <button @click="asignarAlumno(alumno.AlumnoID)" data-modal-target="gestion-modal"
-                                    data-modal-toggle="gestion-modal" type="button"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                    Gestionar</button>
-                            </td>
-                            <td class="px-6 py-4">
-                                <button @click="asignarAlumno(alumno.AlumnoID)" data-modal-target="delete-modal" data-modal-toggle="delete-modal" 
-                                type="button"
-                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-8 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                    Baja</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="grid justify-items-center" v-if="!filteredAlumnos.length" style="background-color: #F4D03F;">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay alumnos
-                        registrados
-                    </h5>
-                </div>
-
-            </div>
-        </div>
-    </section>
+                        </TableDataCell>
+                    </TableRow>
+                </template>
+            </Table>
+        </section>
+    </DashboardLayout>
 </template>
  
 <script>
+import axios from "axios";
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import { getUserName } from "../../sessions";
-import SideBarCE from "../../components/SideBarCE.vue";
-import axios from "axios";
-import { ref } from "vue";
-import { id } from "date-fns/locale";
 import DatePicker from "vue3-datepicker";
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
-// initialize components based on data attribute selectors
+import DashboardLayout from "../../layouts/DashboardLayout.vue";
+import Table from "../../components/Table.vue";
+import TableDataCell from "../../components/TableDataCell.vue";
+import TableHeaderCell from "../../components/TableHeaderCell.vue";
+import TableRow from "../../components/TableRow.vue";
+import SearchListItem from "../../components/SearchListItem.vue";
+import Modal from '../../components/Modal/Modal.vue';
+import ModalSection from "../../components/Modal/ModalSection.vue";
+import SectionInput from '../../components/Modal/SectionInput.vue';
+import InputModal from '../../components/Modal/InputModal.vue';
+import SelectModal from "../../components/Modal/SelectModal.vue";
 
 onMounted(() => {
     initFlowbite();
@@ -542,10 +361,11 @@ export default {
         }
 
         return { notify, errUpdate, infoNotify, errLeads, errPromotores, actualizarLeadNotify, errorActualizarLeadNotify };
-        },
+    },
 
     data() {
         return {
+            categories: ['Nombre', 'Telefono', 'Escuela', 'NumeroRecibo', 'Matricula', 'CorreoInstitucional'],
             userName: getUserName(),
             alumnos: [],
             leadIndividual: [],
@@ -583,6 +403,7 @@ export default {
                 inputCarreraInteres: null,
                 inputGrado: null,
                 inputPrograma: '',
+                inputPrograma: null,
                 inputEstatusInscripcion: null,
                 inputSemestreIngreso: null,
                 inputFacebook: null,
@@ -591,7 +412,7 @@ export default {
                 inputLink: null,
                 inputTwiter: null,
                 inputWhatsapp: null,
-                inputOtro:null,
+                inputOtro: null,
                 inputTipoReferido: null,
                 inputNombreReferido: null,
                 inputDondeObtuvoDato: null,
@@ -765,13 +586,13 @@ export default {
                     this.updateAlumno.inputPromotor = this.leadIndividual.PromotorID;
                     this.alumnoParaGestionar = this.leadIndividual.AlumnoID;
                     this.updateAlumno.inputTipoBaja = this.leadIndividual.TipoBaja;
-                    
+
                 }
             } catch (error) {
                 console.log('Error al obtener los datos del alumno:', error);
             }
         },
-        
+
         async actualizarAlumno(alumnoID, event) {
             event.preventDefault();
 
@@ -800,11 +621,10 @@ export default {
                         CarreraInscripcion: this.updateAlumno.inputCarreraInscripcion,
                         Procedencia: this.updateAlumno.inputProcedencia,
                         PromotorID: this.updateAlumno.inputPromotor,
-                        // ... otros campos que deseas actualizar
                     });
                     this.actualizarLeadNotify();
                     console.log(response.data); // Manejar la respuesta del servidor
-                    
+
                     // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
                 } catch (error) {
                     this.errorActualizarLeadNotify();
@@ -815,17 +635,13 @@ export default {
                 this.errUpdate();
             }
             this.loadAlumnos();
-<<<<<<< HEAD
-            
-=======
->>>>>>> 93fab6157a2e76398b98965f0769ca6d202025b9
         },
 
         hayCambiosEnDatos() {
             // Aquí debes comparar los datos actuales con los datos originales para determinar si hay cambios
             // Puedes utilizar condiciones como (this.inputName !== this.leads.NombreCompleto) para cada campo
             // Devuelve true si hay algún cambio, y false si no hay cambios
-            
+
             return this.updateAlumno.inputNombre !== this.comparacionAlumno.nombreAlumno
                 || this.updateAlumno.inputCorreoInstitucional !== this.comparacionAlumno.CorreoInstitucional
                 || this.updateAlumno.inputNoRecibo !== this.comparacionAlumno.NoRecibo
@@ -842,10 +658,9 @@ export default {
                 || this.updateAlumno.inputCarreraInscripcion !== this.comparacionAlumno.CarreraInscripcion
                 || this.updateAlumno.inputProcedencia !== this.comparacionAlumno.Procedencia
                 || this.updateAlumno.inputPromotor !== this.comparacionAlumno.PromotorID;
-                // ... otras comparaciones
         },
 
-        
+
         async loadCarreras() {
             try {
                 const response = await axios.get('http://localhost:4000/carrera');
@@ -874,7 +689,6 @@ export default {
         selectCategory(category) {
             this.selectedCategory = category;
             this.isDropdownOpen = false;
-            // Aquí puedes realizar cualquier otra acción necesaria con la categoría seleccionada
         },
         BorrarFiltros() {
             this.selectedFiltrado = 'Carrera';
@@ -896,9 +710,21 @@ export default {
         },
         inmediate: true
     },
-    components: { SideBarCE, DatePicker }
+    components: {
+        DatePicker,
+        DashboardLayout,
+        Table,
+        TableDataCell,
+        TableHeaderCell,
+        TableRow,
+        SearchListItem,
+        Modal,
+        ModalSection,
+        ModalSection,
+        SectionInput,
+        InputModal,
+        SelectModal,
+    }
 };
 
 </script>
- 
-<style></style>
