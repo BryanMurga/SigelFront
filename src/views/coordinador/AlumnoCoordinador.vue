@@ -241,7 +241,9 @@
                         <TableDataCell>{{ alumno.Matricula }}</TableDataCell>
                         <TableDataCell>{{ alumno.CarreraInsc }}</TableDataCell>
                         <TableDataCell>{{ alumno.Procedencia }}</TableDataCell>
-                        <TableDataCell>{{ alumno.Estatus }}</TableDataCell>
+                        <TableDataCell :class="alumno.Estatus === 'INSC' ? 'text-green-600' : 'text-red-600'">
+                            {{ alumno.Estatus }}
+                        </TableDataCell>
                         <TableDataCell>{{ alumno.CorreoInstitucional }}</TableDataCell>
                         <TableDataCell>
                             <div class="flex flex-col lg:flex-row gap-4 w-56">
