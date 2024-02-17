@@ -1,10 +1,16 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue'
 import Swal from 'sweetalert2'
+import '@fontsource-variable/onest';
 </script>
 
 <template>
   <RouterView />  
 </template>
+
+<style>
+body{
+  font-family: 'Onest Variable', sans-serif;
+}
+</style>
 
