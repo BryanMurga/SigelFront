@@ -47,6 +47,17 @@
                     </svg>
                 </template>
             </CardLink>
+
+            <CardLink 
+                url="reporte-ps-pi" 
+                name="reporte-ps-pi"
+            >
+                <template #svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-white w-8 h-8">
+                        <path fill-rule="evenodd" d="M2.25 5.25a.75.75 0 0 1 .75-.75h18a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75h-18a.75.75 0 0 1-.75-.75v-13.5ZM3 6.75v11.25h18V6.75H3ZM8.25 15a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5H8.25ZM8.25 12a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5H8.25ZM8.25 9a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5H8.25Z" clip-rule="evenodd" />
+                    </svg>
+                </template>
+            </CardLink>
         </section>
     </DashboardLayout>
 </template>

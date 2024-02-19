@@ -815,10 +815,6 @@ export default {
                 this.errUpdate();
             }
             this.loadAlumnos();
-<<<<<<< HEAD
-            
-=======
->>>>>>> 93fab6157a2e76398b98965f0769ca6d202025b9
         },
 
         hayCambiosEnDatos() {
