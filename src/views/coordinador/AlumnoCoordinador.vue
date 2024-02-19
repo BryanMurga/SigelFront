@@ -730,4 +730,3 @@ export default {
 };
 
 </script>
-</script>
