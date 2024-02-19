@@ -197,9 +197,9 @@ export default {
                     </TableRow>
                 </template>
             </Table>
-            <p v-else>
-                No hay datos existentes
-            </p>
+            <div v-else class="w-full">
+                No hay ninguna campaña registrada en este momento.
+            </div>
         </section>
     </DashboardLayout>
 </template>
