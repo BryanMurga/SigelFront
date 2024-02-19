@@ -4,7 +4,7 @@
             <thead class="text-xs text-white capitalize bg-sky-800">
                 <slot name="header" />
             </thead>
-            <tbody class="text-center border-x"> 
+            <tbody class="border-x"> 
                 <slot></slot>
             </tbody>
         </table>
