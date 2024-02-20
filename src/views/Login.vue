@@ -112,46 +112,82 @@ export default {
     };
   },
   methods: {
-    async entrar(event) {
-      event.preventDefault();
-
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/api/auth/login",
-          {
-            email: this.formData.email,
-            password: this.formData.password,
-          }
-        );
-
-        const { token, user } = response.data;
-
-        // Almacenar el token en una cookie con una fecha de expiración
-        Cookies.set('token', token, { expires: 1 }); // Cookie expira en 1 días
-
-        console.log("Inicio de Sesión Exitoso");
-        const userRole = user.role;
-        const userName = user.userName;
-        
-        //Almacena en el localStorage el nombre y rol del usuario
-        setRole(userRole)
-        setUserName(userName)
-
-        if (userRole === "admin") {
-          this.$router.push({ name: "home-adm" });
-        } else if (userRole === "coordinador") {
-          this.$router.push({ name: "alumno-coordinador" });
-        } else if (userRole === "promotor") {
-          this.$router.push({ name: "dash-promotor" });
-        } else {
-          console.error("Rol de usuario no reconocido:", userRole);
-          // Puedes redirigir a una página de error o realizar otras acciones apropiadas
+        validateEmail: function (email) {
+            let regExp = /^\S+@\S+\.\S+$/;
+            return regExp.test(email);
+        },
+        validarArroba: function (email) {
+            let regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            return regExp.test(email);
+        },
+        validateFields: function () {
+            if (!this.validateEmail(this.email)) {
+                Swal.fire({
+                    title: "Error",
+                    text: "Correo electrónico invalido",
+                    icon: "error",
+                    button: "Aceptar",
+                });
+                return false;
+            }
+            else if (!this.validarArroba(this.email)) {
+                Swal.fire({
+                    title: "Error",
+                    text: "Doble arroba no permitido",
+                    icon: "error",
+                    button: "Aceptar",
+                });
+                return false;
+            } else if (this.password == null || this.password == "") {
+                Swal.fire({
+                    title: "Error",
+                    text: "Campos vacios",
+                    icon: "error",
+                    button: "Aceptar",
+                });
+                return false;
+            }
+        },
+        entrar(event) {
+            event.preventDefault();
+            // Realiza la solicitud utilizando el valor del campo de entrada
+            axios.post('http://localhost:4000/auth/login', this.formData)
+                .then(response => {
+                    // Maneja la respuesta exitosa aquí
+                    console.log(response.data);
+                    Swal.fire({
+                        title: "Datos correctos",
+                        text: response.data.message,
+                        icon: "success",
+                        button: "Aceptar",
+                    });
+                    const userRole = response.data.role;
+                    const userName = response.data.userName;
+                    if (userRole == 'admin') {
+                        this.$router.push({ name: 'home-adm' });
+                    } else if (userRole == 'coordinador') {
+                        this.$router.push({ name: 'alumno-coordinador' });
+                    } else if (userRole == 'promotor') {
+                        this.$router.push({ name: 'dash-promotor' });
+                    }
+                    setRole(userRole)
+                    setUserName(userName)
+                })
+                .catch(error => {
+                    // Maneja el error aquí
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: "No existen credenciales validas",
+                        text: response.data.message,
+                        icon: "error",
+                        button: "Aceptar",
+                    });
+                });
         }
-      } catch (error) {
-        console.error("Error al iniciar sesión:", error.response.data);
-        // Manejar errores de la solicitud
-      }
     },
-  },
-};
+    mounted: function () {
+    },
+}
+
+
 </script>
