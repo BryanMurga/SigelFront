@@ -1,5 +1,7 @@
 <script>
 import { getRole, getUserName, clearRole, clearUserName } from "../sessions";
+import axios from "axios";
+import Cookies from 'js-cookie';
 import SideBarLink from './../components/SideBarLink.vue';
 
 export default {
@@ -32,10 +34,7 @@ export default {
         isLinkActive(path) {
             return this.$route.path === path;
         },
-        selectSection(section) {
-            this.selectedSection = section;
-        },
-        cerrarSesion() {
+        async logout() {
             clearRole();
             clearUserName();
             this.$router.push("/login");
@@ -202,7 +201,7 @@ export default {
         </div>
 
         <div class="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-            <a @click="cerrarSesion"
+            <button @click="logout"
                 class="px-4 py-3 flex items-center space-x-4 rounded-md hover:text-[#4fc4ae]  group cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -210,7 +209,7 @@ export default {
                         d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
                 <span class="hover:text-[#4fc4ae]">Cerrar Sesión</span>
-            </a>
+            </button>
         </div>
     </aside>
     <div class="ml-auto lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
