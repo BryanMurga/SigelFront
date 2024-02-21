@@ -1,125 +1,101 @@
 <template>
-    <header>
-        <div class="lg:ml-64 p-4">
-            <i class="fas fa-circle-plus text-2xl" style="color: #48c9b0"></i>
-            <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Asignar</span>
-
-            <SideBarADM class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
-            <br><br>
-
-            <form>
-                <label for="default-search"
-                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-                    <input v-model="input" type="search" id="default-search" name="leadSearch"
-                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Buscar registros" required />
-                    <!-- <div class="items" v-for="lead in filterList()" :key=lead.id>
+    <DashboardLayout name="Asignaciones">
+        <form>
+            <label for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input v-model="input" type="search" id="default-search" name="leadSearch"
+                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Buscar registros" required />
+                <!-- <div class="items" v-for="lead in filterList()" :key=lead.id>
                                 <p>{{ lead.NombreCompleto }}</p>
                             </div>
                             <div class="item-error" v-if="input&&!filterList().length">
                                 <p>No se encontraron registros</p>
                             </div> -->
-                </div>
-            </form>
-        </div>
-        <div class="p-5 lg:ml-64 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">Asignaciones</h5>
-        </div>
-    </header>
-
-    <section>
-        <div class="flex-1 lg:ml-64">
-            <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky-header"
-                        style="background-color: #48C9B0;">
-                        <tr>
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                        v-model="selectedAll" @change="selectedAllLeads">
-                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="col" class="px-6 py-3 text-white">
-                                ID Lead
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-white">
-                                Nombre Completo
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-white">
-                                Telefono
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-white">
-                                Correo Electronico
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-white">
-                                Promotor
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="lead in filterList" :key="lead.LeadID"
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                        :value="lead.LeadID" v-model="selectedLeads">
-                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ lead.LeadID }}
-                            </th>
-                            <th class="px-6 py-4">
-                                {{ lead.NombreCompleto }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ lead.Telefono }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ lead.CorreoElectronico }}
-                            </td>
-                            <td class="px-2 py-1">
-                                <select v-model="lead.selectedPromotor" @change="asignarPromotor(lead.LeadID)"
-                                    class="block w-full mt-1 rounded-md border-blue-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                    style="color: black;">
-                                    <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID"
-                                        :value="promotor.PromotorID" style="color: black;">
-                                        {{ promotor.Nombre }}
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-            <br>
-            <button type="button" v-if="promotorSeleccionado"
-                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    style="text-align: left; float: right;" @click="enviarAsignaciones">
-                    <i class="fas fa-regular fa-paper-plane"></i> Enviar
+        </form>
+
+        <section class="pt-6">
+            <!-- Alerta -->
+            <div v-if="!filterList.length" class="flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-100"
+                role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    No hay leads para asignar
+                </div>
+            </div>
+
+            <Table>
+                <template #header>
+                    <TableRow>
+                        <TableHeaderCell>
+                            <div>
+                                <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
+                                    class="w-4 h-w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600"
+                                    v-model="selectedAll" @change="selectedAllLeads">
+                                <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                            </div>
+                        </TableHeaderCell>
+                        <TableHeaderCell>ID</TableHeaderCell>
+                        <TableHeaderCell>Nombre completo</TableHeaderCell>
+                        <TableHeaderCell>Teléfono</TableHeaderCell>
+                        <TableHeaderCell>Correo Electrónico</TableHeaderCell>
+                        <TableHeaderCell>Promotor</TableHeaderCell>
+                    </TableRow>
+                </template>
+                <template #default>
+                    <TableRow v-for="lead in filterList" :key="lead.LeadID" class="border-b">
+                        <TableDataCell>
+                            <div>
+                                <input id="'checkbox-table-search-1' + lead.LeadID" type="checkbox"
+                                    class="w-4 h-w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    :value="lead.LeadID" v-model="selectedLeads">
+                                <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                            </div>
+                        </TableDataCell>
+                        <TableDataCell>{{ lead.LeadID }}</TableDataCell>
+                        <TableDataCell>{{ lead.NombreCompleto }}</TableDataCell>
+                        <TableDataCell>{{ lead.Telefono }}</TableDataCell>
+                        <TableDataCell>{{ lead.CorreoElectronico }}</TableDataCell>
+                        <TableDataCell>
+                            <label for="default" class="block mb-2 text-sm font-medium text-gray-900">Asigna un
+                                promotor</label>
+                            <select id="default" v-model="lead.selectedPromotor" @change="asignarPromotor(lead.LeadID)"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option v-for="promotor in promotoresActivos" :key="promotor.PromotorID"
+                                    :value="promotor.PromotorID">
+                                    {{ promotor.Nombre }}
+                                </option>
+                            </select>
+                        </TableDataCell>
+                    </TableRow>
+                </template>
+            </Table>
+
+            <div class="flex justify-end w-full">
+                <button 
+                    type="button" 
+                    v-if="promotorSeleccionado"
+                    @click="enviarAsignaciones"
+                    class="py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-md duration-150"
+                >
+                    Enviar <i class="fas fa-regular fa-paper-plane"></i>
                 </button>
-                <div class="grid justify-items-center" v-if="!filterList.length" style="background-color: #F4D03F;">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-grey">No hay leads para
-                        asignar</h5>
-                </div>
-
-                <label for="underline_select" class="sr-only">Underline select</label>
-
             </div>
-            <br>
+
             <div v-show="selectedLeads.length > 0" class="flex items-center space-x-4">
                 <label for="asignacion-promotores"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asignación Multiple</label>
@@ -137,21 +113,28 @@
                     style="text-align: left;">
                     <i class="fas fa-regular fa-paper-plane"></i> Asignar
                 </button>
-            </div>    
-    </section>
+            </div>
+        </section>
+    </DashboardLayout>
 </template>
 
 <script>
-
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import { getUserName } from "../../sessions";
-import SideBarADM from "../../components/SideBarADM.vue";
 import axios from "axios";
 import { ref } from "vue";
-
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+
+// Layout
+import DashboardLayout from "../../layouts/DashboardLayout.vue";
+
+// Components
+import Table from '../../components/Table.vue';
+import TableDataCell from '../../components/TableDataCell.vue';
+import TableHeaderCell from '../../components/TableHeaderCell.vue';
+import TableRow from '../../components/TableRow.vue';
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -159,14 +142,12 @@ onMounted(() => {
 });
 
 export default {
-
     computed: {
-
         promotorSeleccionado() {
             // Comprueba si hay al menos un lead con promotor seleccionado
             return this.filterList.some(lead => lead.selectedPromotor);
         },
-        
+
         filterList() {
 
             if (this.leads.length === 0) {
@@ -305,18 +286,18 @@ export default {
             this.updateMultipleLeads.leadIDs = this.selectedLeads;
             this.updateMultipleLeads.promotorOriginal = this.selectPromotorMultiple;
             console.log(this.updateMultipleLeads);
-            if(this.updateMultipleLeads.leadIDs === null || this.updateMultipleLeads.promotorOriginal === null){
+            if (this.updateMultipleLeads.leadIDs === null || this.updateMultipleLeads.promotorOriginal === null) {
                 console.error('Promotor no seleccionado');
                 return;
             }
-            try{    
-                await axios.put(`http://localhost:4000/leads/update-multiple-leads-promotor`, this.updateMultipleLeads 
+            try {
+                await axios.put(`http://localhost:4000/leads/update-multiple-leads-promotor`, this.updateMultipleLeads
                 );
                 this.loadLeads();
                 this.notify();
-                
+
             }
-            catch(error){
+            catch (error) {
                 this.errAsignarPromotor();
             }
 
@@ -375,17 +356,14 @@ export default {
         },
         inmediate: true,
     },
-    components: { SideBarADM }
+    components: {
+        DashboardLayout,
+        Table,
+        TableDataCell,
+        TableHeaderCell,
+        TableRow
+    }
 };
 
 
 </script>
-
-<style>
-.sticky-header th {
-        position: sticky;
-        top: 0;
-        background-color: #48C9B0; /* Color de fondo del encabezado */
-        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
-    }
-</style>
