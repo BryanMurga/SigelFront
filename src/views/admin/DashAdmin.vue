@@ -37,6 +37,38 @@
           <div id="inscripcionesPorPromotor-chart"></div>
         </div>
 
+        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-users fa-2x"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total de inscripciones por Promotor de Seguimiento
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de Inscripciones
+                {{
+                  totalPSeguimientoData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPSeguimiento-chart"></div>
+        </div>
+
+        
+
         <div
           class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
         >
@@ -467,6 +499,7 @@
           </div>
           <div id="totalDondeObtDato-chart"></div>
         </div>
+
       </div>
     </div>
   </div>
@@ -481,6 +514,7 @@ export default {
   data() {
     return {
       inscripcionesPorPromotorData: [],
+      totalPSeguimientoData: [],
       inscripcionesPorEdadData: [],
       inscripcionesPorStatusData: [],
       totalPorGradoData: [],
@@ -539,6 +573,29 @@ export default {
           ),
         },
       };
+
+     const optionsPseguimiento ={
+      chart:{
+        type:"bar",
+        height:320,
+        fontFamily:"Inter, sans-serif",
+        toolbar:{
+          show:true,
+        },
+      } ,
+      series:[
+        {
+          name:"Total de inscripciones",
+          data: this.totalPSeguimientoData.map((item) => item.total),
+        },
+      ],
+      xaxis:{
+        categories: this.totalPSeguimientoData.map(
+          (item) => `${item.PSeguimiento}`
+        ),
+      },
+    };
+      
 
       const optionsEdad = {
         chart: {
@@ -951,6 +1008,12 @@ export default {
       );
       chartDondeObtDato.render();
 
+      const chartPseguimiento = new ApexCharts(
+        document.getElementById("totalPSeguimiento-chart"),
+        optionsPseguimiento
+      );
+      chartPseguimiento.render();
+
       const chartMes = new ApexCharts(
         document.getElementById("totalInscripcionesPorMes-chart"),
         optionsMes
@@ -1048,6 +1111,10 @@ export default {
         );
         this.inscripcionesPorPromotorData =
           response.data.data.inscripcionesPorPromotor || [];
+
+        this.totalPSeguimientoData =
+          response.data.data.totalPSeguimiento || [];
+
         this.inscripcionesPorEdadData =
           response.data.data.inscripcionesPorEdad || [];
         this.inscripcionesPorStatusData =
@@ -1063,6 +1130,8 @@ export default {
         this.totalPorEscuelaData = response.data.data.totalPorEscuela || [];
         this.totalInscripcionesPorAnioData =
           response.data.data.totalInscripcionesPorAnio || [];
+
+          //checar metodo para poner meses en vez de numeros
         this.totalInscripcionesPorMesData =
           response.data.data.totalInscripcionesPorMes.map((item) => ({
             ...item,
@@ -1072,6 +1141,9 @@ export default {
         this.totalPorEstadoData = response.data.data.totalPorEstado || [];
 
         this.totalDondeObtDatoData = response.data.data.totalDondeObtDato || [];
+
+
+
 
         this.renderBarChart();
       } catch (error) {

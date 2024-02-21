@@ -3,28 +3,26 @@
     <SideBarProm class="lg:w-64 md:w-48 sm:w-32" />
     <div class="lg:ml-64 p-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center">
-      
-
-        <!-- Inscripciones Por Edad -->
+        <!-- Sección de inscripciones por Grado del promotor -->
         <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mb-4"
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
         >
           <div class="flex items-center">
             <div
               class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
             >
-              <i class="fa-solid fa-calendar-alt fa-2x"></i>
+              <i class="fa-solid fa-chart-line fa-2x"></i>
             </div>
             <div class="ml-4">
               <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Inscripciones Por Edad
+                Inscripciones por Promotor
               </p>
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de Leads edad:
+                Total de Inscripciones
                 {{
-                  inscripcionesPorEdadData.reduce(
+                  inscripcionesPorPromData.reduce(
                     (acc, item) => acc + item.total,
                     0
                   )
@@ -32,30 +30,29 @@
               </h2>
             </div>
           </div>
-          <!-- Gráfico -->
-          <div id="inscripcionesPorEdad-chart"></div>
+          <div id="inscripcionesPorProm-chart"></div>
         </div>
 
-        <!-- Inscripciones por Estatus -->
+        <!-- Sección de PS-PI del promotor -->
         <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 mb-4"
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
         >
           <div class="flex items-center">
             <div
               class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
             >
-              <i class="fa-solid fa-info fa-2x"></i>
+              <i class="fa-solid fa-square-poll-vertical"></i>
             </div>
             <div class="ml-4">
               <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Estatus de los Leads
+                PS-Seguimiento
               </p>
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de Leads asignados:
+                Total de datos PS-PI:
                 {{
-                  inscripcionesPorStatusData.reduce(
+                  pseguimientoPromData.reduce(
                     (acc, item) => acc + item.total,
                     0
                   )
@@ -63,9 +60,10 @@
               </h2>
             </div>
           </div>
-          <!-- Gráfico -->
-          <div id="inscripcionesPorStatus-chart"></div>
+          <div id="pseguimientoPromData-chart"></div>
         </div>
+
+        <!--Total por ciclo -->
 
         <div
           class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
@@ -74,24 +72,179 @@
             <div
               class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
             >
-              <i class="fa-solid fa-graduation-cap fa-2x"></i>
+              <i class="fa-solid fa-arrows-spin"></i>
             </div>
             <div class="ml-4">
               <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Grado
+                Total de Inscripciones por Ciclo
               </p>
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de Leads por Grado:
+                Total de datos Por ciclo:
                 {{
-                  totalPorGradoData.reduce((acc, item) => acc + item.total, 0)
+                  pseguimientoPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
                 }}
               </h2>
             </div>
           </div>
-          <div id="totalPorGrado-chart"></div>
+          <div id="totalPorCiclo-chart"></div>
         </div>
+
+        <!-- Total Por pais-->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-earth-americas fa-2x"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total de Inscripciones por País
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos Por País:
+                {{
+                  totalPorPaisPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorPais-chart"></div>
+        </div>
+
+        <!-- Total Por Estado-->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-earth-americas fa-2x"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total por Estados
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos Por Estado:
+                {{
+                  totalPorEstadoPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorEstadoProm-chart"></div>
+        </div>
+
+        <!-- Total Por Ciudad-->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-earth-americas fa-2x"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total por Ciudad
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos Por Ciudad:
+                {{
+                  totalPorCiudadPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorCiudad-chart"></div>
+        </div>
+
+        <!-- Total Por Año y Mes-->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-calendar-days fa-2x"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total de Inscripciones por Mes y Año
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos:
+                {{
+                  totalPorMesAnioPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorMesAnio-chart"></div>
+        </div>
+
+        <!-- Total Por Escuela de procedencia-->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-school"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total por Escuela de procedencia
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos:
+                {{
+                  totalPorMesAnioPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorEscProd-chart"></div>
+        </div>
+
+        <!-- Total por Edades -->
 
         <div
           class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
@@ -100,27 +253,121 @@
             <div
               class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
             >
-              <i class="fa-solid fa-graduation-cap fa-2x"></i>
+              <i class="fa-solid fa-child-reaching"></i>
             </div>
             <div class="ml-4">
               <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Beca
+                Total por Edad
               </p>
               <h2
                 class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
               >
-                Total de Leads por Beca:
+                Total de datos:
                 {{
-                  totalPorBecaData.reduce((acc, item) => acc + item.total, 0)
+                  totalPorEdadesPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorEdades-chart"></div>
+        </div>
+
+        <!-- Total por Beca -->
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-money-bill"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total por Beca Ofertada
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos:
+                {{
+                  totalPorBecaPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
                 }}
               </h2>
             </div>
           </div>
           <div id="totalPorBeca-chart"></div>
         </div>
-        <!-- Agrega más secciones según tus necesidades -->
-      
 
+        <!-- Total por Referido -->
+
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-arrows-down-to-people"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total por Referido
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos:
+                {{
+                  totalPorReferidoPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorReferido-chart"></div>
+        </div>
+
+        <!-- Total por Medio de Contacto -->
+
+        <div
+          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+            >
+              <i class="fa-solid fa-address-book"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+                Total por Medio de Contacto
+              </p>
+              <h2
+                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+              >
+                Total de datos:
+                {{
+                  totalPorMedioContactoPromData.reduce(
+                    (acc, item) => acc + item.total,
+                    0
+                  )
+                }}
+              </h2>
+            </div>
+          </div>
+          <div id="totalPorMedioContacto-chart"></div>
+        </div>
+
+        <!-- Agrega más secciones según tus necesidades -->
       </div>
     </div>
   </div>
@@ -128,287 +375,522 @@
 
 <script>
 import ApexCharts from "apexcharts";
-import SideBarProm from "../../components/SideBarProm.vue";
 import axios from "axios";
+import SideBarProm from "../../components/SideBarADM.vue";
 import { getUserName } from "../../sessions";
 
 export default {
   data() {
     return {
       userName: getUserName(),
-      // inscripcionesPorPromotorData: [],
-      inscripcionesPorEdadData: [],
-      inscripcionesPorStatusData: [],
-      totalPorGradoData: [],
-      totalPorBecaData: [],
-      totalInscripcionesPorAnioData: [],
-      totalInscripcionesPorMesData: [],
-
-
-      // Agrega más variables según las gráficas que necesites
+      inscripcionesPorPromData: [],
+      pseguimientoPromData: [],
+      totalPorCicloPromData: [],
+      totalPorPaisPromData: [],
+      totalPorEstadoPromData: [],
+      totalPorCiudadPromData: [],
+      totalPorMesAnioPromData: [],
+      totalPorEscProdPromData: [],
+      totalPorEdadesPromData: [],
+      totalPorBecaPromData: [],
+      totalPorReferidoPromData: [],
+      totalPorMedioContactoPromData: [],
     };
   },
+
   methods: {
-
-    renderBarChart(chartId, data) {
-      if (data && data.length) {
-        const dataForChart = data.map((item) => ({
-          x: item.Nombre || item.Edad || "Sin especificar",
-          y: item.total || 0,
-        }));
-
-        const options = {
-          chart: {
-            type: "bar",
-            height: 320,
-            fontFamily: "Inter, sans-serif",
-            toolbar: {
-              show: true,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: false,
-            },
-          },
-          xaxis: {
-            categories: dataForChart.map((item) => item.x),
-          },
-          series: [
-            {
-              name: "Total",
-              data: dataForChart.map((item) => item.y),
-            },
-          ],
-        };
-
-        // Renderizar la gráfica solo si el elemento del gráfico está presente
-        const chartElement = document.getElementById(chartId);
-        if (chartElement) {
-          const chart = new ApexCharts(chartElement, options);
-          chart.render();
-        } else {
-          console.error("El elemento del gráfico no se encontró.");
-        }
-      } else {
-        console.error("El array de datos está indefinido o vacío");
-      }
+    getNombreMes(numeroMes) {
+      const nombresMeses = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
+      return nombresMeses[numeroMes - 1] || "Sin especificar";
     },
 
-    renderPieChartInscripcionesPorStatus() {
-      const optionsStatus = {
-        // Configuración específica del gráfico para Inscripciones Por Estatus
+    renderBarChart() {
+      const optionsinscripcionesProm = {
         chart: {
-          type: "pie",
+          type: "bar",
           height: 320,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
           },
-          // Otras opciones del gráfico...
         },
-        series: this.inscripcionesPorStatusData.map((item) => item.total),
-        labels: this.inscripcionesPorStatusData.map(
-          (item) => item.EstatusInsc || "Desconocido"
-        ),
-        colors: ["#008FFB", "#00E396", "#feb019", "#FF4560"],
-        legend: {
-          show: true,
-          position: "bottom",
-          horizontalAlign: "center",
-          verticalAlign: "middle",
-          fontSize: "14px",
-          formatter: function (val, opts) {
-            return val + " : " + opts.w.globals.series[opts.seriesIndex];
-          },
-
-          // Otras opciones de leyenda...
-        },
-        dataLabels: {
-          enabled: true,
-          // Otras opciones de etiquetas de datos...
-
-        },
-        responsive: [
+        series: [
           {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-              },
-              legend: {
-                position: "bottom",
-              },
-            },
+            name: "Total de inscripciones",
+            data: this.inscripcionesPorPromData.map((item) => item.total),
           },
         ],
+        xaxis: {
+          categories: this.inscripcionesPorPromData.map(
+            (item) => `${item.Grado}`
+          ),
+        },
+      };
+      const chartoptionsinscripcionesProm = new ApexCharts(
+        document.getElementById("inscripcionesPorProm-chart"),
+        optionsinscripcionesProm
+      );
+      chartoptionsinscripcionesProm.render();
+
+      const optionPseguimientoProm = {
+        chart: {
+          type: "bar",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+        series: [
+          {
+            name: "Total de PS-PI",
+            data: this.pseguimientoPromData.map((item) => item.total),
+          },
+        ],
+        xaxis: {
+          categories: this.pseguimientoPromData.map(
+            (item) => `${item.PSeguimiento}`
+          ),
+        },
+        colors: ["#008FFB", "#FF4560", "#feb019", "#00E396", "#1a8cff", "#FFD700", "#8B008B", "#4CAF50", "#FF6347", "#808080", "#CD853F", "#FF8C00", "#000000"],
+
+      };
+      const chartPseguimientoProm = new ApexCharts(
+        document.getElementById("pseguimientoPromData-chart"),
+        optionPseguimientoProm
+      );
+      chartPseguimientoProm.render();
+
+      const optionCiclo = {
+        chart: {
+          type: "line",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+        series: [
+          {
+            name: "Total de Inscripciones Por Ciclo",
+            data: this.totalPorCicloPromData.map((item) => item.total),
+          },
+        ],
+        xaxis: {
+          categories: this.totalPorCicloPromData.map((item) => `${item.Ciclo}`),
+        },
+        plotoptions: {
+          bar: {
+            horizontal: true,
+          },
+        },
+      };
+      const chartCiclo = new ApexCharts(
+        document.getElementById("totalPorCiclo-chart"),
+        optionCiclo
+      );
+      chartCiclo.render();
+
+      const optionPais = {
+        chart: {
+          type: "bar",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+
+        series: [
+          {
+            name: "Total de Inscripciones Por País",
+            data: this.totalPorPaisPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorPaisPromData.map(
+            (item) => `${item.NombrePais}`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
       };
 
-      // Renderizar la gráfica solo si el elemento del gráfico está presente
-      const chartElement = document.getElementById(
-        "inscripcionesPorStatus-chart"
+      const chartPais = new ApexCharts(
+        document.getElementById("totalPorPais-chart"),
+        optionPais
       );
-      if (chartElement) {
-        const chartStatus = new ApexCharts(chartElement, optionsStatus);
-        chartStatus.render();
-      } else {
-        console.error("El elemento del gráfico no se encontró.");
-      }
-    },
+      chartPais.render();
 
-    renderTotalPorGradoChart() {
-      if (this.totalPorGradoData && this.totalPorGradoData.length) {
-        const dataForChart = this.totalPorGradoData.map((item) => ({
-          x: item.Grado || "Desconocido",
-          y: item.total || 0,
-        }));
-
-        const options = {
-          chart: {
-            type: "bar",
-            height: 320,
-            fontFamily: "Inter, sans-serif",
-            toolbar: {
-              show: true,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: false,
-            },
-          },
-          xaxis: {
-            categories: dataForChart.map((item) => item.x),
-          },
-          series: [
-            {
-              name: "Total de inscripciones",
-              data: dataForChart.map((item) => item.y),
-            },
-          ],
-        };
-
-        const chartElement = document.getElementById("totalPorGrado-chart");
-        if (chartElement) {
-          const chartTotalPorGrado = new ApexCharts(chartElement, options);
-          chartTotalPorGrado.render();
-        } else {
-          console.error("El elemento del gráfico no se encontró.");
-        }
-      } else {
-        console.error("El array totalPorGradoData está indefinido o vacío");
-      }
-    },
-
-    renderTotalPorBecaChart() {
-      if (this.totalPorBecaData && this.totalPorBecaData.length) {
-        const dataForChart = this.totalPorBecaData.map((item) => ({
-          x: item.BecaOfrecida || "Desconocido",
-          y: item.total || 0,
-        }));
-
-        const options = {
-          chart: {
-            type: "donut",
-            height: 320,
-            fontFamily: "Inter, sans-serif",
-            toolbar: {
-              show: true,
-            },
-          },
-          labels: dataForChart.map((item) => item.x),
-          series: dataForChart.map((item) => item.y),
-          colors: ["#008FFB", "#00E396", "#feb019", "#FF4560"],
-          legend: {
+      const optionEstado = {
+        chart: {
+          type: "area",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
             show: true,
-            position: "bottom",
-            horizontalAlign: "center",
-            verticalAlign: "middle",
-            fontSize: "14px",
           },
-          dataLabels: {
-            enabled: true,
-            formatter: function (val, opts) {
-              return opts.w.globals.series[opts.seriesIndex];
-            },
-            style: {
-              fontSize: "16px",
-              colors: ["#ffffff"],
-            },
-          },
-        };
+        },
 
-        const chartElement = document.getElementById("totalPorBeca-chart");
-        if (chartElement) {
-          const chartTotalPorBeca = new ApexCharts(chartElement, options);
-          chartTotalPorBeca.render();
-        } else {
-          console.error("El elemento del gráfico no se encontró.");
-        }
-      } else {
-        console.error("El array totalPorBecaData está indefinido o vacío");
-      }
+        series: [
+          {
+            name: "Total de Inscripciones Por Estado",
+            data: this.totalPorEstadoPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorEstadoPromData.map(
+            (item) => `${item.NombreEstado}`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+      };
+
+      const chartEstado = new ApexCharts(
+        document.getElementById("totalPorEstadoProm-chart"),
+        optionEstado
+      );
+      chartEstado.render();
+
+      const optionCiudad = {
+        chart: {
+          type: "area",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+
+        series: [
+          {
+            name: "Total de Inscripciones Por Ciudad",
+            data: this.totalPorCiudadPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorCiudadPromData.map(
+            (item) => `${item.NombreCiudad}`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+      };
+
+      const chartCiudad = new ApexCharts(
+        document.getElementById("totalPorCiudad-chart"),
+        optionCiudad
+      );
+      chartCiudad.render();
+
+      const optionMesAnio = {
+        chart: {
+          type: "area",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+
+        series: [
+          {
+            name: "Total de Inscripciones Por Mes y Año",
+            data: this.totalPorMesAnioPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorMesAnioPromData.map(
+            (item) =>
+              `${item.anio || "Sin especificar"} - ${
+                item.nombreMes || "Sin especificar"
+              }`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+      };
+      const chartMesAnio = new ApexCharts(
+        document.getElementById("totalPorMesAnio-chart"),
+        optionMesAnio
+      );
+      chartMesAnio.render();
+
+      const optionEscuelaProd = {
+        chart: {
+          type: "bar",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+
+        series: [
+          {
+            name: "Total de Inscripciones Por Escuela de Procedencia",
+            data: this.totalPorEscProdPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorEscProdPromData.map(
+            (item) => `${item.EscuelaProcedencia || "Sin especificar"}`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+        colors: ["#1a8cff"],
+      };
+      const chartEscuelaProd = new ApexCharts(
+        document.getElementById("totalPorEscProd-chart"),
+        optionEscuelaProd
+      );
+      chartEscuelaProd.render();
+
+      const optionEdades = {
+        chart: {
+          type: "line",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+
+        series: [
+          {
+            name: "Total de Inscripciones Por Edades",
+            data: this.totalPorEdadesPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorEdadesPromData.map(
+            (item) => `${item.Edad || "Sin especificar"}`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+        colors: ["#1a8cff"],
+      };
+
+      const chartEdades = new ApexCharts(
+        document.getElementById("totalPorEdades-chart"),
+        optionEdades
+      );
+      chartEdades.render();
+
+      const optionBeca = {
+        chart: {
+          type: "bar",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+        series: [
+          {
+            name: "Total de Inscripciones Por Beca",
+            data: this.totalPorBecaPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorBecaPromData.map(
+            (item) => `${item.BecaOfrecida || "Sin especificar"}`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+        colors: ["#1a8cff"],
+      };
+      const chartBeca = new ApexCharts(
+        document.getElementById("totalPorBeca-chart"),
+        optionBeca
+      );
+      chartBeca.render();
+
+      const optionReferido = {
+        chart: {
+          type: "area",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+        series: [
+          {
+            name: "Total de Inscripciones Por Referido",
+            data: this.totalPorReferidoPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorReferidoPromData.map(
+            (item) => `${item.TipoReferido || "Sin especificar"}` //\n${item.NombreReferido || "Sin especificar"}
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+        colors: ["#1a8cff"],
+      };
+      const chartReferido = new ApexCharts(
+        document.getElementById("totalPorReferido-chart"),
+        optionReferido
+      );
+      chartReferido.render();
+
+      const optionMedioContacto = {
+        chart: {
+          type: "line",
+          height: 320,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
+        },
+        series: [
+          {
+            name: "Total de Inscripciones Por Medio de Contacto",
+            data: this.totalPorMedioContactoPromData.map((item) => item.total),
+          },
+        ],
+
+        xaxis: {
+          categories: this.totalPorMedioContactoPromData.map(
+            (item) => `${item.MedioContacto || "Sin especificar"}`
+          ),
+        },
+
+        plotoptions: {
+          bar: {
+            horizontal: true,
+            columnWidth: "70%",
+          },
+        },
+        colors: ["#1a8cff"],
+      };
+      const chartMedioContacto = new ApexCharts(
+        document.getElementById("totalPorMedioContacto-chart"),
+        optionMedioContacto
+      );
+      chartMedioContacto.render();
     },
-
-   
-
 
     async fetchData() {
       try {
         const response = await axios.get(
-          "http://localhost:4000/graficas/datos-graficas"
+          "http://localhost:4000/graficas/dash-prom",
+          {
+            params: {
+              userName: this.userName,
+            },
+          }
         );
+        this.inscripcionesPorPromData =
+          response.data.data.inscripcionesPorProm || [];
 
-        this.inscripcionesPorPromotorData =
-          response.data.data.inscripcionesPorPromotor || [];
-        this.inscripcionesPorEdadData =
-          response.data.data.inscripcionesPorEdad || [];
+        this.pseguimientoPromData = response.data.data.pseguimientoProm || [];
 
-        this.inscripcionesPorStatusData =
-          response.data.data.inscripcionesPorStatus || [];
+        this.totalPorCicloPromData = response.data.data.totalPorCicloProm || [];
 
-        this.totalPorGradoData = response.data.data.totalPorGrado || [];
+        this.totalPorPaisPromData = response.data.data.totalPorPaisProm || [];
 
-        this.totalPorBecaData = response.data.data.totalPorBeca || [];
+        this.totalPorEstadoPromData =
+          response.data.data.totalPorEstadoProm || [];
 
+        this.totalPorCiudadPromData =
+          response.data.data.totalPorCiudadProm || [];
 
-        // Agrega más asignaciones según las gráficas que necesites
-       
+        this.totalPorMesAnioPromData =
+          response.data.data.totalPorMesAnioProm.map((item) => ({
+            ...item,
+            nombreMes: this.getNombreMes(item.mes),
+          })) || [];
 
-        // Llama a tus funciones de renderización aquí
-        if (this.totalInscripcionesPorAnioData.length > 0) {
-          this.renderTotalInscripcionesPorAnioChart();
-        }
+        this.totalPorEscProdPromData =
+          response.data.data.totalPorEscProdProm || [];
 
-        if (this.totalInscripcionesPorMesData.length > 0) {
-          this.renderTotalInscripcionesPorMesChart();
-        }
+        this.totalPorEdadesPromData =
+          response.data.data.totalPorEdadesProm || [];
 
+        this.totalPorBecaPromData = response.data.data.totalPorBecaProm || [];
 
-        // Renderizar las gráficas después de cargar los datos
-        this.renderBarChart(
-          "inscripcionesPorPromotor-chart",
-          this.inscripcionesPorPromotorData
-        );
-        this.renderBarChart(
-          "inscripcionesPorEdad-chart",
-          this.inscripcionesPorEdadData
-        );
-        
-        this.renderPieChartInscripcionesPorStatus();
+        this.totalPorReferidoPromData =
+          response.data.data.totalPorReferidoProm || [];
 
-        this.renderTotalPorGradoChart();
-        this.renderTotalPorBecaChart();
+        this.totalPorMedioContactoPromData =
+          response.data.data.totalPorMedioContactoProm || [];
 
-       
-        // Agrega más renderizaciones según las gráficas que necesites
+        this.renderBarChart();
       } catch (error) {
         console.error("Error al obtener datos del backend:", error);
       }
     },
   },
+
   mounted() {
-    // Llamar al método para obtener datos del dashboard al montar el componente
     this.fetchData();
   },
   components: {
