@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <div class="lg:ml-64 p-4">
+  <DashboardLayoutVue name="Registrar Nuevo Promotor">
+    
       <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
       <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Registrar Promotor</span>
-    </div>
-    <SideBarADM />
 
     <section class="flex items-center justify-center h-scrren ">
       <div class="w-full max-w-md p-6">
@@ -56,18 +54,19 @@
      
     </section>
 
-  </div>
+  
+</DashboardLayoutVue>
 </template>
 
 
 <script>
 import { onMounted, ref } from 'vue';
 import { initFlowbite } from 'flowbite'; // Ajusta las importaciones según la API de Flowbite
-import SideBarADM from '../../components/SideBarADM.vue';
 import axios from 'axios';
 // Toast
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import DashboardLayoutVue from '../../layouts/DashboardLayout.vue';
 
 onMounted(() => {
   initFlowbite();
@@ -160,7 +159,7 @@ export default {
     },
   },
   components: {
-    SideBarADM,
+    DashboardLayoutVue,
   },
 };
 </script>

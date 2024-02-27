@@ -22,6 +22,7 @@ import DashAdmin from '../views/admin/DashAdmin.vue'
 import AlumnoCoordinador from '../views/coordinador/AlumnoCoordinador.vue'
 import Campaign from '../views/admin/Campaign.vue'
 import ReportePsPi from '../views/admin/PsReporte.vue'
+import ListaComision from '../views/admin/ListaComision.vue'
 
 
 const router = createRouter({
@@ -283,6 +284,20 @@ const router = createRouter({
         path: '/reporte-ps-pi',
         name: 'reporte-ps-pi',
         component: ReportePsPi,
+        beforeEnter: (to, from, next) => {
+          if (getRole() === 'admin') {
+            // Acceso permitido para administradores
+            next();
+          } else {
+            // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+            next({ name: '/login' });
+          }
+        }
+      },
+      {
+        path: '/lista-comision',
+        name: 'lista-comision',
+        component: ListaComision,
         beforeEnter: (to, from, next) => {
           if (getRole() === 'admin') {
             // Acceso permitido para administradores

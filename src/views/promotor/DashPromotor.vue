@@ -1,8 +1,8 @@
 <template>
   <DashboardLayout name="Dash" >
-  <div>
-    <div class="lg:ml-64 p-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center">
+  
+    
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 place-content-center">
         <!-- Sección de inscripciones por Grado del promotor -->
         <div
           class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
@@ -369,8 +369,8 @@
 
         <!-- Agrega más secciones según tus necesidades -->
       </div>
-    </div>
-  </div>
+    
+  
   
   </DashboardLayout>
 </template>
