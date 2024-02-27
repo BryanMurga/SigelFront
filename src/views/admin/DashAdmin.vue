@@ -1,6 +1,6 @@
 <template>
   <DashboardLayout name="Dashboard">
-    <section class="h-fit w-full grid grid-cols-1 md:grid-cols-2 justify-items-center gap-8 py-10">
+    <section class="h-fit w-full grid grid-cols-1 md:grid-cols-2 justify-items-center gap-8 md:gap-4 lg:gap-8 py-10">
       <!-- Card Inscripciones por promotor -->
       <CardStatistics 
         title="Inscripciones por Promotor" 
