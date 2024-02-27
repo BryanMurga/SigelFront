@@ -1,514 +1,321 @@
 <template>
-  <div>
-    <SideBarADM class="lg:w-64 md:w-48 sm:w-32" />
-    <div class="lg:ml-64 p-4">
-      <i class="fa-solid fa-chart-line text-2xl" style="color: #48c9b0"></i>
-      <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg"
-        >Dashboard</span
+  <DashboardLayout name="Dashboard">
+    <section class="h-fit w-full grid grid-cols-1 md:grid-cols-2 justify-items-center gap-8 md:gap-4 lg:gap-8 py-10">
+      <!-- Card Inscripciones por promotor -->
+      <CardStatistics 
+        title="Inscripciones por Promotor" 
+        total="Total de inscripciones"
       >
-      <br /><br />
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 place-content-center">
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-users fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de inscripciones por Promotor
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  inscripcionesPorPromotorData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+        <template #total_num>
+          {{
+            inscripcionesPorPromotorData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="inscripcionesPorPromotor-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-users fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de inscripciones por Promotor de Seguimiento
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPSeguimientoData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por promotor de seguimiento -->
+      <CardStatistics 
+        title="Inscripciones por promotor de seguimiento" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPSeguimientoData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPSeguimiento-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        
+      <!-- Card Inscripciones por edad -->
+      <CardStatistics 
+        title="Inscripciones por edad" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            inscripcionesPorEdadData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
 
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-user fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de inscripciones por Edad
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  inscripcionesPorEdadData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+        <template #graphics>
           <div id="inscripcionesPorEdad-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-info fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Inscripciones por Estatus
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  inscripcionesPorStatusData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por status -->
+      <CardStatistics 
+        title="Inscripciones por Estatus" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            inscripcionesPorStatusData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="inscripcionesPorStatus-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-graduation-cap fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Grado
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorGradoData.reduce((acc, item) => acc + item.total, 0)
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por grado -->
+      <CardStatistics 
+        title="Inscripciones por grado" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorGradoData.reduce((acc, item) => acc + item.total, 0)
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorGrado-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-money-bill-wave fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Beca
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorBecaData.reduce((acc, item) => acc + item.total, 0)
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por beca -->
+      <CardStatistics 
+        title="Inscripciones por beca" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorBecaData.reduce((acc, item) => acc + item.total, 0)
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorBeca-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-globe fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por País
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorPaisData.reduce((acc, item) => acc + item.total, 0)
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por país -->
+      <CardStatistics 
+        title="Inscripciones por país" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorPaisData.reduce((acc, item) => acc + item.total, 0)
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorPais-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-map-marked fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Estado
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorEstadoData.reduce((acc, item) => acc + item.total, 0)
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por estado -->
+      <CardStatistics 
+        title="Inscripciones por estado" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorEstadoData.reduce((acc, item) => acc + item.total, 0)
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorEstado-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-map-marker-alt fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Municipio
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorMunicipioData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por estado -->
+      <CardStatistics 
+        title="Inscripciones por municipio" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorMunicipioData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorMunicipio-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-calendar-alt fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Ciclo
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorCicloData.reduce((acc, item) => acc + item.total, 0)
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por ciclo -->
+      <CardStatistics 
+        title="Inscripciones por ciclo" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorCicloData.reduce((acc, item) => acc + item.total, 0)
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorCiclo-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-book-open fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Programa
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorProgramaData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por programa -->
+      <CardStatistics 
+        title="Inscripciones por programa" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorProgramaData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorPrograma-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-calendar-alt fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Semestre
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorSemestreData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por semestre -->
+      <CardStatistics 
+        title="Inscripciones por semestre" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorSemestreData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorSemestre-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-handshake fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Referido
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorReferidoData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por referido -->
+      <CardStatistics 
+        title="Inscripciones por referido" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorReferidoData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorReferido-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-school fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Escuela
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalPorEscuelaData.reduce((acc, item) => acc + item.total, 0)
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por escuela -->
+      <CardStatistics 
+        title="Inscripciones por escuela" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalPorEscuelaData.reduce((acc, item) => acc + item.total, 0)
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalPorEscuela-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-calendar fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de Inscripciones por Año
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalInscripcionesPorAnioData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por año -->
+      <CardStatistics 
+        title="Inscripciones por año" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalInscripcionesPorAnioData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalInscripcionesPorAnio-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-calendar fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de Inscripciones por Mes
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalInscripcionesPorMesData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por mes -->
+      <CardStatistics 
+        title="Inscripciones por mes" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalInscripcionesPorMesData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalInscripcionesPorMes-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-        <!-- Dentro del div con clase "grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center" -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-chart-line fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total Donde se Obtiene el Dato
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  totalDondeObtDatoData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
+      <!-- Card Inscripciones por mes -->
+      <CardStatistics 
+        title="Total donde se obtiene el dato" 
+        total="Total de inscripciones"
+      >
+        <template #total_num>
+          {{
+            totalDondeObtDatoData.reduce(
+              (acc, item) => acc + item.total,
+              0
+            )
+          }}
+        </template>
+
+        <template #graphics>
           <div id="totalDondeObtDato-chart"></div>
-        </div>
+        </template>
+      </CardStatistics>
 
-      </div>
-    </div>
-  </div>
+    </section>
+  </DashboardLayout>
 </template>
 
 <script>
 import ApexCharts from "apexcharts";
 import axios from "axios";
-import SideBarADM from "../../components/SideBarADM.vue";
+
+import DashboardLayout from '../../layouts/DashboardLayout.vue';
+import CardStatistics from '../../components/CardStatistics.vue';
 
 export default {
   data() {
@@ -552,10 +359,11 @@ export default {
     },
 
     renderBarChart() {
+      // Inscripciones por promotor
       const options = {
         chart: {
           type: "bar",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -574,33 +382,44 @@ export default {
         },
       };
 
-     const optionsPseguimiento ={
-      chart:{
-        type:"bar",
-        height:320,
-        fontFamily:"Inter, sans-serif",
-        toolbar:{
-          show:true,
+      // Inscripciones por promotor de seguimiento
+      const optionsPseguimiento = {
+        chart: {
+          type: "bar",
+          height: 300,
+          fontFamily: "Inter, sans-serif",
+          toolbar: {
+            show: true,
+          },
         },
-      } ,
-      series:[
-        {
-          name:"Total de inscripciones",
-          data: this.totalPSeguimientoData.map((item) => item.total),
+        series: [
+          {
+            name: "Total de inscripciones",
+            data: this.totalPSeguimientoData.map((item) => item.total),
+          },
+        ],
+        xaxis: {
+          categories: this.totalPSeguimientoData.map(
+            (item) => `${item.PSeguimiento}`
+          ),
         },
-      ],
-      xaxis:{
-        categories: this.totalPSeguimientoData.map(
-          (item) => `${item.PSeguimiento}`
-        ),
-      },
-    };
-      
+        responsive: [
+          {
+            breakpoint: 1024, // Ancho de la ventana
+            options: {
+              chart: {
+                height: 280,
+              },
+            },
+          },
+        ],
+      };
 
+      // Inscripciones por edad
       const optionsEdad = {
         chart: {
           type: "area",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -619,6 +438,7 @@ export default {
         },
       };
 
+      // Inscripciones por estatus
       const optionsStatus = {
         chart: {
           type: "pie",
@@ -655,10 +475,10 @@ export default {
         },
         responsive: [
           {
-            breakpoint: 480,
+            breakpoint: 640,
             options: {
               chart: {
-                width: 200,
+                width: 320,
               },
               legend: {
                 position: "bottom",
@@ -668,10 +488,11 @@ export default {
         ],
       };
 
+      // Inscripciones por grado
       const optionsGrado = {
         chart: {
           type: "bar",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -690,10 +511,11 @@ export default {
         },
       };
 
+      // Inscripciones por beca
       const optionsBeca = {
         chart: {
           type: "area",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -730,10 +552,12 @@ export default {
           opacity: 0.45,
         },
       };
+
+      // Inscripciones por pais
       const optionsPais = {
         chart: {
           type: "area",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -752,10 +576,11 @@ export default {
         },
       };
 
+      // Inscripciones por estado
       const optionsEstado = {
         chart: {
           type: "bar",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -774,10 +599,11 @@ export default {
         },
       };
 
+      // Inscripciones por municipio
       const optionsMunicipio = {
         chart: {
           type: "bar",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -796,10 +622,11 @@ export default {
         },
       };
 
+      // Inscripciones por ciclo
       const optionsCiclo = {
         chart: {
           type: "area",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -818,6 +645,7 @@ export default {
         },
       };
 
+      // Inscripciones por programa
       const optionsPrograma = {
         chart: {
           type: "pie",
@@ -852,25 +680,13 @@ export default {
             colors: ["#ffffff"],
           },
         },
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-              },
-              legend: {
-                position: "bottom",
-              },
-            },
-          },
-        ],
       };
 
+      // Inscripciones por semestre
       const optionsSemestre = {
         chart: {
           type: "bar",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -889,10 +705,11 @@ export default {
         },
       };
 
+      // Inscripciones por referido
       const optionsReferido = {
         chart: {
           type: "area",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -911,10 +728,11 @@ export default {
         },
       };
 
+      // Inscripciones por escuela
       const optionsEscuela = {
         chart: {
           type: "scatter",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -933,10 +751,11 @@ export default {
         },
       };
 
+      // Inscripciones por año
       const optionsAnio = {
         chart: {
           type: "bar",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -955,10 +774,11 @@ export default {
         },
       };
 
+      // Inscripciones por mes
       const optionsMes = {
         chart: {
           type: "bar",
-          height: 320,
+          height: 300,
           fontFamily: "Inter, sans-serif",
           toolbar: {
             show: true,
@@ -973,8 +793,7 @@ export default {
         xaxis: {
           categories: this.totalInscripcionesPorMesData.map(
             (item) =>
-              `${item.anio || "Sin especificar"} - ${
-                item.nombreMes || "Sin especificar"
+              `${item.anio || "Sin especificar"} - ${item.nombreMes || "Sin especificar"
               }`
           ),
         },
@@ -1131,7 +950,7 @@ export default {
         this.totalInscripcionesPorAnioData =
           response.data.data.totalInscripcionesPorAnio || [];
 
-          //checar metodo para poner meses en vez de numeros
+        //checar metodo para poner meses en vez de numeros
         this.totalInscripcionesPorMesData =
           response.data.data.totalInscripcionesPorMes.map((item) => ({
             ...item,
@@ -1156,7 +975,7 @@ export default {
     this.fetchData();
   },
   components: {
-    SideBarADM,
+    DashboardLayout, CardStatistics
   },
 };
 </script>

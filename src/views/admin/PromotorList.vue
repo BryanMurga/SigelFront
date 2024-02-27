@@ -202,12 +202,12 @@ export default {
     return {
       promotores: [],
       editingPromotor: null,
-      addingPromotor: {
-        Nombre: "",
-        Correo: "",
-        Telefono: "",
-        Estado: "",
-        Passw: "",
+      selectedPromotor: {
+        Nombre: '',
+        Correo: '',
+        Passw: '',
+        Telefono: '',
+        Estado: false,
       },
       searchQuery: "",
     };
@@ -222,8 +222,27 @@ export default {
         promotor.Nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     },
+    estadoBooleano() {
+      return this.selectedPromotor.Estado === 1;
+    },
+    estadoTexto() {
+      return this.selectedPromotor.Estado ? 'Activo' : 'Inactivo';
+    },
   },
+
   methods: {
+    editPromotor(promotor) {
+      // Clona el objeto promotor para evitar mutaciones directas
+      const promotorEdit = { ...promotor };
+
+      // Convierte el estado de 0 o 1 a false o true
+      promotorEdit.Estado = promotorEdit.Estado === 1;
+
+      // Actualiza el promotor seleccionado para editar
+      this.selectedPromotor = promotorEdit;
+    },
+
+
     async loadPromotores() {
       try {
         const response = await axios.get("http://localhost:4000/promotores");
@@ -232,25 +251,31 @@ export default {
         this.errPromotores();
       }
     },
-    openEditModal(promotor) {
-      this.editingPromotor = { ...promotor };
-    },
-    closeEditModal() {
-      this.editingPromotor = null;
-    },
-    async updatePromotor() {
+    async actualizarPromotor() {
       try {
-        await axios.put(
-          `http://localhost:4000/promotores/update/${this.editingPromotor.PromotorID}`,
-          this.editingPromotor
-        );
+        // Convierte el estado de true/false a 1/0 para la API
+        const promotorParaActualizar = {
+          ...this.selectedPromotor,
+          Estado: this.selectedPromotor.Estado ? 1 : 0,
+        };
 
-        this.closeEditModal();
-        this.loadPromotores();
+        // Actualiza en la base de datos
+        await axios.put(`http://localhost:4000/promotores/update/${promotorParaActualizar.PromotorID}`, promotorParaActualizar);
 
+        // Notificación de éxito
         this.notify();
+
+        // Encuentra el índice del promotor en la lista original para actualizar
+        const index = this.promotores.findIndex(promotor => promotor.PromotorID === this.selectedPromotor.PromotorID);
+        if (index !== -1) {
+          // Convierte el estado a booleano para el frontend si es necesario
+          promotorParaActualizar.Estado = !!promotorParaActualizar.Estado;
+          // Actualiza el promotor en la lista con los nuevos valores
+          this.promotores.splice(index, 1, promotorParaActualizar);
+        }
+
       } catch (error) {
-        this.errNotify();
+        console.error(error);
       }
     },
     openAddModal() {
@@ -275,17 +300,3 @@ export default {
   components: { SideBarADM, FwbButton, FwbModal },
 };
 </script>
-
-<style>
-.modal-wrapper {
-  z-index: 9999;
-}
-
-.modal-content {
-  z-index: 10000;
-}
-
-.sidebar {
-  z-index: 999;
-}
-</style>
