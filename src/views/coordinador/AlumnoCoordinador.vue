@@ -45,31 +45,36 @@
                 <!-- Nombre -->
                 <SectionInput label="Nombre de Alumno">
                     <template #input>
-                        <InputModal id="name" type="text" placeholder="Ingresa nombre completo" v-model:student="updateAlumno.inputNombre" />
+                        <InputModal id="name" type="text" placeholder="Ingresa nombre completo"
+                            v-model:student="updateAlumno.inputNombre" />
                     </template>
                 </SectionInput>
                 <!-- Correo -->
                 <SectionInput label="Correo Institucional">
                     <template #input>
-                        <InputModal type="email" placeholder="Ingresa correo electrónico" v-model:student="updateAlumno.inputCorreoInstitucional" />
+                        <InputModal type="email" placeholder="Ingresa correo electrónico"
+                            v-model:student="updateAlumno.inputCorreoInstitucional" />
                     </template>
                 </SectionInput>
                 <!-- Num recibo -->
                 <SectionInput label="Número de recibo">
                     <template #input>
-                        <InputModal type="text" placeholder="Ingresa número de recibo" v-model:student="updateAlumno.inputNoRecibo" />
+                        <InputModal type="text" placeholder="Ingresa número de recibo"
+                            v-model:student="updateAlumno.inputNoRecibo" />
                     </template>
                 </SectionInput>
                 <!-- Matricula -->
                 <SectionInput label="Matricula">
                     <template #input>
-                        <InputModal type="text" placeholder="Ingresa matrícula" v-model:student="updateAlumno.inputMatricula" />
+                        <InputModal type="text" placeholder="Ingresa matrícula"
+                            v-model:student="updateAlumno.inputMatricula" />
                     </template>
                 </SectionInput>
                 <!-- Escuela -->
                 <SectionInput label="Escuela de Procedencia">
                     <template #input>
-                        <InputModal type="text" placeholder="Ingresa escuela de procedencia" v-model:student="updateAlumno.inputEscuelaProcedencia" />
+                        <InputModal type="text" placeholder="Ingresa escuela de procedencia"
+                            v-model:student="updateAlumno.inputEscuelaProcedencia" />
                     </template>
                 </SectionInput>
             </ModalSection>
@@ -79,49 +84,57 @@
                 <!-- Telefono -->
                 <SectionInput label="Teléfono familiar (Papá, Mamá, Tutor, etc)">
                     <template #input>
-                        <InputModal type="tel" id="number" placeholder="Ingresa número de teléfono" v-model:student="updateAlumno.inputTelefonoFamiliar" />
+                        <InputModal type="tel" id="number" placeholder="Ingresa número de teléfono"
+                            v-model:student="updateAlumno.inputTelefonoFamiliar" />
                     </template>
                 </SectionInput>
                 <!-- Facebook -->
                 <SectionInput label="Facebook">
                     <template #input>
-                        <InputModal type="text" id="rsFacebook" placeholder="Ingresa usuario de Facebook" v-model:student="updateAlumno.inputFacebook" />
+                        <InputModal type="text" id="rsFacebook" placeholder="Ingresa usuario de Facebook"
+                            v-model:student="updateAlumno.inputFacebook" />
                     </template>
                 </SectionInput>
                 <!-- Instagram -->
                 <SectionInput label="Instagram">
                     <template #input>
-                        <InputModal type="text" id="rsInsta" placeholder="Ingresa usuario de Instagram" v-model:student="updateAlumno.inputInsta" />
+                        <InputModal type="text" id="rsInsta" placeholder="Ingresa usuario de Instagram"
+                            v-model:student="updateAlumno.inputInsta" />
                     </template>
                 </SectionInput>
                 <!-- Tiktok -->
                 <SectionInput label="TikTok">
                     <template #input>
-                        <InputModal type="text" id="rsTK" placeholder="Ingresa usuario de Tiktok" v-model:student="updateAlumno.inputTikTok" />
+                        <InputModal type="text" id="rsTK" placeholder="Ingresa usuario de Tiktok"
+                            v-model:student="updateAlumno.inputTikTok" />
                     </template>
                 </SectionInput>
                 <!-- LinkedIn -->
                 <SectionInput label="LinkedIn">
                     <template #input>
-                        <InputModal type="text" id="rsLink" placeholder="Ingresa usuario de LinkedIn" v-model:student="updateAlumno.inputLink" />
+                        <InputModal type="text" id="rsLink" placeholder="Ingresa usuario de LinkedIn"
+                            v-model:student="updateAlumno.inputLink" />
                     </template>
                 </SectionInput>
                 <!-- Twitter -->
                 <SectionInput label="X (Twitter)">
                     <template #input>
-                        <InputModal type="text" id="rsTwiter" placeholder="Ingresa usuario de X (Twitter)" v-model:student="updateAlumno.inputTwiter" />
+                        <InputModal type="text" id="rsTwiter" placeholder="Ingresa usuario de X (Twitter)"
+                            v-model:student="updateAlumno.inputTwiter" />
                     </template>
                 </SectionInput>
                 <!-- WhatsApp -->
                 <SectionInput label="WhatsApp">
                     <template #input>
-                        <InputModal type="tel" id="rsWhatsapp" placeholder="Ingresa número de teléfono personal" v-model:student="updateAlumno.inputWhatsapp" />
+                        <InputModal type="tel" id="rsWhatsapp" placeholder="Ingresa número de teléfono personal"
+                            v-model:student="updateAlumno.inputWhatsapp" />
                     </template>
                 </SectionInput>
                 <!-- Otro -->
                 <SectionInput label="Otro">
                     <template #input>
-                        <InputModal type="tel" id="rsOtro" placeholder="Ingresa..." v-model:student="updateAlumno.inputOtro" />
+                        <InputModal type="tel" id="rsOtro" placeholder="Ingresa..."
+                            v-model:student="updateAlumno.inputOtro" />
                     </template>
                 </SectionInput>
             </ModalSection>
@@ -132,11 +145,7 @@
                 <SectionInput label="Carrera de Inscripción">
                     <template #input>
                         <SelectModal id="carrera-inscripcion" v-model:student="updateAlumno.inputCarreraInscripcion">
-                            <option 
-                                v-for=" carrera in carreraInscrita" 
-                                :key="carrera.CarreraID"
-                                :value="carrera.CarreraID"
-                            >
+                            <option v-for=" carrera in carreraInscrita" :key="carrera.CarreraID" :value="carrera.CarreraID">
                                 {{ carrera.Nombre }}
                             </option>
                         </SelectModal>
@@ -146,10 +155,7 @@
                 <SectionInput label="Procedencia">
                     <template #input>
                         <SelectModal id="procedencia" v-model:student="updateAlumno.inputProcedencia">
-                            <option 
-                                v-for=" procedencia  in  Procedencia " 
-                                :key="procedencia" :value="procedencia"
-                            >
+                            <option v-for=" procedencia  in  Procedencia " :key="procedencia" :value="procedencia">
                                 {{ procedencia }}
                             </option>
                         </SelectModal>
@@ -159,11 +165,7 @@
                 <SectionInput label="Promotor">
                     <template #input>
                         <SelectModal id="promotor" v-model:student="updateAlumno.inputPromotor">
-                            <option 
-                                v-for=" promotor in Promotores" 
-                                :key="promotor.PromotorID"
-                                :value="promotor.PromotorID"
-                            >
+                            <option v-for=" promotor in Promotores" :key="promotor.PromotorID" :value="promotor.PromotorID">
                                 {{ promotor.Nombre }}
                             </option>
                         </SelectModal>
@@ -183,35 +185,119 @@
         </Modal>
 
         <!-- Modal de baja alumno -->
-        <Modal id="delete-modal" name="Baja Alumno" modalToggle="delete-modal">
+        <Modal name="Baja Alumno" modalToggle="delete-modal">
             <!-- Carrera Inscripcion -->
             <SectionInput label="Selecciona un mótivo de baja">
                 <template #input>
                     <SelectModal id="estatus" v-model:student="updateAlumno.inputTipoBaja">
-                        <option 
-                            v-for="est in tipoBaja" 
-                            :key="est"
-                            :value="est"
-                        >
+                        <option v-for="est in tipoBaja" :key="est" :value="est">
                             {{ est }}
                         </option>
                     </SelectModal>
                 </template>
             </SectionInput>
+            <!-- Comentario -->
+            <SectionInput label="Comentario">
+                <template #input>
+                    <textarea v-model="updateAlumno.inputComentario" rows="4"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Agrega un comentario acerca de la baja"></textarea>
+                </template>
+            </SectionInput>
 
             <div class="mt-4">
-                <button 
-                    @click="bajaTipoAlumno(alumnoParaGestionar, $event)" type="submit"
-                    data-modal-toggle="delete-modal"
-                    class="flex flex-row py-2 px-4 gap-2 text-white bg-red-700 hover:bg-red-800 rounded-md duration-200"
-                >
+                <button @click="bajaTipoAlumno(alumnoParaGestionar, $event)" type="submit" data-modal-toggle="delete-modal"
+                    class="flex flex-row py-2 px-4 gap-2 text-white bg-red-700 hover:bg-red-800 rounded-md duration-200">
                     Dar de Baja
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 3v4a1 1 0 0 0 1 1h4" /><path d="M17 17h-6a2 2 0 0 1 -2 -2v-6m0 -4a2 2 0 0 1 2 -2h4l5 5v7c0 .294 -.063 .572 -.177 .823" /><path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2" /><path d="M3 3l18 18" /></svg>
-                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files-off" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M15 3v4a1 1 0 0 0 1 1h4" />
+                        <path d="M17 17h-6a2 2 0 0 1 -2 -2v-6m0 -4a2 2 0 0 1 2 -2h4l5 5v7c0 .294 -.063 .572 -.177 .823" />
+                        <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2" />
+                        <path d="M3 3l18 18" />
+                    </svg>
+
                 </button>
             </div>
         </Modal>
 
+        <!-- Modal de Reactivar alumno -->
+        <Modal id="reactivate-modal" name="Reactivar Alumno" modalToggle="reactivate-modal">
+            <!-- Comentario -->
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                Fecha de Baja
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Comentario
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr v-for="comentario in  comentarios" :key="comentario.ContactoAlumnoID"
+                            class="border-b border-gray-200 dark:border-gray-700">
+                            {{ formatDate(comentario.FechaContacto) }}
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                {{ formatDate(comentario.FechaContacto) }}
+                            </th>
+                            <td
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                {{ comentario.Comentario }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div v-if="comentarios.length > 0">
+                <h2>Comentarios</h2>
+                <ul>
+                <li v-for="comentario in comentarios" :key="comentario.ContactoAlumnoID">
+                    <p>Fecha: {{ formatDate(comentario.FechaContacto) }}</p>
+                    <p>Comentario: {{ comentario.Comentario }}</p>
+                </li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Comentarios (Debug)</h2>
+                <pre>{{ comentarios }}</pre>
+            </div>
+
+            
+            <!-- Carrera Inscripcion -->
+            <br>
+            <SectionInput label="Selecciona un mótivo de baja">
+                <template #input>
+                    <SelectModal id="estatus" v-model:student="updateAlumno.inputTipoBaja">
+                        <option v-for="est in tipoBaja" :key="est" :value="est">
+                            {{ est }}
+                        </option>
+                    </SelectModal>
+                </template>
+            </SectionInput>
+            <div class="mt-4">
+                <button @click="bajaTipoAlumno(alumnoParaGestionar, $event)" type="submit" data-modal-toggle="reactivate-modal"
+                    class="flex flex-row py-2 px-4 gap-2 text-white bg-red-700 hover:bg-red-800 rounded-md duration-200">
+                    Reactivar Alumno
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-files-off" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M15 3v4a1 1 0 0 0 1 1h4" />
+                        <path d="M17 17h-6a2 2 0 0 1 -2 -2v-6m0 -4a2 2 0 0 1 2 -2h4l5 5v7c0 .294 -.063 .572 -.177 .823" />
+                        <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2" />
+                        <path d="M3 3l18 18" />
+                    </svg>
+                </button>
+            </div>
+        </Modal>
 
         <!-- Tabla -->
         <section class="pt-14">
@@ -247,23 +333,22 @@
                         <TableDataCell>{{ alumno.CorreoInstitucional }}</TableDataCell>
                         <TableDataCell>
                             <div class="flex flex-col lg:flex-row gap-4 w-56">
-                                <button 
-                                    @click="asignarAlumno(alumno.AlumnoID)" 
-                                    data-modal-target="gestion-modal"
-                                    data-modal-toggle="gestion-modal" 
-                                    type="button"
-                                    class="py-2 px-4 text-white text-sm font-normal bg-blue-700 hover:bg-blue-800 rounded-md duration-150"
-                                >
+                                <button @click="asignarAlumno(alumno.AlumnoID)" data-modal-target="gestion-modal"
+                                    data-modal-toggle="gestion-modal" type="button"
+                                    class="py-2 px-4 text-white text-sm font-normal bg-blue-700 hover:bg-blue-800 rounded-md duration-150">
                                     Gestionar
                                 </button>
-                                <button 
-                                    @click="asignarAlumno(alumno.AlumnoID)" 
-                                    data-modal-target="delete-modal" 
-                                    data-modal-toggle="delete-modal" 
-                                    type="button"
+                                <button @click="asignarAlumno(alumno.AlumnoID)" data-modal-target="delete-modal"
+                                    data-modal-toggle="delete-modal" type="button"
                                     class="py-2 px-4 text-white text-sm font-normal bg-red-700 hover:bg-red-800 rounded-md duration-150"
-                                >
+                                    v-if="alumno.Estatus === 'INSC'">
                                     Dar de baja
+                                </button>
+                                <button @click="VerComentarioModal(alumno.AlumnoID)" data-modal-target="reactivate-modal"
+                                    data-modal-toggle="reactivate-modal" type="button"
+                                    class="py-2 px-4 text-white text-sm font-normal bg-green-500 hover:bg-green-600 rounded-md duration-150"
+                                    v-if="alumno.Estatus === 'BAJA'">
+                                    Reactivar
                                 </button>
                             </div>
                         </TableDataCell>
@@ -419,8 +504,9 @@ export default {
                 inputNombreReferido: null,
                 inputDondeObtuvoDato: null,
                 inputFechaInscripcion: null,
+                inputComentario: null,
             },
-
+            comentarios: [],
         };
 
     },
@@ -430,6 +516,7 @@ export default {
         this.loadCarreras();
         this.loadDatosAlumnos();
         this.loadPromotor();
+        this.loadComentarios();
     },
     computed: {
         filteredAlumnos() {
@@ -514,12 +601,65 @@ export default {
                 console.log(this.alumnos);
             } catch (error) {
             }
+            this.loadComentarios();
         },
 
         async asignarAlumno(alumnoID) {
             await this.loadRedes(alumnoID);
             await this.loadDatosAlumnos(alumnoID);
             await this.bajaTipoAlumno(alumnoID);
+            await this.loadComentarios(alumnoID);
+            await this.VerComentarioModal(alumnoID);
+        },
+
+        async VerComentarioModal(id) {
+            await this.loadComentarios(id);
+        },
+
+        async loadComentarios(alumnoID) {
+            if (alumnoID){
+            axios.get(`http://localhost:4000/contacto-alumno/${alumnoID}`)
+                .then(response => {
+                    this.comentarios = response.data.contactoAlumno;
+                    console.log('Comentarios:', this.comentarios);
+                    if (this.comentarios) {
+                        this.$nextTick(() => {
+                        this.$modal.show('reactivate-modal');
+                    });
+
+                    } else {
+                        console.error('El objeto de comentarios es nulo o indefinido');
+
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener los comentarios contacto:', error);
+                    // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+                });
+            }
+            // try {
+            //     const response = await axios.get(`http://localhost:4000/contacto-alumno/${alumnoID}`);
+                
+            //     if (response.data && response.data.contactoAlumno) {
+            //         this.comentarios = response.data.contactoAlumno;
+            //         console.log('Comentarios:', this.comentarios);
+            //     } else {
+            //         console.error('Error: Datos de contacto no encontrados en la respuesta.');
+            //     }
+
+            //     if (this.comentarios.length > 0) {
+            //             this.$modal.show('reactivate-modal');
+            //     } else {
+            //         console.error('El objeto de comentarios es nulo o indefinido');
+            //     }
+
+            // } catch (error) {
+            //     console.error('Error al obtener los comentarios del lead:', error);
+            //     // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+            // }finally {
+            //     // Puedes realizar acciones aquí, incluso si hay un error o no
+            //     console.log('Comentarios:', this.comentarios);
+            // }
         },
 
         async bajaTipoAlumno(alumnoID, event) {
@@ -529,6 +669,7 @@ export default {
                     TipoBaja: this.updateAlumno.inputTipoBaja,
                 });
                 this.actualizarLeadNotify();
+                this.comentarioBaja(alumnoID, this.updateAlumno.inputComentario);
                 console.log(response.data); // Manejar la respuesta del servidor
                 // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
             } catch (error) {
@@ -536,6 +677,22 @@ export default {
                 // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
             }
             this.loadAlumnos();
+        },
+
+        comentarioBaja(AlumnoID, Comentario) {
+            try {
+                const response = axios.post(`http://localhost:4000/contacto-alumno/create`, {
+                    alumnoID: AlumnoID,
+                    Comentario: Comentario,
+
+                });
+                console.log(response);
+            } catch (error) {
+                console.error(error);
+                this.errComentario
+            }
+            this.loadAlumnos();
+
         },
 
         async loadRedes(alumnoID) {
@@ -589,10 +746,12 @@ export default {
                     this.alumnoParaGestionar = this.leadIndividual.AlumnoID;
                     this.updateAlumno.inputTipoBaja = this.leadIndividual.TipoBaja;
 
+                    this.loadComentarios(this.leadIndividual.AlumnoID);
                 }
             } catch (error) {
                 console.log('Error al obtener los datos del alumno:', error);
             }
+            this.updateAlumno.inputComentario = null;
         },
 
         async actualizarAlumno(alumnoID, event) {
@@ -707,6 +866,7 @@ export default {
                 this.loadCarreras;
                 this.loadDatosAlumnos;
                 this.loadPromotor;
+                this.loadComentarios;
             },
 
         },
