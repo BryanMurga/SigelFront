@@ -1,26 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 import { getRole } from '../sessions'
 
-import HomeView from '../views/admin/Home.vue'
-import LoginView from '../views/Login.vue'
 import RegisterView from '../views/Register.vue'
-import AsignacionesView from '../views/admin/Asignaciones.vue'
-import LeadsView from '../views/admin/Leads.vue'
 import TemplateView from '../views/Template.vue'
-import PromotorListView from '../views/admin/PromotorList.vue'
-import RegisterPromotor from '../views/admin/RegisterPromotor.vue'
-import Reasignaciones from '../views/admin/Reasignaciones.vue'
-import IndicadoresView from '../views/admin/Indicadores.vue'
-import DashPromotor from '../views/promotor/DashPromotor.vue'
-import RegistrarLead from '../views/promotor/RegistrarLead.vue'
-import LeadsPromotor from '../views/promotor/Leads.vue'
-import RegisterContacto from '../views/promotor/RegisterContacto.vue'
-import CargarArchivo from '../views/admin/CargarArchivo.vue'
-import AlumnoPromotor from '../views/promotor/AlumnoPromotor.vue'
-import DashAdmin from '../views/admin/DashAdmin.vue'
-import AlumnoCoordinador from '../views/coordinador/AlumnoCoordinador.vue'
-import Campaign from '../views/admin/Campaign.vue'
 
 
 const router = createRouter({
@@ -29,7 +11,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'init',
-      component: LoginView,
+      component: () => import('../views/Login.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/Login.vue'),
     },
     {
       path: '/register',
@@ -37,10 +24,94 @@ const router = createRouter({
       component: RegisterView,
       beforeEnter: (to, from, next) => {
         if (getRole() === 'coordinador') {
-          // Acceso permitido para administradores
           next();
         } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+
+    // Admin Views
+    {
+      path: '/home-adm',
+      name: 'home-adm',
+      component: () => import('../views/admin/Home.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/promotor-list',
+      name: 'promotor-list',
+      component: () => import('../views/admin/PromotorList.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/register-promotor',
+      name: 'register-promotor',
+      component: () => import('../views/admin/RegisterPromotor.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/promotor/edit/:id',
+      name: 'edit-promotor',
+      component: () => import('../views/admin/EditPromotor.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/dash-admin',
+      name: 'dash-admin',
+      component: () => import('../views/admin/DashAdmin.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: '/login' });
+        }
+      }
+    },
+    {
+      path: '/indicadores',
+      name: 'indicadores',
+      component: () => import('../views/admin/Indicadores.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: '/login' });
+        }
+      }
+    },
+    {
+      path: '/campania',
+      name: 'campania',
+      component: () => import('../views/admin/Campaign.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
           next({ name: 'login' });
         }
       }
@@ -48,114 +119,73 @@ const router = createRouter({
     {
       path: '/leads',
       name: 'leads',
-      component: LeadsView,
+      component: () => import('../views/admin/Leads.vue'),
       beforeEnter: (to, from, next) => {
         if (getRole() === 'admin') {
-          // Acceso permitido para administradores
           next();
         } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
           next({ name: 'login' });
         }
       }
     },
-    {
-      path: '/template',
-      name: 'template',
-      component: TemplateView,
-    },
-    {
-      path: '/promotor-list',
-      name: 'promotor-list',
-      component: PromotorListView,
-      beforeEnter: (to, from, next) => {
-        if (getRole() === 'admin') {
-          // Acceso permitido para administradores
-          next();
-        } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-          next({ name: 'login' });
-        }
-      }
-    },
-
-    {
-      path: '/login',
-      name: 'login',
-      component: LoginView,
-    },
-    {
-      path: '/home-adm',
-      name: 'home-adm',
-      component: HomeView, 
-    },
-
-    {
-      path:'/register-promotor',
-      name:'register-promotor',
-      component: RegisterPromotor,
-      beforeEnter: (to, from, next) => {
-        if (getRole() === 'admin') {
-          // Acceso permitido para administradores
-          next();
-        } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-          next({ name: 'login' });
-        }
-      }
-    },
-      
     {
       path: '/asignaciones',
       name: 'asignaciones',
-      component: AsignacionesView,
+      component: () => import('../views/admin/Asignaciones.vue'),
       beforeEnter: (to, from, next) => {
         if (getRole() === 'admin') {
-          // Acceso permitido para administradores
           next();
         } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
           next({ name: 'login' });
         }
       }
     },
-
-    {
-      path: '/campania',
-      name: 'campania',
-      component: Campaign,
-      beforeEnter: (to, from, next) => {
-        if (getRole() === 'admin') {
-          // Acceso permitido para administradores
-          next();
-        } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-          next({ name: 'login' });
-        }
-      }
-    },
-
     {
       path: '/reasignaciones',
       name: 'reasignaciones',
-      component: Reasignaciones
+      component: () => import('../views/admin/Reasignaciones.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: 'login' });
+        }
+      }
     },
     {
-      path: '/indicadores',
-      name: 'indicadores',  
-      component: IndicadoresView,
+      path: '/cargar-archivo',
+      name: 'cargar-archivo',
+      component: () => import('../views/admin/CargarArchivo.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'admin') {
+          next();
+        } else {
+          next({ name: 'login' });
+        }
+      }
     },
-
+    
+    // Promotor Views
     {
       path: '/dash-promotor',
       name: 'dash-promotor',
-      component: DashPromotor,
+      component: () => import('../views/promotor/DashPromotor.vue'),
       beforeEnter: (to, from, next) => {
         if (getRole() === 'promotor') {
-          // Acceso permitido para administradores
           next();
         } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/alumno-promotor',
+      name: 'alumno-promotor',
+      component: () => import('../views/promotor/AlumnoPromotor.vue'),
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'promotor') {
+          next();
+        } else {
           next({ name: 'login' });
         }
       }
@@ -163,13 +193,11 @@ const router = createRouter({
     {
       path: '/registrar-lead',
       name: 'registrar-lead',
-      component: RegistrarLead,
+      component: () => import('../views/promotor/RegistrarLead.vue'),
       beforeEnter: (to, from, next) => {
         if (getRole() === 'promotor') {
-          // Acceso permitido para administradores
           next();
         } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
           next({ name: 'login' });
         }
       }
@@ -177,106 +205,51 @@ const router = createRouter({
     {
       path: '/leads-promotor',
       name: 'leads-promotor',
-      component: LeadsPromotor,
+      component: () => import('../views/promotor/Leads.vue'),
       beforeEnter: (to, from, next) => {
         if (getRole() === 'promotor') {
-          // Acceso permitido para administradores
           next();
         } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
+          next({ name: 'login' });
+        }
+      }
+    },
+    {
+      path: '/register-contacto/:selectContacto',
+      name: 'register-contacto',
+      component: () => import('../views/promotor/RegisterContacto.vue'),
+      props: true,
+      beforeEnter: (to, from, next) => {
+        if (getRole() === 'promotor') {
+          next();
+        } else {
           next({ name: 'login' });
         }
       }
     },
 
-    {
-      path: '/leads-promotor',
-      name: 'leads-promotor',
-      component: LeadsPromotor,
-      beforeEnter: (to, from, next) => {
-        if (getRole() === 'promotor') {
-          // Acceso permitido para administradores
-          next();
-        } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-          next({ name: 'login' });
-        }
-      }
-    },
-    {
-    path: '/register-contacto/:selectContacto',
-    name: 'register-contacto',
-    component: RegisterContacto,
-    props: true,
-    beforeEnter: (to, from, next) => {
-      if (getRole() === 'promotor') {
-        // Acceso permitido para administradores
-        next();
-      } else {
-        // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-        next({ name: 'login' });
-      }
-    }
-    },
 
+    // Coordinador Views
     {
-      path: '/cargar-archivo',
-      name: 'cargar-archivo',
-      component: CargarArchivo,
+      path: '/alumno-coordinador',
+      name: 'alumno-coordinador',
+      component: () => import('../views/coordinador/AlumnoCoordinador.vue'),
       beforeEnter: (to, from, next) => {
-        if (getRole() === 'admin') {
+        if (getRole() === 'coordinador') {
           // Acceso permitido para administradores
           next();
         } else {
           // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-          next({ name: 'login' });
+          next({ name: '/login' });
         }
       }
     },
 
     {
-      path: '/alumno-promotor',
-      name: 'alumno-promotor',
-      component: AlumnoPromotor,
-      beforeEnter: (to, from, next) => {
-        if (getRole() === 'promotor') {
-          // Acceso permitido para administradores
-          next();
-        } else {
-          // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-          next({ name: 'login' });
-        }
-      }
+      path: '/template',
+      name: 'template',
+      component: TemplateView,
     },
-      
-      {
-        path: '/dash-admin',
-        name: 'dash-admin',
-        component: DashAdmin,
-        beforeEnter: (to, from, next) => {
-          if (getRole() === 'admin') {
-            // Acceso permitido para administradores
-            next();
-          } else {
-            // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-            next({ name: '/login' });
-          }
-        }
-      },
-      {
-        path: '/alumno-coordinador',
-        name: 'alumno-coordinador',
-        component: AlumnoCoordinador,
-        beforeEnter: (to, from, next) => {
-          if (getRole() === 'coordinador') {
-            // Acceso permitido para administradores
-            next();
-          } else {
-            // Redirigir a la página de inicio de sesión o a otro lugar adecuado
-            next({ name: '/login' });
-          }
-        }
-      }
   ]
 })
 export default router;
