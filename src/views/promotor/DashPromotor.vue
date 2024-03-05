@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <SideBarProm class="lg:w-64 md:w-48 sm:w-32" />
-    <div class="lg:ml-64 p-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center">
+  <DashboardLayout name="Dash" >
+  
+    
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 place-content-center">
         <!-- Sección de inscripciones por Grado del promotor -->
         <div
           class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
@@ -369,14 +369,18 @@
 
         <!-- Agrega más secciones según tus necesidades -->
       </div>
-    </div>
-  </div>
+    
+  
+  
+  </DashboardLayout>
 </template>
 
 <script>
+import DashboardLayout from "../../layouts/DashboardLayout.vue";
+import CardLink from "../../components/CardLink.vue";
 import ApexCharts from "apexcharts";
 import axios from "axios";
-import SideBarProm from "../../components/SideBarADM.vue";
+// import SideBarProm from "../../components/SideBarADM.vue";
 import { getUserName } from "../../sessions";
 
 export default {
@@ -894,7 +898,8 @@ export default {
     this.fetchData();
   },
   components: {
-    SideBarProm,
+    DashboardLayout,
+    CardLink,
   },
 };
 </script>
