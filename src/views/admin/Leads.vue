@@ -273,7 +273,7 @@
                         <TableHeaderCell>Contacto</TableHeaderCell>
                     </TableRow>
                 </template>
-                <template #default>
+                <template #content>
                     <TableRow v-for="lead in filterList" :key="lead.id" class="border-b">
                         <TableDataCell>{{ lead.LeadID }}</TableDataCell>
                         <TableDataCell>{{ lead.NombreCompleto }}</TableDataCell>
