@@ -231,7 +231,7 @@
                         <TableHeaderCell>Acciones</TableHeaderCell>
                     </TableRow>
                 </template>
-                <template #default>
+                <template #content>
                     <TableRow v-for=" alumno  in  filteredAlumnos " :key="alumno.AlumnoID">
                         <TableDataCell>{{ alumno.AlumnoID }}</TableDataCell>
                         <TableDataCell>{{ alumno.NombreAlumno }}</TableDataCell>
