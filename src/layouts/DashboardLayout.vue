@@ -4,6 +4,7 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 import SideBarLink from './../components/SideBarLink.vue';
 
+
 export default {
     props: {
         name: String,
@@ -35,9 +36,31 @@ export default {
             return this.$route.path === path;
         },
         async logout() {
-            clearRole();
-            clearUserName();
-            this.$router.push("/login");
+            try {
+                const token = Cookies.get('token');
+
+
+                if (!token) {
+                    // Si no hay token almacenado, probablemente el usuario ya está desconectado
+                    console.warn('No se encontró un token en las cookies');
+                    return;
+                }
+
+
+                const response = await axios.post('http://localhost:3000/api/auth/logout', null, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+
+                clearRole();
+                clearUserName();
+                this.$router.push("/login");
+               
+            } catch (error) {
+                console.error('Error al cerrar sesión', error);
+            }
         },
     },
     components: {
@@ -45,6 +68,7 @@ export default {
     }
 };
 </script>
+
 
 <template>
     <!-- component -->
@@ -59,10 +83,11 @@ export default {
                 <!-- <span class="hidden text-gray-400 lg:block">Admin</span> -->
             </div>
 
+
             <ul class="space-y-2 tracking-wide mt-8">
                 <!-- Enlaces para admin -->
                 <li v-if="isAdmin">
-                    <SideBarLink href="home-adm" :active="isLinkActive('/home-adm')">
+                    <SideBarLink to="/home-adm" :active="isLinkActive('/home-adm')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path class="fill-current group-hover:text-[#4fc4ae]"
                                 d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
@@ -73,7 +98,7 @@ export default {
                     </SideBarLink>
                 </li>
                 <li v-if="isAdmin">
-                    <SideBarLink href="leads" :active="isLinkActive('/leads')">
+                    <SideBarLink to="/leads" :active="isLinkActive('/leads')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path class="fill-current group-hover:text-[#4fc4ae]" stroke-linecap="round"
@@ -84,7 +109,7 @@ export default {
                     </SideBarLink>
                 </li>
                 <li v-if="isAdmin">
-                    <SideBarLink href="asignaciones" :active="isLinkActive('/asignaciones')">
+                    <SideBarLink to="/asignaciones" :active="isLinkActive('/asignaciones')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path class=" group-hover:text-[#4fc4ae]" fill-rule="evenodd"
                                 d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
@@ -94,7 +119,7 @@ export default {
                     </SideBarLink>
                 </li>
                 <li v-if="isAdmin">
-                    <SideBarLink href="reasignaciones" :active="isLinkActive('/reasignaciones')">
+                    <SideBarLink to="/reasignaciones" :active="isLinkActive('/reasignaciones')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path class=" group-hover:text-[#4fc4ae]"
                                 d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
@@ -105,7 +130,7 @@ export default {
                     </SideBarLink>
                 </li>
                 <li v-if="isAdmin">
-                    <SideBarLink href="cargar-archivo" :active="isLinkActive('/cargar-archivo')">
+                    <SideBarLink to="/cargar-archivo" :active="isLinkActive('/cargar-archivo')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                             <path class=" group-hover:text-[#4fc4ae]" fill-rule="evenodd"
                                 d="M10.5 3.75a6 6 0 0 0-5.98 6.496A5.25 5.25 0 0 0 6.75 20.25H18a4.5 4.5 0 0 0 2.206-8.423 3.75 3.75 0 0 0-4.133-4.303A6.001 6.001 0 0 0 10.5 3.75Zm2.03 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v4.94a.75.75 0 0 0 1.5 0v-4.94l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z"
@@ -116,24 +141,21 @@ export default {
                 </li>
                 <!-- Fin de enlaces admin -->
 
+
                 <!-- Enlaces para promotor -->
                 <li v-if="isPromotor">
-                    <a href="dash-promotor" aria-label="dashboard"
-                        class="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-[#057a55]">
-                        <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                                class="fill-current text-cyan-400 dark:fill-slate-600"></path>
-                            <path d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                                class="fill-current text-cyan-200 group-hover:text-cyan-300"></path>
-                            <path d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                                class="fill-current group-hover:text-sky-300"></path>
+                    <SideBarLink to="/dash-promotor" :active="isLinkActive('/dash-promotor')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path class="fill-current group-hover:text-[#4fc4ae]"
+                                d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                            <path class="fill-current group-hover:text-[#4fc4ae]"
+                                d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
                         </svg>
-                        <span class="-mr-1 font-medium">Inicio</span>
-                    </a>
+                        <span class="-mr-1 font-medium group-hover:text-[#4fc4ae]">Inicio</span>
+                    </SideBarLink>
                 </li>
                 <li v-if="isPromotor">
-                    <a href="leads-promotor" class="px-4 py-3 flex items-center space-x-4 rounded-md group">
+                    <SideBarLink to="/leads-promotor" :active="isLinkActive('/leads-promotor')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path class="fill-current group-hover:text-[#4fc4ae]" stroke-linecap="round"
@@ -141,7 +163,7 @@ export default {
                                 d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
                         </svg>
                         <span class="group-hover:text-[#4fc4ae]">Leads</span>
-                    </a>
+                    </SideBarLink>
                 </li>
                 <li v-if="isPromotor">
                     <a href="registrar-lead" class="px-4 py-3 flex items-center space-x-4 rounded-md group">
@@ -167,6 +189,7 @@ export default {
                     </a>
                 </li>
                 <!-- Fin de enlaces promotor -->
+
 
                 <!-- Enlaces de coordinador -->
                 <li v-if="isCoordinador">
@@ -200,6 +223,7 @@ export default {
             </ul>
         </div>
 
+
         <div class="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
             <button @click="logout"
                 class="px-4 py-3 flex items-center space-x-4 rounded-md hover:text-[#4fc4ae]  group cursor-pointer">
@@ -224,6 +248,7 @@ export default {
                 </button>
             </div>
         </div>
+
 
         <div class="px-6 py-6 2xl:container h-[calc(100vh-64px)]">
             <slot />
