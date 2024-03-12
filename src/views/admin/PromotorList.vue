@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div class="lg:ml-60 p-4">
+  <DashboardLayout name="Listado de promotores" >
+
       <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
       <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Promotores</span>
-    </div>
 
-    <SideBarADM />
 
     <div class="flex flex-col mt-6 md:flex-row md:items-center md:justify-end lg:ml-64 lg:mr-10 lg:mb-5">
       <div class="relative flex-grow">
@@ -24,10 +22,9 @@
     <br>
 
     <section>
-      <div class="flex-1 lg:ml-64">
         <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white">
+            <thead style="background-color: #0C4A6E" class="text-xs uppercase dark:bg-gray-700 text-white">
               <tr>
                 <th scope="col" class="px-6 py-3">Nombre Completo</th>
                 <th scope="col" class="px-6 py-3">Correo Electrónico</th>
@@ -55,7 +52,7 @@
                   {{ promotor.Estado ? "Activo" : "Inactivo" }}
                 </td>
                 <td class="px-6 py-4">
-                  <fwb-button @click="openEditModal(promotor)" color="blue">
+                  <fwb-button @click="openEditModal(promotor)" color="green">
                     Editar
                   </fwb-button>
                 </td>
@@ -63,15 +60,13 @@
             </tbody>
           </table>
         </div>
-      </div>
 
       <div class="flex justify-end mt-10 mr-40 mb-10">
-        <button @click="redirectToAgregarPromotor" class="px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800">
+        <button @click="redirectToAgregarPromotor" class="px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-600">
           Agregar Promotor
         </button>
       </div>
     </section>
-  </div>
 
   <div v-if="editingPromotor"
     class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 dark:bg-opacity-80">
@@ -88,7 +83,7 @@
           </svg>
         </button>
       </div>
-      <form @submit.prevent="updatePromotor">
+      <form @submit.prevent="actualizarPromotor">
         <label for="editNombre">Nombre:</label>
         <input v-model="editingPromotor.Nombre" id="editNombre" type="text" class="w-full mb-4 p-2 border rounded" />
         <label for="editCorreo">Correo Electrónico:</label>
@@ -103,21 +98,21 @@
         <label for="editPassw">Contraseña:</label>
         <input v-model="editingPromotor.Passw" id="editPassw" type="password" class="w-full mb-4 p-2 border rounded" />
         <div class="flex justify-end mt-4">
-          <fwb-button @click="updatePromotor" color="blue">Guardar Cambios</fwb-button>
+          <fwb-button @click="actualizarPromotor" color="blue">Guardar Cambios</fwb-button>
           <fwb-button @click="closeEditModal" color="alternative">Cancelar</fwb-button>
         </div>
       </form>
     </div>
   </div>
+</DashboardLayout>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
 import { initFlowbite } from "flowbite";
-import SideBarADM from "../../components/SideBarADM.vue";
+import DashboardLayout from "../../layouts/DashboardLayout.vue";
 import axios from "axios";
 import { FwbButton, FwbModal } from "flowbite-vue";
-import { useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
@@ -127,52 +122,7 @@ onMounted(() => {
 
 export default {
 
-  //types of toast
-  setup() {
-    const notify = () => {
-      toast("Se ha reasignado el Promotor!", {
-        autoClose: 3000,
-        type: 'success'
-      }); // ToastOptions
-    }
 
-    const errAsignacion = (LeadID) => {
-      toast(`El lead ${LeadID} no tiene un promotor asignado`, {
-        autoClose: 2000,
-        type: 'warning'
-      }); // ToastOptions
-    }
-
-    const errLeads = () => {
-      toast("Error al obtener los Leads", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
-
-    const errPromotores = () => {
-      toast("Error al obtener los Promotores Activos", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
-
-    const errAsignarPromotor = () => {
-      toast("Error al asignar promotor", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
-
-    const infoNotify = () => {
-      toast("Se ha actualizado la Información... ", {
-        autoClose: 2000,
-        type: 'error'
-      }); // ToastOptions
-    }
-
-    return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
-  },
 
   setup() {
     const notify = () => {
@@ -251,19 +201,22 @@ export default {
         this.errPromotores();
       }
     },
+
+    openEditModal(promotor) {
+      this.editingPromotor = { ...promotor };
+    },
+
+    closeEditModal() {
+      this.editingPromotor = null;
+    },
+
     async actualizarPromotor() {
       try {
         // Convierte el estado de true/false a 1/0 para la API
-        const promotorParaActualizar = {
-          ...this.selectedPromotor,
-          Estado: this.selectedPromotor.Estado ? 1 : 0,
-        };
+        const promotorParaActualizar = { ...this.editingPromotor };
 
         // Actualiza en la base de datos
         await axios.put(`http://localhost:4000/promotores/update/${promotorParaActualizar.PromotorID}`, promotorParaActualizar);
-
-        // Notificación de éxito
-        this.notify();
 
         // Encuentra el índice del promotor en la lista original para actualizar
         const index = this.promotores.findIndex(promotor => promotor.PromotorID === this.selectedPromotor.PromotorID);
@@ -272,12 +225,22 @@ export default {
           promotorParaActualizar.Estado = !!promotorParaActualizar.Estado;
           // Actualiza el promotor en la lista con los nuevos valores
           this.promotores.splice(index, 1, promotorParaActualizar);
+        
         }
+        this.closeEditModal();
+        this.loadPromotores();
+        // Notificación de éxito
+        this.notify();
+
+
 
       } catch (error) {
-        console.error(error);
+        // Notificación de error
+        this.errNotify();
       }
     },
+    
+
     openAddModal() {
       this.addingPromotor = {
         Nombre: "",
@@ -297,6 +260,6 @@ export default {
       this.$router.push("/register-promotor");
     },
   },
-  components: { SideBarADM, FwbButton, FwbModal },
+  components: { DashboardLayout, FwbButton, FwbModal },
 };
 </script>

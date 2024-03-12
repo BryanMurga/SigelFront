@@ -1,16 +1,11 @@
 <template>
-    <header>
-        <div class="lg:ml-64 p-4">
+     <DashboardLayout name="Registrar Contacto">
+
+        
             <i class="fa-solid fa-address-book text-2xl" style="color: #48c9b0"></i>
             <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg">Registro de Contactos</span>
-        </div>
-
-        <SideBarPromotor class="lg:w-64 md:w-48 sm:w-32" /> <!-- Importa y utiliza el componente SidebarADM -->
-
-    </header>
-
-    <section>
-        <div class="flex-1 lg:ml-64">
+            <br/>
+            
             <form @submit.prevent="crearComentario">
                 <div>
                     <br>
@@ -54,15 +49,14 @@
 
                 </div>
             </form>
-        </div>
-    </section>
+</DashboardLayout>
 </template>
  
 <script>
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import { getUserName } from "../../sessions";
-import SideBarPromotor from "../../components/SideBarProm.vue";
+import DashboardLayout from "../../layouts/DashboardLayout.vue";
 import DatePicker from "vue3-datepicker";
 import axios from "axios";
 
@@ -170,7 +164,7 @@ export default {
         },
 
     },
-    components: { SideBarPromotor, DatePicker }
+    components: { DashboardLayout, DatePicker }
 };
 
 </script>

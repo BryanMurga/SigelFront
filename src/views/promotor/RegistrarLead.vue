@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <div class="lg:ml-64 p-4">
+  <DashboardLayout name="Registrar Lead">
       <i class="fas fa-bars-progress text-2xl" style="color: #48c9b0"></i>
       <span id="posicion" class="ml-2 text-gray-500 dark:text-gray-400 text-lg"
         >Registrar Lead</span
       >
-    </div>
+    
     <div>
       <SideBarProm />
     </div>
@@ -635,20 +634,20 @@
         </form>
       </div>
     </div>
-  </div>
+  </DashboardLayout>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
 import { initFlowbite } from "flowbite";
-import SideBarProm from "../../components/SideBarProm.vue";
+import DashboardLayout from "../../layouts/DashboardLayout.vue";
 import DatePicker from "vue3-datepicker";
 import axios from "axios";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 // import { municipiosEstados } from '../../utils/municipiosEstados';
 import municipiosEstados from "../../data/municipiosEstados.json";
-import { getUserName } from "../../sessions"; 
+import { getUserName } from "../../sessions";
 
 export default {
   setup() {
@@ -684,8 +683,6 @@ export default {
         type: "error",
       });
     };
-
-
 
     return {
       isTelefonoValido,
@@ -1008,93 +1005,126 @@ export default {
     },
 
     async registerLead() {
-    try {
-      const {
-        NombreCompleto, Telefono, Telefono2, CorreoElectronico, CorreoElectronico2,
-        FechaPrimerContacto, FechaNac, EscuelaProcedencia, NombrePais, NombreEstado,
-        NombreCiudad, PSeguimiento, CarreraInteresID, Grado, Programa, EstatusInsc,
-        SemestreIngreso, Ciclo, CampanaID, AsetNameForm, IsOrganic, MedioDeContactoID,
-        TipoReferido, NombreReferido, DondeObtDato, FechaInscripcion, CarreraInscripcion,
-        BecaOfrecida, NumeroLista, Comentarios
-      } = this.lead;
+      try {
+        const {
+          NombreCompleto,
+          Telefono,
+          Telefono2,
+          CorreoElectronico,
+          CorreoElectronico2,
+          FechaPrimerContacto,
+          FechaNac,
+          EscuelaProcedencia,
+          NombrePais,
+          NombreEstado,
+          NombreCiudad,
+          PSeguimiento,
+          CarreraInteresID,
+          Grado,
+          Programa,
+          EstatusInsc,
+          SemestreIngreso,
+          Ciclo,
+          CampanaID,
+          AsetNameForm,
+          IsOrganic,
+          MedioDeContactoID,
+          TipoReferido,
+          NombreReferido,
+          DondeObtDato,
+          FechaInscripcion,
+          CarreraInscripcion,
+          BecaOfrecida,
+          NumeroLista,
+          Comentarios,
+        } = this.lead;
 
-      const promotorOriginal = this.promotorID;
-      const promotorActual = this.promotorID;
-      const FechaPromotorOriginal = new Date();
-      const FechaPromotorActual = new Date();
+        const promotorOriginal = this.promotorID;
+        const promotorActual = this.promotorID;
+        const FechaPromotorOriginal = new Date();
+        const FechaPromotorActual = new Date();
 
-      // Agrega validaciones según tus requerimientos
-      if (!NombreCompleto || !Telefono || !CorreoElectronico || !promotorOriginal || !promotorActual) {
-        throw new Error('Por favor, completa todos los campos obligatorios correctamente.');
+        // Agrega validaciones según tus requerimientos
+        if (
+          !NombreCompleto ||
+          !Telefono ||
+          !CorreoElectronico ||
+          !promotorOriginal ||
+          !promotorActual
+        ) {
+          throw new Error(
+            "Por favor, completa todos los campos obligatorios correctamente."
+          );
+        }
+
+        const leadData = {
+          NombreCompleto,
+          Telefono,
+          Telefono2,
+          CorreoElectronico,
+          CorreoElectronico2,
+          FechaPrimerContacto,
+          FechaNac,
+          EscuelaProcedencia,
+          NombrePais,
+          NombreEstado,
+          NombreCiudad,
+          PSeguimiento,
+          CarreraInteresID,
+          Grado,
+          Programa,
+          EstatusInsc,
+          SemestreIngreso,
+          Ciclo,
+          CampanaID,
+          AsetNameForm,
+          IsOrganic,
+          MedioDeContactoID,
+          TipoReferido,
+          NombreReferido,
+          DondeObtDato,
+          FechaInscripcion,
+          CarreraInscripcion,
+          BecaOfrecida,
+          NumeroLista,
+          promotorOriginal,
+          FechaPromotorOriginal,
+          promotorActual,
+          FechaPromotorActual,
+          Comentarios,
+        };
+
+        console.log(leadData);
+        await axios.post("http://localhost:4000/leads/create", leadData);
+
+        // Redirige a la vista deseada después del registro
+        // Puedes ajustar esto según la estructura de tu aplicación
+        this.$router.push("/leads-promotor");
+        notifySuccess();
+      } catch (error) {
+        console.error("Error al registrar el lead:", error.message);
+
+        console.log(this.lead);
       }
+    },
+    async PromotorID() {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/promotores/getPromotorID",
+          {
+            params: {
+              userName: this.userName,
+            },
+          }
+        );
+        this.promotorID = response.data.promotor.promotorID;
+        console.log(this.promotorID);
+      } catch (error) {
+        console.error("Error al cargar la lista de promotores:", error);
+        // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+      }
+    },
 
-      const leadData = {
-        NombreCompleto,
-        Telefono,
-        Telefono2,
-        CorreoElectronico,
-        CorreoElectronico2,
-        FechaPrimerContacto,
-        FechaNac,
-        EscuelaProcedencia,
-        NombrePais,
-        NombreEstado,
-        NombreCiudad,
-        PSeguimiento,
-        CarreraInteresID,
-        Grado,
-        Programa,
-        EstatusInsc,
-        SemestreIngreso,
-        Ciclo,
-        CampanaID,
-        AsetNameForm,
-        IsOrganic,
-        MedioDeContactoID,
-        TipoReferido,
-        NombreReferido,
-        DondeObtDato,
-        FechaInscripcion,
-        CarreraInscripcion,
-        BecaOfrecida,
-        NumeroLista,
-        promotorOriginal,
-        FechaPromotorOriginal,
-        promotorActual,
-        FechaPromotorActual,
-        Comentarios,
-      };
-      
-      console.log(leadData)
-      await axios.post('http://localhost:4000/leads/create', leadData);
-
-      // Redirige a la vista deseada después del registro
-      // Puedes ajustar esto según la estructura de tu aplicación
-      this.$router.push('/leads-promotor');
-      notifySuccess();
-    } catch (error) {
-      console.error('Error al registrar el lead:', error.message);
-
-      console.log(this.lead)
-    }
-  },
-  async PromotorID() {
-
-    try {
-      const response = await axios.get("http://localhost:4000/promotores/getPromotorID", {
-        params: {
-          userName: this.userName,
-        },
-      });
-      this.promotorID = response.data.promotor.promotorID;
-      console.log(this.promotorID)
-    } catch (error) {
-      console.error("Error al cargar la lista de promotores:", error);
-      // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
-    }
-
-  }, 
-    
     cancelarRegistro() {
       // Limpia el formulario u otras acciones al cancelar el registro
       this.limpiarFormulario();
@@ -1169,7 +1199,7 @@ export default {
   },
 
   components: {
-    SideBarProm,
+    DashboardLayout,
     DatePicker,
   },
 };

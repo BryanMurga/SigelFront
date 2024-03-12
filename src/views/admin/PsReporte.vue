@@ -386,6 +386,7 @@ export default {
           || response.data.reporte.length === 0
         ) {
           this.infoNotify();
+         
           return;
         } else {
           this.reportePromotores = response.data.reportePromotores;
@@ -393,6 +394,10 @@ export default {
         }
       } catch (error) {
         this.infoNotify();
+        console.log(this.reportePromotores.length)
+          console.log(this.cicloPromotores)
+          console.log(this.fechaInicioPromotores)
+          console.log(this.fechaFinPromotores)
       }
     },
   },

@@ -1,377 +1,360 @@
 <template>
-  <DashboardLayout name="Dash" >
-  
-    
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 place-content-center">
-        <!-- Sección de inscripciones por Grado del promotor -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-chart-line fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Inscripciones por Promotor
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de Inscripciones
-                {{
-                  inscripcionesPorPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
+  <DashboardLayout name="Dashboard">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 place-content-center">
+      <!-- Sección de inscripciones por Grado del promotor -->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-chart-line fa-2x"></i>
           </div>
-          <div id="inscripcionesPorProm-chart"></div>
-        </div>
-
-        <!-- Sección de PS-PI del promotor -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Inscripciones por Promotor
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
             >
-              <i class="fa-solid fa-square-poll-vertical"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                PS-Seguimiento
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos PS-PI:
-                {{
-                  pseguimientoPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
+              Total de Inscripciones
+              {{
+                inscripcionesPorPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
           </div>
-          <div id="pseguimientoPromData-chart"></div>
         </div>
-
-        <!--Total por ciclo -->
-
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-arrows-spin"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de Inscripciones por Ciclo
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos Por ciclo:
-                {{
-                  pseguimientoPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorCiclo-chart"></div>
-        </div>
-
-        <!-- Total Por pais-->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-earth-americas fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de Inscripciones por País
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos Por País:
-                {{
-                  totalPorPaisPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorPais-chart"></div>
-        </div>
-
-        <!-- Total Por Estado-->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-earth-americas fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Estados
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos Por Estado:
-                {{
-                  totalPorEstadoPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorEstadoProm-chart"></div>
-        </div>
-
-        <!-- Total Por Ciudad-->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-earth-americas fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Ciudad
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos Por Ciudad:
-                {{
-                  totalPorCiudadPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorCiudad-chart"></div>
-        </div>
-
-        <!-- Total Por Año y Mes-->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-calendar-days fa-2x"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total de Inscripciones por Mes y Año
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos:
-                {{
-                  totalPorMesAnioPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorMesAnio-chart"></div>
-        </div>
-
-        <!-- Total Por Escuela de procedencia-->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-school"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Escuela de procedencia
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos:
-                {{
-                  totalPorMesAnioPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorEscProd-chart"></div>
-        </div>
-
-        <!-- Total por Edades -->
-
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-child-reaching"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Edad
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos:
-                {{
-                  totalPorEdadesPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorEdades-chart"></div>
-        </div>
-
-        <!-- Total por Beca -->
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-money-bill"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Beca Ofertada
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos:
-                {{
-                  totalPorBecaPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorBeca-chart"></div>
-        </div>
-
-        <!-- Total por Referido -->
-
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-arrows-down-to-people"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Referido
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos:
-                {{
-                  totalPorReferidoPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorReferido-chart"></div>
-        </div>
-
-        <!-- Total por Medio de Contacto -->
-
-        <div
-          class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
-        >
-          <div class="flex items-center">
-            <div
-              class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
-            >
-              <i class="fa-solid fa-address-book"></i>
-            </div>
-            <div class="ml-4">
-              <p class="text-base font-medium text-gray-900 dark:text-gray-400">
-                Total por Medio de Contacto
-              </p>
-              <h2
-                class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
-              >
-                Total de datos:
-                {{
-                  totalPorMedioContactoPromData.reduce(
-                    (acc, item) => acc + item.total,
-                    0
-                  )
-                }}
-              </h2>
-            </div>
-          </div>
-          <div id="totalPorMedioContacto-chart"></div>
-        </div>
-
-        <!-- Agrega más secciones según tus necesidades -->
+        <div id="inscripcionesPorProm-chart"></div>
       </div>
-    
-  
-  
+
+      <!-- Sección de PS-PI del promotor -->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-square-poll-vertical"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              PS-Seguimiento
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos PS-PI:
+              {{
+                pseguimientoPromData.reduce((acc, item) => acc + item.total, 0)
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="pseguimientoPromData-chart"></div>
+      </div>
+
+      <!--Total por ciclo -->
+
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-arrows-spin"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total de Inscripciones por Ciclo
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos Por ciclo:
+              {{
+                pseguimientoPromData.reduce((acc, item) => acc + item.total, 0)
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorCiclo-chart"></div>
+      </div>
+
+      <!-- Total Por pais-->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-earth-americas fa-2x"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total de Inscripciones por País
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos Por País:
+              {{
+                totalPorPaisPromData.reduce((acc, item) => acc + item.total, 0)
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorPais-chart"></div>
+      </div>
+
+      <!-- Total Por Estado-->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-earth-americas fa-2x"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total por Estados
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos Por Estado:
+              {{
+                totalPorEstadoPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorEstadoProm-chart"></div>
+      </div>
+
+      <!-- Total Por Ciudad-->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-earth-americas fa-2x"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total por Ciudad
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos Por Ciudad:
+              {{
+                totalPorCiudadPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorCiudad-chart"></div>
+      </div>
+
+      <!-- Total Por Año y Mes-->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-calendar-days fa-2x"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total de Inscripciones por Mes y Año
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos:
+              {{
+                totalPorMesAnioPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorMesAnio-chart"></div>
+      </div>
+
+      <!-- Total Por Escuela de procedencia-->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-school"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total por Escuela de procedencia
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos:
+              {{
+                totalPorMesAnioPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorEscProd-chart"></div>
+      </div>
+
+      <!-- Total por Edades -->
+
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-child-reaching"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total por Edad
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos:
+              {{
+                totalPorEdadesPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorEdades-chart"></div>
+      </div>
+
+      <!-- Total por Beca -->
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-money-bill"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total por Beca Ofertada
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos:
+              {{
+                totalPorBecaPromData.reduce((acc, item) => acc + item.total, 0)
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorBeca-chart"></div>
+      </div>
+
+      <!-- Total por Referido -->
+
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-arrows-down-to-people"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total por Referido
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos:
+              {{
+                totalPorReferidoPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorReferido-chart"></div>
+      </div>
+
+      <!-- Total por Medio de Contacto -->
+
+      <div
+        class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500"
+          >
+            <i class="fa-solid fa-address-book"></i>
+          </div>
+          <div class="ml-4">
+            <p class="text-base font-medium text-gray-900 dark:text-gray-400">
+              Total por Medio de Contacto
+            </p>
+            <h2
+              class="mb-2 text-lg font-medium text-gray-400 dark:text-gray-100"
+            >
+              Total de datos:
+              {{
+                totalPorMedioContactoPromData.reduce(
+                  (acc, item) => acc + item.total,
+                  0
+                )
+              }}
+            </h2>
+          </div>
+        </div>
+        <div id="totalPorMedioContacto-chart"></div>
+      </div>
+
+      <!-- Agrega más secciones según tus necesidades -->
+    </div>
   </DashboardLayout>
 </template>
 
@@ -469,8 +452,21 @@ export default {
             (item) => `${item.PSeguimiento}`
           ),
         },
-        colors: ["#008FFB", "#FF4560", "#feb019", "#00E396", "#1a8cff", "#FFD700", "#8B008B", "#4CAF50", "#FF6347", "#808080", "#CD853F", "#FF8C00", "#000000"],
-
+        colors: [
+          "#008FFB",
+          "#FF4560",
+          "#feb019",
+          "#00E396",
+          "#1a8cff",
+          "#FFD700",
+          "#8B008B",
+          "#4CAF50",
+          "#FF6347",
+          "#808080",
+          "#CD853F",
+          "#FF8C00",
+          "#000000",
+        ],
       };
       const chartPseguimientoProm = new ApexCharts(
         document.getElementById("pseguimientoPromData-chart"),

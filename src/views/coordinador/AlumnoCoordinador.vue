@@ -617,50 +617,25 @@ export default {
         },
 
         async loadComentarios(alumnoID) {
-            if (alumnoID){
-            axios.get(`http://localhost:4000/contacto-alumno/${alumnoID}`)
-                .then(response => {
-                    this.comentarios = response.data.contactoAlumno;
-                    console.log('Comentarios:', this.comentarios);
-                    if (this.comentarios) {
-                        this.$nextTick(() => {
-                        this.$modal.show('reactivate-modal');
-                    });
-
-                    } else {
-                        console.error('El objeto de comentarios es nulo o indefinido');
-
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al obtener los comentarios contacto:', error);
-                    // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+    if (alumnoID) {
+        try {
+            const response = await axios.get(`http://localhost:4000/contacto-alumno/${alumnoID}`);
+            this.comentarios = response.data.alumno.comentarios;
+            
+            if (this.comentarios) {
+                this.$nextTick(() => {
+                    this.$modal.show('reactivate-modal');
                 });
+            } else {
+                console.error('El objeto de comentarios es nulo o indefinido');
             }
-            // try {
-            //     const response = await axios.get(`http://localhost:4000/contacto-alumno/${alumnoID}`);
-                
-            //     if (response.data && response.data.contactoAlumno) {
-            //         this.comentarios = response.data.contactoAlumno;
-            //         console.log('Comentarios:', this.comentarios);
-            //     } else {
-            //         console.error('Error: Datos de contacto no encontrados en la respuesta.');
-            //     }
+        } catch (error) {
+            console.error('Error al obtener los comentarios contacto:', error);
+            // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
+        }
+    }
+},
 
-            //     if (this.comentarios.length > 0) {
-            //             this.$modal.show('reactivate-modal');
-            //     } else {
-            //         console.error('El objeto de comentarios es nulo o indefinido');
-            //     }
-
-            // } catch (error) {
-            //     console.error('Error al obtener los comentarios del lead:', error);
-            //     // Manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario
-            // }finally {
-            //     // Puedes realizar acciones aquí, incluso si hay un error o no
-            //     console.log('Comentarios:', this.comentarios);
-            // }
-        },
 
         async bajaTipoAlumno(alumnoID, event) {
             event.preventDefault();

@@ -118,7 +118,7 @@ export default {
 
                 <!-- Enlaces para promotor -->
                 <li v-if="isPromotor">
-                    <a href="dash-promotor" aria-label="dashboard"
+                    <a href="dash-promotor" aria-label="dashboard " :active = "isLinkActive('/dash-promotor')"
                         class="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-[#057a55]">
                         <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                             <path
@@ -133,7 +133,7 @@ export default {
                     </a>
                 </li>
                 <li v-if="isPromotor">
-                    <a href="leads-promotor" class="px-4 py-3 flex items-center space-x-4 rounded-md group">
+                    <a href="leads-promotor" :active = "isLinkActive('/dash-promotor')" class="px-4 py-3 flex items-center space-x-4 rounded-md group" >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path class="fill-current group-hover:text-[#4fc4ae]" stroke-linecap="round"
