@@ -47,9 +47,11 @@
             <button type="submit" class="px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800">
               Registrar Promotor
             </button>
-            <button @click="errNotify"  type="button"  class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700" >
-              <router-link to="/promotor-list">Regresar</router-link>
-            </button>
+            <router-link to="/promotor-list" class="inline-block">
+              <button @click="errNotify" type="button" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                Regresar
+              </button>
+            </router-link>
           </div>
         </form>
       </div>
@@ -79,7 +81,7 @@ export default {
    setup() {
     const notify = () => {
       toast("Se ha registrado al Promotor!", {
-        autoClose: 3000,
+        autoClose: 2000,
         type: 'success'
       }); // ToastOptions
     }

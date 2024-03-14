@@ -27,7 +27,7 @@
       <div class="flex-1 lg:ml-64">
         <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white">
+            <thead style="background-color: #48c9b0" class="text-xs uppercase dark:bg-gray-700 text-white sticky-header">
               <tr>
                 <th scope="col" class="px-6 py-3">Nombre Completo</th>
                 <th scope="col" class="px-6 py-3">Correo Electrónico</th>
@@ -55,7 +55,7 @@
                   {{ promotor.Estado ? "Activo" : "Inactivo" }}
                 </td>
                 <td class="px-6 py-4">
-                  <fwb-button @click="openEditModal(promotor)" color="blue">
+                  <fwb-button @click="openEditModal(promotor)" color="green">
                     Editar
                   </fwb-button>
                 </td>
@@ -103,7 +103,7 @@
         <label for="editPassw">Contraseña:</label>
         <input v-model="editingPromotor.Passw" id="editPassw" type="password" class="w-full mb-4 p-2 border rounded" />
         <div class="flex justify-end mt-4">
-          <fwb-button @click="updatePromotor" color="blue">Guardar Cambios</fwb-button>
+          <fwb-button  color="blue">Guardar Cambios</fwb-button>
           <fwb-button @click="closeEditModal" color="alternative">Cancelar</fwb-button>
         </div>
       </form>
@@ -174,30 +174,6 @@ export default {
     return { notify, errAsignacion, infoNotify, errLeads, errPromotores, errAsignarPromotor };
   },
 
-  setup() {
-    const notify = () => {
-      toast("Se ha Actualizado al Promotor!", {
-        autoClose: 3000,
-        type: "success",
-      });
-    };
-
-    const errNotify = () => {
-      toast("Error al Actualizar. No puedes dejar campos vacios ", {
-        autoClose: 2000,
-        type: "error",
-      });
-    };
-
-    const infoNotify = () => {
-      toast("Se ha actualizado la Información... ", {
-        autoClose: 2000,
-        type: "info",
-      });
-    };
-
-    return { notify, errNotify, infoNotify };
-  },
   data() {
     return {
       promotores: [],
@@ -288,4 +264,11 @@ export default {
 .sidebar {
   z-index: 999;
 }
+
+.sticky-header th {
+        position: sticky;
+        top: 0;
+        background-color: #48C9B0; /* Color de fondo del encabezado */
+        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
+    }
 </style>

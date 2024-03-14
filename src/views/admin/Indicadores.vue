@@ -19,7 +19,7 @@
       <div class="flex-1 lg:ml-64">
         <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400"
+            <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400 sticky-header-general"
             :style="{ backgroundColor: '#2e79db' }">
               <tr>
                 <th scope="col" class="px-6 py-3">NOMBRE PROMOTOR</th>
@@ -151,7 +151,7 @@
       <div class="flex-1 lg:ml-64">
         <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400 sticky-header-tiktok">
               <tr>
                 <th scope="col" class="px-6 py-3">NOMBRE PROMOTOR</th>
                 <th scope="col" class="px-6 py-3">INSC-INSCRIPCION</th>
@@ -282,7 +282,7 @@
       <div class="flex-1 lg:ml-64">
         <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-black uppercase dark:bg-gray-700 dark:text-gray-400"
+            <thead class="text-xs text-black uppercase dark:bg-gray-700 dark:text-gray-400 sticky-header-meta"
               :style="{ backgroundColor: '#d3912f' }">
               <tr>
                 <th scope="col" class="px-6 py-3">NOMBRE PROMOTOR</th>
@@ -674,5 +674,26 @@ export default {
 .sidebar {
   z-index: 999;
 }
+
+.sticky-header-general th {
+        position: sticky;
+        top: 0;
+        background-color: #2e79db; /* Color de fondo del encabezado */
+        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
+    }
+
+    .sticky-header-tiktok th {
+        position: sticky;
+        top: 0;
+        background-color: #000000; /* Color de fondo del encabezado */
+        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
+    }
+
+    .sticky-header-meta th {
+        position: sticky;
+        top: 0;
+        background-color: #d3912f; /* Color de fondo del encabezado */
+        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
+    }
 </style>
   

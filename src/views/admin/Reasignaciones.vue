@@ -103,7 +103,7 @@
             <div class="relative overflow-x-auto max-h-[520px] shadow-md sm:rounded-lg">
                 <table v-if="filterList.length > 0"
                     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky-header"
                         style="background-color: #48C9B0;">
                         <tr>
                             <td class="w-4 p-4">
@@ -492,4 +492,13 @@ export default {
 
 </script>
 
-<style></style>
+<style>
+
+.sticky-header th {
+        position: sticky;
+        top: 0;
+        background-color: #48C9B0; /* Color de fondo del encabezado */
+        z-index: 1; /* Para asegurarse de que esté encima del contenido al hacer scroll */
+    }
+
+</style>
